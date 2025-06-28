@@ -1,5 +1,1 @@
-![diavola](https://github.com/user-attachments/assets/4d546fcb-2020-456a-a447-b5304ce01b21)
-![gorgonzola](https://github.com/user-attachments/assets/89ee1d68-dd83-4816-b793-49b99eba1e05)
-![margherita](https://github.com/user-attachments/assets/07a6ed69-0d07-4477-a6c0-34b193b28656)
-![mixed](https://github.com/user-attachments/assets/3bb1786b-5081-423d-a247-805d29f9a6bf)
-![mixed_by_genny_arc_flat_readable](https://github.com/user-attachments/assets/ac51fe97-b172-46d7-89fe-c2db0bb6b479)
+Svuotato file index.html per rimozione
