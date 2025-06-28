@@ -25,7 +25,6 @@
       margin: auto;
     }
     .pizza {
-      background: #e8f1fc;
       border-radius: 12px;
       padding: 15px;
       margin: 20px 0;
@@ -34,15 +33,13 @@
       align-items: center;
       gap: 20px;
     }
-   .pizza img {
-  width: 110px;
-  height: 110px;
-  border-radius: 10px;
-  object-fit: cover;
-  background: #d63031;
-  border: 3px solid #b71c1c; /* bordo rosso scuro */
-}
-
+    .pizza img {
+      width: 110px;
+      height: 110px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #d63031;
+      border: 3px solid #b71c1c;
     }
     .pizza-info {
       flex: 1;
@@ -60,21 +57,20 @@
       color: #1b4f8c;
       font-weight: bold;
     }
-.pizza.margherita {
-  background: #fff9d6; /* giallo mozzarella */
-}
 
-.pizza.diavola {
-  background: #ffd6d6; /* rosso chiaro peperoncino */
-}
-
-.pizza.gorgonzola {
-  background: #e1f0ff; /* azzurro delicato, tipo formaggio */
-}
-
-.pizza.mixed {
-  background: #fdebd0; /* arancio chiaro - mix ingredienti */
-}
+    /* Colori personalizzati per ogni tipo di pizza */
+    .pizza.margherita {
+      background: #fff9d6; /* giallo mozzarella */
+    }
+    .pizza.diavola {
+      background: #ffd6d6; /* rosso chiaro peperoncino */
+    }
+    .pizza.gorgonzola {
+      background: #e1f0ff; /* azzurro delicato, tipo formaggio */
+    }
+    .pizza.mixed {
+      background: #fdebd0; /* arancio chiaro - mix ingredienti */
+    }
 
     /* Stile per la sezione AI */
     .ai-box {
@@ -135,7 +131,7 @@
   </header>
 
   <main>
-    <div class="pizza">
+    <div class="pizza margherita">
       <img src="margherita_new.jpg" alt="Margherita">
       <div class="pizza-info">
         <p class="pizza-name">Margherita</p>
@@ -143,7 +139,8 @@
         <p class="pizza-price">10€</p>
       </div>
     </div>
-    <div class="pizza">
+
+    <div class="pizza diavola">
       <img src="diavola_new.jpg" alt="Diavola">
       <div class="pizza-info">
         <p class="pizza-name">Diavola</p>
@@ -151,7 +148,8 @@
         <p class="pizza-price">10€</p>
       </div>
     </div>
-    <div class="pizza">
+
+    <div class="pizza gorgonzola">
       <img src="gorgonzola_new.jpg" alt="Gorgonzola">
       <div class="pizza-info">
         <p class="pizza-name">Gorgonzola</p>
@@ -159,7 +157,8 @@
         <p class="pizza-price">10€</p>
       </div>
     </div>
-    <div class="pizza">
+
+    <div class="pizza mixed">
       <img src="mixed_new.jpg" alt="Mixed by Genny">
       <div class="pizza-info">
         <p class="pizza-name">Mixed by Genny</p>
