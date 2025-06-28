@@ -105,6 +105,39 @@
       </div>
     </div>
   </main>
+  <section id="gennybot" style="padding:2rem; background:#f9f9f9; border-radius:20px; margin-top:3rem;">
+  <h2>🤖 Consigliami una pizza!</h2>
+  <p>Scrivi cosa ti piace (es. "piccante", "senza funghi")</p>
+  <input type="text" id="input-gusti" placeholder="Es. amo il piccante" style="width:100%; padding:0.5rem; border-radius:10px;">
+  <button onclick="consigliaPizza()" style="margin-top:1rem; padding:0.5rem 1rem; background:#e63946; color:white; border:none; border-radius:10px;">
+    🎯 Consigliami
+  </button>
+  <div id="risposta-ai" style="margin-top:1rem; font-size:1.1rem;"></div>
+</section>
+
+<script>
+async function consigliaPizza() {
+  const gusti = document.getElementById("input-gusti").value;
+  if (!gusti.trim()) {
+    alert("Per favore, scrivi almeno un gusto!");
+    return;
+  }
+  document.getElementById("risposta-ai").textContent = "Sto pensando...";
+  try {
+    const resp = await fetch("https://gennybot-pizza-ai.replit.app/consiglia", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ gusti })
+    });
+    const data = await resp.json();
+    document.getElementById("risposta-ai").innerHTML = `<strong>${data.risposta}</strong>`;
+  } catch (e) {
+    document.getElementById("risposta-ai").textContent = "⚠️ Qualcosa è andato storto, riprova tra un momento.";
+    console.error(e);
+  }
+}
+</script>
+
   <footer>
     Coperto: 2€ a persona (inclusa una bottiglia d'acqua da 75ml)
   </footer>
