@@ -105,38 +105,77 @@
       </div>
     </div>
   </main>
-  <section id="gennybot" style="padding:2rem; background:#f9f9f9; border-radius:20px; margin-top:3rem;">
-  <h2>🤖 Consigliami una pizza!</h2>
-  <p>Scrivi cosa ti piace (es. "piccante", "senza funghi")</p>
-  <input type="text" id="input-gusti" placeholder="Es. amo il piccante" style="width:100%; padding:0.5rem; border-radius:10px;">
-  <button onclick="consigliaPizza()" style="margin-top:1rem; padding:0.5rem 1rem; background:#e63946; color:white; border:none; border-radius:10px;">
-    🎯 Consigliami
-  </button>
-  <div id="risposta-ai" style="margin-top:1rem; font-size:1.1rem;"></div>
-</section>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Consigli Pizza AI</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 400px; margin: 2em auto; }
+  label, input, button { display: block; width: 100%; margin-bottom: 1em; }
+  #risposta-ai { margin-top: 1em; font-size: 1.2em; font-weight: bold; color: #d35400; }
+</style>
+</head>
+<body>
+
+<h2>Dimmi cosa ti piace e ti consiglio una pizza!</h2>
+
+<label for="gusto">Inserisci i tuoi gusti (es: pomodoro, mozzarella, peperoni):</label>
+<input type="text" id="gusto" placeholder="Es: pomodoro, mozzarella" />
+
+<button id="chiedi-btn">Consiglia pizza</button>
+
+<div id="risposta-ai"></div>
 
 <script>
-async function consigliaPizza() {
-  const gusti = document.getElementById("input-gusti").value;
-  if (!gusti.trim()) {
-    alert("Per favore, scrivi almeno un gusto!");
-    return;
-  }
-  document.getElementById("risposta-ai").textContent = "Sto pensando...";
-  try {
-    const resp = await fetch("https://gennybot-pizza-ai.replit.app/consiglia", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ gusti })
+  // Funzione per simulare chiamata API AI
+  async function chiediConsiglio(gusti) {
+    // Qui metteresti la vera chiamata fetch a OpenAI o altro servizio AI
+    // Per ora simulo la risposta con un delay
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        let risposta;
+        const g = gusti.toLowerCase();
+
+        if (g.includes('peperoni')) {
+          risposta = "Ti consiglio la pizza diavola, piccante e gustosa!";
+        } else if (g.includes('funghi')) {
+          risposta = "La pizza ai funghi è perfetta per te!";
+        } else if (g.includes('margherita') || g.includes('mozzarella')) {
+          risposta = "La classica Margherita è sempre una buona scelta!";
+        } else {
+          risposta = "Prova una pizza quattro stagioni, è un mix di sapori!";
+        }
+
+        resolve({ risposta });
+      }, 1000);
     });
-    const data = await resp.json();
-    document.getElementById("risposta-ai").innerHTML = `<strong>${data.risposta}</strong>`;
-  } catch (e) {
-    document.getElementById("risposta-ai").textContent = "⚠️ Qualcosa è andato storto, riprova tra un momento.";
-    console.error(e);
   }
-}
+
+  document.getElementById('chiedi-btn').addEventListener('click', async () => {
+    const gustoInput = document.getElementById('gusto').value.trim();
+    const rispostaDiv = document.getElementById('risposta-ai');
+
+    if (!gustoInput) {
+      rispostaDiv.textContent = "Per favore, inserisci qualche gusto.";
+      return;
+    }
+
+    rispostaDiv.textContent = "Sto pensando...";
+    try {
+      const data = await chiediConsiglio(gustoInput);
+      rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
+    } catch (e) {
+      rispostaDiv.textContent = "⚠️ Qualcosa è andato storto, riprova tra un momento.";
+      console.error(e);
+    }
+  });
 </script>
+
+</body>
+</html>
+
 
   <footer>
     Coperto: 2€ a persona (inclusa una bottiglia d'acqua da 75ml)
