@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu - Mixed by Genny</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #a1b0e2;
+      color: #000000;
+      text-align: center;
+    }
+    header {
+      background: linear-gradient(to right, #1c4193, #a1b0e2, #7fd1d3);
+      padding: 20px;
+    }
+    header img {
+      max-width: 400px;
+      display: block;
+      margin: 0 auto;
+    }
+    main {
+      padding: 20px;
+    }
+    .pizza {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 20px auto;
+      max-width: 600px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .pizza img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .pizza-info {
+      text-align: left;
+    }
+    .pizza-name {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin: 0;
+    }
+    .pizza-ingredients {
+      font-size: 0.9em;
+      color: #333;
+    }
+    .pizza-price {
+      font-size: 1em;
+      color: #1c4193;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="mixed_by_genny_arc_flat_readable.png" alt="Logo Mixed by Genny" />
+  </header>
+
+  <main>
+    <div class="pizza">
+      <img src="margherita.jpg" alt="Pizza Margherita" />
+      <div class="pizza-info">
+        <p class="pizza-name">Margherita</p>
+        <p class="pizza-ingredients">Pomodoro, mozzarella, basilico</p>
+        <p class="pizza-price">10€</p>
+      </div>
+    </div>
+    <div class="pizza">
+      <img src="diavola.jpg" alt="Pizza Diavola" />
+      <div class="pizza-info">
+        <p class="pizza-name">Diavola</p>
+        <p class="pizza-ingredients">Pomodoro, mozzarella, salame piccante</p>
+        <p class="pizza-price">10€</p>
+      </div>
+    </div>
+    <div class="pizza">
+      <img src="gorgonzola.jpg" alt="Pizza Gorgonzola" />
+      <div class="pizza-info">
+        <p class="pizza-name">Gorgonzola</p>
+        <p class="pizza-ingredients">Mozzarella, gorgonzola, noci</p>
+        <p class="pizza-price">10€</p>
+      </div>
+    </div>
+    <div class="pizza">
+      <img src="mixed.jpg" alt="Mixed by Genny" />
+      <div class="pizza-info">
+        <p class="pizza-name">Mixed by Genny</p>
+        <p class="pizza-ingredients">Pomodoro, mozzarella, patatine, wurstel, olive</p>
+        <p class="pizza-price">10€</p>
+      </div>
+    </div>
+    <footer>
+      Coperto: 2€ a persona (inclusa una bottiglia d'acqua da 75ml)
+    </footer>
+  </main>
+</body>
+</html>
