@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Menu - Mixed by Genny</title>
   <style>
     body {
@@ -25,6 +25,7 @@
       margin: auto;
     }
     .pizza {
+      background: #e8f1fc;
       border-radius: 12px;
       padding: 15px;
       margin: 20px 0;
@@ -57,28 +58,24 @@
       color: #1b4f8c;
       font-weight: bold;
     }
-
-    /* Colori personalizzati per ogni tipo di pizza */
     .pizza.margherita {
-      background: #fff9d6; /* giallo mozzarella */
+      background: #fff9d6;
     }
     .pizza.diavola {
-      background: #ffd6d6; /* rosso chiaro peperoncino */
+      background: #ffd6d6;
     }
     .pizza.gorgonzola {
-      background: #e1f0ff; /* azzurro delicato, tipo formaggio */
+      background: #e1f0ff;
     }
     .pizza.mixed {
-      background: #fdebd0; /* arancio chiaro - mix ingredienti */
+      background: #fdebd0;
     }
-
-    /* Stile per la sezione AI */
     .ai-box {
       background: #fff4e6;
       border-radius: 12px;
       padding: 20px;
       margin-top: 40px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
@@ -112,8 +109,8 @@
       font-size: 1.2em;
       font-weight: bold;
       color: #d35400;
+      white-space: pre-line;
     }
-
     footer {
       text-align: center;
       font-size: 0.9em;
@@ -125,71 +122,60 @@
   </style>
 </head>
 <body>
-
   <header>
-    <img src="mixed_by_genny_arc_flat_readable.png" alt="Logo Mixed by Genny">
+    <img src="mixed_by_genny_arc_flat_readable.png" alt="Logo Mixed by Genny" />
   </header>
-
   <main>
     <div class="pizza margherita">
-      <img src="margherita_new.jpg" alt="Margherita">
+      <img src="margherita_new.jpg" alt="Margherita" />
       <div class="pizza-info">
         <p class="pizza-name">Margherita</p>
         <p class="pizza-ingredients">Pomodoro, mozzarella, basilico</p>
         <p class="pizza-price">10€</p>
       </div>
     </div>
-
     <div class="pizza diavola">
-      <img src="diavola_new.jpg" alt="Diavola">
+      <img src="diavola_new.jpg" alt="Diavola" />
       <div class="pizza-info">
         <p class="pizza-name">Diavola</p>
         <p class="pizza-ingredients">Mozzarella, pomodoro, salame piccante</p>
         <p class="pizza-price">10€</p>
       </div>
     </div>
-
     <div class="pizza gorgonzola">
-      <img src="gorgonzola_new.jpg" alt="Gorgonzola">
+      <img src="gorgonzola_new.jpg" alt="Gorgonzola" />
       <div class="pizza-info">
         <p class="pizza-name">Gorgonzola</p>
         <p class="pizza-ingredients">Mozzarella, gorgonzola, noci</p>
         <p class="pizza-price">10€</p>
       </div>
     </div>
-
     <div class="pizza mixed">
-      <img src="mixed_new.jpg" alt="Mixed by Genny">
+      <img src="mixed_new.jpg" alt="Mixed by Genny" />
       <div class="pizza-info">
         <p class="pizza-name">Mixed by Genny</p>
         <p class="pizza-ingredients">Pomodoro, mozzarella, patatine, wurstel, olive</p>
         <p class="pizza-price">10€</p>
       </div>
     </div>
-
-    <!-- Sezione AI -->
     <div class="ai-box">
       <h2>Dimmi cosa ti piace e ti consiglio una pizza!</h2>
       <label for="gusto">Inserisci i tuoi gusti (es: pomodoro, mozzarella, peperoni):</label>
       <input type="text" id="gusto" placeholder="Es: pomodoro, mozzarella" />
- <button id="chiedi-btn">Consiglia pizza</button>
-<button id="parla-btn">🎙️ Parla</button>
-<div id="risposta-ai"></div>
-
+      <button id="chiedi-btn">Consiglia pizza</button>
+      <button id="parla-btn">🎙️ Parla</button>
+      <div id="risposta-ai"></div>
     </div>
   </main>
-
   <footer>
     Coperto: 2€ a persona (inclusa una bottiglia d'acqua da 75ml)
   </footer>
-
   <script>
     async function chiediConsiglio(gusti) {
       return new Promise((resolve) => {
         setTimeout(() => {
           let risposta;
           const g = gusti.toLowerCase();
-
           if (g.includes('peperoni')) {
             risposta = "Ti consiglio la pizza diavola, piccante e gustosa!";
           } else if (g.includes('funghi')) {
@@ -199,21 +185,17 @@
           } else {
             risposta = "Prova una pizza quattro stagioni, è un mix di sapori!";
           }
-
           resolve({ risposta });
         }, 1000);
       });
     }
-
     document.getElementById('chiedi-btn').addEventListener('click', async () => {
       const gustoInput = document.getElementById('gusto').value.trim();
       const rispostaDiv = document.getElementById('risposta-ai');
-
       if (!gustoInput) {
         rispostaDiv.textContent = "Per favore, inserisci qualche gusto.";
         return;
       }
-
       rispostaDiv.textContent = "Sto pensando...";
       try {
         const data = await chiediConsiglio(gustoInput);
@@ -223,7 +205,38 @@
         console.error(e);
       }
     });
+    document.getElementById('parla-btn').addEventListener('click', () => {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Il tuo browser non supporta il riconoscimento vocale.");
+        return;
+      }
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'it-IT';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+      const rispostaDiv = document.getElementById('risposta-ai');
+      rispostaDiv.textContent = "Sto ascoltando... 🎧";
+      recognition.start();
+      recognition.onresult = async (event) => {
+        const inputVocale = event.results[0][0].transcript;
+        rispostaDiv.textContent = `Hai detto: "${inputVocale}"\nSto pensando... 🤔`;
+        try {
+          const data = await chiediConsiglio(inputVocale);
+          rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
+          const utter = new SpeechSynthesisUtterance(data.risposta);
+          utter.lang = 'it-IT';
+          window.speechSynthesis.speak(utter);
+        } catch (err) {
+          rispostaDiv.textContent = "Errore durante il consiglio vocale.";
+          console.error(err);
+        }
+      };
+      recognition.onerror = (event) => {
+        rispostaDiv.textContent = "Errore durante il riconoscimento vocale.";
+        console.error("SpeechRecognition error:", event.error);
+      };
+    });
   </script>
-
 </body>
 </html>
