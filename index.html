@@ -288,80 +288,91 @@ async function chiediConsiglio(inputUtente) {
       const input = inputUtente.toLowerCase();
       let risposta = "";
 
-      // Dizionari base
-      const ingredientiPreferiti = {
-        diavola: ["salame", "piccante", "peperoni"],
+      // Sinonimi delle emozioni
+      const emozioni = {
+        triste: ["triste", "giù", "melanconico", "depresso"],
+        felice: ["felice", "contento", "allegro", "gioioso"],
+        arrabbiato: ["arrabbiato", "furioso", "agitato", "nervoso"],
+        stressato: ["stressato", "teso", "ansioso", "stanco", "esausto"],
+        annoiato: ["annoiato", "spento", "apat*"],
+        rilassato: ["rilassato", "tranquillo", "sereno", "calmo"],
+        affamato: ["fame", "affamato", "famelico"],
+        curioso: ["curioso", "strano", "nuovo", "creativo"],
+      };
+
+      // Mappe pizza → ingredienti
+      const pizze = {
+        diavola: ["salame", "piccante", "peperoncino"],
         margherita: ["mozzarella", "pomodoro", "basilico"],
-        capricciosa: ["prosciutto", "carciofi", "olive", "funghi"],
-        quattroFormaggi: ["gorgonzola", "mozzarella", "parmigiano", "fontina"],
         bufalina: ["bufala", "pomodorini", "rucola"],
+        capricciosa: ["prosciutto", "carciofi", "funghi", "olive"],
+        boscaiola: ["salsiccia", "funghi", "panna"],
+        tartufata: ["tartufo", "crema", "scamorza"],
+        quattroFormaggi: ["gorgonzola", "fontina", "parmigiano"],
         tonnoCipolla: ["tonno", "cipolla"],
-        vegetariana: ["verdure", "zucchine", "melanzane", "peperoni", "pomodori secchi"],
-        tartufata: ["tartufo", "crema", "funghi"],
-        napoli: ["acciughe", "origano", "olive nere"],
-        boscaiola: ["funghi", "salsiccia", "panna"]
+        vegetariana: ["zucchine", "melanzane", "peperoni", "verdure"],
+        napoli: ["acciughe", "olive nere", "origano"],
+        fruttiDiMare: ["cozze", "gamberi", "mare", "polpo"],
+        hawaiana: ["ananas", "prosciutto cotto"],
+        nutella: ["nutella", "cioccolato", "dolce"]
       };
 
-      const statiAnimo = {
-        triste: [
-          "Prova qualcosa di forte come la Diavola per tirarti su.",
-          "La Quattro Formaggi ha un comfort unico quando sei giù.",
-          "La Capricciosa ti farà sentire più coccolato."
-        ],
-        felice: [
-          "Festeggia con una Capricciosa ricca di ingredienti.",
-          "La Bufalina fresca è perfetta per un umore allegro.",
-          "Se sei felice, osa con una Tartufata intensa!"
-        ],
-        stressato: [
-          "Rilassati con una Margherita semplice e perfetta.",
-          "La Vegetariana ti aiuta a ritrovare equilibrio e leggerezza.",
-          "Prova la Quattro Formaggi, è cremosa e distensiva."
-        ],
-        arrabbiato: [
-          "Scarica la tensione con una Diavola molto piccante.",
-          "La Napoli saporita e decisa fa per te.",
-          "Prova la Boscaiola: rustica, intensa e appagante."
-        ],
-        annoiato: [
-          "Ravviva la serata con una pizza con gorgonzola e cipolla.",
-          "Una Capricciosa ben fatta non annoia mai.",
-          "Sperimenta una Tartufata, sorprendente e fuori dal comune."
-        ]
+      const frasiEmozioni = {
+        triste: "Hai bisogno di qualcosa che ti coccoli e ti sollevi.",
+        felice: "Ottimo! È il momento perfetto per qualcosa di gustoso e creativo.",
+        arrabbiato: "Serve una pizza decisa, che sfoghi tutta l'energia.",
+        stressato: "Il cibo è il miglior antistress: rilassati e goditi ogni morso.",
+        annoiato: "Rendi la giornata più interessante con una combinazione originale.",
+        rilassato: "Goditi la tranquillità con un gusto morbido e avvolgente.",
+        affamato: "Ti serve una pizza sostanziosa, ricca e piena di sapore.",
+        curioso: "Hai voglia di esplorare? Allora proviamo qualcosa di diverso."
       };
 
-      // Estrai emozione o stato d’animo
-      const emozione = Object.keys(statiAnimo).find(e => input.includes(e));
-      if (emozione) {
-        const suggerimenti = statiAnimo[emozione];
-        risposta = suggerimenti[Math.floor(Math.random() * suggerimenti.length)];
+      // 🔎 Identifica l’umore
+      let umoreRilevato = null;
+      for (const [umore, sinonimi] of Object.entries(emozioni)) {
+        if (sinonimi.some(parola => input.includes(parola))) {
+          umoreRilevato = umore;
+          break;
+        }
       }
 
-      // Estrai ingredienti
-      const pizzeTrovate = Object.entries(ingredientiPreferiti)
-        .filter(([nome, ingredienti]) =>
-          ingredienti.some(i => input.includes(i))
-        )
-        .map(([nome]) => nome);
-
-      if (pizzeTrovate.length > 0) {
-        const pizza = pizzeTrovate[0]; // prende la prima valida trovata
-        risposta = `Ti consiglio la ${pizza.charAt(0).toUpperCase() + pizza.slice(1)}. È perfetta per i tuoi gusti.`;
+      // 🔎 Identifica la pizza basata sugli ingredienti
+      let pizzaSuggerita = null;
+      for (const [nomePizza, ingredienti] of Object.entries(pizze)) {
+        if (ingredienti.some(ing => input.includes(ing))) {
+          pizzaSuggerita = nomePizza;
+          break;
+        }
       }
 
-      // Se trova sia emozione che ingredienti
-      if (emozione && pizzeTrovate.length > 0) {
-        const pizza = pizzeTrovate[0];
-        risposta = `${statiAnimo[emozione][0]} Ti consiglio in particolare la ${pizza}.`;
+      // 🎯 Logica speciale per la Nutella
+      if (input.includes("nutella") || (umoreRilevato === "stressato" && input.includes("dolce"))) {
+        risposta = "Ti consiglio di chiudere la giornata con una pizza alla Nutella: dolce, avvolgente e perfetta contro lo stress.";
       }
 
-      // Risposta di default
-      if (!risposta) {
-        risposta = "Non sono sicuro dei tuoi gusti, ma potresti provare la Quattro Stagioni: un mix perfetto per ogni umore.";
+      // Combinazione umore + ingredienti
+      else if (umoreRilevato && pizzaSuggerita) {
+        risposta = `${frasiEmozioni[umoreRilevato]} Ti consiglio la ${pizzaSuggerita}.`;
       }
+      else if (umoreRilevato) {
+        risposta = `${frasiEmozioni[umoreRilevato]} Una Capricciosa potrebbe essere l’ideale.`;
+      }
+      else if (pizzaSuggerita) {
+        risposta = `Ti consiglio la ${pizzaSuggerita}, perfetta per i tuoi gusti.`;
+      }
+      else {
+        risposta = "Non ho capito bene i tuoi gusti, ma la Quattro Stagioni è sempre una scelta completa e soddisfacente.";
+      }
+
+      // 📢 Sintesi vocale (voce reale)
+      const synth = window.speechSynthesis;
+      const utter = new SpeechSynthesisUtterance(risposta);
+      utter.lang = "it-IT";
+      synth.speak(utter);
 
       resolve({ risposta });
-    }, 1000);
+    }, 500);
   });
 }
 
