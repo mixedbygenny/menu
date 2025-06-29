@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,7 +17,7 @@
 
     header {
       text-align: center;
-      padding: 20px;
+      padding: 20px 10px 10px;
     }
 
     header img {
@@ -43,27 +42,29 @@
       padding: 10px;
       max-width: 800px;
       margin: auto;
+      transform: scale(0.8); /* riduzione proporzionale del 20% */
+      transform-origin: top center;
     }
 
     .pizza {
       background: #D4A373;
-      border-radius: 1px;
+      border-radius: 8px;
       padding: 10px;
       margin: 20px 0;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
       color: #4B1414;
     }
 
     .pizza img {
-      width: 110px;
-      height: 110px;
+      width: 88px;
+      height: 88px;
       border-radius: 10px;
       object-fit: cover;
       background: #6C1E1E;
-      border: 3px solid #4B1414;
+      border: 2px solid #4B1414;
     }
 
     .pizza-info {
@@ -71,16 +72,16 @@
     }
 
     .pizza-name {
-      font-size: 1.5em;
+      font-size: 1.2em;
       margin: 0;
     }
 
     .pizza-ingredients {
-      font-size: 0.9em;
+      font-size: 0.75em;
     }
 
     .pizza-price {
-      font-size: 1em;
+      font-size: 0.9em;
       font-weight: bold;
     }
 
@@ -143,11 +144,6 @@
       font-weight: 600;
     }
 
-    #ai-popup input:focus {
-      border-color: #D4A373;
-      box-shadow: 0 0 8px #D4A373;
-    }
-
     #ai-popup button {
       padding: 12px 0;
       font-size: 1.1em;
@@ -162,14 +158,6 @@
       justify-content: center;
       align-items: center;
       gap: 8px;
-    }
-
-    #ai-popup button:hover {
-      background: linear-gradient(45deg, #4B1414, #6C1E1E);
-    }
-
-    #ai-popup button:active {
-      transform: scale(0.97);
     }
 
     #risposta-ai {
@@ -207,9 +195,7 @@
 <body>
   <header>
     <img src="logo.png" alt="Logo Mixed by Genny" />
-    <div class="coperto-info">
-      Costo coperto 2€ con acqua inclusa
-    </div>
+    <div class="coperto-info">Costo coperto 2€ con acqua inclusa</div>
   </header>
 
   <main>
@@ -250,7 +236,7 @@
     </div>
   </main>
 
-  <!-- Pulsante fluttuante AI -->
+  <!-- Pulsante AI -->
   <div id="ai-fab" onclick="togglePopup()">AI</div>
 
   <!-- Finestra popup AI -->
@@ -262,8 +248,8 @@
     <div class="popup-content">
       <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
       <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" />
-      <button onclick="consiglia()"><span class="icon">🍕</span> Consiglio pizza</button>
-      <button onclick="parla()"><span class="icon">🎙️</span> Parla con me</button>
+      <button onclick="consiglia()"><span>🍕</span> Consiglio pizza</button>
+      <button onclick="parla()"><span>🎙️</span> Parla con me</button>
       <div id="risposta-ai"></div>
     </div>
   </div>
@@ -290,7 +276,6 @@
         rispostaDiv.textContent = currentLang === 'it' ? "Inserisci qualche ingrediente!" : "Please enter some ingredients!";
         return;
       }
-
       const data = await chiediConsiglio(gustoInput);
       rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
       const utter = new SpeechSynthesisUtterance(data.risposta);
@@ -322,7 +307,7 @@
         window.speechSynthesis.speak(utter);
       };
 
-      recognition.onerror = (event) => {
+      recognition.onerror = () => {
         rispostaDiv.textContent = currentLang === 'it' ? "Errore nel riconoscimento vocale." : "Speech recognition error.";
       };
     }
@@ -332,71 +317,45 @@
         setTimeout(() => {
           const input = inputUtente.toLowerCase();
           let risposta = "";
-
-          const ingredientiPreferiti = {
+          const pizze = {
             diavola: ["salame", "piccante", "peperoni"],
             margherita: ["mozzarella", "pomodoro", "basilico"],
             capricciosa: ["prosciutto", "carciofi", "olive", "funghi"],
             quattroFormaggi: ["gorgonzola", "mozzarella", "parmigiano", "fontina"],
             bufalina: ["bufala", "pomodorini", "rucola"],
             tonnoCipolla: ["tonno", "cipolla"],
-            vegetariana: ["verdure", "zucchine", "melanzane", "peperoni", "pomodori secchi"],
+            vegetariana: ["verdure", "zucchine", "melanzane", "peperoni"],
             tartufata: ["tartufo", "crema", "funghi"],
             napoli: ["acciughe", "origano", "olive nere"],
             boscaiola: ["funghi", "salsiccia", "panna"]
           };
 
-          const statiAnimo = {
-            triste: [
-              "Prova qualcosa di forte come la Diavola per tirarti su.",
-              "La Quattro Formaggi ha un comfort unico quando sei giù.",
-              "La Capricciosa ti farà sentire più coccolato."
-            ],
-            felice: [
-              "Festeggia con una Capricciosa ricca di ingredienti.",
-              "La Bufalina fresca è perfetta per un umore allegro.",
-              "Se sei felice, osa con una Tartufata intensa!"
-            ],
-            stressato: [
-              "Rilassati con una Margherita semplice e perfetta.",
-              "La Vegetariana ti aiuta a ritrovare equilibrio e leggerezza.",
-              "Prova la Quattro Formaggi, è cremosa e distensiva."
-            ],
-            arrabbiato: [
-              "Scarica la tensione con una Diavola molto piccante.",
-              "La Napoli saporita e decisa fa per te.",
-              "Prova la Boscaiola: rustica, intensa e appagante."
-            ],
-            annoiato: [
-              "Ravviva la serata con una pizza con gorgonzola e cipolla.",
-              "Una Capricciosa ben fatta non annoia mai.",
-              "Sperimenta una Tartufata, sorprendente e fuori dal comune."
-            ]
+          const emozioni = {
+            triste: ["Prova qualcosa di forte come la Diavola per tirarti su."],
+            felice: ["La Bufalina fresca è perfetta per un umore allegro."],
+            stressato: ["Rilassati con una Margherita semplice e perfetta."],
+            arrabbiato: ["Scarica la tensione con una Diavola molto piccante."],
+            annoiato: ["Sperimenta una Tartufata, sorprendente e fuori dal comune."]
           };
 
-          const emozione = Object.keys(statiAnimo).find(e => input.includes(e));
-          if (emozione) {
-            risposta = statiAnimo[emozione][0];
-          }
+          const emozione = Object.keys(emozioni).find(e => input.includes(e));
+          if (emozione) risposta = emozioni[emozione][0];
 
-          const pizzeTrovate = Object.entries(ingredientiPreferiti)
-            .filter(([nome, ingredienti]) =>
-              ingredienti.some(i => input.includes(i))
-            )
-            .map(([nome]) => nome);
+          const trovate = Object.entries(pizze).filter(([nome, ingredienti]) =>
+            ingredienti.some(i => input.includes(i))
+          ).map(([nome]) => nome);
 
-          if (pizzeTrovate.length > 0) {
-            const pizza = pizzeTrovate[0];
+          if (trovate.length > 0) {
+            const pizza = trovate[0];
             risposta = `Ti consiglio la ${pizza.charAt(0).toUpperCase() + pizza.slice(1)}. È perfetta per i tuoi gusti.`;
           }
 
-          if (emozione && pizzeTrovate.length > 0) {
-            const pizza = pizzeTrovate[0];
-            risposta = `${statiAnimo[emozione][0]} Ti consiglio in particolare la ${pizza}.`;
+          if (emozione && trovate.length > 0) {
+            risposta = `${emozioni[emozione][0]} Ti consiglio in particolare la ${trovate[0]}.`;
           }
 
           if (!risposta) {
-            risposta = "Non sono sicuro dei tuoi gusti, ma potresti provare la Quattro Stagioni: un mix perfetto per ogni umore.";
+            risposta = "Non sono sicuro dei tuoi gusti, ma potresti provare la Quattro Stagioni!";
           }
 
           resolve({ risposta });
@@ -405,5 +364,4 @@
     }
   </script>
 </body>
-
 </html>
