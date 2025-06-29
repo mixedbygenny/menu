@@ -282,99 +282,88 @@
       };
     }
 
+<script>
+const ingredientiAI = [
+  "mozzarella", "pomodoro", "salame", "funghi", "carciofi", "olive", "tonno", "cipolla", "peperoni",
+  "gorgonzola", "basilico", "zucchine", "melanzane", "salsiccia", "bufala", "scamorza", "provola",
+  "pancetta", "prosciutto", "acciughe", "uovo", "panna", "tartufo", "rucola", "pomodorini", "origano",
+  "grana", "fontina", "speck", "wurstel", "radicchio", "crema di tartufo", "formaggio di capra", "porcini",
+  "bresaola", "limone", "lattuga", "mais", "avocado", "zucca", "miele", "nocciole", "pesto", "cetrioli",
+  "peperoncino", "carne macinata", "pollo", "hamburger", "uova strapazzate", "emmental", "camembert",
+  "blue cheese", "ricotta", "spinaci", "patate", "patatine", "rosmarino", "asparagi", "prosciutto crudo",
+  "capperi", "mandorle", "cioccolato", "nutella", "fragole", "banana", "ciliegie", "pistacchi", "lime",
+  "cocco", "ananas", "jalapeno", "senape", "ketchup", "salsa barbecue", "tabasco", "formaggio fuso",
+  "crema di funghi", "crema di peperoni", "crema di zucca", "pomodori secchi", "carne affumicata",
+  "salmone", "gamberi", "cozze", "polpo", "tonno affumicato", "calamari", "crema di gamberi", "zenzero",
+  "aglio", "cipollotto", "barbabietola", "ravanelli", "cavolo", "funghi shitake", "alghe", "wasabi"
+];
+
+const emozioniAI = {
+  triste: ["triste", "giù", "deluso", "depresso", "cupo"],
+  felice: ["felice", "contento", "allegro", "raggiante", "gioioso"],
+  arrabbiato: ["arrabbiato", "furioso", "agitato", "irritato", "nervoso"],
+  stressato: ["stressato", "teso", "ansioso", "esausto", "carico"],
+  curioso: ["curioso", "sognante", "strano", "fantasioso", "sperimentale"],
+  romantico: ["romantico", "innamorato", "dolce", "tenero", "sentimentale"],
+  energico: ["energico", "attivo", "vivace", "dinamico", "euforico"],
+  rilassato: ["rilassato", "tranquillo", "sereno", "calmo", "zen"]
+};
+
+function trovaEmozione(test) {
+  const input = test.toLowerCase();
+  for (const [chiave, sinonimi] of Object.entries(emozioniAI)) {
+    if (sinonimi.some(p => input.includes(p))) {
+      return chiave;
+    }
+  }
+  return null;
+}
+
+function trovaIngredienti(test) {
+  const input = test.toLowerCase();
+  return ingredientiAI.filter(ing => input.includes(ing));
+}
+
 async function chiediConsiglio(inputUtente) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const input = inputUtente.toLowerCase();
+      const umore = trovaEmozione(inputUtente);
+      const ingredienti = trovaIngredienti(inputUtente);
       let risposta = "";
 
-      // Sinonimi delle emozioni
-      const emozioni = {
-        triste: ["triste", "giù", "melanconico", "depresso"],
-        felice: ["felice", "contento", "allegro", "gioioso"],
-        arrabbiato: ["arrabbiato", "furioso", "agitato", "nervoso"],
-        stressato: ["stressato", "teso", "ansioso", "stanco", "esausto"],
-        annoiato: ["annoiato", "spento", "apat*"],
-        rilassato: ["rilassato", "tranquillo", "sereno", "calmo"],
-        affamato: ["fame", "affamato", "famelico"],
-        curioso: ["curioso", "strano", "nuovo", "creativo"],
-      };
-
-      // Mappe pizza → ingredienti
-      const pizze = {
-        diavola: ["salame", "piccante", "peperoncino"],
-        margherita: ["mozzarella", "pomodoro", "basilico"],
-        bufalina: ["bufala", "pomodorini", "rucola"],
-        capricciosa: ["prosciutto", "carciofi", "funghi", "olive"],
-        boscaiola: ["salsiccia", "funghi", "panna"],
-        tartufata: ["tartufo", "crema", "scamorza"],
-        quattroFormaggi: ["gorgonzola", "fontina", "parmigiano"],
-        tonnoCipolla: ["tonno", "cipolla"],
-        vegetariana: ["zucchine", "melanzane", "peperoni", "verdure"],
-        napoli: ["acciughe", "olive nere", "origano"],
-        fruttiDiMare: ["cozze", "gamberi", "mare", "polpo"],
-        hawaiana: ["ananas", "prosciutto cotto"],
-        nutella: ["nutella", "cioccolato", "dolce"]
-      };
-
-      const frasiEmozioni = {
-        triste: "Hai bisogno di qualcosa che ti coccoli e ti sollevi.",
-        felice: "Ottimo! È il momento perfetto per qualcosa di gustoso e creativo.",
-        arrabbiato: "Serve una pizza decisa, che sfoghi tutta l'energia.",
-        stressato: "Il cibo è il miglior antistress: rilassati e goditi ogni morso.",
-        annoiato: "Rendi la giornata più interessante con una combinazione originale.",
-        rilassato: "Goditi la tranquillità con un gusto morbido e avvolgente.",
-        affamato: "Ti serve una pizza sostanziosa, ricca e piena di sapore.",
-        curioso: "Hai voglia di esplorare? Allora proviamo qualcosa di diverso."
-      };
-
-      // 🔎 Identifica l’umore
-      let umoreRilevato = null;
-      for (const [umore, sinonimi] of Object.entries(emozioni)) {
-        if (sinonimi.some(parola => input.includes(parola))) {
-          umoreRilevato = umore;
-          break;
-        }
+      if (ingredienti.includes("nutella") || (umore === "stressato" && inputUtente.toLowerCase().includes("dolce"))) {
+        risposta = "Hai avuto una giornata pesante. Ti consiglio una pizza alla Nutella per chiuderla con dolcezza.";
+      } else if (ingredienti.length > 0) {
+        risposta = `Con gli ingredienti che hai scelto (${ingredienti.join(", ")}), potremmo creare una pizza su misura per te.`;
+      } else if (umore) {
+        const suggerimenti = {
+          triste: "Prova una Boscaiola: cremosa e intensa, per tirarti su.",
+          felice: "Festeggia con una Capricciosa, ricca e piena di sapore.",
+          arrabbiato: "Sfogati con una Diavola molto piccante.",
+          stressato: "Rilassati con una Margherita semplice e perfetta.",
+          curioso: "Prova una Tartufata, elegante e fuori dal comune.",
+          romantico: "Una Bufalina delicata è perfetta per un momento speciale.",
+          energico: "Lanciati con una Quattro Formaggi ricca e decisa.",
+          rilassato: "Una Vegetariana leggera si abbina al tuo stato d’animo."
+        };
+        risposta = suggerimenti[umore];
+      } else {
+        risposta = "Dimmi come ti senti o cosa ti piace, e ti consiglierò la pizza perfetta.";
       }
 
-      // 🔎 Identifica la pizza basata sugli ingredienti
-      let pizzaSuggerita = null;
-      for (const [nomePizza, ingredienti] of Object.entries(pizze)) {
-        if (ingredienti.some(ing => input.includes(ing))) {
-          pizzaSuggerita = nomePizza;
-          break;
-        }
+      // 🔊 Legge solo una volta
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // interrompe eventuali voci precedenti
+        const utter = new SpeechSynthesisUtterance(risposta);
+        utter.lang = "it-IT";
+        window.speechSynthesis.speak(utter);
       }
-
-      // 🎯 Logica speciale per la Nutella
-      if (input.includes("nutella") || (umoreRilevato === "stressato" && input.includes("dolce"))) {
-        risposta = "Ti consiglio di chiudere la giornata con una pizza alla Nutella: dolce, avvolgente e perfetta contro lo stress.";
-      }
-
-      // Combinazione umore + ingredienti
-      else if (umoreRilevato && pizzaSuggerita) {
-        risposta = `${frasiEmozioni[umoreRilevato]} Ti consiglio la ${pizzaSuggerita}.`;
-      }
-      else if (umoreRilevato) {
-        risposta = `${frasiEmozioni[umoreRilevato]} Una Capricciosa potrebbe essere l’ideale.`;
-      }
-      else if (pizzaSuggerita) {
-        risposta = `Ti consiglio la ${pizzaSuggerita}, perfetta per i tuoi gusti.`;
-      }
-      else {
-        risposta = "Non ho capito bene i tuoi gusti, ma la Quattro Stagioni è sempre una scelta completa e soddisfacente.";
-      }
-
-      // 📢 Sintesi vocale (voce reale)
-      const synth = window.speechSynthesis;
-      const utter = new SpeechSynthesisUtterance(risposta);
-      utter.lang = "it-IT";
-      synth.speak(utter);
 
       resolve({ risposta });
-    }, 500);
+    }, 400);
   });
 }
+</script>
 
 
 
