@@ -282,98 +282,88 @@
       };
     }
 
-<input id="input-utente" placeholder="Come ti senti o cosa ti piace?">
-<button onclick="consiglia()">Chiedi consiglio</button>
-<p id="risposta-ai"></p>
-
-<script>
-  async function consiglia() {
-    const testo = document.getElementById("input-utente").value;
-    const { risposta } = await chiediConsiglio(testo);
-    document.getElementById("risposta-ai").textContent = risposta;
-  }
-</script>
-<script>
-const ingredientiAI = [
-  "mozzarella", "pomodoro", "salame", "funghi", "carciofi", "olive", "tonno", "cipolla", "peperoni",
-  "gorgonzola", "basilico", "zucchine", "melanzane", "salsiccia", "bufala", "scamorza", "provola",
-  "pancetta", "prosciutto", "acciughe", "uovo", "panna", "tartufo", "rucola", "pomodorini", "origano",
-  "grana", "fontina", "speck", "wurstel", "radicchio", "crema di tartufo", "formaggio di capra", "porcini",
-  "bresaola", "limone", "lattuga", "mais", "avocado", "zucca", "miele", "nocciole", "pesto", "cetrioli",
-  "peperoncino", "carne macinata", "pollo", "hamburger", "uova strapazzate", "emmental", "camembert",
-  "blue cheese", "ricotta", "spinaci", "patate", "patatine", "rosmarino", "asparagi", "prosciutto crudo",
-  "capperi", "mandorle", "cioccolato", "nutella", "fragole", "banana", "ciliegie", "pistacchi", "lime",
-  "cocco", "ananas", "jalapeno", "senape", "ketchup", "salsa barbecue", "tabasco", "formaggio fuso",
-  "crema di funghi", "crema di peperoni", "crema di zucca", "pomodori secchi", "carne affumicata",
-  "salmone", "gamberi", "cozze", "polpo", "tonno affumicato", "calamari", "crema di gamberi", "zenzero",
-  "aglio", "cipollotto", "barbabietola", "ravanelli", "cavolo", "funghi shitake", "alghe", "wasabi"
-];
-
-const emozioniAI = {
-  triste: ["triste", "giù", "deluso", "depresso", "cupo"],
-  felice: ["felice", "contento", "allegro", "raggiante", "gioioso"],
-  arrabbiato: ["arrabbiato", "furioso", "agitato", "irritato", "nervoso"],
-  stressato: ["stressato", "teso", "ansioso", "esausto", "carico"],
-  curioso: ["curioso", "sognante", "strano", "fantasioso", "sperimentale"],
-  romantico: ["romantico", "innamorato", "dolce", "tenero", "sentimentale"],
-  energico: ["energico", "attivo", "vivace", "dinamico", "euforico"],
-  rilassato: ["rilassato", "tranquillo", "sereno", "calmo", "zen"]
-};
-
-function trovaEmozione(testo) {
-  const input = testo.toLowerCase();
-  for (const [emozione, sinonimi] of Object.entries(emozioniAI)) {
-    if (sinonimi.some(parola => input.includes(parola))) {
-      return emozione;
-    }
-  }
-  return null;
-}
-
-function trovaIngredienti(testo) {
-  const input = testo.toLowerCase();
-  return ingredientiAI.filter(ingrediente => input.includes(ingrediente));
-}
-
 async function chiediConsiglio(inputUtente) {
   return new Promise((resolve) => {
-    const umore = trovaEmozione(inputUtente);
-    const ingredienti = trovaIngredienti(inputUtente);
-    let risposta = "";
+    setTimeout(() => {
+      const input = inputUtente.toLowerCase();
+      let risposta = "";
 
-    if (ingredienti.includes("nutella") || (umore === "stressato" && inputUtente.toLowerCase().includes("dolce"))) {
-      risposta = "Hai avuto una giornata pesante. Ti consiglio una pizza alla Nutella per chiuderla con dolcezza.";
-    } else if (ingredienti.length > 0) {
-      risposta = `Con gli ingredienti che hai scelto (${ingredienti.join(", ")}), potremmo creare una pizza su misura per te.`;
-    } else if (umore) {
-      const suggerimenti = {
-        triste: "Prova una Boscaiola: cremosa e intensa, per tirarti su.",
-        felice: "Festeggia con una Capricciosa, ricca e piena di sapore.",
-        arrabbiato: "Sfogati con una Diavola molto piccante.",
-        stressato: "Rilassati con una Margherita semplice e perfetta.",
-        curioso: "Prova una Tartufata, elegante e fuori dal comune.",
-        romantico: "Una Bufalina delicata è perfetta per un momento speciale.",
-        energico: "Lanciati con una Quattro Formaggi ricca e decisa.",
-        rilassato: "Una Vegetariana leggera si abbina al tuo stato d’animo."
+      // Dizionari base
+      const ingredientiPreferiti = {
+        diavola: ["salame", "piccante", "peperoni"],
+        margherita: ["mozzarella", "pomodoro", "basilico"],
+        capricciosa: ["prosciutto", "carciofi", "olive", "funghi"],
+        quattroFormaggi: ["gorgonzola", "mozzarella", "parmigiano", "fontina"],
+        bufalina: ["bufala", "pomodorini", "rucola"],
+        tonnoCipolla: ["tonno", "cipolla"],
+        vegetariana: ["verdure", "zucchine", "melanzane", "peperoni", "pomodori secchi"],
+        tartufata: ["tartufo", "crema", "funghi"],
+        napoli: ["acciughe", "origano", "olive nere"],
+        boscaiola: ["funghi", "salsiccia", "panna"]
       };
-      risposta = suggerimenti[umore];
-    } else {
-      risposta = "Dimmi come ti senti o cosa ti piace, e ti consiglierò la pizza perfetta.";
-    }
 
-    // ✅ Sintesi vocale (una sola volta, senza bug)
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel(); // ferma qualsiasi parlato in corso
-      const utter = new SpeechSynthesisUtterance(risposta);
-      utter.lang = "it-IT";
-      setTimeout(() => window.speechSynthesis.speak(utter), 100);
-    }
+      const statiAnimo = {
+        triste: [
+          "Prova qualcosa di forte come la Diavola per tirarti su.",
+          "La Quattro Formaggi ha un comfort unico quando sei giù.",
+          "La Capricciosa ti farà sentire più coccolato."
+        ],
+        felice: [
+          "Festeggia con una Capricciosa ricca di ingredienti.",
+          "La Bufalina fresca è perfetta per un umore allegro.",
+          "Se sei felice, osa con una Tartufata intensa!"
+        ],
+        stressato: [
+          "Rilassati con una Margherita semplice e perfetta.",
+          "La Vegetariana ti aiuta a ritrovare equilibrio e leggerezza.",
+          "Prova la Quattro Formaggi, è cremosa e distensiva."
+        ],
+        arrabbiato: [
+          "Scarica la tensione con una Diavola molto piccante.",
+          "La Napoli saporita e decisa fa per te.",
+          "Prova la Boscaiola: rustica, intensa e appagante."
+        ],
+        annoiato: [
+          "Ravviva la serata con una pizza con gorgonzola e cipolla.",
+          "Una Capricciosa ben fatta non annoia mai.",
+          "Sperimenta una Tartufata, sorprendente e fuori dal comune."
+        ]
+      };
 
-    resolve({ risposta });
+      // Estrai emozione o stato d’animo
+      const emozione = Object.keys(statiAnimo).find(e => input.includes(e));
+      if (emozione) {
+        const suggerimenti = statiAnimo[emozione];
+        risposta = suggerimenti[Math.floor(Math.random() * suggerimenti.length)];
+      }
+
+      // Estrai ingredienti
+      const pizzeTrovate = Object.entries(ingredientiPreferiti)
+        .filter(([nome, ingredienti]) =>
+          ingredienti.some(i => input.includes(i))
+        )
+        .map(([nome]) => nome);
+
+      if (pizzeTrovate.length > 0) {
+        const pizza = pizzeTrovate[0]; // prende la prima valida trovata
+        risposta = `Ti consiglio la ${pizza.charAt(0).toUpperCase() + pizza.slice(1)}. È perfetta per i tuoi gusti.`;
+      }
+
+      // Se trova sia emozione che ingredienti
+      if (emozione && pizzeTrovate.length > 0) {
+        const pizza = pizzeTrovate[0];
+        risposta = `${statiAnimo[emozione][0]} Ti consiglio in particolare la ${pizza}.`;
+      }
+
+      // Risposta di default
+      if (!risposta) {
+        risposta = "Non sono sicuro dei tuoi gusti, ma potresti provare la Quattro Stagioni: un mix perfetto per ogni umore.";
+      }
+
+      resolve({ risposta });
+    }, 1000);
   });
 }
-</script>
-
 
 
 
