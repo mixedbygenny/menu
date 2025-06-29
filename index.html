@@ -58,59 +58,13 @@
       color: #1b4f8c;
       font-weight: bold;
     }
-    .pizza.margherita {
-      background: #FFFFFF;
-    }
-    .pizza.diavola1 {
-      background: #FFFFFF;
-    }
-    .pizza.gorgonzola {
-      background: #FFFFFF;
-    }
+    .pizza.margherita,
+    .pizza.diavola1,
+    .pizza.gorgonzola,
     .pizza.mixed {
       background: #FFFFFF;
     }
-    .ai-box {
-      background: #FFFFFF;
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 40px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .ai-box h2 {
-      margin-top: 0;
-      color: #d35400;
-    }
-    label, input, button {
-      display: block;
-      width: 100%;
-      margin-bottom: 1em;
-      font-size: 1em;
-    }
-    input {
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background-color: #FF0000;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    #risposta-ai {
-      margin-top: 1em;
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #d35400;
-      white-space: pre-line;
-    }
+
     footer {
       text-align: center;
       font-size: 0.9em;
@@ -118,6 +72,65 @@
       background: #447fbc;
       color: white;
       margin-top: 40px;
+    }
+
+    /* FAB e popup AI */
+    #ai-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #f39c12;
+      color: white;
+      font-size: 28px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 60px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+
+    #ai-popup {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background: #fff4e6;
+      padding: 20px;
+      border-radius: 20px;
+      width: 280px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 999;
+    }
+
+    #ai-popup .popup-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #ai-popup input,
+    #ai-popup button {
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    #ai-popup button {
+      background-color: #f39c12;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #risposta-ai {
+      font-size: 1em;
+      font-weight: bold;
+      color: #d35400;
+      white-space: pre-line;
     }
   </style>
 </head>
@@ -158,95 +171,45 @@
         <p class="pizza-price">10€</p>
       </div>
     </div>
-    <div class="ai-box">
-      <h2>Ti consiglio una pizza!</h2>
-      <label for="gusto">Scrivi i tuoi gusti oppure parla con me:</label>
-      <input type="text" id="gusto" placeholder="Es: pomodoro, mozzarella" />
-      <button id="chiedi-btn">Consiglia pizza</button>
-      <button id="parla-btn">🎙️ Parlami di te</button>
+  </main>
+
+  <div id="ai-fab" onclick="togglePopup()">🤖</div>
+  <div id="ai-popup">
+    <div class="popup-content">
+      <h2>Dimmi cosa ti piace!</h2>
+      <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" />
+      <button onclick="consiglia()">Consiglia 🍕</button>
+      <button onclick="parla()">🎙️ Parla</button>
       <div id="risposta-ai"></div>
     </div>
-  </main>
+  </div>
+
   <footer>
     Coperto: 2€ a persona (include acqua da 50ml)
   </footer>
+
   <script>
-async function chiediConsiglio(gusti) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      let risposta;
-      const g = gusti.toLowerCase();
+    function togglePopup() {
+      const popup = document.getElementById("ai-popup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
 
-      if (g.includes('salame') || g.includes('peperoni') || g.includes('piccante')) {
-        risposta = "🔥 Hai voglia di qualcosa di deciso? Prova la Diavola con salame piccante!";
-      } else if (g.includes('funghi') || g.includes('champignon') || g.includes('porcini')) {
-        risposta = "🍄 Una pizza ai funghi è la scelta perfetta per un sapore terroso e delicato.";
-      } else if (g.includes('mozzarella') || g.includes('pomodoro') || g.includes('margherita')) {
-        risposta = "🍅 La Margherita è un grande classico: semplice, elegante e sempre gustosa.";
-      } else if (g.includes('gorgonzola') || g.includes('formaggi') || g.includes('quattro formaggi') || g.includes('blu')) {
-        risposta = "🧀 Gorgonzola, fontina, mozzarella e parmigiano: prova la Quattro Formaggi per un gusto intenso!";
-      } else if (g.includes('prosciutto') || g.includes('crudo') || g.includes('cotto') || g.includes('speck')) {
-        risposta = "🥓 Il prosciutto sulla pizza è un must! Ti consiglio una pizza con cotto o crudo a crudo.";
-      } else if (g.includes('rucola') || g.includes('grana') || g.includes('scaglie')) {
-        risposta = "🌿 Fresca e leggera? Vai con rucola e grana su base Margherita!";
-      } else if (g.includes('olive') || g.includes('capperi') || g.includes('carciofi')) {
-        risposta = "🫒 Ami i sapori mediterranei? La Capricciosa fa al caso tuo!";
-      } else if (g.includes('tonno') || g.includes('cipolla') || g.includes('rossa di tropea')) {
-        risposta = "🐟 Tonno e cipolla: un mix semplice ma saporito!";
-      } else if (g.includes('zucchine') || g.includes('melanzane') || g.includes('peperoni grigliati') || g.includes('verdure')) {
-        risposta = "🥬 Ami le verdure grigliate? Una Vegetariana ben fatta è perfetta!";
-      } else if (g.includes('salsiccia') || g.includes('friarielli') || g.includes('broccoli')) {
-        risposta = "🥩 Prova la Salsiccia e Friarielli: un'esplosione di sapore napoletano!";
-      } else if (g.includes('tartufo') || g.includes('crema di tartufo')) {
-        risposta = "🍄 Hai gusti raffinati? Vai con una pizza con crema di tartufo e mozzarella!";
-      } else if (g.includes('bufala')) {
-        risposta = "🧀 La Bufala aggiunge cremosità unica alla tua pizza. Perfetta su base Margherita.";
-      } else if (g.includes('bresaola') || g.includes('rucola') || g.includes('grana')) {
-        risposta = "🥩 Bresaola, rucola e grana: un mix fresco, elegante e leggero.";
-      } else if (g.includes('pesto')) {
-        risposta = "🌿 Il pesto dà un tocco ligure spettacolare alla tua pizza. Provalo con pomodorini e mozzarella!";
-      } else if (g.includes('pomodorini') || g.includes('datterini')) {
-        risposta = "🍅 Pomodorini freschi? Provali su una base bianca con mozzarella e basilico!";
-      } else if (g.includes('wurstel')) {
-        risposta = "🌭 Wurstel e patatine? Una scelta perfetta per i più giovani (e non solo)!";
-      } else if (g.includes('patatine')) {
-        risposta = "🍟 Se ti piacciono le patatine fritte, puoi provare una pizza in stile fast food!";
-      } else if (g.includes('ananas')) {
-        risposta = "🍍 Sì, esiste anche la pizza hawaiana! Ananas e prosciutto per chi ama osare.";
-      } else if (g.includes('uova') || g.includes('uovo')) {
-        risposta = "🥚 Uovo in camicia sulla pizza? Perfetto su una carbonara o amatriciana.";
-      } else if (g.includes('nduja')) {
-        risposta = "🌶 La 'nduja è piccante e intensa. Da provare su base bianca con burrata!";
-      } else if (g.includes('burrata')) {
-        risposta = "🥛 Burrata su pizza? Una goduria cremosa da provare assolutamente!";
-      } else if (g.includes('carbonara')) {
-        risposta = "🍝 Sei amante della carbonara? Abbiamo una pizza ispirata con uovo, guanciale e pepe nero.";
-      } else {
-        risposta = "🤔 Non sono sicuro dei tuoi gusti, ma ti consiglio la Quattro Stagioni: un mix completo per tutti i palati!";
-      }
-
-      resolve({ risposta });
-    }, 1000);
-  });
-}
-
-    document.getElementById('chiedi-btn').addEventListener('click', async () => {
+    async function consiglia() {
       const gustoInput = document.getElementById('gusto').value.trim();
       const rispostaDiv = document.getElementById('risposta-ai');
       if (!gustoInput) {
-        rispostaDiv.textContent = "Per favore, inserisci qualche gusto.";
+        rispostaDiv.textContent = "Inserisci qualche ingrediente!";
         return;
       }
       rispostaDiv.textContent = "Sto pensando...";
-      try {
-        const data = await chiediConsiglio(gustoInput);
-        rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
-      } catch (e) {
-        rispostaDiv.textContent = "⚠️ Qualcosa è andato storto, riprova tra un momento.";
-        console.error(e);
-      }
-    });
-    document.getElementById('parla-btn').addEventListener('click', () => {
+      const data = await chiediConsiglio(gustoInput);
+      rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
+      const utter = new SpeechSynthesisUtterance(data.risposta);
+      utter.lang = 'it-IT';
+      window.speechSynthesis.speak(utter);
+    }
+
+    function parla() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
         alert("Il tuo browser non supporta il riconoscimento vocale.");
@@ -254,30 +217,43 @@ async function chiediConsiglio(gusti) {
       }
       const recognition = new SpeechRecognition();
       recognition.lang = 'it-IT';
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
+      recognition.start();
+
       const rispostaDiv = document.getElementById('risposta-ai');
       rispostaDiv.textContent = "Sto ascoltando... 🎧";
-      recognition.start();
+
       recognition.onresult = async (event) => {
-        const inputVocale = event.results[0][0].transcript;
-        rispostaDiv.textContent = `Hai detto: "${inputVocale}"\nSto pensando... 🤔`;
-        try {
-          const data = await chiediConsiglio(inputVocale);
-          rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
-          const utter = new SpeechSynthesisUtterance(data.risposta);
-          utter.lang = 'it-IT';
-          window.speechSynthesis.speak(utter);
-        } catch (err) {
-          rispostaDiv.textContent = "Errore durante il consiglio vocale.";
-          console.error(err);
-        }
+        const input = event.results[0][0].transcript;
+        document.getElementById('gusto').value = input;
+        rispostaDiv.textContent = "Elaboro... 🤖";
+        const data = await chiediConsiglio(input);
+        rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
+        const utter = new SpeechSynthesisUtterance(data.risposta);
+        utter.lang = 'it-IT';
+        window.speechSynthesis.speak(utter);
       };
+
       recognition.onerror = (event) => {
-        rispostaDiv.textContent = "Errore durante il riconoscimento vocale.";
-        console.error("SpeechRecognition error:", event.error);
+        rispostaDiv.textContent = "Errore nel riconoscimento vocale.";
       };
-    });
+    }
+
+    async function chiediConsiglio(gusti) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const g = gusti.toLowerCase();
+          let risposta;
+          if (g.includes("salame") || g.includes("peperoni") || g.includes("piccante")) {
+            risposta = "🔥 Hai voglia di qualcosa di deciso? Prova la Diavola con salame piccante!";
+          } else if (g.includes("mozzarella") || g.includes("pomodoro") || g.includes("margherita")) {
+            risposta = "🍅 La Margherita è un grande classico: semplice, elegante e sempre gustosa.";
+          } else {
+            risposta = "🤔 Non sono sicuro dei tuoi gusti, ma ti consiglio la Quattro Stagioni!";
+          }
+          resolve({ risposta });
+        }, 1000);
+      });
+    }
   </script>
 </body>
 </html>
