@@ -42,7 +42,7 @@
       padding: 10px;
       max-width: 800px;
       margin: auto;
-      transform: scale(0.95);
+      transform: scale(0.9975);
       transform-origin: top center;
     }
 
@@ -59,8 +59,8 @@
     }
 
     .pizza img {
-      width: 105px;
-      height: 105px;
+      width: 110px;
+      height: 110px;
       border-radius: 10px;
       object-fit: cover;
       background: #6C1E1E;
@@ -72,12 +72,12 @@
     }
 
     .pizza-name {
-      font-size: 1.45em;
+      font-size: 1.5em;
       margin: 0;
     }
 
     .pizza-ingredients {
-      font-size: 0.85em;
+      font-size: 0.9em;
     }
 
     .pizza-price {
@@ -247,6 +247,35 @@
     function togglePopup() {
       const popup = document.getElementById("ai-popup");
       popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
+
+    function consiglia() {
+      const gusto = document.getElementById("gusto").value;
+      const rispostaDiv = document.getElementById("risposta-ai");
+      if (!gusto) {
+        rispostaDiv.textContent = currentLang === 'it' ? "Per favore inserisci un gusto." : "Please enter a flavor.";
+        return;
+      }
+      rispostaDiv.textContent = currentLang === 'it' ? `Potresti provare la pizza con ${gusto}!` : `You could try a pizza with ${gusto}!`;
+    }
+
+    function parla() {
+      const rispostaDiv = document.getElementById("risposta-ai");
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+
+      recognition.start();
+      rispostaDiv.textContent = currentLang === 'it' ? "Sto ascoltando..." : "Listening...";
+
+      recognition.onresult = function(event) {
+        const result = event.results[0][0].transcript;
+        document.getElementById("gusto").value = result;
+        rispostaDiv.textContent = currentLang === 'it' ? `Hai detto: ${result}` : `You said: ${result}`;
+      };
+
+      recognition.onerror = function(event) {
+        rispostaDiv.textContent = currentLang === 'it' ? "Errore nel riconoscimento vocale." : "Speech recognition error.";
+      };
     }
   </script>
 </body>
