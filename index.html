@@ -168,27 +168,68 @@
     </div>
   </main>
   <footer>
-    Coperto: 2€ a persona (inclusa una bottiglia d'acqua da 75ml)
+    Coperto: 2€ a persona (include acqua da 50ml)
   </footer>
   <script>
-    async function chiediConsiglio(gusti) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          let risposta;
-          const g = gusti.toLowerCase();
-          if (g.includes('peperoni')) {
-            risposta = "Ti consiglio la pizza diavola, piccante e gustosa!";
-          } else if (g.includes('funghi')) {
-            risposta = "La pizza ai funghi è perfetta per te!";
-          } else if (g.includes('margherita') || g.includes('mozzarella')) {
-            risposta = "La classica Margherita è sempre una buona scelta!";
-          } else {
-            risposta = "Prova una pizza quattro stagioni, è un mix di sapori!";
-          }
-          resolve({ risposta });
-        }, 1000);
-      });
-    }
+async function chiediConsiglio(gusti) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      let risposta;
+      const g = gusti.toLowerCase();
+
+      if (g.includes('salame') || g.includes('peperoni') || g.includes('piccante')) {
+        risposta = "🔥 Hai voglia di qualcosa di deciso? Prova la Diavola con salame piccante!";
+      } else if (g.includes('funghi') || g.includes('champignon') || g.includes('porcini')) {
+        risposta = "🍄 Una pizza ai funghi è la scelta perfetta per un sapore terroso e delicato.";
+      } else if (g.includes('mozzarella') || g.includes('pomodoro') || g.includes('margherita')) {
+        risposta = "🍅 La Margherita è un grande classico: semplice, elegante e sempre gustosa.";
+      } else if (g.includes('gorgonzola') || g.includes('formaggi') || g.includes('quattro formaggi') || g.includes('blu')) {
+        risposta = "🧀 Gorgonzola, fontina, mozzarella e parmigiano: prova la Quattro Formaggi per un gusto intenso!";
+      } else if (g.includes('prosciutto') || g.includes('crudo') || g.includes('cotto') || g.includes('speck')) {
+        risposta = "🥓 Il prosciutto sulla pizza è un must! Ti consiglio una pizza con cotto o crudo a crudo.";
+      } else if (g.includes('rucola') || g.includes('grana') || g.includes('scaglie')) {
+        risposta = "🌿 Fresca e leggera? Vai con rucola e grana su base Margherita!";
+      } else if (g.includes('olive') || g.includes('capperi') || g.includes('carciofi')) {
+        risposta = "🫒 Ami i sapori mediterranei? La Capricciosa fa al caso tuo!";
+      } else if (g.includes('tonno') || g.includes('cipolla') || g.includes('rossa di tropea')) {
+        risposta = "🐟 Tonno e cipolla: un mix semplice ma saporito!";
+      } else if (g.includes('zucchine') || g.includes('melanzane') || g.includes('peperoni grigliati') || g.includes('verdure')) {
+        risposta = "🥬 Ami le verdure grigliate? Una Vegetariana ben fatta è perfetta!";
+      } else if (g.includes('salsiccia') || g.includes('friarielli') || g.includes('broccoli')) {
+        risposta = "🥩 Prova la Salsiccia e Friarielli: un'esplosione di sapore napoletano!";
+      } else if (g.includes('tartufo') || g.includes('crema di tartufo')) {
+        risposta = "🍄 Hai gusti raffinati? Vai con una pizza con crema di tartufo e mozzarella!";
+      } else if (g.includes('bufala')) {
+        risposta = "🧀 La Bufala aggiunge cremosità unica alla tua pizza. Perfetta su base Margherita.";
+      } else if (g.includes('bresaola') || g.includes('rucola') || g.includes('grana')) {
+        risposta = "🥩 Bresaola, rucola e grana: un mix fresco, elegante e leggero.";
+      } else if (g.includes('pesto')) {
+        risposta = "🌿 Il pesto dà un tocco ligure spettacolare alla tua pizza. Provalo con pomodorini e mozzarella!";
+      } else if (g.includes('pomodorini') || g.includes('datterini')) {
+        risposta = "🍅 Pomodorini freschi? Provali su una base bianca con mozzarella e basilico!";
+      } else if (g.includes('wurstel')) {
+        risposta = "🌭 Wurstel e patatine? Una scelta perfetta per i più giovani (e non solo)!";
+      } else if (g.includes('patatine')) {
+        risposta = "🍟 Se ti piacciono le patatine fritte, puoi provare una pizza in stile fast food!";
+      } else if (g.includes('ananas')) {
+        risposta = "🍍 Sì, esiste anche la pizza hawaiana! Ananas e prosciutto per chi ama osare.";
+      } else if (g.includes('uova') || g.includes('uovo')) {
+        risposta = "🥚 Uovo in camicia sulla pizza? Perfetto su una carbonara o amatriciana.";
+      } else if (g.includes('nduja')) {
+        risposta = "🌶 La 'nduja è piccante e intensa. Da provare su base bianca con burrata!";
+      } else if (g.includes('burrata')) {
+        risposta = "🥛 Burrata su pizza? Una goduria cremosa da provare assolutamente!";
+      } else if (g.includes('carbonara')) {
+        risposta = "🍝 Sei amante della carbonara? Abbiamo una pizza ispirata con uovo, guanciale e pepe nero.";
+      } else {
+        risposta = "🤔 Non sono sicuro dei tuoi gusti, ma ti consiglio la Quattro Stagioni: un mix completo per tutti i palati!";
+      }
+
+      resolve({ risposta });
+    }, 1000);
+  });
+}
+
     document.getElementById('chiedi-btn').addEventListener('click', async () => {
       const gustoInput = document.getElementById('gusto').value.trim();
       const rispostaDiv = document.getElementById('risposta-ai');
