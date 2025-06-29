@@ -5,8 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mixed by Genny - Menu</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Altri CSS o script se presenti -->
   <style>
     body {
       margin: 0;
@@ -26,6 +24,19 @@
     header img {
       width: 100%;
       max-width: 480px;
+    }
+
+    .coperto-info {
+      text-align: center;
+      font-size: 1em;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      color: #F5E2C8;
+      background-color: #6C1E1E;
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
     }
 
     main {
@@ -73,15 +84,6 @@
       font-weight: bold;
     }
 
-    footer {
-      text-align: center;
-      font-size: 0.9em;
-      padding: 15px;
-      background: #6C1E1E;
-      color: #F5E2C8;
-      margin-top: 40px;
-    }
-
     #ai-fab {
       position: fixed;
       bottom: 20px;
@@ -100,7 +102,6 @@
       font-weight: bold;
     }
 
-    /* === STILE AGGIORNATO PER LA FINESTRA AI === */
     #ai-popup {
       position: fixed;
       bottom: 90px;
@@ -139,7 +140,6 @@
       border-radius: 12px;
       border: 2px solid #6C1E1E;
       outline: none;
-      transition: border-color 0.3s ease;
       font-weight: 600;
     }
 
@@ -158,7 +158,6 @@
       color: #F5E2C8;
       background: linear-gradient(45deg, #6C1E1E, #4B1414);
       box-shadow: 0 4px 8px rgba(75, 20, 20, 0.7);
-      transition: background 0.3s ease;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -167,15 +166,10 @@
 
     #ai-popup button:hover {
       background: linear-gradient(45deg, #4B1414, #6C1E1E);
-      box-shadow: 0 6px 12px rgba(108, 30, 30, 0.9);
     }
 
     #ai-popup button:active {
       transform: scale(0.97);
-    }
-
-    #ai-popup button span.icon {
-      font-size: 1.3em;
     }
 
     #risposta-ai {
@@ -213,6 +207,9 @@
 <body>
   <header>
     <img src="logo.png" alt="Logo Mixed by Genny" />
+    <div class="coperto-info">
+      Coperto: 2€ a persona (include acqua da 50ml)
+    </div>
   </header>
 
   <main>
@@ -247,14 +244,16 @@
       <img src="diavola1.jpeg" alt="Mixed by Genny" />
       <div class="pizza-info">
         <p class="pizza-name">Mixed by Genny</p>
-        <p class="pizza-ingredients">Interagisci con l'AI e Genny farà una pizza speciale solo per te<br><em>Interact with the AI and Genny will maka a special pizza for you</em></p>
+        <p class="pizza-ingredients">Interagisci con l'AI e Genny farà una pizza speciale solo per te<br><em>Interact with the AI and Genny will make a special pizza for you</em></p>
         <p class="pizza-price">10€</p>
       </div>
     </div>
   </main>
 
+  <!-- Pulsante fluttuante AI -->
   <div id="ai-fab" onclick="togglePopup()">AI</div>
 
+  <!-- Finestra popup AI -->
   <div id="ai-popup">
     <div class="lang-switch">
       <button onclick="setLang('it')">🇮🇹</button>
@@ -268,10 +267,6 @@
       <div id="risposta-ai"></div>
     </div>
   </div>
-
-  <footer>
-    Coperto: 2€ a persona (include acqua da 50ml)
-  </footer>
 
   <script>
     let currentLang = 'it';
@@ -338,7 +333,6 @@
           const input = inputUtente.toLowerCase();
           let risposta = "";
 
-          // Dizionari base
           const ingredientiPreferiti = {
             diavola: ["salame", "piccante", "peperoni"],
             margherita: ["mozzarella", "pomodoro", "basilico"],
@@ -380,14 +374,11 @@
             ]
           };
 
-          // Estrai emozione o stato d’animo
           const emozione = Object.keys(statiAnimo).find(e => input.includes(e));
           if (emozione) {
-            const suggerimenti = statiAnimo[emozione];
-            risposta = suggerimenti[Math.floor(Math.random() * suggerimenti.length)];
+            risposta = statiAnimo[emozione][0];
           }
 
-          // Estrai ingredienti
           const pizzeTrovate = Object.entries(ingredientiPreferiti)
             .filter(([nome, ingredienti]) =>
               ingredienti.some(i => input.includes(i))
@@ -395,17 +386,15 @@
             .map(([nome]) => nome);
 
           if (pizzeTrovate.length > 0) {
-            const pizza = pizzeTrovate[0]; // prende la prima valida trovata
+            const pizza = pizzeTrovate[0];
             risposta = `Ti consiglio la ${pizza.charAt(0).toUpperCase() + pizza.slice(1)}. È perfetta per i tuoi gusti.`;
           }
 
-          // Se trova sia emozione che ingredienti
           if (emozione && pizzeTrovate.length > 0) {
             const pizza = pizzeTrovate[0];
             risposta = `${statiAnimo[emozione][0]} Ti consiglio in particolare la ${pizza}.`;
           }
 
-          // Risposta di default
           if (!risposta) {
             risposta = "Non sono sicuro dei tuoi gusti, ma potresti provare la Quattro Stagioni: un mix perfetto per ogni umore.";
           }
