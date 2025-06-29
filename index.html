@@ -1,3 +1,9 @@
+<!--
+🌟 FILE: menu.html
+📌 SCOPO: Menu interattivo per pizzeria "Mixed by Genny" con AI vocale e cambio lingua
+🛠️ MODIFICHE: Aggiunto sfondo con cornice e suggerimenti nei commenti
+-->
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -5,35 +11,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Menu - Mixed by Genny</title>
   <style>
-    /* Stile base per corpo e testo */
+    /* 🌈 SFONDO e CORNICE GLOBALE */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #000000;
-      color: #001f4d;
+      background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+      border: 8px solid #f39c12; /* Cornice */
+      padding: 10px;
+      box-sizing: border-box;
     }
 
-    /* Header con logo */
     header {
       text-align: center;
       padding: 20px;
     }
-
     header img {
       width: 100%;
       max-width: 480px;
     }
 
-    /* Contenitore principale */
     main {
       padding: 20px;
       max-width: 800px;
       margin: auto;
     }
 
-    /* Singola pizza */
     .pizza {
-      background: #644B00;
+      background: #fff;
       border-radius: 12px;
       padding: 15px;
       margin: 20px 0;
@@ -72,15 +76,6 @@
       font-weight: bold;
     }
 
-    /* Colori pizza personalizzati */
-    .pizza.margherita,
-    .pizza.diavola1,
-    .pizza.gorgonzola,
-    .pizza.mixed {
-      background: #FFFFFF;
-    }
-
-    /* Footer */
     footer {
       text-align: center;
       font-size: 0.9em;
@@ -90,7 +85,7 @@
       margin-top: 40px;
     }
 
-    /* Pulsante flottante per AI */
+    /* 🤖 Pulsante AI flottante */
     #ai-fab {
       position: fixed;
       bottom: 20px;
@@ -100,16 +95,16 @@
       background: #f39c12;
       color: white;
       font-size: 20px;
-      font-weight: bold;
       border-radius: 50%;
       text-align: center;
       line-height: 60px;
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
       z-index: 1000;
+      font-weight: bold;
     }
 
-    /* Popup dell'assistente AI */
+    /* 💬 Pop-up AI */
     #ai-popup {
       position: fixed;
       bottom: 90px;
@@ -151,48 +146,39 @@
       white-space: pre-line;
     }
 
-    /* Pulsanti lingua */
-    .lang-buttons {
+    /* 🌐 Pulsanti Lingua */
+    .lang-switch {
       position: fixed;
-      top: 10px;
-      right: 10px;
+      top: 20px;
+      right: 20px;
       display: flex;
       gap: 10px;
     }
 
-    .lang-button {
+    .lang-switch button {
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      border: 2px solid white;
-      overflow: hidden;
+      border: none;
       cursor: pointer;
-    }
-
-    .lang-button img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
-  <!-- Logo principale -->
+
+  <!-- 🖼️ Logo -->
   <header>
     <img src="logo.png" alt="Logo Mixed by Genny" />
   </header>
 
-  <!-- Pulsanti selezione lingua -->
-  <div class="lang-buttons">
-    <div class="lang-button" onclick="cambiaLingua('it-IT')">
-      <img src="bandiera-it.png" alt="IT">
-    </div>
-    <div class="lang-button" onclick="cambiaLingua('en-US')">
-      <img src="bandiera-en.png" alt="EN">
-    </div>
+  <!-- 🌐 Selettore lingua -->
+  <div class="lang-switch">
+    <button onclick="setLang('it')">🇮🇹</button>
+    <button onclick="setLang('en')">🇬🇧</button>
   </div>
 
-  <!-- Menu pizze -->
+  <!-- 🍕 Elenco pizze -->
   <main>
     <div class="pizza margherita">
       <img src="diavola1.jpeg" alt="Margherita" />
@@ -202,6 +188,7 @@
         <p class="pizza-price">10€</p>
       </div>
     </div>
+
     <div class="pizza diavola1">
       <img src="diavola1.jpeg" alt="Diavola" />
       <div class="pizza-info">
@@ -210,6 +197,7 @@
         <p class="pizza-price">10€</p>
       </div>
     </div>
+
     <div class="pizza gorgonzola">
       <img src="diavola1.jpeg" alt="Gorgonzola" />
       <div class="pizza-info">
@@ -218,6 +206,7 @@
         <p class="pizza-price">10€</p>
       </div>
     </div>
+
     <div class="pizza mixed">
       <img src="diavola1.jpeg" alt="Mixed by Genny" />
       <div class="pizza-info">
@@ -228,13 +217,13 @@
     </div>
   </main>
 
-  <!-- Pulsante flottante per attivare popup AI -->
+  <!-- 🤖 Pulsante AI -->
   <div id="ai-fab" onclick="togglePopup()">AI</div>
 
-  <!-- Popup AI -->
+  <!-- 💬 Pop-up AI -->
   <div id="ai-popup">
     <div class="popup-content">
-      <h2>Dimmi cosa ti piace!</h2>
+      <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
       <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" />
       <button onclick="consiglia()">Consiglia 🍕</button>
       <button onclick="parla()">🎙️ Parla</button>
@@ -242,18 +231,20 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- ℹ️ Footer -->
   <footer>
     Coperto: 2€ a persona (include acqua da 50ml)
   </footer>
 
-  <!-- Script principale -->
+  <!-- ⚙️ Funzioni AI -->
   <script>
-    let lingua = 'it-IT'; // Impostazione lingua iniziale
+    let currentLang = 'it';
 
-    function cambiaLingua(codice) {
-      lingua = codice;
-      alert("Lingua cambiata: " + (lingua === 'it-IT' ? 'Italiano' : 'English'));
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.getElementById("title-prompt").textContent = lang === 'it' ? "Dimmi cosa ti piace!" : "Tell me what you like!";
+      document.getElementById("gusto").placeholder = lang === 'it' ? "Es: mozzarella, pomodoro" : "E.g.: mozzarella, tomato";
     }
 
     function togglePopup() {
@@ -265,43 +256,43 @@
       const gustoInput = document.getElementById('gusto').value.trim();
       const rispostaDiv = document.getElementById('risposta-ai');
       if (!gustoInput) {
-        rispostaDiv.textContent = lingua === 'it-IT' ? "Inserisci qualche ingrediente!" : "Please enter some ingredients!";
+        rispostaDiv.textContent = currentLang === 'it' ? "Inserisci qualche ingrediente!" : "Please enter some ingredients!";
         return;
       }
-      rispostaDiv.textContent = lingua === 'it-IT' ? "Sto pensando..." : "Thinking...";
+      rispostaDiv.textContent = currentLang === 'it' ? "Sto pensando..." : "Thinking...";
       const data = await chiediConsiglio(gustoInput);
       rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
       const utter = new SpeechSynthesisUtterance(data.risposta);
-      utter.lang = lingua;
+      utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
       window.speechSynthesis.speak(utter);
     }
 
     function parla() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
-        alert("Il tuo browser non supporta il riconoscimento vocale.");
+        alert(currentLang === 'it' ? "Il tuo browser non supporta il riconoscimento vocale." : "Your browser does not support voice recognition.");
         return;
       }
       const recognition = new SpeechRecognition();
-      recognition.lang = lingua;
+      recognition.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
       recognition.start();
 
       const rispostaDiv = document.getElementById('risposta-ai');
-      rispostaDiv.textContent = lingua === 'it-IT' ? "Sto ascoltando... 🎧" : "Listening... 🎧";
+      rispostaDiv.textContent = currentLang === 'it' ? "Sto ascoltando... 🎧" : "Listening... 🎧";
 
       recognition.onresult = async (event) => {
         const input = event.results[0][0].transcript;
         document.getElementById('gusto').value = input;
-        rispostaDiv.textContent = lingua === 'it-IT' ? "Elaboro... 🤖" : "Processing... 🤖";
+        rispostaDiv.textContent = currentLang === 'it' ? "Elaboro... 🤖" : "Processing... 🤖";
         const data = await chiediConsiglio(input);
         rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
         const utter = new SpeechSynthesisUtterance(data.risposta);
-        utter.lang = lingua;
+        utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
         window.speechSynthesis.speak(utter);
       };
 
-      recognition.onerror = () => {
-        rispostaDiv.textContent = lingua === 'it-IT' ? "Errore nel riconoscimento vocale." : "Voice recognition error.";
+      recognition.onerror = (event) => {
+        rispostaDiv.textContent = currentLang === 'it' ? "Errore nel riconoscimento vocale." : "Speech recognition error.";
       };
     }
 
@@ -311,11 +302,11 @@
           const g = gusti.toLowerCase();
           let risposta;
           if (g.includes("salame") || g.includes("peperoni") || g.includes("piccante")) {
-            risposta = lingua === 'it-IT' ? "🔥 Hai voglia di qualcosa di deciso? Prova la Diavola con salame piccante!" : "🔥 Craving something bold? Try the Diavola with spicy salami!";
+            risposta = currentLang === 'it' ? "🔥 Hai voglia di qualcosa di deciso? Prova la Diavola con salame piccante!" : "🔥 Craving something spicy? Try the Diavola with spicy salami!";
           } else if (g.includes("mozzarella") || g.includes("pomodoro") || g.includes("margherita")) {
-            risposta = lingua === 'it-IT' ? "🍅 La Margherita è un grande classico: semplice, elegante e sempre gustosa." : "🍅 Margherita is a timeless classic: simple, elegant and always tasty.";
+            risposta = currentLang === 'it' ? "🍅 La Margherita è un grande classico: semplice, elegante e sempre gustosa." : "🍅 Margherita is a timeless classic: simple, elegant, and always delicious.";
           } else {
-            risposta = lingua === 'it-IT' ? "🤔 Non sono sicuro dei tuoi gusti, ma ti consiglio la Quattro Stagioni!" : "🤔 Not sure about your taste, but try the Quattro Stagioni!";
+            risposta = currentLang === 'it' ? "🤔 Non sono sicuro dei tuoi gusti, ma ti consiglio la Quattro Stagioni!" : "🤔 Not sure about your taste, but I suggest the Quattro Stagioni!";
           }
           resolve({ risposta });
         }, 1000);
