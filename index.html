@@ -299,33 +299,7 @@
       });
     }
 
-<button onclick="apriPopup()">Apri Popup</button>
 
-<div id="overlay"></div>
-<div id="popup">
-  <p>Questo è un popup. Tocca fuori per chiuderlo.</p>
-</div>
-
-<script>
-  const popup = document.getElementById('popup');
-  const overlay = document.getElementById('overlay');
-
-  function apriPopup() {
-    popup.style.display = 'block';
-    overlay.style.display = 'block';
-  }
-
-  document.addEventListener('click', function(event) {
-    // Chiudi il popup solo se si clicca fuori da esso
-    if (popup.style.display === 'block' && !popup.contains(event.target)) {
-      popup.style.display = 'none';
-      overlay.style.display = 'none';
-    }
-  });
-</script>
-
-</body>
-</html>
 
   </script>
 </body>
