@@ -282,6 +282,17 @@
       };
     }
 
+<input id="input-utente" placeholder="Come ti senti o cosa ti piace?">
+<button onclick="consiglia()">Chiedi consiglio</button>
+<p id="risposta-ai"></p>
+
+<script>
+  async function consiglia() {
+    const testo = document.getElementById("input-utente").value;
+    const { risposta } = await chiediConsiglio(testo);
+    document.getElementById("risposta-ai").textContent = risposta;
+  }
+</script>
 <script>
 const ingredientiAI = [
   "mozzarella", "pomodoro", "salame", "funghi", "carciofi", "olive", "tonno", "cipolla", "peperoni",
@@ -309,61 +320,60 @@ const emozioniAI = {
   rilassato: ["rilassato", "tranquillo", "sereno", "calmo", "zen"]
 };
 
-function trovaEmozione(test) {
-  const input = test.toLowerCase();
-  for (const [chiave, sinonimi] of Object.entries(emozioniAI)) {
-    if (sinonimi.some(p => input.includes(p))) {
-      return chiave;
+function trovaEmozione(testo) {
+  const input = testo.toLowerCase();
+  for (const [emozione, sinonimi] of Object.entries(emozioniAI)) {
+    if (sinonimi.some(parola => input.includes(parola))) {
+      return emozione;
     }
   }
   return null;
 }
 
-function trovaIngredienti(test) {
-  const input = test.toLowerCase();
-  return ingredientiAI.filter(ing => input.includes(ing));
+function trovaIngredienti(testo) {
+  const input = testo.toLowerCase();
+  return ingredientiAI.filter(ingrediente => input.includes(ingrediente));
 }
 
 async function chiediConsiglio(inputUtente) {
   return new Promise((resolve) => {
-    setTimeout(() => {
-      const umore = trovaEmozione(inputUtente);
-      const ingredienti = trovaIngredienti(inputUtente);
-      let risposta = "";
+    const umore = trovaEmozione(inputUtente);
+    const ingredienti = trovaIngredienti(inputUtente);
+    let risposta = "";
 
-      if (ingredienti.includes("nutella") || (umore === "stressato" && inputUtente.toLowerCase().includes("dolce"))) {
-        risposta = "Hai avuto una giornata pesante. Ti consiglio una pizza alla Nutella per chiuderla con dolcezza.";
-      } else if (ingredienti.length > 0) {
-        risposta = `Con gli ingredienti che hai scelto (${ingredienti.join(", ")}), potremmo creare una pizza su misura per te.`;
-      } else if (umore) {
-        const suggerimenti = {
-          triste: "Prova una Boscaiola: cremosa e intensa, per tirarti su.",
-          felice: "Festeggia con una Capricciosa, ricca e piena di sapore.",
-          arrabbiato: "Sfogati con una Diavola molto piccante.",
-          stressato: "Rilassati con una Margherita semplice e perfetta.",
-          curioso: "Prova una Tartufata, elegante e fuori dal comune.",
-          romantico: "Una Bufalina delicata è perfetta per un momento speciale.",
-          energico: "Lanciati con una Quattro Formaggi ricca e decisa.",
-          rilassato: "Una Vegetariana leggera si abbina al tuo stato d’animo."
-        };
-        risposta = suggerimenti[umore];
-      } else {
-        risposta = "Dimmi come ti senti o cosa ti piace, e ti consiglierò la pizza perfetta.";
-      }
+    if (ingredienti.includes("nutella") || (umore === "stressato" && inputUtente.toLowerCase().includes("dolce"))) {
+      risposta = "Hai avuto una giornata pesante. Ti consiglio una pizza alla Nutella per chiuderla con dolcezza.";
+    } else if (ingredienti.length > 0) {
+      risposta = `Con gli ingredienti che hai scelto (${ingredienti.join(", ")}), potremmo creare una pizza su misura per te.`;
+    } else if (umore) {
+      const suggerimenti = {
+        triste: "Prova una Boscaiola: cremosa e intensa, per tirarti su.",
+        felice: "Festeggia con una Capricciosa, ricca e piena di sapore.",
+        arrabbiato: "Sfogati con una Diavola molto piccante.",
+        stressato: "Rilassati con una Margherita semplice e perfetta.",
+        curioso: "Prova una Tartufata, elegante e fuori dal comune.",
+        romantico: "Una Bufalina delicata è perfetta per un momento speciale.",
+        energico: "Lanciati con una Quattro Formaggi ricca e decisa.",
+        rilassato: "Una Vegetariana leggera si abbina al tuo stato d’animo."
+      };
+      risposta = suggerimenti[umore];
+    } else {
+      risposta = "Dimmi come ti senti o cosa ti piace, e ti consiglierò la pizza perfetta.";
+    }
 
-      // 🔊 Legge solo una volta
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); // interrompe eventuali voci precedenti
-        const utter = new SpeechSynthesisUtterance(risposta);
-        utter.lang = "it-IT";
-        window.speechSynthesis.speak(utter);
-      }
+    // ✅ Sintesi vocale (una sola volta, senza bug)
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel(); // ferma qualsiasi parlato in corso
+      const utter = new SpeechSynthesisUtterance(risposta);
+      utter.lang = "it-IT";
+      setTimeout(() => window.speechSynthesis.speak(utter), 100);
+    }
 
-      resolve({ risposta });
-    }, 400);
+    resolve({ risposta });
   });
 }
 </script>
+
 
 
 
