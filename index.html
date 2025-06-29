@@ -282,22 +282,68 @@
       };
     }
 
-    async function chiediConsiglio(gusti) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          const g = gusti.toLowerCase();
-          let risposta;
-          if (g.includes("salame") || g.includes("peperoni") || g.includes("piccante")) {
-            risposta = currentLang === 'it' ? "🔥 Hai voglia di qualcosa di deciso? Prova la Diavola con salame piccante!" : "🔥 Craving something spicy? Try the Diavola with spicy salami!";
-          } else if (g.includes("mozzarella") || g.includes("pomodoro") || g.includes("margherita")) {
-            risposta = currentLang === 'it' ? "🍅 La Margherita è un grande classico: semplice, elegante e sempre gustosa." : "🍅 Margherita is a timeless classic: simple, elegant, and always delicious.";
-          } else {
-            risposta = currentLang === 'it' ? "🤔 Non sono sicuro dei tuoi gusti, ma ti consiglio la Quattro Stagioni!" : "🤔 Not sure about your taste, but I suggest the Quattro Stagioni!";
-          }
-          resolve({ risposta });
-        }, 1000);
-      });
-    }
+  async function chiediConsiglio(inputUtente) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const input = inputUtente.toLowerCase();
+      let risposta;
+
+      const gusti = ["salame", "peperoni", "piccante", "mozzarella", "pomodoro", "margherita", "funghi", "prosciutto", "cipolla"];
+      const statiAnimo = ["triste", "felice", "stressato", "annoiato", "arrabbiato", "rilassato"];
+
+      const contiene = (parole) => parole.some(p => input.includes(p));
+
+      // Regole basate sullo stato d'animo
+      if (input.includes("triste")) {
+        risposta = currentLang === 'it'
+          ? "😢 Triste? Ti serve una carica! Prova la Diavola: piccante, intensa e tira su il morale!"
+          : "😢 Feeling down? Spice it up! Try the Diavola – bold and uplifting!";
+      } else if (input.includes("felice")) {
+        risposta = currentLang === 'it'
+          ? "😄 Felice? È il momento perfetto per una pizza creativa come la Capricciosa!"
+          : "😄 Happy? Perfect time for a creative pizza like the Capricciosa!";
+      } else if (input.includes("stressato")) {
+        risposta = currentLang === 'it'
+          ? "😵‍💫 Stressato? Rilassati con una delicata Margherita e goditi la semplicità."
+          : "😵‍💫 Stressed? Relax with a smooth Margherita and enjoy simplicity.";
+      } else if (input.includes("annoiato")) {
+        risposta = currentLang === 'it'
+          ? "🥱 Annoiato? Prova qualcosa di diverso come una pizza con cipolla e gorgonzola!"
+          : "🥱 Bored? Try something different like onion and gorgonzola pizza!";
+      } else if (input.includes("arrabbiato")) {
+        risposta = currentLang === 'it'
+          ? "😡 Arrabbiato? Sfogati con una Diavola extra piccante!"
+          : "😡 Angry? Let it out with an extra spicy Diavola!";
+      } else if (input.includes("rilassato")) {
+        risposta = currentLang === 'it'
+          ? "🧘‍♂️ Rilassato? Goditi una Quattro Formaggi, cremosa e avvolgente."
+          : "🧘‍♂️ Relaxed? Enjoy a creamy Four Cheese pizza.";
+
+      // Regole basate sugli ingredienti
+      } else if (contiene(["salame", "peperoni", "piccante"])) {
+        risposta = currentLang === 'it'
+          ? "🔥 Hai voglia di qualcosa di deciso? Prova la Diavola con salame piccante!"
+          : "🔥 Craving something spicy? Try the Diavola with spicy salami!";
+      } else if (contiene(["mozzarella", "pomodoro", "margherita"])) {
+        risposta = currentLang === 'it'
+          ? "🍅 La Margherita è un grande classico: semplice, elegante e sempre gustosa."
+          : "🍅 Margherita is a timeless classic: simple, elegant, and always delicious.";
+      } else if (contiene(["funghi", "prosciutto"])) {
+        risposta = currentLang === 'it'
+          ? "🌿 Ti piacciono i sapori tradizionali? La Prosciutto e Funghi fa al caso tuo!"
+          : "🌿 Love traditional flavors? Prosciutto e Funghi is the one for you!";
+      } else {
+        // Default
+        risposta = currentLang === 'it'
+          ? "🤔 Non sono sicuro dei tuoi gusti, ma ti consiglio la Quattro Stagioni!"
+          : "🤔 Not sure about your taste, but I suggest the Quattro Stagioni!";
+      }
+
+      resolve({ risposta });
+    }, 1000);
+  });
+}
+
 
 
 
