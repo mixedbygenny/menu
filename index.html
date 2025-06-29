@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Menu - Mixed by Genny</title>
   <style>
+    /* STILI BASE GENERALI */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #000000;
       color: #001f4d;
     }
+
+    /* HEADER CON LOGO */
     header {
       text-align: center;
       padding: 20px;
@@ -19,11 +22,15 @@
       width: 100%;
       max-width: 480px;
     }
+
+    /* CONTENUTO PRINCIPALE */
     main {
       padding: 20px;
       max-width: 800px;
       margin: auto;
     }
+
+    /* STILE PER OGNI PIZZA */
     .pizza {
       background: #644B00;
       border-radius: 12px;
@@ -58,6 +65,8 @@
       color: #1b4f8c;
       font-weight: bold;
     }
+
+    /* COLORI PERSONALIZZATI PER TIPO PIZZA */
     .pizza.margherita,
     .pizza.diavola1,
     .pizza.gorgonzola,
@@ -65,6 +74,7 @@
       background: #FFFFFF;
     }
 
+    /* FOOTER CON NOTE FINALI */
     footer {
       text-align: center;
       font-size: 0.9em;
@@ -74,7 +84,7 @@
       margin-top: 40px;
     }
 
-    /* FAB e popup AI */
+    /* BOTTONE FISSO FLOTTANTE PER APRIRE POPUP AI */
     #ai-fab {
       position: fixed;
       bottom: 20px;
@@ -90,9 +100,9 @@
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
       z-index: 1000;
-      font-weight: bold;
     }
 
+    /* FINESTRA POPUP PER AI */
     #ai-popup {
       position: fixed;
       bottom: 90px;
@@ -106,12 +116,14 @@
       z-index: 999;
     }
 
+    /* CONTENUTO INTERNO DEL POPUP AI */
     #ai-popup .popup-content {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
+    /* CAMPI INPUT E BOTTONI NEL POPUP AI */
     #ai-popup input,
     #ai-popup button {
       padding: 10px;
@@ -119,7 +131,6 @@
       border-radius: 8px;
       border: 1px solid #ccc;
     }
-
     #ai-popup button {
       background-color: #f39c12;
       color: white;
@@ -127,38 +138,22 @@
       cursor: pointer;
     }
 
+    /* TESTO RISPOSTA DELL'AI */
     #risposta-ai {
       font-size: 1em;
       font-weight: bold;
       color: #d35400;
       white-space: pre-line;
     }
-
-    .lang-switch {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-    }
-    .lang-switch button {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-    }
   </style>
 </head>
 <body>
+  <!-- INTESTAZIONE CON LOGO -->
   <header>
     <img src="logo.png" alt="Logo Mixed by Genny" />
   </header>
-  <div class="lang-switch">
-    <button onclick="setLang('it')">🇮🇹</button>
-    <button onclick="setLang('en')">🇬🇧</button>
-  </div>
+
+  <!-- SEZIONE MENU PIZZE -->
   <main>
     <div class="pizza margherita">
       <img src="diavola1.jpeg" alt="Margherita" />
@@ -194,10 +189,13 @@
     </div>
   </main>
 
+  <!-- BOTTONE FLOTTANTE CON SIMBOLO "AI" -->
   <div id="ai-fab" onclick="togglePopup()">AI</div>
+
+  <!-- POPUP AI CON INPUT E VOCE -->
   <div id="ai-popup">
     <div class="popup-content">
-      <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
+      <h2>Dimmi cosa ti piace!</h2>
       <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" />
       <button onclick="consiglia()">Consiglia 🍕</button>
       <button onclick="parla()">🎙️ Parla</button>
@@ -205,80 +203,77 @@
     </div>
   </div>
 
+  <!-- FOOTER CON COSTI -->
   <footer>
     Coperto: 2€ a persona (include acqua da 50ml)
   </footer>
 
+  <!-- SCRIPT INTERATTIVO PER AI -->
   <script>
-    let currentLang = 'it';
-
-    function setLang(lang) {
-      currentLang = lang;
-      document.documentElement.lang = lang;
-      document.getElementById("title-prompt").textContent = lang === 'it' ? "Dimmi cosa ti piace!" : "Tell me what you like!";
-      document.getElementById("gusto").placeholder = lang === 'it' ? "Es: mozzarella, pomodoro" : "E.g.: mozzarella, tomato";
-    }
-
+    // Mostra o nasconde il popup AI
     function togglePopup() {
       const popup = document.getElementById("ai-popup");
       popup.style.display = popup.style.display === "block" ? "none" : "block";
     }
 
+    // Elabora il consiglio in base ai gusti inseriti
     async function consiglia() {
       const gustoInput = document.getElementById('gusto').value.trim();
       const rispostaDiv = document.getElementById('risposta-ai');
       if (!gustoInput) {
-        rispostaDiv.textContent = currentLang === 'it' ? "Inserisci qualche ingrediente!" : "Please enter some ingredients!";
+        rispostaDiv.textContent = "Inserisci qualche ingrediente!";
         return;
       }
-      rispostaDiv.textContent = currentLang === 'it' ? "Sto pensando..." : "Thinking...";
+      rispostaDiv.textContent = "Sto pensando...";
       const data = await chiediConsiglio(gustoInput);
       rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
       const utter = new SpeechSynthesisUtterance(data.risposta);
-      utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+      utter.lang = 'it-IT';
       window.speechSynthesis.speak(utter);
     }
 
+    // Funzione per attivare il riconoscimento vocale
     function parla() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
-        alert(currentLang === 'it' ? "Il tuo browser non supporta il riconoscimento vocale." : "Your browser does not support voice recognition.");
+        alert("Il tuo browser non supporta il riconoscimento vocale.");
         return;
       }
       const recognition = new SpeechRecognition();
-      recognition.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+      recognition.lang = 'it-IT';
       recognition.start();
 
       const rispostaDiv = document.getElementById('risposta-ai');
-      rispostaDiv.textContent = currentLang === 'it' ? "Sto ascoltando... 🎧" : "Listening... 🎧";
+      rispostaDiv.textContent = "Sto ascoltando... 🎧";
 
       recognition.onresult = async (event) => {
         const input = event.results[0][0].transcript;
         document.getElementById('gusto').value = input;
-        rispostaDiv.textContent = currentLang === 'it' ? "Elaboro... 🤖" : "Processing... 🤖";
+        rispostaDiv.textContent = "Elaboro... 🤖";
         const data = await chiediConsiglio(input);
         rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
         const utter = new SpeechSynthesisUtterance(data.risposta);
-        utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+        utter.lang = 'it-IT';
         window.speechSynthesis.speak(utter);
       };
 
-      recognition.onerror = (event) => {
-        rispostaDiv.textContent = currentLang === 'it' ? "Errore nel riconoscimento vocale." : "Speech recognition error.";
+      recognition.onerror = () => {
+        rispostaDiv.textContent = "Errore nel riconoscimento vocale.";
       };
     }
 
+    // Logica base per il consiglio pizza
     async function chiediConsiglio(gusti) {
       return new Promise((resolve) => {
         setTimeout(() => {
           const g = gusti.toLowerCase();
           let risposta;
           if (g.includes("salame") || g.includes("peperoni") || g.includes("piccante")) {
-            risposta = currentLang === 'it' ? "🔥 Hai voglia di qualcosa di deciso? Prova la Diavola con salame piccante!" : "🔥 Craving something spicy? Try the Diavola with spicy salami!";
+            risposta = "🔥 Hai voglia di qualcosa di deciso? Prova la Diavola con salame piccante!";
           } else if (g.includes("mozzarella") || g.includes("pomodoro") || g.includes("margherita")) {
-            risposta = currentLang === 'it' ? "🍅 La Margherita è un grande classico: semplice, elegante e sempre gustosa." : "🍅 Margherita is a timeless classic: simple, elegant, and always delicious.";
+            risposta = "🍅 La Margherita è un grande classico: semplice, elegante e sempre gustosa.";
           } else {
-            risposta = currentLang === 'it' ? "🤔 Non sono sicuro dei tuoi gusti, ma ti consiglio la Quattro Stagioni!" : "🤔 Not sure about your taste, but I suggest the Quattro Stagioni!";
+            risposta = "🤔 Non sono sicuro dei tuoi gusti, ma ti consiglio la Quattro Stagioni!";
           }
           resolve({ risposta });
         }, 1000);
