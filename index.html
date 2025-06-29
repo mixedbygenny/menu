@@ -213,8 +213,8 @@
     <div class="popup-content">
       <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
       <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" />
-      <button onclick="consiglia()">Consiglia 🍕</button>
-      <button onclick="parla()">🎙️ Parla</button>
+      <button onclick="consiglia()">Scrivimi i tuop gusti 🍕</button>
+      <button onclick="parla()">🎙️ Parla con me</button>
       <div id="risposta-ai"></div>
     </div>
   </div>
@@ -245,7 +245,7 @@
         rispostaDiv.textContent = currentLang === 'it' ? "Inserisci qualche ingrediente!" : "Please enter some ingredients!";
         return;
       }
-      rispostaDiv.textContent = currentLang === 'it' ? "Sto pensando..." : "Thinking...";
+      
       const data = await chiediConsiglio(gustoInput);
       rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
       const utter = new SpeechSynthesisUtterance(data.risposta);
