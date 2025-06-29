@@ -298,7 +298,13 @@
         }, 1000);
       });
     }
-
+ document.addEventListener('click', function(event) {
+    // Chiudi il popup solo se si clicca fuori da esso
+    if (popup.style.display === 'block' && !popup.contains(event.target)) {
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+    }
+  });
 
 
   </script>
