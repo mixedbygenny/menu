@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mixed by Genny - Menu</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Altri CSS o script se presenti -->
+</head>
+
+<body>
 <!--
 🌟 FILE: menu.html
 📌 SCOPO: Menu interattivo per pizzeria "Mixed by Genny" con AI vocale e cambio lingua
@@ -371,4 +383,112 @@ async function chiediConsiglio(inputUtente) {
 
   </script>
 </body>
+</html>
+  <!-- Qui dentro va tutto il tuo codice esistente di menu e pagine -->
+  <!-- Ho copiato e lasciato invariato il contenuto principale -->
+
+  <!-- INIZIO SEZIONE MENU - Mantieni il tuo menu esistente come è -->
+
+  <!-- Esempio (da sostituire col tuo codice attuale): -->
+  <h1>Benvenuto nel Menu di Mixed by Genny</h1>
+
+  <!-- Sezione AI consigli pizza (aggiunta da noi) -->
+  <section id="sezione-ai-consiglio" style="margin:20px; padding:15px; border:1px solid #ccc; max-width: 480px;">
+    <h2>Chiedi consiglio alla nostra AI per la pizza</h2>
+    <input id="input-utente" type="text" placeholder="Come ti senti o cosa ti piace?" style="width:70%; padding:8px;" />
+    <button onclick="consiglia()" style="padding:8px 16px; margin-left:10px; cursor:pointer;">Consiglio AI</button>
+    <p id="risposta-ai" style="margin-top:15px; font-weight:bold; min-height:40px;"></p>
+  </section>
+
+  <!-- FINE MENU -->
+
+  <!-- ----------------- INIZIO SCRIPT INTEGRAZIONE AI ----------------- -->
+  <script>
+    const ingredientiAI = [
+      "mozzarella", "pomodoro", "salame", "funghi", "carciofi", "olive", "tonno", "cipolla", "peperoni",
+      "gorgonzola", "basilico", "zucchine", "melanzane", "salsiccia", "bufala", "scamorza", "provola",
+      "pancetta", "prosciutto", "acciughe", "uovo", "panna", "tartufo", "rucola", "pomodorini", "origano",
+      "grana", "fontina", "speck", "wurstel", "radicchio", "crema di tartufo", "formaggio di capra", "porcini",
+      "bresaola", "limone", "lattuga", "mais", "avocado", "zucca", "miele", "nocciole", "pesto", "cetrioli",
+      "peperoncino", "carne macinata", "pollo", "hamburger", "uova strapazzate", "emmental", "camembert",
+      "blue cheese", "ricotta", "spinaci", "patate", "patatine", "rosmarino", "asparagi", "prosciutto crudo",
+      "capperi", "mandorle", "cioccolato", "nutella", "fragole", "banana", "ciliegie", "pistacchi", "lime",
+      "cocco", "ananas", "jalapeno", "senape", "ketchup", "salsa barbecue", "tabasco", "formaggio fuso",
+      "crema di funghi", "crema di peperoni", "crema di zucca", "pomodori secchi", "carne affumicata",
+      "salmone", "gamberi", "cozze", "polpo", "tonno affumicato", "calamari", "crema di gamberi", "zenzero",
+      "aglio", "cipollotto", "barbabietola", "ravanelli", "cavolo", "funghi shitake", "alghe", "wasabi"
+    ];
+
+    const emozioniAI = {
+      triste: ["triste", "giù", "deluso", "depresso", "cupo"],
+      felice: ["felice", "contento", "allegro", "raggiante", "gioioso"],
+      arrabbiato: ["arrabbiato", "furioso", "agitato", "irritato", "nervoso"],
+      stressato: ["stressato", "teso", "ansioso", "esausto", "carico"],
+      curioso: ["curioso", "sognante", "strano", "fantasioso", "sperimentale"],
+      romantico: ["romantico", "innamorato", "dolce", "tenero", "sentimentale"],
+      energico: ["energico", "attivo", "vivace", "dinamico", "euforico"],
+      rilassato: ["rilassato", "tranquillo", "sereno", "calmo", "zen"]
+    };
+
+    function trovaEmozione(testo) {
+      const input = testo.toLowerCase();
+      for (const [emozione, sinonimi] of Object.entries(emozioniAI)) {
+        if (sinonimi.some(p => input.includes(p))) {
+          return emozione;
+        }
+      }
+      return null;
+    }
+
+    function trovaIngredienti(testo) {
+      const input = testo.toLowerCase();
+      return ingredientiAI.filter(ingrediente => input.includes(ingrediente));
+    }
+
+    async function chiediConsiglio(inputUtente) {
+      return new Promise((resolve) => {
+        const umore = trovaEmozione(inputUtente);
+        const ingredienti = trovaIngredienti(inputUtente);
+        let risposta = "";
+
+        if (ingredienti.includes("nutella") || (umore === "stressato" && inputUtente.toLowerCase().includes("dolce"))) {
+          risposta = "Hai avuto una giornata pesante. Ti consiglio una pizza alla Nutella per chiuderla con dolcezza.";
+        } else if (ingredienti.length > 0) {
+          risposta = `Con gli ingredienti che hai scelto (${ingredienti.join(", ")}), potremmo creare una pizza su misura per te.`;
+        } else if (umore) {
+          const suggerimenti = {
+            triste: "Prova una Boscaiola: cremosa e intensa, per tirarti su.",
+            felice: "Festeggia con una Capricciosa, ricca e piena di sapore.",
+            arrabbiato: "Sfogati con una Diavola molto piccante.",
+            stressato: "Rilassati con una Margherita semplice e perfetta.",
+            curioso: "Prova una Tartufata, elegante e fuori dal comune.",
+            romantico: "Una Bufalina delicata è perfetta per un momento speciale.",
+            energico: "Lanciati con una Quattro Formaggi ricca e decisa.",
+            rilassato: "Una Vegetariana leggera si abbina al tuo stato d’animo."
+          };
+          risposta = suggerimenti[umore];
+        } else {
+          risposta = "Dimmi come ti senti o cosa ti piace, e ti consiglierò la pizza perfetta.";
+        }
+
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(risposta);
+          utter.lang = "it-IT";
+          setTimeout(() => window.speechSynthesis.speak(utter), 100);
+        }
+
+        resolve({ risposta });
+      });
+    }
+
+    async function consiglia() {
+      const testo = document.getElementById("input-utente").value;
+      const { risposta } = await chiediConsiglio(testo);
+      document.getElementById("risposta-ai").textContent = risposta;
+    }
+  </script>
+
+</body>
+
 </html>
