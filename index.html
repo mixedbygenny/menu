@@ -282,67 +282,89 @@
       };
     }
 
-  async function chiediConsiglio(inputUtente) {
+async function chiediConsiglio(inputUtente) {
   return new Promise((resolve) => {
     setTimeout(() => {
       const input = inputUtente.toLowerCase();
-      let risposta;
+      let risposta = "";
 
-      const gusti = ["salame", "peperoni", "piccante", "mozzarella", "pomodoro", "margherita", "funghi", "prosciutto", "cipolla"];
-      const statiAnimo = ["triste", "felice", "stressato", "annoiato", "arrabbiato", "rilassato"];
+      // Dizionari base
+      const ingredientiPreferiti = {
+        diavola: ["salame", "piccante", "peperoni"],
+        margherita: ["mozzarella", "pomodoro", "basilico"],
+        capricciosa: ["prosciutto", "carciofi", "olive", "funghi"],
+        quattroFormaggi: ["gorgonzola", "mozzarella", "parmigiano", "fontina"],
+        bufalina: ["bufala", "pomodorini", "rucola"],
+        tonnoCipolla: ["tonno", "cipolla"],
+        vegetariana: ["verdure", "zucchine", "melanzane", "peperoni", "pomodori secchi"],
+        tartufata: ["tartufo", "crema", "funghi"],
+        napoli: ["acciughe", "origano", "olive nere"],
+        boscaiola: ["funghi", "salsiccia", "panna"]
+      };
 
-      const contiene = (parole) => parole.some(p => input.includes(p));
+      const statiAnimo = {
+        triste: [
+          "Prova qualcosa di forte come la Diavola per tirarti su.",
+          "La Quattro Formaggi ha un comfort unico quando sei giù.",
+          "La Capricciosa ti farà sentire più coccolato."
+        ],
+        felice: [
+          "Festeggia con una Capricciosa ricca di ingredienti.",
+          "La Bufalina fresca è perfetta per un umore allegro.",
+          "Se sei felice, osa con una Tartufata intensa!"
+        ],
+        stressato: [
+          "Rilassati con una Margherita semplice e perfetta.",
+          "La Vegetariana ti aiuta a ritrovare equilibrio e leggerezza.",
+          "Prova la Quattro Formaggi, è cremosa e distensiva."
+        ],
+        arrabbiato: [
+          "Scarica la tensione con una Diavola molto piccante.",
+          "La Napoli saporita e decisa fa per te.",
+          "Prova la Boscaiola: rustica, intensa e appagante."
+        ],
+        annoiato: [
+          "Ravviva la serata con una pizza con gorgonzola e cipolla.",
+          "Una Capricciosa ben fatta non annoia mai.",
+          "Sperimenta una Tartufata, sorprendente e fuori dal comune."
+        ]
+      };
 
-      // Regole basate sullo stato d'animo
-      if (input.includes("triste")) {
-        risposta = currentLang === 'it'
-          ? "😢 Triste? Ti serve una carica! Prova la Diavola: piccante, intensa e tira su il morale!"
-          : "😢 Feeling down? Spice it up! Try the Diavola – bold and uplifting!";
-      } else if (input.includes("felice")) {
-        risposta = currentLang === 'it'
-          ? "😄 Felice? È il momento perfetto per una pizza creativa come la Capricciosa!"
-          : "😄 Happy? Perfect time for a creative pizza like the Capricciosa!";
-      } else if (input.includes("stressato")) {
-        risposta = currentLang === 'it'
-          ? "😵‍💫 Stressato? Rilassati con una delicata Margherita e goditi la semplicità."
-          : "😵‍💫 Stressed? Relax with a smooth Margherita and enjoy simplicity.";
-      } else if (input.includes("annoiato")) {
-        risposta = currentLang === 'it'
-          ? "🥱 Annoiato? Prova qualcosa di diverso come una pizza con cipolla e gorgonzola!"
-          : "🥱 Bored? Try something different like onion and gorgonzola pizza!";
-      } else if (input.includes("arrabbiato")) {
-        risposta = currentLang === 'it'
-          ? "😡 Arrabbiato? Sfogati con una Diavola extra piccante!"
-          : "😡 Angry? Let it out with an extra spicy Diavola!";
-      } else if (input.includes("rilassato")) {
-        risposta = currentLang === 'it'
-          ? "🧘‍♂️ Rilassato? Goditi una Quattro Formaggi, cremosa e avvolgente."
-          : "🧘‍♂️ Relaxed? Enjoy a creamy Four Cheese pizza.";
+      // Estrai emozione o stato d’animo
+      const emozione = Object.keys(statiAnimo).find(e => input.includes(e));
+      if (emozione) {
+        const suggerimenti = statiAnimo[emozione];
+        risposta = suggerimenti[Math.floor(Math.random() * suggerimenti.length)];
+      }
 
-      // Regole basate sugli ingredienti
-      } else if (contiene(["salame", "peperoni", "piccante"])) {
-        risposta = currentLang === 'it'
-          ? "🔥 Hai voglia di qualcosa di deciso? Prova la Diavola con salame piccante!"
-          : "🔥 Craving something spicy? Try the Diavola with spicy salami!";
-      } else if (contiene(["mozzarella", "pomodoro", "margherita"])) {
-        risposta = currentLang === 'it'
-          ? "🍅 La Margherita è un grande classico: semplice, elegante e sempre gustosa."
-          : "🍅 Margherita is a timeless classic: simple, elegant, and always delicious.";
-      } else if (contiene(["funghi", "prosciutto"])) {
-        risposta = currentLang === 'it'
-          ? "🌿 Ti piacciono i sapori tradizionali? La Prosciutto e Funghi fa al caso tuo!"
-          : "🌿 Love traditional flavors? Prosciutto e Funghi is the one for you!";
-      } else {
-        // Default
-        risposta = currentLang === 'it'
-          ? "🤔 Non sono sicuro dei tuoi gusti, ma ti consiglio la Quattro Stagioni!"
-          : "🤔 Not sure about your taste, but I suggest the Quattro Stagioni!";
+      // Estrai ingredienti
+      const pizzeTrovate = Object.entries(ingredientiPreferiti)
+        .filter(([nome, ingredienti]) =>
+          ingredienti.some(i => input.includes(i))
+        )
+        .map(([nome]) => nome);
+
+      if (pizzeTrovate.length > 0) {
+        const pizza = pizzeTrovate[0]; // prende la prima valida trovata
+        risposta = `Ti consiglio la ${pizza.charAt(0).toUpperCase() + pizza.slice(1)}. È perfetta per i tuoi gusti.`;
+      }
+
+      // Se trova sia emozione che ingredienti
+      if (emozione && pizzeTrovate.length > 0) {
+        const pizza = pizzeTrovate[0];
+        risposta = `${statiAnimo[emozione][0]} Ti consiglio in particolare la ${pizza}.`;
+      }
+
+      // Risposta di default
+      if (!risposta) {
+        risposta = "Non sono sicuro dei tuoi gusti, ma potresti provare la Quattro Stagioni: un mix perfetto per ogni umore.";
       }
 
       resolve({ risposta });
     }, 1000);
   });
 }
+
 
 
 
