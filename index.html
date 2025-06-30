@@ -52,6 +52,10 @@
       background: #BFAFAF;
     }
 
+    .submenu {
+      display: none;
+    }
+
     .pizza {
       background: #F8F8FF;
       border: 2px solid #D1BDBD;
@@ -190,6 +194,23 @@
   </header>
 
   <main>
+    <button class="menu-button" onclick="window.location.href='pizze/index.html'">🍕 Pizze</button>
+    <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
+    <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
+  </main>
+
+  <footer>
+    Coperto: 2€ a persona (include acqua da 50ml)
+  </footer>
+</body>
+
+</html>
+
+
+
+
+
+  <main>
     <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
     <div id="submenu-pizze">
       <div class="pizza">
@@ -237,6 +258,9 @@
       <div id="risposta-ai"></div>
     </div>
   </main>
+
+
+
 
   <footer>
     Coperto: 2€ a persona (include acqua da 50ml)
@@ -307,6 +331,9 @@
 </body>
 
 </html>
+
+
+
 
 
 
