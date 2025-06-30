@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mixed by Genny - Menu</title>
 
-  <!-- Inserisci qui il link al font "Ara Hamah 1982" da Google Fonts o altro hosting -->
-  <!-- Se non disponibile, usa questo fallback simile -->
-  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet" />
+  <!-- Playfair Display da Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
 
   <style>
-    /* Usa Ara Hamah 1982, fallback a 'Amiri' (font arabo calligrafico simile), poi serif */
+    /* Font elegante e leggibile */
     body, button, input, p, h2 {
-      font-family: 'Ara Hamah 1982', 'Amiri', serif;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400; /* normale, non grassetto */
     }
 
     body {
@@ -43,7 +43,6 @@
     .menu-button {
       background: #D1BDBD;
       color: #2B2B2B;
-      font-weight: 700;
       border: none;
       border-radius: 15px;
       padding: 15px;
@@ -55,7 +54,8 @@
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
-      font-family: 'Ara Hamah 1982', 'Amiri', serif;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
     }
 
     .menu-button:hover {
@@ -76,7 +76,8 @@
       margin: 20px 0;
       padding: 15px;
       color: #4F4F4F;
-      font-family: 'Ara Hamah 1982', 'Amiri', serif;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
     }
 
     .pizza img {
@@ -95,21 +96,19 @@
     .pizza-name {
       font-size: 1.5em;
       margin: 0 0 6px 0;
-      font-weight: 700;
+      font-weight: 600; /* un po' più marcato per il nome */
     }
 
     .pizza-ingredients {
       font-size: 0.9em;
       margin: 0 0 6px 0;
       font-style: normal;
-      font-family: 'Ara Hamah 1982', 'Amiri', serif;
     }
 
     .pizza-price {
-      font-weight: 700;
+      font-weight: 600;
       font-size: 1.1em;
       margin: 0;
-      font-family: 'Ara Hamah 1982', 'Amiri', serif;
     }
 
     #footer-container {
@@ -123,7 +122,6 @@
     #allergeni-btn {
       background: #D1BDBD;
       color: #2B2B2B;
-      font-weight: 700;
       border: none;
       border-radius: 15px;
       padding: 15px;
@@ -135,7 +133,8 @@
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
-      font-family: 'Ara Hamah 1982', 'Amiri', serif;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
     }
 
     #allergeni-btn:hover {
@@ -145,10 +144,10 @@
     #coperto-text {
       color: #2B2B2B;
       font-size: 1.1em;
-      font-weight: 600;
+      font-weight: 400;
       margin-top: 0;
       user-select: none;
-      font-family: 'Ara Hamah 1982', 'Amiri', serif;
+      font-family: 'Playfair Display', serif;
     }
 
     #ai-fab {
@@ -168,7 +167,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       z-index: 10000;
       user-select: none;
-      font-family: 'Ara Hamah 1982', 'Amiri', serif;
+      font-family: 'Playfair Display', serif;
     }
 
     #ai-popup {
@@ -187,8 +186,8 @@
       z-index: 9999;
       color: #2B2B2B;
       user-select: none;
-      font-weight: 600;
-      font-family: 'Ara Hamah 1982', 'Amiri', serif;
+      font-weight: 400;
+      font-family: 'Playfair Display', serif;
       overflow-y: auto;
       text-align: center;
     }
@@ -196,6 +195,7 @@
     #ai-popup h2 {
       margin: 0 0 15px 0;
       font-size: 1.5em;
+      font-weight: 600;
     }
 
     #ai-popup .lang-switch {
@@ -228,9 +228,7 @@
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
-      font-family: 'Ara Hamah 1982', 'Amiri', serif;
-      color: #2B2B2B;
-      user-select: none;
+      font-family: 'Playfair Display', serif;
     }
 
     #ai-popup button.action-btn:hover {
@@ -243,7 +241,7 @@
       font-size: 1.1em;
       min-height: 40px;
       color: #2B2B2B;
-      font-family: 'Ara Hamah 1982', 'Amiri', serif;
+      font-family: 'Playfair Display', serif;
     }
   </style>
 </head>
