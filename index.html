@@ -99,13 +99,42 @@
       margin: 0;
     }
 
-    footer {
-      text-align: center;
-      padding: 15px;
-      color: #F2F3F4;
-      border-top: 1px solid #2B2B2B;
+    #footer-container {
       max-width: 800px;
-      margin: 30px auto 0;
+      margin: 10px auto 40px;
+      width: 80%;
+      text-align: center;
+    }
+
+    #footer-text {
+      background-color: #2B2B2B;
+      color: #F2F3F4;
+      padding: 12px 0;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1em;
+      user-select: none;
+    }
+
+    #allergeni-btn {
+      background: #D1BDBD;
+      color: #2B2B2B;
+      font-weight: 700;
+      border: none;
+      border-radius: 15px;
+      padding: 15px;
+      margin: 15px auto 0 auto;
+      display: block;
+      width: 80%;
+      text-align: center;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease;
+    }
+
+    #allergeni-btn:hover {
+      background: #BFAFAF;
     }
 
     #ai-fab {
@@ -131,12 +160,12 @@
       position: fixed;
       bottom: 90px;
       right: 20px;
-      width: 280px;
-      height: 220px;
+      width: 320px;
+      height: 320px;
       background: #F8F8FF;
       border: 2px solid #D1BDBD;
-      border-radius: 30px;
-      padding: 20px;
+      border-radius: 50%;
+      padding: 25px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
       display: none;
       z-index: 9999;
@@ -144,54 +173,48 @@
       user-select: none;
       font-weight: 600;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-      /* Centratura verticale e orizzontale contenuti */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      overflow: auto;
       text-align: center;
     }
 
-    .lang-switch {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 15px;
-      gap: 10px;
+    #ai-popup h2 {
+      margin: 0 0 15px 0;
+      font-size: 1.3em;
+    }
+
+    #ai-popup input {
       width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      font-size: 1em;
+      border-radius: 10px;
+      border: 1px solid #BFAFAF;
+      font-weight: 600;
     }
 
-    .lang-switch button {
-      background: transparent;
-      border: none;
-      font-size: 1.5em;
-      cursor: pointer;
-    }
-
-    .lang-switch button:focus {
-      outline: 2px solid #2B2B2B;
-      border-radius: 5px;
-    }
-
-    /* Nascondiamo input e bottone "scrivimi i tuoi gusti" */
-    /* Non ci sono nel markup ora, quindi non servono regole specifiche */
-
-    .action-btn {
-      width: 80%;
-      padding: 12px;
-      margin-top: 15px;
-      font-size: 1.1em;
+    #ai-popup button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      font-size: 1em;
       border-radius: 10px;
       border: none;
-      font-weight: 700;
       background-color: #D1BDBD;
       color: #2B2B2B;
+      font-weight: 700;
       cursor: pointer;
       transition: background 0.3s ease;
     }
 
-    .action-btn:hover {
+    #ai-popup button:hover {
       background-color: #BFAFAF;
+    }
+
+    #risposta-ai {
+      margin-top: 10px;
+      font-style: italic;
+      font-size: 1em;
+      color: #2B2B2B;
     }
   </style>
 </head>
@@ -240,32 +263,21 @@
 
     <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
     <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
+
+    <div id="footer-container">
+      <div id="footer-text">Coperto: 2€ a persona (include acqua da 50ml)</div>
+      <button id="allergeni-btn" onclick="alert('Informazioni allergeni in arrivo!')">Allergeni</button>
+    </div>
   </main>
 
   <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
   <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
-    <div class="lang-switch" role="group" aria-label="Selettore lingua">
-      <button aria-label="Italiano" onclick="setLang('it')">🇮🇹</button>
-      <button aria-label="Inglese" onclick="setLang('en')">🇬🇧</button>
-    </div>
-
-    <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
+    <h2 id="title-prompt" style="text-align:center;">Dimmi cosa ti piace!</h2>
     <button class="action-btn" onclick="parla()">🎙️ Parla con me</button>
+    <div id="risposta-ai" aria-live="polite" aria-atomic="true"></div>
   </div>
 
-  <footer>
-    Coperto: 2€ a persona (include acqua da 50ml)
-  </footer>
-
   <script>
-    let currentLang = 'it';
-
-    function setLang(lang) {
-      currentLang = lang;
-      document.documentElement.lang = lang;
-      document.getElementById("title-prompt").textContent = lang === 'it' ? "Dimmi cosa ti piace!" : "Tell me what you like!";
-    }
-
     function toggleSubmenu(id) {
       const submenu = document.getElementById('submenu-' + id);
       submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
@@ -275,116 +287,38 @@
       const popup = document.getElementById("ai-popup");
       popup.style.display = popup.style.display === "block" ? "none" : "block";
       if (popup.style.display === "block") {
-        // Non c'è input da focalizzare
+        document.getElementById("risposta-ai").textContent = "";
       }
     }
 
     function parla() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
-        alert(currentLang === 'it' ? "Il tuo browser non supporta il riconoscimento vocale." : "Your browser does not support voice recognition.");
+        alert("Il tuo browser non supporta il riconoscimento vocale.");
         return;
       }
       const recognition = new SpeechRecognition();
-      recognition.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+      recognition.lang = 'it-IT';
       recognition.start();
+
+      const rispostaDiv = document.getElementById("risposta-ai");
+      rispostaDiv.textContent = "Sto ascoltando... 🎧";
 
       recognition.onresult = async (event) => {
         const input = event.results[0][0].transcript;
-
-        const data = await chiediConsiglio(input);
+        rispostaDiv.textContent = "";
 
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
-          const utter = new SpeechSynthesisUtterance(data.risposta);
-          utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+          const utter = new SpeechSynthesisUtterance("Ti consiglio la pizza " + input);
+          utter.lang = 'it-IT';
           window.speechSynthesis.speak(utter);
         }
       };
 
       recognition.onerror = () => {
-        // Non mostriamo errore testuale
+        document.getElementById("risposta-ai").textContent = "Errore nel riconoscimento vocale.";
       };
-    }
-
-    async function chiediConsiglio(inputUtente) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          const input = inputUtente.toLowerCase();
-          let risposta = "";
-
-          const ingredientiPreferiti = {
-            diavola: ["salame", "piccante", "peperoni"],
-            margherita: ["mozzarella", "pomodoro", "basilico"],
-            capricciosa: ["prosciutto", "carciofi", "olive", "funghi"],
-            quattroFormaggi: ["gorgonzola", "mozzarella", "parmigiano", "fontina"],
-            bufalina: ["bufala", "pomodorini", "rucola"],
-            tonnoCipolla: ["tonno", "cipolla"],
-            vegetariana: ["verdure", "zucchine", "melanzane", "peperoni", "pomodori secchi"],
-            tartufata: ["tartufo", "crema", "funghi"],
-            napoli: ["acciughe", "origano", "olive nere"],
-            boscaiola: ["funghi", "salsiccia", "panna"]
-          };
-
-          const statiAnimo = {
-            triste: [
-              "Prova qualcosa di forte come la Diavola per tirarti su.",
-              "La Quattro Formaggi ha un comfort unico quando sei giù.",
-              "La Capricciosa ti farà sentire più coccolato."
-            ],
-            felice: [
-              "Festeggia con una Capricciosa ricca di ingredienti.",
-              "La Bufalina fresca è perfetta per un umore allegro.",
-              "Se sei felice, osa con una Tartufata intensa!"
-            ],
-            stressato: [
-              "Rilassati con una Margherita semplice e perfetta.",
-              "La Vegetariana ti aiuta a ritrovare equilibrio e leggerezza.",
-              "Prova la Quattro Formaggi, è cremosa e distensiva."
-            ],
-            arrabbiato: [
-              "Scarica la tensione con una Diavola molto piccante.",
-              "La Napoli saporita e decisa fa per te.",
-              "Prova la Boscaiola: rustica, intensa e appagante."
-            ],
-            annoiato: [
-              "Ravviva la serata con una pizza con gorgonzola e cipolla.",
-              "Una Capricciosa ben fatta non annoia mai.",
-              "Sperimenta una Tartufata, sorprendente e fuori dal comune."
-            ]
-          };
-
-          const emozione = Object.keys(statiAnimo).find(e => input.includes(e));
-          if (emozione) {
-            const lista = statiAnimo[emozione];
-            risposta = lista[Math.floor(Math.random() * lista.length)];
-          }
-
-          const pizzeTrovate = Object.entries(ingredientiPreferiti)
-            .filter(([_, ingredienti]) =>
-              ingredienti.some(i => input.includes(i))
-            )
-            .map(([nome]) => nome);
-
-          if (!risposta && pizzeTrovate.length > 0) {
-            const pizza = pizzeTrovate[0];
-            risposta = `Ti consiglio la ${pizza.charAt(0).toUpperCase() + pizza.slice(1)}. È perfetta per i tuoi gusti.`;
-          }
-
-          if (emozione && pizzeTrovate.length > 0) {
-            const pizza = pizzeTrovate[0];
-            risposta = `${statiAnimo[emozione][0]} Ti consiglio in particolare la ${pizza}.`;
-          }
-
-          if (!risposta) {
-            risposta = currentLang === 'it' ?
-              "Non sono sicuro dei tuoi gusti, ma potresti provare la Quattro Stagioni: un mix perfetto per ogni umore." :
-              "I'm not sure about your preferences, but you might try the Quattro Stagioni: a perfect mix for every mood.";
-          }
-
-          resolve({ risposta });
-        }, 900);
-      });
     }
   </script>
 </body>
