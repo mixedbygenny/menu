@@ -146,6 +146,53 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow: auto;
     }
+
+    .lang-switch {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+      gap: 10px;
+    }
+
+    .lang-switch button {
+      background: transparent;
+      border: none;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    .lang-switch button:focus {
+      outline: 2px solid #2B2B2B;
+      border-radius: 5px;
+    }
+
+    #gusto {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #BFAFAF;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .action-btn {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 8px;
+      font-size: 1em;
+      border-radius: 10px;
+      border: none;
+      font-weight: 700;
+      background-color: #D1BDBD;
+      color: #2B2B2B;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .action-btn:hover {
+      background-color: #BFAFAF;
+    }
   </style>
 </head>
 
@@ -197,94 +244,6 @@
 
   <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
   <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
-    <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
-    <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
-    <button onclick="consiglia()">Consiglio</button>
-    <button onclick="parla()">🎙️ Parla con me</button>
-    <div id="risposta-ai"></div>
-  </div>
-
-  <footer>
-    Coperto: 2€ a persona (include acqua da 50ml)
-  </footer>
-
-  <script>
-    function toggleSubmenu(id) {
-      const submenu = document.getElementById('submenu-' + id);
-      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function togglePopup() {
-      const popup = document.getElementById("ai-popup");
-      popup.style.display = popup.style.display === "block" ? "none" : "block";
-    }
-
-    async function consiglia() {
-      const gusto = document.getElementById("gusto").value.toLowerCase();
-      const rispostaDiv = document.getElementById("risposta-ai");
-      rispostaDiv.textContent = "Elaboro...";
-
-      const ingredienti = {
-        diavola: ["salame", "piccante"],
-        margherita: ["mozzarella", "pomodoro"],
-        gorgonzola: ["gorgonzola", "noci"]
-      };
-
-      let trovata = "";
-      for (let [nome, lista] of Object.entries(ingredienti)) {
-        if (lista.some(i => gusto.includes(i))) {
-          trovata = nome;
-          break;
-        }
-      }
-
-      if (trovata) {
-        rispostaDiv.textContent = `Ti consiglio la ${trovata}.`;
-      } else {
-        rispostaDiv.textContent = "Non sono sicuro, ma prova la Quattro Formaggi!";
-      }
-
-      if ('speechSynthesis' in window) {
-        const utter = new SpeechSynthesisUtterance(rispostaDiv.textContent);
-        utter.lang = 'it-IT';
-        window.speechSynthesis.speak(utter);
-      }
-    }
-
-    function parla() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        alert("Il tuo browser non supporta il riconoscimento vocale.");
-        return;
-      }
-      const recognition = new SpeechRecognition();
-      recognition.lang = 'it-IT';
-      recognition.start();
-
-      const rispostaDiv = document.getElementById("risposta-ai");
-      rispostaDiv.textContent = "Sto ascoltando...";
-
-      recognition.onresult = (event) => {
-        const input = event.results[0][0].transcript;
-        document.getElementById("gusto").value = input;
-        consiglia();
-      };
-
-      recognition.onerror = () => {
-        rispostaDiv.textContent = "Errore nel riconoscimento vocale.";
-      };
-    }
-  </script>
-</body>
-
-</html>
-
-
-
-
-  <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
-
-  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
     <div class="lang-switch" role="group" aria-label="Selettore lingua">
       <button aria-label="Italiano" onclick="setLang('it')">🇮🇹</button>
       <button aria-label="Inglese" onclick="setLang('en')">🇬🇧</button>
@@ -294,8 +253,11 @@
     <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
     <button class="action-btn" onclick="consiglia()">Scrivimi i tuoi gusti 🍕</button>
     <button class="action-btn" onclick="parla()">🎙️ Parla con me</button>
-    <div id="risposta-ai" aria-live="polite" aria-atomic="true"></div>
   </div>
+
+  <footer>
+    Coperto: 2€ a persona (include acqua da 50ml)
+  </footer>
 
   <script>
     let currentLang = 'it';
@@ -305,7 +267,12 @@
       document.documentElement.lang = lang;
       document.getElementById("title-prompt").textContent = lang === 'it' ? "Dimmi cosa ti piace!" : "Tell me what you like!";
       document.getElementById("gusto").placeholder = lang === 'it' ? "Es: mozzarella, pomodoro" : "E.g.: mozzarella, tomato";
-      document.getElementById("risposta-ai").textContent = "";
+      // Non c'è più testo risposta da cancellare
+    }
+
+    function toggleSubmenu(id) {
+      const submenu = document.getElementById('submenu-' + id);
+      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
     }
 
     function togglePopup() {
@@ -318,15 +285,18 @@
 
     async function consiglia() {
       const gustoInput = document.getElementById('gusto').value.trim();
-      const rispostaDiv = document.getElementById('risposta-ai');
       if (!gustoInput) {
-        rispostaDiv.textContent = currentLang === 'it' ? "Inserisci qualche ingrediente!" : "Please enter some ingredients!";
+        const msg = currentLang === 'it' ? "Inserisci qualche ingrediente!" : "Please enter some ingredients!";
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(msg);
+          utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+          window.speechSynthesis.speak(utter);
+        }
         return;
       }
 
-      // Simula chiamata API con ritardo e logica interna
       const data = await chiediConsiglio(gustoInput);
-      rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
 
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
@@ -346,16 +316,11 @@
       recognition.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
       recognition.start();
 
-      const rispostaDiv = document.getElementById('risposta-ai');
-      rispostaDiv.textContent = currentLang === 'it' ? "Sto ascoltando... 🎧" : "Listening... 🎧";
-
       recognition.onresult = async (event) => {
         const input = event.results[0][0].transcript;
         document.getElementById('gusto').value = input;
-        rispostaDiv.textContent = currentLang === 'it' ? "Elaboro... 🤖" : "Processing... 🤖";
 
         const data = await chiediConsiglio(input);
-        rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
 
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
@@ -365,8 +330,8 @@
         }
       };
 
-      recognition.onerror = (event) => {
-        rispostaDiv.textContent = currentLang === 'it' ? "Errore nel riconoscimento vocale." : "Speech recognition error.";
+      recognition.onerror = () => {
+        // Non mostriamo errore testuale
       };
     }
 
@@ -417,36 +382,30 @@
             ]
           };
 
-          // Cerca emozioni nel testo
           const emozione = Object.keys(statiAnimo).find(e => input.includes(e));
           if (emozione) {
-            // Se trova emozione, prendi messaggio casuale tra quelli disponibili
             const lista = statiAnimo[emozione];
             risposta = lista[Math.floor(Math.random() * lista.length)];
           }
 
-          // Cerca pizze per ingredienti
           const pizzeTrovate = Object.entries(ingredientiPreferiti)
             .filter(([_, ingredienti]) =>
               ingredienti.some(i => input.includes(i))
             )
             .map(([nome]) => nome);
 
-          // Se trova pizze e nessuna emozione già impostata, usa pizza trovata
           if (!risposta && pizzeTrovate.length > 0) {
             const pizza = pizzeTrovate[0];
             risposta = `Ti consiglio la ${pizza.charAt(0).toUpperCase() + pizza.slice(1)}. È perfetta per i tuoi gusti.`;
           }
 
-          // Se trova emozione e pizza, combina i messaggi
           if (emozione && pizzeTrovate.length > 0) {
             const pizza = pizzeTrovate[0];
             risposta = `${statiAnimo[emozione][0]} Ti consiglio in particolare la ${pizza}.`;
           }
 
-          // Default
           if (!risposta) {
-            risposta = currentLang === 'it' ? 
+            risposta = currentLang === 'it' ?
               "Non sono sicuro dei tuoi gusti, ma potresti provare la Quattro Stagioni: un mix perfetto per ogni umore." :
               "I'm not sure about your preferences, but you might try the Quattro Stagioni: a perfect mix for every mood.";
           }
