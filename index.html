@@ -235,26 +235,25 @@
           <p class="pizza-price">10€</p>
         </div>
       </div>
-
-      <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
-
-      <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
-        <div class="lang-switch" role="group" aria-label="Selettore lingua">
-          <button aria-label="Italiano" onclick="setLang('it')">🇮🇹</button>
-          <button aria-label="Inglese" onclick="setLang('en')">🇬🇧</button>
-        </div>
-        <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
-        <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
-        <button class="action-btn" onclick="consiglia()">Scrivimi i tuoi gusti 🍕</button>
-        <button class="action-btn" onclick="parla()">🎙️ Parla con me</button>
-        <div id="risposta-ai" aria-live="polite" aria-atomic="true"></div>
-      </div>
-
     </div>
 
     <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
     <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
   </main>
+
+  <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
+
+  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
+    <div class="lang-switch" role="group" aria-label="Selettore lingua">
+      <button aria-label="Italiano" onclick="setLang('it')">🇮🇹</button>
+      <button aria-label="Inglese" onclick="setLang('en')">🇬🇧</button>
+    </div>
+    <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
+    <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
+    <button class="action-btn" onclick="consiglia()">Scrivimi i tuoi gusti 🍕</button>
+    <button class="action-btn" onclick="parla()">🎙️ Parla con me</button>
+    <div id="risposta-ai" aria-live="polite" aria-atomic="true"></div>
+  </div>
 
   <footer>
     Coperto: 2€ a persona (include acqua da 50ml)
@@ -287,6 +286,7 @@
 </body>
 
 </html>
+
 
 
 
