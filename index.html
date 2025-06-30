@@ -6,11 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mixed by Genny - Menu</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    /* Simuliamo font "Impasti" con 'Pacifico' (calligrafico e elegante) */
+    body, button, input, p, h2 {
+      font-family: 'Pacifico', cursive, 'Segoe UI', sans-serif;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
       background-color: #F8F8FF;
-      color: #D1BDBD;
+      color: #2B2B2B;
       padding: 10px;
       box-sizing: border-box;
     }
@@ -42,10 +48,11 @@
       display: block;
       width: 80%;
       text-align: center;
-      font-size: 1.2em;
+      font-size: 1.3em;
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
+      font-family: 'Pacifico', cursive, 'Segoe UI', sans-serif;
     }
 
     .menu-button:hover {
@@ -66,6 +73,7 @@
       margin: 20px 0;
       padding: 15px;
       color: #4F4F4F;
+      font-family: 'Pacifico', cursive, 'Segoe UI', sans-serif;
     }
 
     .pizza img {
@@ -91,28 +99,21 @@
       font-size: 0.9em;
       margin: 0 0 6px 0;
       font-style: normal;
+      font-family: 'Pacifico', cursive, 'Segoe UI', sans-serif;
     }
 
     .pizza-price {
       font-weight: 700;
       font-size: 1.1em;
       margin: 0;
+      font-family: 'Pacifico', cursive, 'Segoe UI', sans-serif;
     }
 
     #footer-container {
       max-width: 800px;
-      margin: 10px auto 40px;
+      margin: 0 auto 30px;
       width: 80%;
       text-align: center;
-    }
-
-    #footer-text {
-      background-color: #2B2B2B;
-      color: #F2F3F4;
-      padding: 12px 0;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 1em;
       user-select: none;
     }
 
@@ -123,18 +124,28 @@
       border: none;
       border-radius: 15px;
       padding: 15px;
-      margin: 15px auto 0 auto;
+      margin: 15px auto 5px auto;
       display: block;
       width: 80%;
       text-align: center;
-      font-size: 1.2em;
+      font-size: 1.3em;
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
+      font-family: 'Pacifico', cursive, 'Segoe UI', sans-serif;
     }
 
     #allergeni-btn:hover {
       background: #BFAFAF;
+    }
+
+    #coperto-text {
+      color: #2B2B2B;
+      font-size: 1.1em;
+      font-weight: 600;
+      margin-top: 0;
+      user-select: none;
+      font-family: 'Pacifico', cursive, 'Segoe UI', sans-serif;
     }
 
     #ai-fab {
@@ -154,17 +165,18 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       z-index: 10000;
       user-select: none;
+      font-family: 'Pacifico', cursive, 'Segoe UI', sans-serif;
     }
 
     #ai-popup {
       position: fixed;
       bottom: 90px;
       right: 20px;
-      width: 320px;
-      height: 320px;
+      width: 340px;
+      height: 340px;
       background: #F8F8FF;
       border: 2px solid #D1BDBD;
-      border-radius: 50%;
+      border-radius: 20px;
       padding: 25px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
       display: none;
@@ -172,49 +184,62 @@
       color: #2B2B2B;
       user-select: none;
       font-weight: 600;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: auto;
+      font-family: 'Pacifico', cursive, 'Segoe UI', sans-serif;
+      overflow-y: auto;
       text-align: center;
     }
 
     #ai-popup h2 {
       margin: 0 0 15px 0;
-      font-size: 1.3em;
+      font-size: 1.5em;
     }
 
-    #ai-popup input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      font-size: 1em;
-      border-radius: 10px;
-      border: 1px solid #BFAFAF;
-      font-weight: 600;
+    #ai-popup .lang-switch {
+      margin-bottom: 15px;
+      text-align: center;
     }
 
-    #ai-popup button {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      font-size: 1em;
-      border-radius: 10px;
+    #ai-popup .lang-switch button {
+      background: transparent;
       border: none;
-      background-color: #D1BDBD;
-      color: #2B2B2B;
-      font-weight: 700;
+      font-size: 28px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      margin: 0 8px;
+      transition: transform 0.2s ease;
     }
 
-    #ai-popup button:hover {
+    #ai-popup .lang-switch button:hover {
+      transform: scale(1.2);
+    }
+
+    #ai-popup button.action-btn {
+      background-color: #D1BDBD;
+      border-radius: 15px;
+      border: none;
+      padding: 14px;
+      margin-top: 15px;
+      width: 100%;
+      font-weight: 700;
+      font-size: 1.3em;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease;
+      font-family: 'Pacifico', cursive, 'Segoe UI', sans-serif;
+      color: #2B2B2B;
+      user-select: none;
+    }
+
+    #ai-popup button.action-btn:hover {
       background-color: #BFAFAF;
     }
 
     #risposta-ai {
-      margin-top: 10px;
+      margin-top: 12px;
       font-style: italic;
-      font-size: 1em;
+      font-size: 1.1em;
+      min-height: 40px;
       color: #2B2B2B;
+      font-family: 'Pacifico', cursive, 'Segoe UI', sans-serif;
     }
   </style>
 </head>
@@ -264,20 +289,25 @@
     <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
     <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
 
-    <div id="footer-container">
-      <div id="footer-text">Coperto: 2€ a persona (include acqua da 50ml)</div>
-      <button id="allergeni-btn" onclick="alert('Informazioni allergeni in arrivo!')">Allergeni</button>
-    </div>
+    <button id="allergeni-btn" onclick="alert('Informazioni allergeni in arrivo!')">Allergeni</button>
+    <p id="coperto-text">Coperto: 2€ a persona (include acqua da 50ml)</p>
   </main>
 
   <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
   <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
-    <h2 id="title-prompt" style="text-align:center;">Dimmi cosa ti piace!</h2>
+    <div class="lang-switch" role="group" aria-label="Selettore lingua">
+      <button aria-label="Italiano" onclick="setLang('it')" title="Italiano">🇮🇹</button>
+      <button aria-label="Inglese" onclick="setLang('en')" title="English">🇬🇧</button>
+    </div>
+
+    <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
     <button class="action-btn" onclick="parla()">🎙️ Parla con me</button>
     <div id="risposta-ai" aria-live="polite" aria-atomic="true"></div>
   </div>
 
   <script>
+    let currentLang = 'it';
+
     function toggleSubmenu(id) {
       const submenu = document.getElementById('submenu-' + id);
       submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
@@ -291,18 +321,25 @@
       }
     }
 
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.getElementById("title-prompt").textContent = lang === 'it' ? "Dimmi cosa ti piace!" : "Tell me what you like!";
+      document.getElementById("risposta-ai").textContent = "";
+    }
+
     function parla() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
-        alert("Il tuo browser non supporta il riconoscimento vocale.");
+        alert(currentLang === 'it' ? "Il tuo browser non supporta il riconoscimento vocale." : "Your browser does not support voice recognition.");
         return;
       }
       const recognition = new SpeechRecognition();
-      recognition.lang = 'it-IT';
+      recognition.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
       recognition.start();
 
       const rispostaDiv = document.getElementById("risposta-ai");
-      rispostaDiv.textContent = "Sto ascoltando... 🎧";
+      rispostaDiv.textContent = currentLang === 'it' ? "Sto ascoltando... 🎧" : "Listening... 🎧";
 
       recognition.onresult = async (event) => {
         const input = event.results[0][0].transcript;
@@ -310,14 +347,15 @@
 
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
-          const utter = new SpeechSynthesisUtterance("Ti consiglio la pizza " + input);
-          utter.lang = 'it-IT';
+          const textToSpeak = currentLang === 'it' ? "Ti consiglio la pizza " + input : "I recommend the pizza " + input;
+          const utter = new SpeechSynthesisUtterance(textToSpeak);
+          utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
           window.speechSynthesis.speak(utter);
         }
       };
 
       recognition.onerror = () => {
-        document.getElementById("risposta-ai").textContent = "Errore nel riconoscimento vocale.";
+        document.getElementById("risposta-ai").textContent = currentLang === 'it' ? "Errore nel riconoscimento vocale." : "Speech recognition error.";
       };
     }
   </script>
