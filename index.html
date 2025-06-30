@@ -44,16 +44,12 @@
       text-align: center;
       font-size: 1.2em;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       transition: background 0.3s ease;
     }
 
     .menu-button:hover {
       background: #BFAFAF;
-    }
-
-    .submenu {
-      display: none;
     }
 
     .pizza {
@@ -114,7 +110,7 @@
       right: 20px;
       width: 60px;
       height: 60px;
-      background: #F2F3F4;
+      background: #D1BDBD;
       color: #2B2B2B;
       font-size: 22px;
       font-weight: 700;
@@ -129,14 +125,14 @@
 
     #ai-popup {
       position: fixed;
-      bottom: 90px;
+      bottom: 100px;
       right: 20px;
       width: 320px;
-      height: 320px;
+      height: auto;
       background: #F8F8FF;
       border: 2px solid #D1BDBD;
-      border-radius: 50%;
-      padding: 25px;
+      border-radius: 20px;
+      padding: 20px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
       display: none;
       z-index: 9999;
@@ -144,7 +140,46 @@
       user-select: none;
       font-weight: 600;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: auto;
+    }
+
+    #ai-popup h2 {
+      margin-top: 0;
+      font-size: 1.3em;
+      text-align: center;
+    }
+
+    #ai-popup input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #D1BDBD;
+      border-radius: 10px;
+      font-size: 1em;
+    }
+
+    #ai-popup button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      font-size: 1em;
+      font-weight: bold;
+      background-color: #D1BDBD;
+      color: #2B2B2B;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #ai-popup button:hover {
+      background-color: #BFAFAF;
+    }
+
+    #risposta-ai {
+      margin-top: 10px;
+      font-style: italic;
+      font-size: 1em;
+      color: #4F4F4F;
     }
   </style>
 </head>
@@ -156,7 +191,7 @@
 
   <main>
     <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
-    <div id="submenu-pizze" class="submenu">
+    <div id="submenu-pizze">
       <div class="pizza">
         <img src="diavola1.jpeg" alt="Margherita" />
         <div class="pizza-info">
@@ -190,30 +225,24 @@
         </div>
       </div>
     </div>
-
     <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
     <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
-  </main>
 
-  <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
-  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
-    <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
-    <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
-    <button onclick="consiglia()">Consiglio</button>
-    <button onclick="parla()">🎙️ Parla con me</button>
-    <div id="risposta-ai"></div>
-  </div>
+    <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
+    <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
+      <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
+      <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
+      <button onclick="consiglia()">Scrivimi i tuoi gusti 🍕</button>
+      <button onclick="parla()">🎙️ Parla con me</button>
+      <div id="risposta-ai"></div>
+    </div>
+  </main>
 
   <footer>
     Coperto: 2€ a persona (include acqua da 50ml)
   </footer>
 
   <script>
-    function toggleSubmenu(id) {
-      const submenu = document.getElementById('submenu-' + id);
-      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-    }
-
     function togglePopup() {
       const popup = document.getElementById("ai-popup");
       popup.style.display = popup.style.display === "block" ? "none" : "block";
@@ -278,6 +307,7 @@
 </body>
 
 </html>
+
 
 
 
