@@ -5,59 +5,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mixed by Genny - Menu</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Altri CSS o script se presenti -->
-</head>
-
-<body>
-<!--
-🌟 FILE: menu.html
-📌 SCOPO: Menu interattivo per pizzeria "Mixed by Genny" con AI vocale e cambio lingua
-🛠️ MODIFICHE: Aggiunto sfondo con cornice e suggerimenti nei commenti, palette calda, traduzioni inglesi per descrizioni pizze e selettore lingua solo per AI
--->
-
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Menu - Mixed by Genny</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #4B1414, #4B1414);
-      border: 2px solid #6C1E1E;
+      background-color: #1E1F26;
+      color: #2B2B2B;
       padding: 10px;
       box-sizing: border-box;
-      color: #F5E2C8;
     }
 
     header {
       text-align: center;
-      padding: 20px;
+      padding: 20px 0;
     }
+
     header img {
-      width: 100%;
       max-width: 480px;
+      width: 100%;
     }
 
     main {
-      padding: 20px;
       max-width: 800px;
       margin: auto;
+      padding: 0 10px 40px;
     }
 
     .pizza {
-      background: #D4A373;
+      background: #F2F3F4;
+      border: 2px solid #2B2B2B;
       border-radius: 12px;
-      padding: 15px;
-      margin: 20px 0;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       display: flex;
       align-items: center;
       gap: 20px;
-      color: #4B1414;
+      margin: 20px 0;
+      padding: 15px;
+      color: #2B2B2B;
     }
 
     .pizza img {
@@ -65,8 +48,8 @@
       height: 110px;
       border-radius: 10px;
       object-fit: cover;
-      background: #6C1E1E;
-      border: 3px solid #4B1414;
+      border: 2px solid #2B2B2B;
+      background: #F2F3F4;
     }
 
     .pizza-info {
@@ -75,25 +58,29 @@
 
     .pizza-name {
       font-size: 1.5em;
-      margin: 0;
+      margin: 0 0 6px 0;
+      font-weight: 700;
     }
 
     .pizza-ingredients {
       font-size: 0.9em;
+      margin: 0 0 6px 0;
+      font-style: normal;
     }
 
     .pizza-price {
-      font-size: 1em;
-      font-weight: bold;
+      font-weight: 700;
+      font-size: 1.1em;
+      margin: 0;
     }
 
     footer {
       text-align: center;
-      font-size: 0.9em;
       padding: 15px;
-      background: #6C1E1E;
-      color: #F5E2C8;
-      margin-top: 40px;
+      color: #F2F3F4;
+      border-top: 1px solid #2B2B2B;
+      max-width: 800px;
+      margin: 30px auto 0;
     }
 
     #ai-fab {
@@ -102,76 +89,115 @@
       right: 20px;
       width: 60px;
       height: 60px;
-      background: #D4A373;
-      color: #4B1414;
-      font-size: 20px;
+      background: #F2F3F4;
+      color: #2B2B2B;
+      font-size: 22px;
+      font-weight: 700;
       border-radius: 50%;
       text-align: center;
       line-height: 60px;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      z-index: 1000;
-      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 10000;
+      user-select: none;
     }
 
     #ai-popup {
       position: fixed;
       bottom: 90px;
       right: 20px;
-      background: #F5E2C8;
-      padding: 20px;
+      width: 320px;
+      background: #F2F3F4;
+      border: 2px solid #2B2B2B;
       border-radius: 20px;
-      width: 280px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      padding: 20px 25px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
       display: none;
-      z-index: 999;
-      color: #4B1414;
+      z-index: 9999;
+      color: #2B2B2B;
+      user-select: none;
+      font-weight: 600;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    #ai-popup .popup-content {
+    #ai-popup .lang-switch {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    #ai-popup input,
-    #ai-popup button {
-      padding: 10px;
-      font-size: 1em;
-      border-radius: 8px;
-      border: 1px solid #6C1E1E;
-    }
-
-    #ai-popup button {
-      background-color: #D4A373;
-      color: #4B1414;
-      border: none;
-      cursor: pointer;
-    }
-
-    #risposta-ai {
-      font-size: 1em;
-      font-weight: bold;
-      white-space: pre-line;
-    }
-
-    .lang-switch {
-      display: flex;
-      gap: 10px;
       justify-content: center;
-      margin-bottom: 10px;
+      gap: 12px;
+      margin-bottom: 15px;
     }
 
-    .lang-switch button {
+    #ai-popup .lang-switch button {
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      border: none;
-      cursor: pointer;
+      border: 2px solid #2B2B2B;
+      background: #F2F3F4;
       font-size: 18px;
+      cursor: pointer;
+      font-weight: 700;
+      line-height: 1;
+      user-select: none;
+    }
+
+    #ai-popup h2 {
+      margin: 0 0 12px 0;
+      font-size: 1.5em;
+      font-weight: 700;
+      text-align: center;
+      color: #2B2B2B;
+    }
+
+    #ai-popup input {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 1em;
+      border-radius: 12px;
+      border: 2px solid #2B2B2B;
+      outline: none;
+      font-weight: 600;
+      color: #2B2B2B;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+    }
+
+    #ai-popup input::placeholder {
+      color: #555555;
+      font-weight: 500;
+    }
+
+    #ai-popup button.action-btn {
+      width: 100%;
+      padding: 12px 0;
+      font-size: 1.1em;
+      border-radius: 20px;
+      border: none;
+      background: #2B2B2B;
+      color: #F2F3F4;
+      cursor: pointer;
+      margin-bottom: 10px;
+      font-weight: 700;
+      user-select: none;
+      transition: background-color 0.25s ease;
+    }
+
+    #ai-popup button.action-btn:hover {
+      background: #121212;
+    }
+
+    #ai-popup #risposta-ai {
+      min-height: 50px;
+      margin-top: 8px;
+      font-size: 1em;
+      font-weight: 600;
+      white-space: pre-line;
+      text-align: center;
+      color: #2B2B2B;
+      user-select: text;
     }
   </style>
 </head>
+
 <body>
   <header>
     <img src="logo.png" alt="Logo Mixed by Genny" />
@@ -209,31 +235,30 @@
       <img src="diavola1.jpeg" alt="Mixed by Genny" />
       <div class="pizza-info">
         <p class="pizza-name">Mixed by Genny</p>
-        <p class="pizza-ingredients">Interagisci con l'AI e Genny farà una pizza speciale solo per te<br><em>Interact with the AI and Genny will maka a special pizza for you</em></p>
+        <p class="pizza-ingredients">Interagisci con l'AI e Genny farà una pizza speciale solo per te<br><em>Interact with the AI and Genny will make a special pizza for you</em></p>
         <p class="pizza-price">10€</p>
       </div>
     </div>
   </main>
 
-  <div id="ai-fab" onclick="togglePopup()">AI</div>
-
-  <div id="ai-popup">
-    <div class="lang-switch">
-      <button onclick="setLang('it')">🇮🇹</button>
-      <button onclick="setLang('en')">🇬🇧</button>
-    </div>
-    <div class="popup-content">
-      <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
-      <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" />
-      <button onclick="consiglia()">Scrivimi i tuop gusti 🍕</button>
-      <button onclick="parla()">🎙️ Parla con me</button>
-      <div id="risposta-ai"></div>
-    </div>
-  </div>
-
   <footer>
     Coperto: 2€ a persona (include acqua da 50ml)
   </footer>
+
+  <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
+
+  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
+    <div class="lang-switch" role="group" aria-label="Selettore lingua">
+      <button aria-label="Italiano" onclick="setLang('it')">🇮🇹</button>
+      <button aria-label="Inglese" onclick="setLang('en')">🇬🇧</button>
+    </div>
+
+    <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
+    <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
+    <button class="action-btn" onclick="consiglia()">Scrivimi i tuoi gusti 🍕</button>
+    <button class="action-btn" onclick="parla()">🎙️ Parla con me</button>
+    <div id="risposta-ai" aria-live="polite" aria-atomic="true"></div>
+  </div>
 
   <script>
     let currentLang = 'it';
@@ -243,11 +268,15 @@
       document.documentElement.lang = lang;
       document.getElementById("title-prompt").textContent = lang === 'it' ? "Dimmi cosa ti piace!" : "Tell me what you like!";
       document.getElementById("gusto").placeholder = lang === 'it' ? "Es: mozzarella, pomodoro" : "E.g.: mozzarella, tomato";
+      document.getElementById("risposta-ai").textContent = "";
     }
 
     function togglePopup() {
       const popup = document.getElementById("ai-popup");
       popup.style.display = popup.style.display === "block" ? "none" : "block";
+      if (popup.style.display === "block") {
+        document.getElementById("gusto").focus();
+      }
     }
 
     async function consiglia() {
@@ -257,12 +286,17 @@
         rispostaDiv.textContent = currentLang === 'it' ? "Inserisci qualche ingrediente!" : "Please enter some ingredients!";
         return;
       }
-      
+
+      // Simula chiamata API con ritardo e logica interna
       const data = await chiediConsiglio(gustoInput);
       rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
-      const utter = new SpeechSynthesisUtterance(data.risposta);
-      utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
-      window.speechSynthesis.speak(utter);
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(data.risposta);
+        utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+        window.speechSynthesis.speak(utter);
+      }
     }
 
     function parla() {
@@ -282,11 +316,16 @@
         const input = event.results[0][0].transcript;
         document.getElementById('gusto').value = input;
         rispostaDiv.textContent = currentLang === 'it' ? "Elaboro... 🤖" : "Processing... 🤖";
+
         const data = await chiediConsiglio(input);
         rispostaDiv.innerHTML = `<strong>${data.risposta}</strong>`;
-        const utter = new SpeechSynthesisUtterance(data.risposta);
-        utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
-        window.speechSynthesis.speak(utter);
+
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(data.risposta);
+          utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+          window.speechSynthesis.speak(utter);
+        }
       };
 
       recognition.onerror = (event) => {
@@ -294,178 +333,92 @@
       };
     }
 
-async function chiediConsiglio(inputUtente) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const input = inputUtente.toLowerCase();
-      let risposta = "";
+    async function chiediConsiglio(inputUtente) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const input = inputUtente.toLowerCase();
+          let risposta = "";
 
-      // Dizionari base
-      const ingredientiPreferiti = {
-        diavola: ["salame", "piccante", "peperoni"],
-        margherita: ["mozzarella", "pomodoro", "basilico"],
-        capricciosa: ["prosciutto", "carciofi", "olive", "funghi"],
-        quattroFormaggi: ["gorgonzola", "mozzarella", "parmigiano", "fontina"],
-        bufalina: ["bufala", "pomodorini", "rucola"],
-        tonnoCipolla: ["tonno", "cipolla"],
-        vegetariana: ["verdure", "zucchine", "melanzane", "peperoni", "pomodori secchi"],
-        tartufata: ["tartufo", "crema", "funghi"],
-        napoli: ["acciughe", "origano", "olive nere"],
-        boscaiola: ["funghi", "salsiccia", "panna"]
-      };
+          const ingredientiPreferiti = {
+            diavola: ["salame", "piccante", "peperoni"],
+            margherita: ["mozzarella", "pomodoro", "basilico"],
+            capricciosa: ["prosciutto", "carciofi", "olive", "funghi"],
+            quattroFormaggi: ["gorgonzola", "mozzarella", "parmigiano", "fontina"],
+            bufalina: ["bufala", "pomodorini", "rucola"],
+            tonnoCipolla: ["tonno", "cipolla"],
+            vegetariana: ["verdure", "zucchine", "melanzane", "peperoni", "pomodori secchi"],
+            tartufata: ["tartufo", "crema", "funghi"],
+            napoli: ["acciughe", "origano", "olive nere"],
+            boscaiola: ["funghi", "salsiccia", "panna"]
+          };
 
-      const statiAnimo = {
-        triste: [
-          "Prova qualcosa di forte come la Diavola per tirarti su.",
-          "La Quattro Formaggi ha un comfort unico quando sei giù.",
-          "La Capricciosa ti farà sentire più coccolato."
-        ],
-        felice: [
-          "Festeggia con una Capricciosa ricca di ingredienti.",
-          "La Bufalina fresca è perfetta per un umore allegro.",
-          "Se sei felice, osa con una Tartufata intensa!"
-        ],
-        stressato: [
-          "Rilassati con una Margherita semplice e perfetta.",
-          "La Vegetariana ti aiuta a ritrovare equilibrio e leggerezza.",
-          "Prova la Quattro Formaggi, è cremosa e distensiva."
-        ],
-        arrabbiato: [
-          "Scarica la tensione con una Diavola molto piccante.",
-          "La Napoli saporita e decisa fa per te.",
-          "Prova la Boscaiola: rustica, intensa e appagante."
-        ],
-        annoiato: [
-          "Ravviva la serata con una pizza con gorgonzola e cipolla.",
-          "Una Capricciosa ben fatta non annoia mai.",
-          "Sperimenta una Tartufata, sorprendente e fuori dal comune."
-        ]
-      };
+          const statiAnimo = {
+            triste: [
+              "Prova qualcosa di forte come la Diavola per tirarti su.",
+              "La Quattro Formaggi ha un comfort unico quando sei giù.",
+              "La Capricciosa ti farà sentire più coccolato."
+            ],
+            felice: [
+              "Festeggia con una Capricciosa ricca di ingredienti.",
+              "La Bufalina fresca è perfetta per un umore allegro.",
+              "Se sei felice, osa con una Tartufata intensa!"
+            ],
+            stressato: [
+              "Rilassati con una Margherita semplice e perfetta.",
+              "La Vegetariana ti aiuta a ritrovare equilibrio e leggerezza.",
+              "Prova la Quattro Formaggi, è cremosa e distensiva."
+            ],
+            arrabbiato: [
+              "Scarica la tensione con una Diavola molto piccante.",
+              "La Napoli saporita e decisa fa per te.",
+              "Prova la Boscaiola: rustica, intensa e appagante."
+            ],
+            annoiato: [
+              "Ravviva la serata con una pizza con gorgonzola e cipolla.",
+              "Una Capricciosa ben fatta non annoia mai.",
+              "Sperimenta una Tartufata, sorprendente e fuori dal comune."
+            ]
+          };
 
-      // Estrai emozione o stato d’animo
-      const emozione = Object.keys(statiAnimo).find(e => input.includes(e));
-      if (emozione) {
-        const suggerimenti = statiAnimo[emozione];
-        risposta = suggerimenti[Math.floor(Math.random() * suggerimenti.length)];
-      }
+          // Cerca emozioni nel testo
+          const emozione = Object.keys(statiAnimo).find(e => input.includes(e));
+          if (emozione) {
+            // Se trova emozione, prendi messaggio casuale tra quelli disponibili
+            const lista = statiAnimo[emozione];
+            risposta = lista[Math.floor(Math.random() * lista.length)];
+          }
 
-      // Estrai ingredienti
-      const pizzeTrovate = Object.entries(ingredientiPreferiti)
-        .filter(([nome, ingredienti]) =>
-          ingredienti.some(i => input.includes(i))
-        )
-        .map(([nome]) => nome);
+          // Cerca pizze per ingredienti
+          const pizzeTrovate = Object.entries(ingredientiPreferiti)
+            .filter(([_, ingredienti]) =>
+              ingredienti.some(i => input.includes(i))
+            )
+            .map(([nome]) => nome);
 
-      if (pizzeTrovate.length > 0) {
-        const pizza = pizzeTrovate[0]; // prende la prima valida trovata
-        risposta = `Ti consiglio la ${pizza.charAt(0).toUpperCase() + pizza.slice(1)}. È perfetta per i tuoi gusti.`;
-      }
+          // Se trova pizze e nessuna emozione già impostata, usa pizza trovata
+          if (!risposta && pizzeTrovate.length > 0) {
+            const pizza = pizzeTrovate[0];
+            risposta = `Ti consiglio la ${pizza.charAt(0).toUpperCase() + pizza.slice(1)}. È perfetta per i tuoi gusti.`;
+          }
 
-      // Se trova sia emozione che ingredienti
-      if (emozione && pizzeTrovate.length > 0) {
-        const pizza = pizzeTrovate[0];
-        risposta = `${statiAnimo[emozione][0]} Ti consiglio in particolare la ${pizza}.`;
-      }
+          // Se trova emozione e pizza, combina i messaggi
+          if (emozione && pizzeTrovate.length > 0) {
+            const pizza = pizzeTrovate[0];
+            risposta = `${statiAnimo[emozione][0]} Ti consiglio in particolare la ${pizza}.`;
+          }
 
-      // Risposta di default
-      if (!risposta) {
-        risposta = "Non sono sicuro dei tuoi gusti, ma potresti provare la Quattro Stagioni: un mix perfetto per ogni umore.";
-      }
+          // Default
+          if (!risposta) {
+            risposta = currentLang === 'it' ? 
+              "Non sono sicuro dei tuoi gusti, ma potresti provare la Quattro Stagioni: un mix perfetto per ogni umore." :
+              "I'm not sure about your preferences, but you might try the Quattro Stagioni: a perfect mix for every mood.";
+          }
 
-      resolve({ risposta });
-    }, 1000);
-  });
-}
-
-
-
-
-
-  </script>
-</body>
-</html>
-  <!-- Qui dentro va tutto il tuo codice esistente di menu e pagine -->
-  <!-- Ho copiato e lasciato invariato il contenuto principale -->
-
-  <!-- INIZIO SEZIONE MENU - Mantieni il tuo menu esistente come è -->
-
-  <!-- Esempio (da sostituire col tuo codice attuale): -->
-  <h1>Benvenuto nel Menu di Mixed by Genny</h1>
-
-  <!-- Sezione AI consigli pizza (aggiunta da noi) -->
-  <section id="sezione-ai-consiglio" style="margin:20px; padding:15px; border:1px solid #ccc; max-width: 480px;">
-    <h2>Chiedi consiglio alla nostra AI per la pizza</h2>
-    <input id="input-utente" type="text" placeholder="Come ti senti o cosa ti piace?" style="width:70%; padding:8px;" />
-    <button onclick="consiglia()" style="padding:8px 16px; margin-left:10px; cursor:pointer;">Consiglio AI</button>
-    <p id="risposta-ai" style="margin-top:15px; font-weight:bold; min-height:40px;"></p>
-  </section>
-
-  <!-- FINE MENU -->
-
-  <!-- ----------------- INIZIO SCRIPT INTEGRAZIONE AI ----------------- -->
-  <script>
-    const ingredientiAI = [
-      "mozzarella", "pomodoro", "salame", "funghi", "carciofi", "olive", "tonno", "cipolla", "peperoni",
-      "gorgonzola", "basilico", "zucchine", "melanzane", "salsiccia", "bufala", "scamorza", "provola",
-      "pancetta", "prosciutto", "acciughe", "uovo", "panna", "tartufo", "rucola", "pomodorini", "origano",
-      "grana", "fontina", "speck", "wurstel", "radicchio", "crema di tartufo", "formaggio di capra", "porcini",
-      "bresaola", "limone", "lattuga", "mais", "avocado", "zucca", "miele", "nocciole", "pesto", "cetrioli",
-      "peperoncino", "carne macinata", "pollo", "hamburger", "uova strapazzate", "emmental", "camembert",
-      "blue cheese", "ricotta", "spinaci", "patate", "patatine", "rosmarino", "asparagi", "prosciutto crudo",
-      "capperi", "mandorle", "cioccolato", "nutella", "fragole", "banana", "ciliegie", "pistacchi", "lime",
-      "cocco", "ananas", "jalapeno", "senape", "ketchup", "salsa barbecue", "tabasco", "formaggio fuso",
-      "crema di funghi", "crema di peperoni", "crema di zucca", "pomodori secchi", "carne affumicata",
-      "salmone", "gamberi", "cozze", "polpo", "tonno affumicato", "calamari", "crema di gamberi", "zenzero",
-      "aglio", "cipollotto", "barbabietola", "ravanelli", "cavolo", "funghi shitake", "alghe", "wasabi"
-    ];
-
-    const emozioniAI = {
-      triste: ["triste", "giù", "deluso", "depresso", "cupo"],
-      felice: ["felice", "contento", "allegro", "raggiante", "gioioso"],
-      arrabbiato: ["arrabbiato", "furioso", "agitato", "irritato", "nervoso"],
-      stressato: ["stressato", "teso", "ansioso", "esausto", "carico"],
-      curioso: ["curioso", "sognante", "strano", "fantasioso", "sperimentale"],
-      romantico: ["romantico", "innamorato", "dolce", "tenero", "sentimentale"],
-      energico: ["energico", "attivo", "vivace", "dinamico", "euforico"],
-      rilassato: ["rilassato", "tranquillo", "sereno", "calmo", "zen"]
-    };
-
-    function trovaEmozione(testo) {
-      const input = testo.toLowerCase();
-      for (const [emozione, sinonimi] of Object.entries(emozioniAI)) {
-        if (sinonimi.some(p => input.includes(p))) {
-          return emozione;
-        }
-      }
-      return null;
-    }
-
-    function trovaIngredienti(testo) {
-      const input = testo.toLowerCase();
-      return ingredientiAI.filter(ingrediente => input.includes(ingrediente));
-    }
-
-
-        }
-
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel();
-          const utter = new SpeechSynthesisUtterance(risposta);
-          utter.lang = "it-IT";
-          setTimeout(() => window.speechSynthesis.speak(utter), 100);
-        }
-
-        resolve({ risposta });
+          resolve({ risposta });
+        }, 900);
       });
     }
-
-    async function consiglia() {
-      const testo = document.getElementById("input-utente").value;
-      const { risposta } = await chiediConsiglio(testo);
-      document.getElementById("risposta-ai").textContent = risposta;
-    }
   </script>
-
 </body>
 
 </html>
