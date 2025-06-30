@@ -31,6 +31,31 @@
       padding: 0 10px 40px;
     }
 
+    .menu-button {
+      background: #D1BDBD;
+      color: #2B2B2B;
+      font-weight: 700;
+      border: none;
+      border-radius: 15px;
+      padding: 15px;
+      margin: 15px auto;
+      display: block;
+      width: 80%;
+      text-align: center;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease;
+    }
+
+    .menu-button:hover {
+      background: #BFAFAF;
+    }
+
+    .submenu {
+      display: none;
+    }
+
     .pizza {
       background: #F8F8FF;
       border: 2px solid #D1BDBD;
@@ -121,10 +146,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow: auto;
     }
-
-    .show-ai {
-      display: block !important;
-    }
   </style>
 </head>
 
@@ -133,54 +154,66 @@
     <img src="logocanva1-removebg-preview.png" alt="Logo Mixed by Genny" />
   </header>
 
-  <main id="pizza-menu">
-    <div class="pizza">
-      <img src="diavola1.jpeg" alt="Margherita" />
-      <div class="pizza-info">
-        <p class="pizza-name">Margherita</p>
-        <p class="pizza-ingredients">Pomodoro, mozzarella, basilico<br><em>Tomato, mozzarella, basil</em></p>
-        <p class="pizza-price">10€</p>
+  <main>
+    <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
+    <div id="submenu-pizze" class="submenu">
+      <div class="pizza">
+        <img src="diavola1.jpeg" alt="Margherita" />
+        <div class="pizza-info">
+          <p class="pizza-name">Margherita</p>
+          <p class="pizza-ingredients">Pomodoro, mozzarella, basilico<br><em>Tomato, mozzarella, basil</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <img src="diavola1.jpeg" alt="Diavola" />
+        <div class="pizza-info">
+          <p class="pizza-name">Diavola</p>
+          <p class="pizza-ingredients">Mozzarella, pomodoro, salame piccante<br><em>Mozzarella, tomato, spicy salami</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <img src="diavola1.jpeg" alt="Gorgonzola" />
+        <div class="pizza-info">
+          <p class="pizza-name">Gorgonzola</p>
+          <p class="pizza-ingredients">Mozzarella, gorgonzola, noci<br><em>Mozzarella, gorgonzola, walnuts</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <img src="diavola1.jpeg" alt="Mixed by Genny" />
+        <div class="pizza-info">
+          <p class="pizza-name">Mixed by Genny</p>
+          <p class="pizza-ingredients">AI generatore di pizza<br><em>AI pizza generator</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
       </div>
     </div>
-    <div class="pizza">
-      <img src="diavola1.jpeg" alt="Diavola" />
-      <div class="pizza-info">
-        <p class="pizza-name">Diavola</p>
-        <p class="pizza-ingredients">Mozzarella, pomodoro, salame piccante<br><em>Mozzarella, tomato, spicy salami</em></p>
-        <p class="pizza-price">10€</p>
-      </div>
-    </div>
-    <div class="pizza">
-      <img src="diavola1.jpeg" alt="Gorgonzola" />
-      <div class="pizza-info">
-        <p class="pizza-name">Gorgonzola</p>
-        <p class="pizza-ingredients">Mozzarella, gorgonzola, noci<br><em>Mozzarella, gorgonzola, walnuts</em></p>
-        <p class="pizza-price">10€</p>
-      </div>
-    </div>
-    <div class="pizza">
-      <img src="diavola1.jpeg" alt="Mixed by Genny" />
-      <div class="pizza-info">
-        <p class="pizza-name">Mixed by Genny</p>
-        <p class="pizza-ingredients">AI generatore di pizza<br><em>AI pizza generator</em></p>
-        <p class="pizza-price">10€</p>
-      </div>
-    </div>
-    <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
-    <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
-      <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
-      <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
-      <button onclick="consiglia()">Consiglio</button>
-      <button onclick="parla()">🎙️ Parla con me</button>
-      <div id="risposta-ai"></div>
-    </div>
+
+    <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
+    <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
   </main>
+
+  <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
+  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
+    <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
+    <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
+    <button onclick="consiglia()">Consiglio</button>
+    <button onclick="parla()">🎙️ Parla con me</button>
+    <div id="risposta-ai"></div>
+  </div>
 
   <footer>
     Coperto: 2€ a persona (include acqua da 50ml)
   </footer>
 
   <script>
+    function toggleSubmenu(id) {
+      const submenu = document.getElementById('submenu-' + id);
+      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+    }
+
     function togglePopup() {
       const popup = document.getElementById("ai-popup");
       popup.style.display = popup.style.display === "block" ? "none" : "block";
@@ -245,6 +278,7 @@
 </body>
 
 </html>
+
 
 
 
