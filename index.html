@@ -44,12 +44,59 @@
       text-align: center;
       font-size: 1.2em;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
     }
 
     .menu-button:hover {
       background: #BFAFAF;
+    }
+
+    .submenu {
+      display: none;
+    }
+
+    .pizza {
+      background: #F8F8FF;
+      border: 2px solid #D1BDBD;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin: 20px 0;
+      padding: 15px;
+      color: #4F4F4F;
+    }
+
+    .pizza img {
+      width: 110px;
+      height: 110px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 2px solid #D1BDBD;
+      background: #F2F3F4;
+    }
+
+    .pizza-info {
+      flex: 1;
+    }
+
+    .pizza-name {
+      font-size: 1.5em;
+      margin: 0 0 6px 0;
+      font-weight: 700;
+    }
+
+    .pizza-ingredients {
+      font-size: 0.9em;
+      margin: 0 0 6px 0;
+      font-style: normal;
+    }
+
+    .pizza-price {
+      font-weight: 700;
+      font-size: 1.1em;
+      margin: 0;
     }
 
     footer {
@@ -67,7 +114,7 @@
       right: 20px;
       width: 60px;
       height: 60px;
-      background: #D1BDBD;
+      background: #F2F3F4;
       color: #2B2B2B;
       font-size: 22px;
       font-weight: 700;
@@ -82,55 +129,22 @@
 
     #ai-popup {
       position: fixed;
-      bottom: 100px;
+      bottom: 90px;
       right: 20px;
       width: 320px;
-      background: #D1BDBD;
-      border-radius: 20px;
-      padding: 20px;
+      height: 320px;
+      background: #F8F8FF;
+      border: 2px solid #D1BDBD;
+      border-radius: 50%;
+      padding: 25px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
       display: none;
       z-index: 9999;
       color: #2B2B2B;
+      user-select: none;
       font-weight: 600;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    #ai-popup h2 {
-      margin-top: 0;
-      font-size: 1.3em;
-      text-align: center;
-    }
-
-    #ai-popup input, #ai-popup button {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      font-size: 1em;
-      border-radius: 10px;
-      border: none;
-      font-weight: bold;
-    }
-
-    #ai-popup input {
-      border: 1px solid #BFAFAF;
-    }
-
-    #ai-popup button {
-      background-color: #F8F8FF;
-      color: #2B2B2B;
-      cursor: pointer;
-    }
-
-    #ai-popup button:hover {
-      background-color: #E0E0E0;
-    }
-
-    #risposta-ai {
-      margin-top: 10px;
-      font-style: italic;
-      font-size: 1em;
-      color: #2B2B2B;
+      overflow: auto;
     }
   </style>
 </head>
@@ -141,102 +155,8 @@
   </header>
 
   <main>
-    <button class="menu-button" onclick="window.location.href='pizze/index.html'">🍕 Pizze</button>
-    <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
-    <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
-  </main>
-
-  <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
-  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
-    <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
-    <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
-    <button onclick="consiglia()">Scrivimi i tuoi gusti 🍕</button>
-    <button onclick="parla()">🎙️ Parla con me</button>
-    <div id="risposta-ai" aria-live="polite" aria-atomic="true"></div>
-  </div>
-
-  <footer>
-    Coperto: 2€ a persona (include acqua da 50ml)
-  </footer>
-
-  <script>
-    function togglePopup() {
-      const popup = document.getElementById("ai-popup");
-      popup.style.display = popup.style.display === "block" ? "none" : "block";
-      if (popup.style.display === "block") {
-        document.getElementById("gusto").focus();
-      }
-    }
-
-    async function consiglia() {
-      const gustoInput = document.getElementById('gusto').value.trim().toLowerCase();
-      const rispostaDiv = document.getElementById('risposta-ai');
-      if (!gustoInput) {
-        rispostaDiv.textContent = "Inserisci qualche ingrediente!";
-        return;
-      }
-
-      rispostaDiv.textContent = "Elaboro...";
-
-      const preferenze = {
-        diavola: ["salame", "piccante"],
-        margherita: ["mozzarella", "pomodoro"],
-        gorgonzola: ["gorgonzola", "noci"],
-        vegetariana: ["zucchine", "melanzane", "peperoni"]
-      };
-
-      let consiglio = "Prova la Quattro Stagioni!";
-      for (const [nome, ingredienti] of Object.entries(preferenze)) {
-        if (ingredienti.some(i => gustoInput.includes(i))) {
-          consiglio = `Ti consiglio la ${nome.charAt(0).toUpperCase() + nome.slice(1)}.`;
-          break;
-        }
-      }
-
-      rispostaDiv.textContent = consiglio;
-      if ('speechSynthesis' in window) {
-        const utter = new SpeechSynthesisUtterance(consiglio);
-        utter.lang = 'it-IT';
-        window.speechSynthesis.speak(utter);
-      }
-    }
-
-    function parla() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        alert("Il tuo browser non supporta il riconoscimento vocale.");
-        return;
-      }
-      const recognition = new SpeechRecognition();
-      recognition.lang = 'it-IT';
-      recognition.start();
-
-      const rispostaDiv = document.getElementById('risposta-ai');
-      rispostaDiv.textContent = "Sto ascoltando...";
-
-      recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById('gusto').value = transcript;
-        consiglia();
-      };
-
-      recognition.onerror = function() {
-        rispostaDiv.textContent = "Errore nel riconoscimento vocale.";
-      };
-    }
-  </script>
-</body>
-
-</html>
-
-
-
-
-
-
-  <main>
     <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
-    <div id="submenu-pizze">
+    <div id="submenu-pizze" class="submenu">
       <div class="pizza">
         <img src="diavola1.jpeg" alt="Margherita" />
         <div class="pizza-info">
@@ -271,25 +191,29 @@
       </div>
     </div>
 
-
-    <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
-    <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
-      <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
-      <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
-      <button onclick="consiglia()">Scrivimi i tuoi gusti 🍕</button>
-      <button onclick="parla()">🎙️ Parla con me</button>
-      <div id="risposta-ai"></div>
-    </div>
+    <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
+    <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
   </main>
 
-
-
+  <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
+  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
+    <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
+    <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
+    <button onclick="consiglia()">Consiglio</button>
+    <button onclick="parla()">🎙️ Parla con me</button>
+    <div id="risposta-ai"></div>
+  </div>
 
   <footer>
     Coperto: 2€ a persona (include acqua da 50ml)
   </footer>
 
   <script>
+    function toggleSubmenu(id) {
+      const submenu = document.getElementById('submenu-' + id);
+      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+    }
+
     function togglePopup() {
       const popup = document.getElementById("ai-popup");
       popup.style.display = popup.style.display === "block" ? "none" : "block";
@@ -354,10 +278,6 @@
 </body>
 
 </html>
-
-
-
-
 
 
 
