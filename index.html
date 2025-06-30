@@ -31,31 +31,6 @@
       padding: 0 10px 40px;
     }
 
-    .menu-button {
-      background: #D1BDBD;
-      color: #2B2B2B;
-      font-weight: 700;
-      border: none;
-      border-radius: 15px;
-      padding: 15px;
-      margin: 15px auto;
-      display: block;
-      width: 80%;
-      text-align: center;
-      font-size: 1.2em;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: background 0.3s ease;
-    }
-
-    .menu-button:hover {
-      background: #BFAFAF;
-    }
-
-    .submenu {
-      display: none;
-    }
-
     .pizza {
       background: #F8F8FF;
       border: 2px solid #D1BDBD;
@@ -107,6 +82,49 @@
       max-width: 800px;
       margin: 30px auto 0;
     }
+
+    #ai-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #F2F3F4;
+      color: #2B2B2B;
+      font-size: 22px;
+      font-weight: 700;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 60px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 10000;
+      user-select: none;
+    }
+
+    #ai-popup {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 320px;
+      height: 320px;
+      background: #F8F8FF;
+      border: 2px solid #D1BDBD;
+      border-radius: 50%;
+      padding: 25px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      display: none;
+      z-index: 9999;
+      color: #2B2B2B;
+      user-select: none;
+      font-weight: 600;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: auto;
+    }
+
+    .show-ai {
+      display: block !important;
+    }
   </style>
 </head>
 
@@ -115,45 +133,47 @@
     <img src="logocanva1-removebg-preview.png" alt="Logo Mixed by Genny" />
   </header>
 
-  <main>
-    <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
-    <div id="submenu-pizze" class="submenu">
-      <div class="pizza">
-        <img src="diavola1.jpeg" alt="Margherita" />
-        <div class="pizza-info">
-          <p class="pizza-name">Margherita</p>
-          <p class="pizza-ingredients">Pomodoro, mozzarella, basilico<br><em>Tomato, mozzarella, basil</em></p>
-          <p class="pizza-price">10€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <img src="diavola1.jpeg" alt="Diavola" />
-        <div class="pizza-info">
-          <p class="pizza-name">Diavola</p>
-          <p class="pizza-ingredients">Mozzarella, pomodoro, salame piccante<br><em>Mozzarella, tomato, spicy salami</em></p>
-          <p class="pizza-price">10€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <img src="diavola1.jpeg" alt="Gorgonzola" />
-        <div class="pizza-info">
-          <p class="pizza-name">Gorgonzola</p>
-          <p class="pizza-ingredients">Mozzarella, gorgonzola, noci<br><em>Mozzarella, gorgonzola, walnuts</em></p>
-          <p class="pizza-price">10€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <img src="diavola1.jpeg" alt="Mixed by Genny" />
-        <div class="pizza-info">
-          <p class="pizza-name">Mixed by Genny</p>
-          <p class="pizza-ingredients">AI generatore di pizza<br><em>AI pizza generator</em></p>
-          <p class="pizza-price">10€</p>
-        </div>
+  <main id="pizza-menu">
+    <div class="pizza">
+      <img src="diavola1.jpeg" alt="Margherita" />
+      <div class="pizza-info">
+        <p class="pizza-name">Margherita</p>
+        <p class="pizza-ingredients">Pomodoro, mozzarella, basilico<br><em>Tomato, mozzarella, basil</em></p>
+        <p class="pizza-price">10€</p>
       </div>
     </div>
-
-    <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
-    <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
+    <div class="pizza">
+      <img src="diavola1.jpeg" alt="Diavola" />
+      <div class="pizza-info">
+        <p class="pizza-name">Diavola</p>
+        <p class="pizza-ingredients">Mozzarella, pomodoro, salame piccante<br><em>Mozzarella, tomato, spicy salami</em></p>
+        <p class="pizza-price">10€</p>
+      </div>
+    </div>
+    <div class="pizza">
+      <img src="diavola1.jpeg" alt="Gorgonzola" />
+      <div class="pizza-info">
+        <p class="pizza-name">Gorgonzola</p>
+        <p class="pizza-ingredients">Mozzarella, gorgonzola, noci<br><em>Mozzarella, gorgonzola, walnuts</em></p>
+        <p class="pizza-price">10€</p>
+      </div>
+    </div>
+    <div class="pizza">
+      <img src="diavola1.jpeg" alt="Mixed by Genny" />
+      <div class="pizza-info">
+        <p class="pizza-name">Mixed by Genny</p>
+        <p class="pizza-ingredients">AI generatore di pizza<br><em>AI pizza generator</em></p>
+        <p class="pizza-price">10€</p>
+      </div>
+    </div>
+    <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
+    <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
+      <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
+      <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
+      <button onclick="consiglia()">Consiglio</button>
+      <button onclick="parla()">🎙️ Parla con me</button>
+      <div id="risposta-ai"></div>
+    </div>
   </main>
 
   <footer>
@@ -161,14 +181,71 @@
   </footer>
 
   <script>
-    function toggleSubmenu(id) {
-      const submenu = document.getElementById('submenu-' + id);
-      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+    function togglePopup() {
+      const popup = document.getElementById("ai-popup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
+
+    async function consiglia() {
+      const gusto = document.getElementById("gusto").value.toLowerCase();
+      const rispostaDiv = document.getElementById("risposta-ai");
+      rispostaDiv.textContent = "Elaboro...";
+
+      const ingredienti = {
+        diavola: ["salame", "piccante"],
+        margherita: ["mozzarella", "pomodoro"],
+        gorgonzola: ["gorgonzola", "noci"]
+      };
+
+      let trovata = "";
+      for (let [nome, lista] of Object.entries(ingredienti)) {
+        if (lista.some(i => gusto.includes(i))) {
+          trovata = nome;
+          break;
+        }
+      }
+
+      if (trovata) {
+        rispostaDiv.textContent = `Ti consiglio la ${trovata}.`;
+      } else {
+        rispostaDiv.textContent = "Non sono sicuro, ma prova la Quattro Formaggi!";
+      }
+
+      if ('speechSynthesis' in window) {
+        const utter = new SpeechSynthesisUtterance(rispostaDiv.textContent);
+        utter.lang = 'it-IT';
+        window.speechSynthesis.speak(utter);
+      }
+    }
+
+    function parla() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Il tuo browser non supporta il riconoscimento vocale.");
+        return;
+      }
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'it-IT';
+      recognition.start();
+
+      const rispostaDiv = document.getElementById("risposta-ai");
+      rispostaDiv.textContent = "Sto ascoltando...";
+
+      recognition.onresult = (event) => {
+        const input = event.results[0][0].transcript;
+        document.getElementById("gusto").value = input;
+        consiglia();
+      };
+
+      recognition.onerror = () => {
+        rispostaDiv.textContent = "Errore nel riconoscimento vocale.";
+      };
     }
   </script>
 </body>
 
 </html>
+
 
 
   <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
