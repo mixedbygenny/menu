@@ -64,16 +64,14 @@
       position: absolute;
       left: 0;
       width: 100%;
-      height: 30px;
-      background-image: radial-gradient(circle at 10px 15px, transparent 14px, #0D3B66 15px);
-      background-repeat: repeat-x;
-      background-size: 30px 30px;
+      height: 20px;
+      background-image: linear-gradient(135deg, #0D3B66 25%, transparent 25%, transparent 50%, #0D3B66 50%, #0D3B66 75%, transparent 75%, transparent);
+      background-size: 20px 20px;
       z-index: 1;
     }
 
     .pizza::before {
       top: 0;
-      transform: rotate(180deg);
     }
 
     .pizza::after {
@@ -152,6 +150,10 @@
       user-select: none;
     }
 
+    #ai-popup.show {
+      display: block;
+    }
+
     #ai-popup .popup-content {
       display: flex;
       flex-direction: column;
@@ -167,79 +169,19 @@
       text-shadow: 1px 1px 1px #58A4B0;
       letter-spacing: 1.5px;
     }
-
-    #ai-popup input {
-      padding: 12px 15px;
-      font-size: 1em;
-      border-radius: 12px;
-      border: 2px solid #58A4B0;
-      outline: none;
-      font-weight: 600;
-    }
-
-    #ai-popup input:focus {
-      border-color: #58A4B0;
-      box-shadow: 0 0 8px #58A4B0;
-    }
-
-    #ai-popup button {
-      padding: 12px 0;
-      font-size: 1.1em;
-      border-radius: 20px;
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
-      color: #F2F3F4;
-      background: linear-gradient(45deg, #0D3B66, #58A4B0);
-      box-shadow: 0 4px 8px rgba(13, 59, 102, 0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-    }
-
-    #ai-popup button:hover {
-      background: linear-gradient(45deg, #58A4B0, #0D3B66);
-    }
-
-    #ai-popup button:active {
-      transform: scale(0.97);
-    }
-
-    #risposta-ai {
-      font-size: 1.05em;
-      font-weight: 600;
-      min-height: 50px;
-      margin-top: 10px;
-      padding: 10px;
-      background: #F2F3F4;
-      border-radius: 15px;
-      color: #0D3B66;
-      box-shadow: inset 0 0 6px #58A4B0;
-      white-space: pre-line;
-      text-align: center;
-    }
-
-    .lang-switch {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
-
-    .lang-switch button {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-    }
   </style>
-
-  <!-- ... resto del codice invariato ... -->
+</head>
+<body>
+  <!-- resto del codice HTML, incluso il popup e lo script -->
+  <script>
+    function togglePopup() {
+      const popup = document.getElementById("ai-popup");
+      popup.classList.toggle("show");
+    }
+  </script>
 </body>
 </html>
+
 
 
 </head>
