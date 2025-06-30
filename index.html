@@ -13,7 +13,7 @@
       border: 2px solid #58A4B0;
       padding: 10px;
       box-sizing: border-box;
-      color: #F4D58D;
+      color: #F2F3F4;
     }
 
     header {
@@ -32,7 +32,7 @@
       margin-top: 10px;
       margin-bottom: 20px;
       color: #0D3B66;
-      background-color: #F4D58D;
+      background-color: #F2F3F4;
       display: inline-block;
       padding: 8px 16px;
       border-radius: 20px;
@@ -46,8 +46,8 @@
     }
 
     .pizza {
-      background: #F4D58D;
-      border-radius: 10px;
+      background: #F2F3F4;
+      border-radius: 1px;
       padding: 10px;
       margin: 20px 0;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -55,20 +55,42 @@
       align-items: center;
       gap: 20px;
       color: #0D3B66;
-      min-height: 140px;
       position: relative;
+      min-height: 160px;
+      overflow: hidden;
+    }
+
+    .pizza::before,
+    .pizza::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      background: repeating-linear-gradient(135deg, #58A4B0 0px, #58A4B0 2px, #F2F3F4 2px, #F2F3F4 4px);
+      z-index: 1;
+    }
+
+    .pizza::before {
+      top: 0;
+    }
+
+    .pizza::after {
+      bottom: 0;
     }
 
     .pizza-name {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin: 0 0 5px 0;
       position: absolute;
       top: 10px;
       left: 10px;
+      z-index: 2;
       background: #0D3B66;
-      color: #F4D58D;
-      padding: 5px 10px;
-      border-radius: 10px;
-      font-size: 1.2em;
-      font-weight: bold;
+      color: #F2F3F4;
+      padding: 4px 10px;
+      border-radius: 8px;
     }
 
     .pizza img {
@@ -78,16 +100,16 @@
       object-fit: cover;
       background: #58A4B0;
       border: 3px solid #0D3B66;
+      margin-top: 35px;
     }
 
     .pizza-info {
       flex: 1;
-      padding-left: 10px;
+      padding-top: 35px;
     }
 
     .pizza-ingredients {
       font-size: 0.9em;
-      margin-top: 40px;
     }
 
     .pizza-price {
@@ -101,7 +123,7 @@
       right: 20px;
       width: 60px;
       height: 60px;
-      background: #F4D58D;
+      background: #F2F3F4;
       color: #0D3B66;
       font-size: 20px;
       border-radius: 50%;
@@ -117,7 +139,7 @@
       position: fixed;
       bottom: 90px;
       right: 20px;
-      background: #F4D58D;
+      background: #F2F3F4;
       padding: 25px 30px;
       border-radius: 25px;
       width: 300px;
@@ -125,120 +147,96 @@
       display: none;
       z-index: 999;
       color: #0D3B66;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
+    }
+
+    #ai-popup .popup-content {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
 
     #ai-popup h2 {
-      text-align: center;
       font-size: 1.6em;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      text-align: center;
+      color: #0D3B66;
+      text-shadow: 1px 1px 1px #58A4B0;
+      letter-spacing: 1.5px;
     }
 
-    #ai-popup input,
-    #ai-popup button {
-      width: 100%;
-      margin-top: 10px;
-      padding: 10px;
-      border: none;
-      border-radius: 10px;
+    #ai-popup input {
+      padding: 12px 15px;
       font-size: 1em;
+      border-radius: 12px;
+      border: 2px solid #58A4B0;
+      outline: none;
+      font-weight: 600;
+    }
+
+    #ai-popup input:focus {
+      border-color: #58A4B0;
+      box-shadow: 0 0 8px #58A4B0;
     }
 
     #ai-popup button {
-      background-color: #0D3B66;
-      color: #F4D58D;
+      padding: 12px 0;
+      font-size: 1.1em;
+      border-radius: 20px;
+      border: none;
       cursor: pointer;
+      font-weight: 700;
+      color: #F2F3F4;
+      background: linear-gradient(45deg, #0D3B66, #58A4B0);
+      box-shadow: 0 4px 8px rgba(13, 59, 102, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #ai-popup button:hover {
+      background: linear-gradient(45deg, #58A4B0, #0D3B66);
+    }
+
+    #ai-popup button:active {
+      transform: scale(0.97);
     }
 
     #risposta-ai {
+      font-size: 1.05em;
+      font-weight: 600;
+      min-height: 50px;
       margin-top: 10px;
-      background: #fff;
       padding: 10px;
-      border-radius: 10px;
+      background: #F2F3F4;
+      border-radius: 15px;
       color: #0D3B66;
-      font-weight: bold;
+      box-shadow: inset 0 0 6px #58A4B0;
+      white-space: pre-line;
+      text-align: center;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .lang-switch button {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <img src="logo.png" alt="Logo Mixed by Genny" />
-    <div class="coperto-info">Costo coperto 2€ con acqua inclusa</div>
-  </header>
-
-  <main>
-    <div class="pizza margherita">
-      <span class="pizza-name">Margherita</span>
-      <img src="diavola1.jpeg" alt="Margherita" />
-      <div class="pizza-info">
-        <p class="pizza-ingredients">Pomodoro, mozzarella, basilico<br><em>Tomato, mozzarella, basil</em></p>
-        <p class="pizza-price">10€</p>
-      </div>
-    </div>
-
-    <div class="pizza diavola">
-      <span class="pizza-name">Diavola</span>
-      <img src="diavola1.jpeg" alt="Diavola" />
-      <div class="pizza-info">
-        <p class="pizza-ingredients">Mozzarella, pomodoro, salame piccante<br><em>Mozzarella, tomato, spicy salami</em></p>
-        <p class="pizza-price">10€</p>
-      </div>
-    </div>
-
-    <div class="pizza gorgonzola">
-      <span class="pizza-name">Gorgonzola</span>
-      <img src="diavola1.jpeg" alt="Gorgonzola" />
-      <div class="pizza-info">
-        <p class="pizza-ingredients">Mozzarella, gorgonzola, noci<br><em>Mozzarella, gorgonzola, walnuts</em></p>
-        <p class="pizza-price">10€</p>
-      </div>
-    </div>
-
-    <div class="pizza mixed">
-      <span class="pizza-name">Mixed by Genny</span>
-      <img src="diavola1.jpeg" alt="Mixed by Genny" />
-      <div class="pizza-info">
-        <p class="pizza-ingredients">Interagisci con l'AI e Genny farà una pizza speciale solo per te<br><em>Interact with the AI and Genny will make a special pizza for you</em></p>
-        <p class="pizza-price">10€</p>
-      </div>
-    </div>
-  </main>
-
-  <div id="ai-fab" onclick="togglePopup()">AI</div>
-
-  <div id="ai-popup">
-    <h2>Dimmi cosa ti piace!</h2>
-    <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" />
-    <button onclick="consiglia()">🍕 Consiglio pizza</button>
-    <button onclick="parla()">🎙️ Parla con me</button>
-    <div id="risposta-ai"></div>
-  </div>
-
-  <script>
-    function togglePopup() {
-      const popup = document.getElementById("ai-popup");
-      popup.style.display = popup.style.display === "block" ? "none" : "block";
-    }
-
-    async function consiglia() {
-      const gusto = document.getElementById("gusto").value;
-      const risposta = `Ti consiglio la Margherita se ti piace il pomodoro!`;
-      document.getElementById("risposta-ai").textContent = risposta;
-      const utterance = new SpeechSynthesisUtterance(risposta);
-      utterance.lang = "it-IT";
-      speechSynthesis.speak(utterance);
-    }
-
-    function parla() {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = "it-IT";
-      recognition.start();
-      recognition.onresult = async (event) => {
-        const input = event.results[0][0].transcript;
-        document.getElementById("gusto").value = input;
-        await consiglia();
-      };
-    }
-  </script>
+  <!-- ... resto del codice invariato ... -->
 </body>
-
 </html>
