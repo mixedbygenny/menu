@@ -7,203 +7,204 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mixed by Genny - Menu</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #4B1414, #4B1414);
-      border: 2px solid #6C1E1E;
-      padding: 10px;
-      box-sizing: border-box;
-      color: #F5E2C8;
-    }
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #1E1F26, #1E1F26);
+    border: 2px solid #2E2E2E;
+    padding: 10px;
+    box-sizing: border-box;
+    color: #FFD700;
+  }
 
-    header {
-      text-align: center;
-      padding: 20px;
-    }
+  header {
+    text-align: center;
+    padding: 20px;
+  }
 
-    header img {
-      width: 100%;
-      max-width: 480px;
-    }
+  header img {
+    width: 100%;
+    max-width: 480px;
+  }
 
-    .coperto-info {
-      text-align: center;
-      font-size: 1em;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      color: #F5E2C8;
-      background-color: #6C1E1E;
-      display: inline-block;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: bold;
-    }
+  .coperto-info {
+    text-align: center;
+    font-size: 1em;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #FFD700;
+    background-color: #2E2E2E;
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+  }
 
-    main {
-      padding: 10px;
-      max-width: 800px;
-      margin: auto;
-    }
+  main {
+    padding: 10px;
+    max-width: 800px;
+    margin: auto;
+  }
 
-    .pizza {
-      background: #D4A373;
-      border-radius: 1px;
-      padding: 10px;
-      margin: 20px 0;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      color: #4B1414;
-    }
+  .pizza {
+    background: #FFD700;
+    border-radius: 1px;
+    padding: 10px;
+    margin: 20px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #1E1F26;
+  }
 
-    .pizza img {
-      width: 110px;
-      height: 110px;
-      border-radius: 10px;
-      object-fit: cover;
-      background: #6C1E1E;
-      border: 3px solid #4B1414;
-    }
+  .pizza img {
+    width: 110px;
+    height: 110px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: #2E2E2E;
+    border: 3px solid #1E1F26;
+  }
 
-    .pizza-info {
-      flex: 1;
-    }
+  .pizza-info {
+    flex: 1;
+  }
 
-    .pizza-name {
-      font-size: 1.5em;
-      margin: 0;
-    }
+  .pizza-name {
+    font-size: 1.5em;
+    margin: 0;
+  }
 
-    .pizza-ingredients {
-      font-size: 0.9em;
-    }
+  .pizza-ingredients {
+    font-size: 0.9em;
+  }
 
-    .pizza-price {
-      font-size: 1em;
-      font-weight: bold;
-    }
+  .pizza-price {
+    font-size: 1em;
+    font-weight: bold;
+  }
 
-    #ai-fab {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background: #D4A373;
-      color: #4B1414;
-      font-size: 20px;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 60px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      z-index: 1000;
-      font-weight: bold;
-    }
+  #ai-fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #FFD700;
+    color: #1E1F26;
+    font-size: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 60px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    font-weight: bold;
+  }
 
-    #ai-popup {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      background: #F5E2C8;
-      padding: 25px 30px;
-      border-radius: 25px;
-      width: 300px;
-      box-shadow: 0 8px 20px rgba(108, 30, 30, 0.6);
-      display: none;
-      z-index: 999;
-      color: #4B1414;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      user-select: none;
-    }
+  #ai-popup {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    background: #FFD700;
+    padding: 25px 30px;
+    border-radius: 25px;
+    width: 300px;
+    box-shadow: 0 8px 20px rgba(30, 31, 38, 0.6);
+    display: none;
+    z-index: 999;
+    color: #1E1F26;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+  }
 
-    #ai-popup .popup-content {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+  #ai-popup .popup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 
-    #ai-popup h2 {
-      font-size: 1.6em;
-      font-weight: 700;
-      margin: 0 0 10px 0;
-      text-align: center;
-      color: #6C1E1E;
-      text-shadow: 1px 1px 1px #D4A373;
-      letter-spacing: 1.5px;
-    }
+  #ai-popup h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    text-align: center;
+    color: #2E2E2E;
+    text-shadow: 1px 1px 1px #FFD700;
+    letter-spacing: 1.5px;
+  }
 
-    #ai-popup input {
-      padding: 12px 15px;
-      font-size: 1em;
-      border-radius: 12px;
-      border: 2px solid #6C1E1E;
-      outline: none;
-      font-weight: 600;
-    }
+  #ai-popup input {
+    padding: 12px 15px;
+    font-size: 1em;
+    border-radius: 12px;
+    border: 2px solid #2E2E2E;
+    outline: none;
+    font-weight: 600;
+  }
 
-    #ai-popup input:focus {
-      border-color: #D4A373;
-      box-shadow: 0 0 8px #D4A373;
-    }
+  #ai-popup input:focus {
+    border-color: #FFD700;
+    box-shadow: 0 0 8px #FFD700;
+  }
 
-    #ai-popup button {
-      padding: 12px 0;
-      font-size: 1.1em;
-      border-radius: 20px;
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
-      color: #F5E2C8;
-      background: linear-gradient(45deg, #6C1E1E, #4B1414);
-      box-shadow: 0 4px 8px rgba(75, 20, 20, 0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-    }
+  #ai-popup button {
+    padding: 12px 0;
+    font-size: 1.1em;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    color: #FFD700;
+    background: linear-gradient(45deg, #2E2E2E, #1E1F26);
+    box-shadow: 0 4px 8px rgba(46, 46, 46, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
 
-    #ai-popup button:hover {
-      background: linear-gradient(45deg, #4B1414, #6C1E1E);
-    }
+  #ai-popup button:hover {
+    background: linear-gradient(45deg, #1E1F26, #2E2E2E);
+  }
 
-    #ai-popup button:active {
-      transform: scale(0.97);
-    }
+  #ai-popup button:active {
+    transform: scale(0.97);
+  }
 
-    #risposta-ai {
-      font-size: 1.05em;
-      font-weight: 600;
-      min-height: 50px;
-      margin-top: 10px;
-      padding: 10px;
-      background: #D4A373;
-      border-radius: 15px;
-      color: #4B1414;
-      box-shadow: inset 0 0 6px #6C1E1E;
-      white-space: pre-line;
-      text-align: center;
-    }
+  #risposta-ai {
+    font-size: 1.05em;
+    font-weight: 600;
+    min-height: 50px;
+    margin-top: 10px;
+    padding: 10px;
+    background: #FFD700;
+    border-radius: 15px;
+    color: #1E1F26;
+    box-shadow: inset 0 0 6px #2E2E2E;
+    white-space: pre-line;
+    text-align: center;
+  }
 
-    .lang-switch {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
+  .lang-switch {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
 
-    .lang-switch button {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-    }
-  </style>
+  .lang-switch button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+</style>
+
 </head>
 
 <body>
