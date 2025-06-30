@@ -5,203 +5,242 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mixed by Genny - Menu</title>
-<style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #0D3B66, #0D3B66);
-    border: 2px solid #58A4B0;
-    padding: 10px;
-    box-sizing: border-box;
-    color: #F4D58D;
-  }
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0D3B66, #0D3B66);
+      border: 2px solid #58A4B0;
+      padding: 10px;
+      box-sizing: border-box;
+      color: #F2F3F4;
+    }
 
-  header {
-    text-align: center;
-    padding: 20px;
-  }
+    header {
+      text-align: center;
+      padding: 20px;
+    }
 
-  header img {
-    width: 100%;
-    max-width: 480px;
-  }
+    header img {
+      width: 100%;
+      max-width: 480px;
+    }
 
-  .coperto-info {
-    text-align: center;
-    font-size: 1em;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    color: #0D3B66;
-    background-color: #F4D58D;
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: bold;
-  }
+    .coperto-info {
+      text-align: center;
+      font-size: 1em;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      color: #0D3B66;
+      background-color: #F2F3F4;
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
 
-  main {
-    padding: 10px;
-    max-width: 800px;
-    margin: auto;
-  }
+    main {
+      padding: 10px;
+      max-width: 800px;
+      margin: auto;
+    }
 
-  .pizza {
-    background: #F4D58D;
-    border-radius: 1px;
-    padding: 10px;
-    margin: 20px 0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    color: #0D3B66;
-  }
+    .pizza {
+      background: #F2F3F4;
+      padding: 10px;
+      margin: 40px 0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      color: #0D3B66;
+      position: relative;
+      min-height: 170px;
+    }
 
-  .pizza img {
-    width: 110px;
-    height: 110px;
-    border-radius: 10px;
-    object-fit: cover;
-    background: #58A4B0;
-    border: 3px solid #0D3B66;
-  }
+    .pizza::before,
+    .pizza::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 30px;
+      background-image: radial-gradient(circle at 10px 15px, transparent 14px, #0D3B66 15px);
+      background-repeat: repeat-x;
+      background-size: 30px 30px;
+      z-index: 1;
+    }
 
-  .pizza-info {
-    flex: 1;
-  }
+    .pizza::before {
+      top: 0;
+      transform: rotate(180deg);
+    }
 
-  .pizza-name {
-    font-size: 1.5em;
-    margin: 0;
-  }
+    .pizza::after {
+      bottom: 0;
+    }
 
-  .pizza-ingredients {
-    font-size: 0.9em;
-  }
+    .pizza-name {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin: 0;
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      z-index: 2;
+      background: #0D3B66;
+      color: #F2F3F4;
+      padding: 5px 12px;
+      border-radius: 12px;
+    }
 
-  .pizza-price {
-    font-size: 1em;
-    font-weight: bold;
-  }
+    .pizza img {
+      width: 110px;
+      height: 110px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #58A4B0;
+      border: 3px solid #0D3B66;
+      margin-top: 40px;
+    }
 
-  #ai-fab {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background: #F4D58D;
-    color: #0D3B66;
-    font-size: 20px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 60px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    font-weight: bold;
-  }
+    .pizza-info {
+      flex: 1;
+      padding-top: 40px;
+    }
 
-  #ai-popup {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    background: #F4D58D;
-    padding: 25px 30px;
-    border-radius: 25px;
-    width: 300px;
-    box-shadow: 0 8px 20px rgba(13, 59, 102, 0.6);
-    display: none;
-    z-index: 999;
-    color: #0D3B66;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    user-select: none;
-  }
+    .pizza-ingredients {
+      font-size: 0.9em;
+    }
 
-  #ai-popup .popup-content {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
+    .pizza-price {
+      font-size: 1em;
+      font-weight: bold;
+    }
 
-  #ai-popup h2 {
-    font-size: 1.6em;
-    font-weight: 700;
-    margin: 0 0 10px 0;
-    text-align: center;
-    color: #0D3B66;
-    text-shadow: 1px 1px 1px #58A4B0;
-    letter-spacing: 1.5px;
-  }
+    #ai-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #F2F3F4;
+      color: #0D3B66;
+      font-size: 20px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 60px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      font-weight: bold;
+    }
 
-  #ai-popup input {
-    padding: 12px 15px;
-    font-size: 1em;
-    border-radius: 12px;
-    border: 2px solid #58A4B0;
-    outline: none;
-    font-weight: 600;
-  }
+    #ai-popup {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background: #F2F3F4;
+      padding: 25px 30px;
+      border-radius: 25px;
+      width: 300px;
+      box-shadow: 0 8px 20px rgba(13, 59, 102, 0.6);
+      display: none;
+      z-index: 999;
+      color: #0D3B66;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
+    }
 
-  #ai-popup input:focus {
-    border-color: #58A4B0;
-    box-shadow: 0 0 8px #58A4B0;
-  }
+    #ai-popup .popup-content {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
 
-  #ai-popup button {
-    padding: 12px 0;
-    font-size: 1.1em;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    font-weight: 700;
-    color: #F4D58D;
-    background: linear-gradient(45deg, #0D3B66, #58A4B0);
-    box-shadow: 0 4px 8px rgba(13, 59, 102, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-  }
+    #ai-popup h2 {
+      font-size: 1.6em;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      text-align: center;
+      color: #0D3B66;
+      text-shadow: 1px 1px 1px #58A4B0;
+      letter-spacing: 1.5px;
+    }
 
-  #ai-popup button:hover {
-    background: linear-gradient(45deg, #58A4B0, #0D3B66);
-  }
+    #ai-popup input {
+      padding: 12px 15px;
+      font-size: 1em;
+      border-radius: 12px;
+      border: 2px solid #58A4B0;
+      outline: none;
+      font-weight: 600;
+    }
 
-  #ai-popup button:active {
-    transform: scale(0.97);
-  }
+    #ai-popup input:focus {
+      border-color: #58A4B0;
+      box-shadow: 0 0 8px #58A4B0;
+    }
 
-  #risposta-ai {
-    font-size: 1.05em;
-    font-weight: 600;
-    min-height: 50px;
-    margin-top: 10px;
-    padding: 10px;
-    background: #F4D58D;
-    border-radius: 15px;
-    color: #0D3B66;
-    box-shadow: inset 0 0 6px #58A4B0;
-    white-space: pre-line;
-    text-align: center;
-  }
+    #ai-popup button {
+      padding: 12px 0;
+      font-size: 1.1em;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      color: #F2F3F4;
+      background: linear-gradient(45deg, #0D3B66, #58A4B0);
+      box-shadow: 0 4px 8px rgba(13, 59, 102, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
 
-  .lang-switch {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
+    #ai-popup button:hover {
+      background: linear-gradient(45deg, #58A4B0, #0D3B66);
+    }
 
-  .lang-switch button {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-  }
-</style>
+    #ai-popup button:active {
+      transform: scale(0.97);
+    }
+
+    #risposta-ai {
+      font-size: 1.05em;
+      font-weight: 600;
+      min-height: 50px;
+      margin-top: 10px;
+      padding: 10px;
+      background: #F2F3F4;
+      border-radius: 15px;
+      color: #0D3B66;
+      box-shadow: inset 0 0 6px #58A4B0;
+      white-space: pre-line;
+      text-align: center;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .lang-switch button {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+    }
+  </style>
+
+  <!-- ... resto del codice invariato ... -->
+</body>
+</html>
+
 
 </head>
 
