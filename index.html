@@ -131,12 +131,12 @@
       position: fixed;
       bottom: 90px;
       right: 20px;
-      width: 320px;
-      height: 320px;
+      width: 280px;
+      height: 220px;
       background: #F8F8FF;
       border: 2px solid #D1BDBD;
-      border-radius: 50%;
-      padding: 25px;
+      border-radius: 30px;
+      padding: 20px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
       display: none;
       z-index: 9999;
@@ -144,7 +144,13 @@
       user-select: none;
       font-weight: 600;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: auto;
+
+      /* Centratura verticale e orizzontale contenuti */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
     .lang-switch {
@@ -152,6 +158,7 @@
       justify-content: center;
       margin-bottom: 15px;
       gap: 10px;
+      width: 100%;
     }
 
     .lang-switch button {
@@ -166,21 +173,14 @@
       border-radius: 5px;
     }
 
-    #gusto {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #BFAFAF;
-      border-radius: 10px;
-      font-size: 1em;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
+    /* Nascondiamo input e bottone "scrivimi i tuoi gusti" */
+    /* Non ci sono nel markup ora, quindi non servono regole specifiche */
 
     .action-btn {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 8px;
-      font-size: 1em;
+      width: 80%;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 1.1em;
       border-radius: 10px;
       border: none;
       font-weight: 700;
@@ -250,8 +250,6 @@
     </div>
 
     <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
-    <input type="text" id="gusto" placeholder="Es: mozzarella, pomodoro" aria-label="Inserisci gusti o stati d'animo" />
-    <button class="action-btn" onclick="consiglia()">Scrivimi i tuoi gusti 🍕</button>
     <button class="action-btn" onclick="parla()">🎙️ Parla con me</button>
   </div>
 
@@ -266,8 +264,6 @@
       currentLang = lang;
       document.documentElement.lang = lang;
       document.getElementById("title-prompt").textContent = lang === 'it' ? "Dimmi cosa ti piace!" : "Tell me what you like!";
-      document.getElementById("gusto").placeholder = lang === 'it' ? "Es: mozzarella, pomodoro" : "E.g.: mozzarella, tomato";
-      // Non c'è più testo risposta da cancellare
     }
 
     function toggleSubmenu(id) {
@@ -279,30 +275,7 @@
       const popup = document.getElementById("ai-popup");
       popup.style.display = popup.style.display === "block" ? "none" : "block";
       if (popup.style.display === "block") {
-        document.getElementById("gusto").focus();
-      }
-    }
-
-    async function consiglia() {
-      const gustoInput = document.getElementById('gusto').value.trim();
-      if (!gustoInput) {
-        const msg = currentLang === 'it' ? "Inserisci qualche ingrediente!" : "Please enter some ingredients!";
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel();
-          const utter = new SpeechSynthesisUtterance(msg);
-          utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
-          window.speechSynthesis.speak(utter);
-        }
-        return;
-      }
-
-      const data = await chiediConsiglio(gustoInput);
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(data.risposta);
-        utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
-        window.speechSynthesis.speak(utter);
+        // Non c'è input da focalizzare
       }
     }
 
@@ -318,7 +291,6 @@
 
       recognition.onresult = async (event) => {
         const input = event.results[0][0].transcript;
-        document.getElementById('gusto').value = input;
 
         const data = await chiediConsiglio(input);
 
