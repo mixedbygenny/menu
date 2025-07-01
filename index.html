@@ -87,24 +87,24 @@
       margin-bottom: 6px;
       color: #4B4B4B;
     }
-    .pizza {
+    .pizza, .bibita, .dolce {
       margin: 20px 0;
       padding: 10px 5px;
       font-size: 0.93em; /* ridotto del 7% */
     }
-    .pizza-info {
+    .pizza-info, .bibita-info, .dolce-info {
       padding: 5px 10px;
     }
-    .pizza-name {
+    .pizza-name, .bibita-name, .dolce-name {
       font-size: 1.395em; /* ridotto del 7% da 1.5em */
       margin: 0 0 6px 0;
       font-weight: 600;
     }
-    .pizza-ingredients {
+    .pizza-ingredients, .bibita-ingredients, .dolce-ingredients {
       font-size: 0.837em; /* ridotto del 7% da 0.9em */
       margin: 0 0 6px 0;
     }
-    .pizza-price {
+    .pizza-price, .bibita-price, .dolce-price {
       font-weight: 600;
       font-size: 1.023em; /* ridotto del 7% da 1.1em */
       margin: 0;
@@ -233,21 +233,97 @@
     <img src="logocanva1-removebg-preview.png" alt="Logo Mixed by Genny" />
   </header>
   <main>
+    <!-- Pizze Button e Sottomenu -->
     <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
     <div id="submenu-pizze" class="submenu">
-      <!-- pizze come da codice precedente, omesso per brevità -->
+      <div class="pizza">
+        <p class="pizza-name">Margherita</p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro San Marzano, mozzarella di bufala DOP. <em>San Marzano tomatoes, buffalo mozzarella PDO.</em></p>
+        <p class="pizza-price">€6,00</p>
+      </div>
+      <div class="pizza">
+        <p class="pizza-name">Diavola</p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Salame piccante del Sud Italia, mozzarella. <em>Spicy salami from Southern Italy, mozzarella.</em></p>
+        <p class="pizza-price">€7,50</p>
+      </div>
+      <div class="pizza">
+        <p class="pizza-name">Gorgonzola</p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Gorgonzola DOP dalla Lombardia, noci croccanti. <em>Gorgonzola PDO from Lombardy, crunchy walnuts.</em></p>
+        <p class="pizza-price">€8,00</p>
+      </div>
+      <div class="pizza">
+        <p class="pizza-name">Provola e Pepe</p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Provola affumicata campana, pepe nero. <em>Smoked provola cheese from Campania, black pepper.</em></p>
+        <p class="pizza-price">€7,00</p>
+      </div>
+      <div class="pizza">
+        <p class="pizza-name">Cipollina</p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia. <em>Red onion, gorgonzola, pepper, mozzarella, pecorino cheese, sage.</em></p>
+        <p class="pizza-price">€8,50</p>
+      </div>
+      <div class="pizza">
+        <p class="pizza-name">Cosacca</p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, pecorino romano, olio, basilico. <em>Tomato, Pecorino Romano cheese, olive oil, basil.</em></p>
+        <p class="pizza-price">€7,50</p>
+      </div>
+      <div class="pizza">
+        <p class="pizza-name">Marinara</p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, origano, aglio, basilico. <em>Tomato, oregano, garlic, basil.</em></p>
+        <p class="pizza-price">€5,00</p>
+      </div>
+      <div class="pizza">
+        <p class="pizza-name">Napoli</p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico. <em>Tomato, mozzarella, anchovies, capers, oregano, Pecorino cheese, basil.</em></p>
+        <p class="pizza-price">€8,00</p>
+      </div>
     </div>
 
+    <!-- Bibite Button e Sottomenu -->
     <button class="menu-button" onclick="toggleSubmenu('bibite')">🥤 Bibite</button>
     <div id="submenu-bibite" class="submenu">
-      <!-- bibite omesse per brevità -->
+      <div class="bibita">
+        <p class="bibita-name">Acqua Naturale</p>
+        <p class="bibita-ingredients"><em>Natural water</em></p>
+        <p class="bibita-price">€1,50</p>
+      </div>
+      <div class="bibita">
+        <p class="bibita-name">Acqua Frizzante</p>
+        <p class="bibita-ingredients"><em>Sparkling water</em></p>
+        <p class="bibita-price">€1,80</p>
+      </div>
+      <div class="bibita">
+        <p class="bibita-name">Coca Cola</p>
+        <p class="bibita-ingredients"><em>Coca Cola</em></p>
+        <p class="bibita-price">€2,50</p>
+      </div>
+      <div class="bibita">
+        <p class="bibita-name">Aranciata</p>
+        <p class="bibita-ingredients"><em>Orange soda</em></p>
+        <p class="bibita-price">€2,50</p>
+      </div>
     </div>
 
+    <!-- Dolci Button e Sottomenu -->
     <button class="menu-button" onclick="toggleSubmenu('dolci')">🍰 Dolci</button>
     <div id="submenu-dolci" class="submenu">
-      <!-- dolci omessi per brevità -->
+      <div class="dolce">
+        <p class="dolce-name">Tiramisù</p>
+        <p class="dolce-ingredients"><em>Classic Italian dessert with coffee and mascarpone</em></p>
+        <p class="dolce-price">€4,50</p>
+      </div>
+      <div class="dolce">
+        <p class="dolce-name">Cannoli Siciliani</p>
+        <p class="dolce-ingredients"><em>Sicilian cannoli filled with sweet ricotta</em></p>
+        <p class="dolce-price">€4,00</p>
+      </div>
+      <div class="dolce">
+        <p class="dolce-name">Gelato Artigianale</p>
+        <p class="dolce-ingredients"><em>Artisanal ice cream, various flavors</em></p>
+        <p class="dolce-price">€3,50</p>
+      </div>
     </div>
 
+    <!-- Allergeni Button e Sottomenu -->
     <button class="menu-button" onclick="toggleSubmenu('allergeni')">⚠️ Allergeni</button>
     <div id="submenu-allergeni" class="submenu">
       <p class="intro">
@@ -327,38 +403,4 @@
 
     function setLang(lang) {
       currentLang = lang;
-      document.documentElement.lang = lang;
-      document.getElementById("title-prompt").textContent = "Pizza Advisor";
-    }
-
-    function parla() {
-      const pizze = [
-        { nome: "Margherita", dettagli: "Pomodoro San Marzano, mozzarella di bufala DOP. Un classico napoletano, semplice ma irresistibile." },
-        { nome: "Diavola", dettagli: "Salame piccante del Sud Italia, mozzarella. Per chi ama i sapori forti." },
-        { nome: "Gorgonzola", dettagli: "Gorgonzola DOP dalla Lombardia, noci croccanti. Un incontro di cremosità e croccantezza." },
-        { nome: "Provola e Pepe", dettagli: "Provola affumicata campana, pepe nero. Una pizza intensa e avvolgente." },
-        { nome: "Cipollina", dettagli: "Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia." },
-        { nome: "Cosacca", dettagli: "Pomodoro, pecorino romano, olio, basilico." },
-        { nome: "Marinara", dettagli: "Pomodoro, origano, aglio, basilico." },
-        { nome: "Napoli", dettagli: "Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico." }
-      ];
-
-      const scelta = pizze[Math.floor(Math.random() * pizze.length)];
-
-      const frase = currentLang === 'it'
-        ? `Ti consiglio: ${scelta.nome}. ${scelta.dettagli}`
-        : `I recommend: ${scelta.nome}. ${scelta.dettagli}`;
-
-      const rispostaDiv = document.getElementById("risposta-ai");
-      rispostaDiv.textContent = frase;
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(frase);
-        utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
-        window.speechSynthesis.speak(utter);
-      }
-    }
-  </script>
-</body>
-</html>
+      document.document
