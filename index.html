@@ -6,15 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mixed by Genny - Menu</title>
 
-  <!-- Playfair Display da Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
-
   <style>
     body, button, input, p, h2 {
       font-family: 'Playfair Display', serif;
       font-weight: 400;
     }
-
     body {
       margin: 0;
       background-color: #F8F8FF;
@@ -22,23 +19,19 @@
       padding: 10px;
       box-sizing: border-box;
     }
-
     header {
       text-align: center;
       padding: 20px 0;
     }
-
     header img {
       max-width: 480px;
       width: 100%;
     }
-
     main {
       max-width: 800px;
       margin: auto;
       padding: 0 10px 40px;
     }
-
     .menu-button {
       background: #D1BDBD;
       color: #2B2B2B;
@@ -54,15 +47,12 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
     }
-
     .menu-button:hover {
       background: #BFAFAF;
     }
-
     .submenu {
       display: none;
     }
-
     .pizza {
       background: #F8F8FF;
       border: 2px solid #D1BDBD;
@@ -73,7 +63,6 @@
       margin: 20px 0;
       padding: 15px;
     }
-
     .pizza img {
       width: 110px;
       height: 110px;
@@ -82,35 +71,29 @@
       border: 2px solid #D1BDBD;
       background: #F2F3F4;
     }
-
     .pizza-info {
       flex: 1;
     }
-
     .pizza-name {
       font-size: 1.5em;
       margin: 0 0 6px 0;
       font-weight: 600;
     }
-
     .pizza-ingredients {
       font-size: 0.9em;
       margin: 0 0 6px 0;
     }
-
     .pizza-price {
       font-weight: 600;
       font-size: 1.1em;
       margin: 0;
     }
-
     #footer-container {
       max-width: 800px;
       margin: 0 auto 30px;
       width: 80%;
       text-align: center;
     }
-
     #allergeni-btn {
       background: #D1BDBD;
       color: #2B2B2B;
@@ -126,11 +109,9 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
     }
-
     #allergeni-btn:hover {
       background: #BFAFAF;
     }
-
     #coperto-text {
       color: black;
       font-size: 1.1em;
@@ -141,7 +122,6 @@
       position: relative;
       padding-bottom: 6px;
     }
-
     #coperto-text::after {
       content: "";
       display: block;
@@ -153,7 +133,6 @@
       left: 0;
       border-radius: 1px;
     }
-
     #ai-fab {
       position: fixed;
       bottom: 20px;
@@ -171,7 +150,6 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       z-index: 10000;
     }
-
     #ai-popup {
       position: fixed;
       top: 50%;
@@ -188,16 +166,13 @@
       z-index: 9999;
       text-align: center;
     }
-
     #ai-popup h2 {
       font-size: 1.5em;
       margin: 0 0 15px 0;
     }
-
     #ai-popup .lang-switch {
       margin-bottom: 15px;
     }
-
     #ai-popup .lang-switch button {
       background: transparent;
       border: none;
@@ -205,7 +180,6 @@
       cursor: pointer;
       margin: 0 8px;
     }
-
     #ai-popup button.action-btn {
       background-color: #D1BDBD;
       border-radius: 15px;
@@ -218,11 +192,9 @@
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
-
     #ai-popup button.action-btn:hover {
       background-color: #BFAFAF;
     }
-
     #risposta-ai {
       margin-top: 12px;
       font-style: italic;
@@ -233,9 +205,83 @@
 </head>
 
 <body>
-  <!-- ...omesso per brevità... -->
+  <header>
+    <img src="logocanva1-removebg-preview.png" alt="Logo Mixed by Genny" />
+  </header>
+  <main>
+    <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
+    <div id="submenu-pizze" class="submenu">
+      <div class="pizza">
+        <img src="diavola1.jpeg" alt="Margherita" />
+        <div class="pizza-info">
+          <p class="pizza-name">Margherita</p>
+          <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala<br><em>Tomato, mozzarella</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <img src="diavola1.jpeg" alt="Diavola" />
+        <div class="pizza-info">
+          <p class="pizza-name">Diavola</p>
+          <p class="pizza-ingredients">Salame piccante, mozzarella, pomodoro<br><em>Spicy salami, mozzarella</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <img src="diavola1.jpeg" alt="Gorgonzola" />
+        <div class="pizza-info">
+          <p class="pizza-name">Gorgonzola</p>
+          <p class="pizza-ingredients">Mozzarella, gorgonzola DOP, noci<br><em>Gorgonzola cheese, walnuts</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <img src="diavola1.jpeg" alt="Provola e Pepe" />
+        <div class="pizza-info">
+          <p class="pizza-name">Provola e Pepe</p>
+          <p class="pizza-ingredients">Provola affumicata, pepe nero, pomodoro<br><em>Smoked provola, black pepper</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+    </div>
+    <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
+    <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
+    <button id="allergeni-btn" onclick="alert('Informazioni allergeni in arrivo!')">Allergeni</button>
+    <p id="coperto-text">Coperto 2€ acqua da 50ml inclusa</p>
+  </main>
+
+  <div id="ai-fab" onclick="togglePopup()">AI</div>
+  <div id="ai-popup">
+    <div class="lang-switch">
+      <button onclick="setLang('it')">🇮🇹</button>
+      <button onclick="setLang('en')">🇬🇧</button>
+    </div>
+    <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
+    <button class="action-btn" onclick="parla()">🎙️ Parla con me</button>
+    <div id="risposta-ai"></div>
+  </div>
 
   <script>
+    let currentLang = 'it';
+    const menuPizze = ["Margherita", "Diavola", "Gorgonzola", "Provola e Pepe"];
+
+    function toggleSubmenu(id) {
+      const submenu = document.getElementById("submenu-" + id);
+      submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+    }
+    function togglePopup() {
+      const popup = document.getElementById("ai-popup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+      if (popup.style.display === "block") document.getElementById("risposta-ai").textContent = "";
+    }
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.getElementById("title-prompt").textContent = lang === 'it' ? "Dimmi cosa ti piace!" : "Tell me what you like!";
+    }
+    function consigliaPizza(input) {
+      return menuPizze[Math.floor(Math.random() * menuPizze.length)];
+    }
     function parla() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
@@ -249,24 +295,17 @@
       const rispostaDiv = document.getElementById("risposta-ai");
       rispostaDiv.textContent = currentLang === 'it' ? "Sto ascoltando... 🎧" : "Listening... 🎧";
 
-      recognition.onresult = async (event) => {
-        const input = event.results[0][0].transcript;
-        const consigliata = consigliaPizza(input);
-
+      recognition.onresult = (event) => {
+        const pizza = consigliaPizza(event.results[0][0].transcript);
         let dettagli = "";
-        if (consigliata === "Provola e Pepe") {
-          dettagli = "È fatta con provola affumicata della Campania, pepe nero aromatico, pomodoro San Marzano e un filo di olio evo campano. Proviene da una tradizione napoletana.";
-        } else if (consigliata === "Margherita") {
-          dettagli = "Usiamo mozzarella di bufala Campana DOP e pomodoro San Marzano; è la classica pizza napoletana.";
-        } else if (consigliata === "Diavola") {
-          dettagli = "Arricchita da salame piccante artigianale e mozzarella filante, tipica delle pizzerie del Sud.";
-        } else if (consigliata === "Gorgonzola") {
-          dettagli = "Mozzarella e gorgonzola DOP con noci croccanti: un gusto deciso tipico del Nord Italia.";
-        }
+        if (pizza === "Provola e Pepe") dettagli = "È fatta con provola affumicata della Campania, pepe nero aromatico e pomodoro San Marzano. Una vera esperienza napoletana.";
+        else if (pizza === "Margherita") dettagli = "Con mozzarella di bufala Campana DOP e pomodoro San Marzano, simbolo della tradizione partenopea.";
+        else if (pizza === "Diavola") dettagli = "Con salame piccante artigianale del Sud Italia e mozzarella filante, è un'esplosione di gusto.";
+        else if (pizza === "Gorgonzola") dettagli = "Arricchita da gorgonzola DOP lombardo e noci croccanti, è ideale per chi ama i sapori forti.";
 
         const frase = currentLang === 'it'
-          ? `Fra le pizze del menu, oggi mi sento di consigliarti: ${consigliata}. ${dettagli}`
-          : `Among today's pizzas, I recommend: ${consigliata}. ${dettagli}`;
+          ? `Fra le pizze del menu, oggi mi sento di consigliarti: ${pizza}. ${dettagli}`
+          : `Among the pizzas, today I recommend: ${pizza}. ${dettagli}`;
 
         rispostaDiv.textContent = frase;
 
