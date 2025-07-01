@@ -355,7 +355,66 @@
       document.getElementById("risposta-ai").textContent = "";
     }
 
-    function parla() {
+      <!-- ... Il codice esistente rimane invariato ... -->
+
+<script>
+  let currentLang = 'it';
+
+  const menuPizze = [
+    { nome: "Margherita", vegan: false, piccante: false, formaggi: 1 },
+    { nome: "Diavola", vegan: false, piccante: true, formaggi: 1 },
+    { nome: "Gorgonzola", vegan: false, piccante: false, formaggi: 2 },
+    { nome: "Mixed by Genny", vegan: false, piccante: false, formaggi: 0 },
+    { nome: "Provola e Pepe", vegan: false, piccante: true, formaggi: 1 }
+  ];
+
+  function consigliaPizza(input) {
+    const q = input.toLowerCase();
+    let suggerite = menuPizze.filter(p => {
+      if (q.includes("vegetar") && p.vegan) return true;
+      if (q.includes("vegan") && p.vegan) return true;
+      if (q.includes("piccant") && p.piccante) return true;
+      if (q.includes("formaggio") && p.formaggi >= 2) return true;
+      if (q.includes(p.nome.toLowerCase())) return true;
+      if (q.includes("consiglia")) return true;
+      return false;
+    });
+    if (suggerite.length === 0) suggerite = menuPizze;
+    return suggerite.map(p => p.nome);
+  }
+
+  function parla() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert(currentLang === 'it' ? "Il tuo browser non supporta il riconoscimento vocale." : "Your browser does not support voice recognition.");
+      return;
+    }
+    const recognition = new SpeechRecognition();
+    recognition.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+    recognition.start();
+
+    const rispostaDiv = document.getElementById("risposta-ai");
+    rispostaDiv.textContent = currentLang === 'it' ? "Sto ascoltando... 🎧" : "Listening... 🎧";
+
+    recognition.onresult = async (event) => {
+      const input = event.results[0][0].transcript;
+      const consigliate = consigliaPizza(input);
+
+      rispostaDiv.textContent = currentLang === 'it'
+        ? `Ti consiglio: ${consigliate.join(", ")}`
+        : `I recommend: ${consigliate.join(", ")}`;
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(rispostaDiv.textContent);
+        utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+        window.speechSynthesis.speak(utter);
+      }
+    };
+
+    recognition.onerror = () => {
+      rispostaDiv.textContent = currentLang === 'it' ? "Errore nel riconoscimento vocale." : "Speech recognition error.";
+    };
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
         alert(currentLang === 'it' ? "Il tuo browser non supporta il riconoscimento vocale." : "Your browser does not support voice recognition.");
@@ -388,4 +447,25 @@
   </script>
 </body>
 
+
+
+
+
+
+
+
+
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
 </html>
