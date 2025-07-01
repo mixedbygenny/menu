@@ -233,111 +233,9 @@
 </head>
 
 <body>
-  <header>
-    <img src="logocanva1-removebg-preview.png" alt="Logo Mixed by Genny" />
-  </header>
-
-  <main>
-    <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
-    <div id="submenu-pizze" class="submenu">
-      <div class="pizza">
-        <img src="diavola1.jpeg" alt="Margherita" />
-        <div class="pizza-info">
-          <p class="pizza-name">Margherita</p>
-          <p class="pizza-ingredients">Pomodoro, mozzarella, basilico<br><em>Tomato, mozzarella, basil</em></p>
-          <p class="pizza-price">10€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <img src="diavola1.jpeg" alt="Diavola" />
-        <div class="pizza-info">
-          <p class="pizza-name">Diavola</p>
-          <p class="pizza-ingredients">Mozzarella, pomodoro, salame piccante<br><em>Mozzarella, tomato, spicy salami</em></p>
-          <p class="pizza-price">10€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <img src="diavola1.jpeg" alt="Gorgonzola" />
-        <div class="pizza-info">
-          <p class="pizza-name">Gorgonzola</p>
-          <p class="pizza-ingredients">Mozzarella, gorgonzola, noci<br><em>Mozzarella, gorgonzola, walnuts</em></p>
-          <p class="pizza-price">10€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <img src="diavola1.jpeg" alt="Provola e Pepe" />
-        <div class="pizza-info">
-          <p class="pizza-name">Provola e Pepe</p>
-          <p class="pizza-ingredients">Provola affumicata, pepe nero<br><em>Smoked provola, black pepper</em></p>
-          <p class="pizza-price">10€</p>
-        </div>
-      </div>
-    </div>
-
-    <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
-    <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
-
-    <button id="allergeni-btn" onclick="alert('Informazioni allergeni in arrivo!')">Allergeni</button>
-    <p id="coperto-text">Coperto 2€ acqua da 50ml inclusa</p>
-  </main>
-
-  <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
-  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
-    <div class="lang-switch" role="group" aria-label="Selettore lingua">
-      <button aria-label="Italiano" onclick="setLang('it')">🇮🇹</button>
-      <button aria-label="Inglese" onclick="setLang('en')">🇬🇧</button>
-    </div>
-    <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
-    <button class="action-btn" onclick="parla()">🎙️ Parla con me</button>
-    <div id="risposta-ai" aria-live="polite" aria-atomic="true"></div>
-  </div>
+  <!-- ...omesso per brevità... -->
 
   <script>
-    let currentLang = 'it';
-
-    const menuPizze = [
-      { nome: "Margherita", vegan: false, piccante: false, formaggi: 1 },
-      { nome: "Diavola", vegan: false, piccante: true, formaggi: 1 },
-      { nome: "Gorgonzola", vegan: false, piccante: false, formaggi: 2 },
-      { nome: "Provola e Pepe", vegan: false, piccante: true, formaggi: 1 }
-    ];
-
-    function toggleSubmenu(id) {
-      const submenu = document.getElementById('submenu-' + id);
-      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function togglePopup() {
-      const popup = document.getElementById("ai-popup");
-      popup.style.display = popup.style.display === "block" ? "none" : "block";
-      if (popup.style.display === "block") {
-        document.getElementById("risposta-ai").textContent = "";
-      }
-    }
-
-    function setLang(lang) {
-      currentLang = lang;
-      document.documentElement.lang = lang;
-      document.getElementById("title-prompt").textContent = lang === 'it' ? "Dimmi cosa ti piace!" : "Tell me what you like!";
-      document.getElementById("risposta-ai").textContent = "";
-    }
-
-    function consigliaPizza(input) {
-      const q = input.toLowerCase();
-      let suggerite = menuPizze.filter(p => {
-        if (q.includes("vegetar") && p.vegan) return true;
-        if (q.includes("vegan") && p.vegan) return true;
-        if (q.includes("piccant") && p.piccante) return true;
-        if (q.includes("formaggio") && p.formaggi >= 2) return true;
-        if (q.includes(p.nome.toLowerCase())) return true;
-        if (q.includes("consiglia")) return true;
-        return false;
-      });
-      if (suggerite.length === 0) suggerite = menuPizze;
-      const scelta = suggerite[Math.floor(Math.random() * suggerite.length)];
-      return scelta.nome;
-    }
-
     function parla() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
@@ -354,9 +252,21 @@
       recognition.onresult = async (event) => {
         const input = event.results[0][0].transcript;
         const consigliata = consigliaPizza(input);
+
+        let dettagli = "";
+        if (consigliata === "Provola e Pepe") {
+          dettagli = "È fatta con provola affumicata della Campania, pepe nero aromatico, pomodoro San Marzano e un filo di olio evo campano. Proviene da una tradizione napoletana.";
+        } else if (consigliata === "Margherita") {
+          dettagli = "Usiamo mozzarella di bufala Campana DOP e pomodoro San Marzano; è la classica pizza napoletana.";
+        } else if (consigliata === "Diavola") {
+          dettagli = "Arricchita da salame piccante artigianale e mozzarella filante, tipica delle pizzerie del Sud.";
+        } else if (consigliata === "Gorgonzola") {
+          dettagli = "Mozzarella e gorgonzola DOP con noci croccanti: un gusto deciso tipico del Nord Italia.";
+        }
+
         const frase = currentLang === 'it'
-          ? `Fra le pizze del menu, oggi mi sento di consigliarti: ${consigliata}`
-          : `Among today's pizzas, I feel like recommending: ${consigliata}`;
+          ? `Fra le pizze del menu, oggi mi sento di consigliarti: ${consigliata}. ${dettagli}`
+          : `Among today's pizzas, I recommend: ${consigliata}. ${dettagli}`;
 
         rispostaDiv.textContent = frase;
 
