@@ -72,7 +72,6 @@
       gap: 20px;
       margin: 20px 0;
       padding: 15px;
-      color: #4F4F4F;
     }
 
     .pizza img {
@@ -105,6 +104,13 @@
       margin: 0;
     }
 
+    #footer-container {
+      max-width: 800px;
+      margin: 0 auto 30px;
+      width: 80%;
+      text-align: center;
+    }
+
     #allergeni-btn {
       background: #D1BDBD;
       color: #2B2B2B;
@@ -126,13 +132,13 @@
     }
 
     #coperto-text {
-      text-align: center;
-      margin-top: 35px;
-      font-family: 'Arial', sans-serif;
       color: black;
-      position: relative;
+      font-size: 1.1em;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      margin-top: 35px;
       font-weight: normal;
-      font-size: 1em;
+      position: relative;
       padding-bottom: 6px;
     }
 
@@ -180,9 +186,41 @@
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
       display: none;
       z-index: 9999;
-      color: #2B2B2B;
-      overflow-y: auto;
       text-align: center;
+    }
+
+    #ai-popup h2 {
+      font-size: 1.5em;
+      margin: 0 0 15px 0;
+    }
+
+    #ai-popup .lang-switch {
+      margin-bottom: 15px;
+    }
+
+    #ai-popup .lang-switch button {
+      background: transparent;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      margin: 0 8px;
+    }
+
+    #ai-popup button.action-btn {
+      background-color: #D1BDBD;
+      border-radius: 15px;
+      border: none;
+      padding: 14px;
+      margin-top: 15px;
+      width: 100%;
+      font-weight: 700;
+      font-size: 1.3em;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #ai-popup button.action-btn:hover {
+      background-color: #BFAFAF;
     }
 
     #risposta-ai {
@@ -227,14 +265,6 @@
         </div>
       </div>
       <div class="pizza">
-        <img src="diavola1.jpeg" alt="Mixed by Genny" />
-        <div class="pizza-info">
-          <p class="pizza-name">Mixed by Genny</p>
-          <p class="pizza-ingredients">AI generatore di pizza<br><em>AI pizza generator</em></p>
-          <p class="pizza-price">10€</p>
-        </div>
-      </div>
-      <div class="pizza">
         <img src="diavola1.jpeg" alt="Provola e Pepe" />
         <div class="pizza-info">
           <p class="pizza-name">Provola e Pepe</p>
@@ -248,14 +278,14 @@
     <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
 
     <button id="allergeni-btn" onclick="alert('Informazioni allergeni in arrivo!')">Allergeni</button>
-    <p id="coperto-text">Coperto 2€ acqua da 0.5l inclusa</p>
+    <p id="coperto-text">Coperto 2€ acqua da 50ml inclusa</p>
   </main>
 
   <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
   <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
     <div class="lang-switch" role="group" aria-label="Selettore lingua">
-      <button aria-label="Italiano" onclick="setLang('it')" title="Italiano">🇮🇹</button>
-      <button aria-label="Inglese" onclick="setLang('en')" title="English">🇬🇧</button>
+      <button aria-label="Italiano" onclick="setLang('it')">🇮🇹</button>
+      <button aria-label="Inglese" onclick="setLang('en')">🇬🇧</button>
     </div>
     <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
     <button class="action-btn" onclick="parla()">🎙️ Parla con me</button>
@@ -269,7 +299,6 @@
       { nome: "Margherita", vegan: false, piccante: false, formaggi: 1 },
       { nome: "Diavola", vegan: false, piccante: true, formaggi: 1 },
       { nome: "Gorgonzola", vegan: false, piccante: false, formaggi: 2 },
-      { nome: "Mixed by Genny", vegan: false, piccante: false, formaggi: 0 },
       { nome: "Provola e Pepe", vegan: false, piccante: true, formaggi: 1 }
     ];
 
@@ -305,7 +334,8 @@
         return false;
       });
       if (suggerite.length === 0) suggerite = menuPizze;
-      return suggerite.map(p => p.nome);
+      const scelta = suggerite[Math.floor(Math.random() * suggerite.length)];
+      return scelta.nome;
     }
 
     function parla() {
@@ -321,16 +351,18 @@
       const rispostaDiv = document.getElementById("risposta-ai");
       rispostaDiv.textContent = currentLang === 'it' ? "Sto ascoltando... 🎧" : "Listening... 🎧";
 
-      recognition.onresult = (event) => {
+      recognition.onresult = async (event) => {
         const input = event.results[0][0].transcript;
-        const consigliate = consigliaPizza(input);
-        rispostaDiv.textContent = currentLang === 'it'
-          ? `Ti consiglio: ${consigliate.join(", ")}`
-          : `I recommend: ${consigliate.join(", ")}`;
+        const consigliata = consigliaPizza(input);
+        const frase = currentLang === 'it'
+          ? `Fra le pizze del menu, oggi mi sento di consigliarti: ${consigliata}`
+          : `Among today's pizzas, I feel like recommending: ${consigliata}`;
+
+        rispostaDiv.textContent = frase;
 
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
-          const utter = new SpeechSynthesisUtterance(rispostaDiv.textContent);
+          const utter = new SpeechSynthesisUtterance(frase);
           utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
           window.speechSynthesis.speak(utter);
         }
@@ -342,5 +374,4 @@
     }
   </script>
 </body>
-
 </html>
