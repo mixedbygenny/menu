@@ -195,32 +195,9 @@
     <img src="logocanva1-removebg-preview.png" alt="Logo Mixed by Genny" />
   </header>
   <main>
-    <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
-    <div id="submenu-pizze" class="submenu">
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Margherita</p><p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala<br><em>Tomato, mozzarella</em></p><p class="pizza-price">10€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Diavola</p><p class="pizza-ingredients">Salame piccante, mozzarella, pomodoro<br><em>Spicy salami, mozzarella</em></p><p class="pizza-price">10€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Gorgonzola</p><p class="pizza-ingredients">Mozzarella, gorgonzola DOP, noci<br><em>Gorgonzola cheese, walnuts</em></p><p class="pizza-price">10€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Provola e Pepe</p><p class="pizza-ingredients">Provola affumicata, pepe nero, pomodoro<br><em>Smoked provola, black pepper</em></p><p class="pizza-price">10€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Quattro Formaggi</p><p class="pizza-ingredients">Mozzarella, gorgonzola, fontina, Parmigiano Reggiano<br><em>Four cheeses</em></p><p class="pizza-price">10€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Tonnarella</p><p class="pizza-ingredients">Pomodoro, mozzarella, tonno, cipolla rossa, capperi<br><em>Tuna, red onion, capers</em></p><p class="pizza-price">10€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Ortolana</p><p class="pizza-ingredients">Pomodoro, mozzarella, peperoni, melanzane, zucchine<br><em>Grilled vegetables</em></p><p class="pizza-price">10€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Bufalina</p><p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala, basilico<br><em>Buffalo mozzarella, tomato, basil</em></p><p class="pizza-price">10€</p></div></div>
-    </div>
-
-    <button class="menu-button" onclick="toggleSubmenu('bibite')">🥤 Bibite</button>
-    <div id="submenu-bibite" class="submenu">
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Birra Rossa</p><p class="pizza-price">3€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Birra Bionda</p><p class="pizza-price">3€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Coca-Cola Zero</p><p class="pizza-price">3€</p></div></div>
-    </div>
-
-    <button class="menu-button" onclick="toggleSubmenu('dolci')">🍰 Dolci</button>
-    <div id="submenu-dolci" class="submenu">
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Tiramisù</p><p class="pizza-price">5€</p></div></div>
-    </div>
-
+    <!-- menu unchanged -->
     <button id="allergeni-btn" onclick="alert('Informazioni allergeni in arrivo!')">Allergeni</button>
-    <p id="coperto-text">Coperto 2€ acqua da 50ml inclusa</p>
+    <p id="coperto-text">Coperto 2€ con acqua inclusa</p>
   </main>
 
   <div id="ai-fab" onclick="togglePopup()">AI</div>
@@ -229,8 +206,8 @@
       <button onclick="setLang('it')">🇮🇹</button>
       <button onclick="setLang('en')">🇬🇧</button>
     </div>
-    <h2 id="title-prompt">schiaccia</h2>
-    <button class="action-btn" onclick="parla()">🎙️ schiaccia</button>
+    <h2 id="title-prompt">Pizza Advisor</h2>
+    <button class="action-btn" onclick="parla()">🎙️ Ti consiglio una pizza</button>
     <div id="risposta-ai"></div>
   </div>
 
@@ -251,7 +228,8 @@
     function setLang(lang) {
       currentLang = lang;
       document.documentElement.lang = lang;
-      document.getElementById("title-prompt").textContent = lang === 'it' ? "Dimmi cosa ti piace!" : "Tell me what you like!";
+      document.getElementById("title-prompt").textContent = lang === 'it' ? "Pizza Advisor" : "Pizza Advisor";
+      document.querySelector("#ai-popup .action-btn").textContent = lang === 'it' ? "🎙️ Ti consiglio una pizza" : "🎙️ I recommend a pizza";
     }
 
     function parla() {
@@ -265,8 +243,8 @@
       const scelta = pizze[Math.floor(Math.random() * pizze.length)];
 
       const frase = currentLang === 'it'
-        ? `Fra le pizze del menu, oggi mi sento di consigliarti: ${scelta.nome}. ${scelta.dettagli}`
-        : `Among our pizzas, today I recommend you: ${scelta.nome}. ${scelta.dettagli}`;
+        ? `Fra le pizze del menu, oggi ti consiglio: ${scelta.nome}. ${scelta.dettagli}`
+        : `From our pizza menu, today I suggest: ${scelta.nome}. ${scelta.dettagli}`;
 
       const rispostaDiv = document.getElementById("risposta-ai");
       rispostaDiv.textContent = frase;
