@@ -229,7 +229,7 @@
     <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
     <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
     <button id="allergeni-btn" onclick="alert('Informazioni allergeni in arrivo!')">Allergeni</button>
-    <p id="coperto-text">Coperto 2€ acqua da 50ml inclusa</p>
+    <p id="coperto-text">Coperto 2€ con acqua inclusa</p>
   </main>
 
   <div id="ai-fab" onclick="togglePopup()">AI</div>
@@ -244,7 +244,61 @@
   </div>
 
   <script>
-    // (JS code unchanged)
+    let currentLang = 'it';
+
+    function toggleSubmenu(id) {
+      const submenu = document.getElementById("submenu-" + id);
+      submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+    }
+
+    function togglePopup() {
+      const popup = document.getElementById("ai-popup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+      if (popup.style.display === "block") document.getElementById("risposta-ai").textContent = "";
+    }
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.getElementById("title-prompt").textContent = lang === 'it' ? "Dimmi cosa ti piace!" : "Tell me what you like!";
+    }
+
+    function parla() {
+      const pizze = [
+        {
+          nome: "Margherita",
+          dettagli: "Pomodoro San Marzano, mozzarella di bufala DOP. Un classico napoletano, semplice ma irresistibile."
+        },
+        {
+          nome: "Diavola",
+          dettagli: "Salame piccante del Sud Italia, mozzarella. Per chi ama i sapori forti."
+        },
+        {
+          nome: "Gorgonzola",
+          dettagli: "Gorgonzola DOP dalla Lombardia, noci croccanti. Un incontro di cremosità e croccantezza."
+        },
+        {
+          nome: "Provola e Pepe",
+          dettagli: "Provola affumicata campana, pepe nero. Una pizza intensa e avvolgente."
+        }
+      ];
+
+      const scelta = pizze[Math.floor(Math.random() * pizze.length)];
+
+      const frase = currentLang === 'it'
+        ? `Prova la nosta ${scelta.nome}. ${scelta.dettagli}`
+        : `Try our ${scelta.nome}. ${scelta.dettagli}`;
+
+      const rispostaDiv = document.getElementById("risposta-ai");
+      rispostaDiv.textContent = frase;
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(frase);
+        utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+        window.speechSynthesis.speak(utter);
+      }
+    }
   </script>
 </body>
 </html>
