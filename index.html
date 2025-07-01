@@ -56,22 +56,23 @@
     .pizza {
       margin: 20px 0;
       padding: 10px 5px;
+      font-size: 0.93em; /* ridotto del 7% */
     }
     .pizza-info {
       padding: 5px 10px;
     }
     .pizza-name {
-      font-size: 1.395em;
+      font-size: 1.395em; /* ridotto del 7% da 1.5em */
       margin: 0 0 6px 0;
       font-weight: 600;
     }
     .pizza-ingredients {
-      font-size: 0.837em;
+      font-size: 0.837em; /* ridotto del 7% da 0.9em */
       margin: 0 0 6px 0;
     }
     .pizza-price {
       font-weight: 600;
-      font-size: 1.023em;
+      font-size: 1.023em; /* ridotto del 7% da 1.1em */
       margin: 0;
     }
     #footer-container {
@@ -200,10 +201,104 @@
   <main>
     <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
     <div id="submenu-pizze" class="submenu">
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Margherita</p><p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala<br><em>Tomato, mozzarella</em></p><p class="pizza-price">10€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Diavola</p><p class="pizza-ingredients">Salame piccante, mozzarella, pomodoro<br><em>Spicy salami, mozzarella</em></p><p class="pizza-price">10€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Gorgonzola</p><p class="pizza-ingredients">Mozzarella, gorgonzola DOP, noci<br><em>Gorgonzola cheese, walnuts</em></p><p class="pizza-price">10€</p></div></div>
-      <div class="pizza"><div class="pizza-info"><p class="pizza-name">Provola e Pepe</p><p class="pizza-ingredients">Provola affumicata, pepe nero, pomodoro<br><em>Smoked provola, black pepper</em></p><p class="pizza-price">10€</p></div></div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Margherita</p>
+          <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala<br><em>Tomato, mozzarella</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Diavola</p>
+          <p class="pizza-ingredients">Salame piccante, mozzarella, pomodoro<br><em>Spicy salami, mozzarella</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Gorgonzola</p>
+          <p class="pizza-ingredients">Mozzarella, gorgonzola DOP, noci<br><em>Gorgonzola cheese, walnuts</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Provola e Pepe</p>
+          <p class="pizza-ingredients">Provola affumicata, pepe nero, pomodoro<br><em>Smoked provola, black pepper, tomato</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Quattro Formaggi</p>
+          <p class="pizza-ingredients">Mozzarella, gorgonzola, fontina, Parmigiano Reggiano<br><em>Four cheeses</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Tonnarella</p>
+          <p class="pizza-ingredients">Pomodoro, mozzarella, tonno, cipolla rossa, capperi<br><em>Tuna, red onion, capers</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Ortolana</p>
+          <p class="pizza-ingredients">Pomodoro, mozzarella, peperoni, melanzane, zucchine<br><em>Grilled vegetables</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Bufalina</p>
+          <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala, basilico<br><em>Buffalo mozzarella, tomato, basil</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+
+      <!-- Nuove pizze aggiunte -->
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Cipollina</p>
+          <p class="pizza-ingredients">
+            Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia<br>
+            <em>Red onion, gorgonzola, pepper, mozzarella, pecorino cheese, sage</em>
+          </p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Cosacca</p>
+          <p class="pizza-ingredients">
+            Pomodoro, pecorino romano, olio, basilico<br>
+            <em>Tomato, Pecorino Romano cheese, oil, basil</em>
+          </p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Marinara</p>
+          <p class="pizza-ingredients">
+            Pomodoro, origano, aglio, basilico<br>
+            <em>Tomato, oregano, garlic, basil</em>
+          </p>
+          <p class="pizza-price">9€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Napoli</p>
+          <p class="pizza-ingredients">
+            Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico<br>
+            <em>Tomato, mozzarella, anchovies, capers, oregano, Pecorino cheese, basil</em>
+          </p>
+          <p class="pizza-price">11€</p>
+        </div>
+      </div>
     </div>
 
     <button class="menu-button" onclick="toggleSubmenu('bibite')">🥤 Bibite</button>
@@ -229,7 +324,7 @@
       <button onclick="setLang('en')">🇬🇧</button>
     </div>
     <h2 id="title-prompt">Pizza Advisor</h2>
-    <button class="action-btn" onclick="parla()">Consiglio</button>
+    <button class="action-btn" onclick="parla()"></button>
     <div id="risposta-ai"></div>
   </div>
 
@@ -258,7 +353,11 @@
         { nome: "Margherita", dettagli: "Pomodoro San Marzano, mozzarella di bufala DOP. Un classico napoletano, semplice ma irresistibile." },
         { nome: "Diavola", dettagli: "Salame piccante del Sud Italia, mozzarella. Per chi ama i sapori forti." },
         { nome: "Gorgonzola", dettagli: "Gorgonzola DOP dalla Lombardia, noci croccanti. Un incontro di cremosità e croccantezza." },
-        { nome: "Provola e Pepe", dettagli: "Provola affumicata campana, pepe nero. Una pizza intensa e avvolgente." }
+        { nome: "Provola e Pepe", dettagli: "Provola affumicata campana, pepe nero. Una pizza intensa e avvolgente." },
+        { nome: "Cipollina", dettagli: "Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia." },
+        { nome: "Cosacca", dettagli: "Pomodoro, pecorino romano, olio, basilico." },
+        { nome: "Marinara", dettagli: "Pomodoro, origano, aglio, basilico." },
+        { nome: "Napoli", dettagli: "Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico." }
       ];
 
       const scelta = pizze[Math.floor(Math.random() * pizze.length)];
