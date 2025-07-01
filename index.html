@@ -42,7 +42,7 @@
       display: block;
       width: 80%;
       text-align: center;
-      font-size: 1.3em;
+      font-size: 1.21em; /* ridotto del 7% da 1.3em */
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
@@ -61,17 +61,17 @@
       padding: 5px 10px;
     }
     .pizza-name {
-      font-size: 1.5em;
+      font-size: 1.395em; /* ridotto del 7% da 1.5em */
       margin: 0 0 6px 0;
       font-weight: 600;
     }
     .pizza-ingredients {
-      font-size: 0.837em; /* 7% smaller */
+      font-size: 0.837em; /* ridotto del 7% da 0.9em */
       margin: 0 0 6px 0;
     }
     .pizza-price {
       font-weight: 600;
-      font-size: 1.023em; /* 7% smaller */
+      font-size: 1.023em; /* ridotto del 7% da 1.1em */
       margin: 0;
     }
     #footer-container {
@@ -90,7 +90,7 @@
       display: block;
       width: 80%;
       text-align: center;
-      font-size: 1.3em;
+      font-size: 1.21em; /* ridotto del 7% da 1.3em */
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
@@ -119,6 +119,8 @@
       left: 0;
       border-radius: 1px;
     }
+
+    /* AI FAB */
     #ai-fab {
       position: fixed;
       bottom: 20px;
@@ -135,9 +137,10 @@
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       z-index: 10000;
+      user-select: none;
     }
 
-    /* Popup AI arrotondato a cerchio */
+    /* AI Popup - ora circolare */
     #ai-popup {
       position: fixed;
       top: 50%;
@@ -147,38 +150,35 @@
       height: 320px;
       background: #F8F8FF;
       border: 2px solid #D1BDBD;
-      border-radius: 50%; /* cerchio */
-      padding: 30px 25px 25px 25px;
+      border-radius: 50%;
+      padding: 30px 20px 20px 20px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
       display: none;
       z-index: 9999;
       text-align: center;
-
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       align-items: center;
+      justify-content: start;
     }
 
     #ai-popup h2 {
-      font-size: 2.2em;
-      margin: 0 0 20px 0;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: #2B2B2B;
+      font-size: 2em;
+      margin: 0 0 15px 0;
       user-select: none;
     }
 
     #ai-popup .lang-switch {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
-
     #ai-popup .lang-switch button {
       background: transparent;
       border: none;
       font-size: 28px;
       cursor: pointer;
-      margin: 0 12px;
+      margin: 0 8px;
+      user-select: none;
     }
 
     #ai-popup button.action-btn {
@@ -189,28 +189,31 @@
       background-color: #D1BDBD;
       border-radius: 50%;
       border: none;
-      width: 90px;
-      height: 90px;
+      width: 80px;
+      height: 80px;
       margin-top: 10px;
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       text-indent: -9999px;
+      user-select: none;
       align-self: center;
     }
-
     #ai-popup button.action-btn:hover {
       background-color: #BFAFAF;
     }
 
     #risposta-ai {
-      margin-top: 25px;
+      margin-top: 20px;
       font-style: italic;
-      font-size: 1.15em;
-      min-height: 50px;
-      color: #333333;
-      user-select: text;
-      width: 100%;
+      font-size: 1.1em;
+      min-height: 60px;
       max-width: 280px;
+      user-select: text;
+    }
+
+    /* Menu Sottomenu Styles */
+    .submenu {
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -219,13 +222,15 @@
   <header>
     <img src="logocanva1-removebg-preview.png" alt="Logo Mixed by Genny" />
   </header>
+
   <main>
+    <!-- Bottoni menu -->
     <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
     <div id="submenu-pizze" class="submenu">
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Margherita</p>
-          <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala<br><em>Tomato, buffalo mozzarella</em></p>
+          <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala<br><em>San Marzano tomato, buffalo mozzarella</em></p>
           <p class="pizza-price">10€</p>
         </div>
       </div>
@@ -239,7 +244,7 @@
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Gorgonzola</p>
-          <p class="pizza-ingredients">Mozzarella, gorgonzola DOP, noci<br><em>Gorgonzola cheese, walnuts</em></p>
+          <p class="pizza-ingredients">Mozzarella, gorgonzola DOP, noci<br><em>Mozzarella, PDO gorgonzola, walnuts</em></p>
           <p class="pizza-price">10€</p>
         </div>
       </div>
@@ -250,8 +255,6 @@
           <p class="pizza-price">10€</p>
         </div>
       </div>
-
-      <!-- Nuove pizze integrate -->
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Quattro Formaggi</p>
@@ -269,19 +272,18 @@
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Ortolana</p>
-          <p class="pizza-ingredients">Pomodoro, mozzarella, peperoni, melanzane, zucchine<br><em>Grilled vegetables</em></p>
+          <p class="pizza-ingredients">Pomodoro, mozzarella, peperoni, melanzane, zucchine<br><em>Tomato, mozzarella, peppers, eggplant, zucchini</em></p>
           <p class="pizza-price">10€</p>
         </div>
       </div>
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Bufalina</p>
-          <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala, basilico<br><em>Buffalo mozzarella, tomato, basil</em></p>
+          <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala, basilico<br><em>San Marzano tomato, buffalo mozzarella, basil</em></p>
           <p class="pizza-price">10€</p>
         </div>
       </div>
-
-      <!-- Ultime pizze richieste -->
+      <!-- Nuove pizze -->
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Cipollina</p>
@@ -300,18 +302,19 @@
         <div class="pizza-info">
           <p class="pizza-name">Marinara</p>
           <p class="pizza-ingredients">Pomodoro, origano, aglio, basilico<br><em>Tomato, oregano, garlic, basil</em></p>
-          <p class="pizza-price">9€</p>
+          <p class="pizza-price">10€</p>
         </div>
       </div>
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Napoli</p>
           <p class="pizza-ingredients">Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico<br><em>Tomato, mozzarella, anchovies, capers, oregano, pecorino, basil</em></p>
-          <p class="pizza-price">11€</p>
+          <p class="pizza-price">10€</p>
         </div>
       </div>
     </div>
 
+    <!-- Bibite -->
     <button class="menu-button" onclick="toggleSubmenu('bibite')">🥤 Bibite</button>
     <div id="submenu-bibite" class="submenu">
       <div class="pizza">
@@ -336,82 +339,61 @@
         <div class="pizza-info">
           <p class="pizza-name">Birra Chiara alla Spina</p>
           <p class="pizza-price">5€</p>
-          <p><em>Draft pale beer</em></p>
+          <p><em>Draft Light Beer</em></p>
         </div>
       </div>
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Birra Rossa alla Spina</p>
           <p class="pizza-price">5€</p>
-          <p><em>Draft red beer</em></p>
+          <p><em>Draft Red Beer</em></p>
         </div>
       </div>
     </div>
 
+    <!-- Dolci -->
     <button class="menu-button" onclick="toggleSubmenu('dolci')">🍰 Dolci</button>
     <div id="submenu-dolci" class="submenu">
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Tiramisù</p>
           <p class="pizza-price">5€</p>
+          <p><em>Classic Italian dessert</em></p>
         </div>
       </div>
     </div>
 
-    <button id="allergeni-btn" onclick="toggleSubmenu('allergeni')">Allergeni</button>
-    <div id="submenu-allergeni" class="submenu" style="padding: 0 10px;">
-      <p style="font-weight: 600; margin-bottom: 10px; font-size: 1em; text-align: center;">
-        Per la tua sicurezza, consulta la lista e per una migliore esperienza gastronomica, comunicaci le tue esigenze!<br />
-        <em>For your safety, consult the list and for a better gastronomic experience, inform us of your needs!</em>
-      </p>
-      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; font-size: 0.9em; line-height: 1.3em;">
-        <div style="flex: 1 1 45%; margin-bottom: 8px;">
-          <strong>Latte</strong> (prodotti caseari, latticini e derivati)<br />
-          <em>Milk (dairy products, milk and derivatives)</em>
-        </div>
-        <div style="flex: 1 1 45%; margin-bottom: 8px;">
-          <strong>Frutta a guscio</strong> (mandorle, nocciole, noci, pistacchi)<br />
-          <em>Tree nuts (almonds, hazelnuts, walnuts, pistachios)</em>
-        </div>
-        <div style="flex: 1 1 45%; margin-bottom: 8px;">
-          <strong>Sedano</strong> (a pezzi o nei preparati vegetali)<br />
-          <em>Celery (pieces or in vegetable preparations)</em>
-        </div>
-        <div style="flex: 1 1 45%; margin-bottom: 8px;">
-          <strong>Semi</strong> (nel pane o in alcuni tipi di farine)<br />
-          <em>Seeds (in bread or some types of flour)</em>
-        </div>
-        <div style="flex: 1 1 45%; margin-bottom: 8px;">
-          <strong>Peperoncino</strong><br />
-          <em>Chili pepper</em>
-        </div>
-        <div style="flex: 1 1 45%; margin-bottom: 8px;">
-          <strong>Senape</strong> (nelle salse e nei condimenti)<br />
-          <em>Mustard (in sauces and dressings)</em>
-        </div>
-        <div style="flex: 1 1 45%; margin-bottom: 8px;">
-          <strong>Glutine</strong> (in tutti i cereali e i suoi derivati)<br />
-          <em>Gluten (in all cereals and derivatives)</em>
-        </div>
-        <div style="flex: 1 1 45%; margin-bottom: 8px;">
-          <strong>Arachidi</strong> (creme e condimenti)<br />
-          <em>Peanuts (creams and dressings)</em>
-        </div>
-      </div>
+    <!-- Allergeni -->
+    <button class="menu-button" onclick="toggleSubmenu('allergeni')">⚠️ Allergeni</button>
+    <div id="submenu-allergeni" class="submenu" style="text-align: left; padding: 10px 20px;">
+      <p><strong>Per la tua sicurezza, consulta la lista e per una migliore esperienza gastronomica, comunicaci le tue esigenze!</strong></p>
+      <hr>
+      <ul>
+        <li><strong>Latte:</strong> prodotti caseari, latticini e derivati<br><em>Milk: dairy products and derivatives</em></li>
+        <li><strong>Frutta a guscio:</strong> mandorle, nocciole, noci, pistacchi<br><em>Tree nuts: almonds, hazelnuts, walnuts, pistachios</em></li>
+        <li><strong>Sedano:</strong> a pezzi o nei preparati vegetali<br><em>Celery: pieces or in vegetable preparations</em></li>
+        <li><strong>Semi:</strong> nel pane o in alcuni tipi di farine<br><em>Seeds: in bread or certain flours</em></li>
+        <li><strong>Peperoncino</strong><br><em>Chili pepper</em></li>
+        <li><strong>Senape:</strong> nelle salse e nei condimenti<br><em>Mustard: in sauces and dressings</em></li>
+        <li><strong>Glutine:</strong> in tutti i cereali e suoi derivati<br><em>Gluten: in all cereals and derivatives</em></li>
+        <li><strong>Arachidi:</strong> creme e condimenti<br><em>Peanuts: creams and dressings</em></li>
+      </ul>
     </div>
 
     <p id="coperto-text">Coperto 2€ con acqua inclusa</p>
   </main>
 
-  <div id="ai-fab" onclick="togglePopup()">AI</div>
-  <div id="ai-popup">
-    <h2>AI</h2>
-    <div class="lang-switch">
+  <!-- Pulsante AI e Popup -->
+  <div id="ai-fab" onclick="togglePopup()" title="Apri/Chiudi AI">AI</div>
+
+  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="ai-title">
+    <h2 id="ai-title">AI</h2>
+    <div class="lang-switch" aria-label="Seleziona lingua">
       <button onclick="setLang('it')" aria-label="Italiano">🇮🇹</button>
       <button onclick="setLang('en')" aria-label="English">🇬🇧</button>
     </div>
-    <button class="action-btn" onclick="parla()" aria-label="Consiglio Pizza"></button>
-    <div id="risposta-ai"></div>
+    <button class="action-btn" onclick="parla()" aria-label="Consiglio pizza"></button>
+    <div id="risposta-ai" aria-live="polite"></div>
   </div>
 
   <script>
@@ -425,14 +407,17 @@
 
     function togglePopup() {
       const popup = document.getElementById("ai-popup");
-      popup.style.display = popup.style.display === "block" ? "none" : "block";
-      if (popup.style.display === "block") document.getElementById("risposta-ai").textContent = "";
+      if (popup.style.display === "block") {
+        popup.style.display = "none";
+      } else {
+        popup.style.display = "flex";
+        document.getElementById("risposta-ai").textContent = "";
+      }
     }
 
     function setLang(lang) {
       currentLang = lang;
       document.documentElement.lang = lang;
-      // Non serve cambiare testo "AI" perché è solo la sigla
     }
 
     function parla() {
