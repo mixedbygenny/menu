@@ -10,10 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
 
   <style>
-    /* Font elegante e leggibile */
     body, button, input, p, h2 {
       font-family: 'Playfair Display', serif;
-      font-weight: 400; /* normale, non grassetto */
+      font-weight: 400;
     }
 
     body {
@@ -54,8 +53,6 @@
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
     }
 
     .menu-button:hover {
@@ -76,8 +73,6 @@
       margin: 20px 0;
       padding: 15px;
       color: #4F4F4F;
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
     }
 
     .pizza img {
@@ -96,27 +91,18 @@
     .pizza-name {
       font-size: 1.5em;
       margin: 0 0 6px 0;
-      font-weight: 600; /* un po' più marcato per il nome */
+      font-weight: 600;
     }
 
     .pizza-ingredients {
       font-size: 0.9em;
       margin: 0 0 6px 0;
-      font-style: normal;
     }
 
     .pizza-price {
       font-weight: 600;
       font-size: 1.1em;
       margin: 0;
-    }
-
-    #footer-container {
-      max-width: 800px;
-      margin: 0 auto 30px;
-      width: 80%;
-      text-align: center;
-      user-select: none;
     }
 
     #allergeni-btn {
@@ -133,8 +119,6 @@
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
     }
 
     #allergeni-btn:hover {
@@ -142,12 +126,26 @@
     }
 
     #coperto-text {
-      color: #2B2B2B;
-      font-size: 1.1em;
-      font-weight: 400;
-      margin-top: 0;
-      user-select: none;
-      font-family: 'Playfair Display', serif;
+      text-align: center;
+      margin-top: 35px;
+      font-family: 'Arial', sans-serif;
+      color: black;
+      position: relative;
+      font-weight: normal;
+      font-size: 1em;
+      padding-bottom: 6px;
+    }
+
+    #coperto-text::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: black;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-radius: 1px;
     }
 
     #ai-fab {
@@ -166,8 +164,6 @@
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       z-index: 10000;
-      user-select: none;
-      font-family: 'Playfair Display', serif;
     }
 
     #ai-popup {
@@ -185,86 +181,15 @@
       display: none;
       z-index: 9999;
       color: #2B2B2B;
-      user-select: none;
-      font-weight: 400;
-      font-family: 'Playfair Display', serif;
       overflow-y: auto;
       text-align: center;
     }
 
-    #ai-popup h2 {
-      margin: 0 0 15px 0;
-      font-size: 1.5em;
-      font-weight: 600;
-    }
-
-    #ai-popup .lang-switch {
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    #ai-popup .lang-switch button {
-      background: transparent;
-      border: none;
-      font-size: 28px;
-      cursor: pointer;
-      margin: 0 8px;
-      transition: transform 0.2s ease;
-    }
-
-    #ai-popup .lang-switch button:hover {
-      transform: scale(1.2);
-    }
-
-    #ai-popup button.action-btn {
-      background-color: #D1BDBD;
-      border-radius: 15px;
-      border: none;
-      padding: 14px;
-      margin-top: 15px;
-      width: 100%;
-      font-weight: 700;
-      font-size: 1.3em;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s ease;
-      font-family: 'Playfair Display', serif;
-    }
-
-    #ai-popup button.action-btn:hover {
-      background-color: #BFAFAF;
-    }
-  #coperto-text {
-    text-align: center;
-    margin-top: 35px; /* Più spazio sopra */
-    font-family: 'Arial', sans-serif;
-    color: black;
-    position: relative;
-    font-weight: normal;
-    font-size: 1em;
-    padding-bottom: 6px; /* Spazio sotto testo per la linea */
-  }
-  #coperto-text::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: black;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-radius: 1px;
-
-
-
-    
     #risposta-ai {
       margin-top: 12px;
       font-style: italic;
       font-size: 1.1em;
       min-height: 40px;
-      color: #2B2B2B;
-      font-family: 'Playfair Display', serif;
     }
   </style>
 </head>
@@ -309,15 +234,21 @@
           <p class="pizza-price">10€</p>
         </div>
       </div>
+      <div class="pizza">
+        <img src="diavola1.jpeg" alt="Provola e Pepe" />
+        <div class="pizza-info">
+          <p class="pizza-name">Provola e Pepe</p>
+          <p class="pizza-ingredients">Provola affumicata, pepe nero<br><em>Smoked provola, black pepper</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
     </div>
 
     <button class="menu-button" onclick="alert('Prossimamente: Bibite')">🥤 Bibite</button>
     <button class="menu-button" onclick="alert('Prossimamente: Dolci')">🍰 Dolci</button>
 
     <button id="allergeni-btn" onclick="alert('Informazioni allergeni in arrivo!')">Allergeni</button>
-     <p id="coperto-text">Coperto 2€ acqua da 50ml inclusa</p>
-
-
+    <p id="coperto-text">Coperto 2€ acqua da 0.5l inclusa</p>
   </main>
 
   <div id="ai-fab" title="Consiglio AI" onclick="togglePopup()">AI</div>
@@ -326,7 +257,6 @@
       <button aria-label="Italiano" onclick="setLang('it')" title="Italiano">🇮🇹</button>
       <button aria-label="Inglese" onclick="setLang('en')" title="English">🇬🇧</button>
     </div>
-
     <h2 id="title-prompt">Dimmi cosa ti piace!</h2>
     <button class="action-btn" onclick="parla()">🎙️ Parla con me</button>
     <div id="risposta-ai" aria-live="polite" aria-atomic="true"></div>
@@ -334,6 +264,14 @@
 
   <script>
     let currentLang = 'it';
+
+    const menuPizze = [
+      { nome: "Margherita", vegan: false, piccante: false, formaggi: 1 },
+      { nome: "Diavola", vegan: false, piccante: true, formaggi: 1 },
+      { nome: "Gorgonzola", vegan: false, piccante: false, formaggi: 2 },
+      { nome: "Mixed by Genny", vegan: false, piccante: false, formaggi: 0 },
+      { nome: "Provola e Pepe", vegan: false, piccante: true, formaggi: 1 }
+    ];
 
     function toggleSubmenu(id) {
       const submenu = document.getElementById('submenu-' + id);
@@ -355,66 +293,22 @@
       document.getElementById("risposta-ai").textContent = "";
     }
 
-      <!-- ... Il codice esistente rimane invariato ... -->
-
-<script>
-  let currentLang = 'it';
-
-  const menuPizze = [
-    { nome: "Margherita", vegan: false, piccante: false, formaggi: 1 },
-    { nome: "Diavola", vegan: false, piccante: true, formaggi: 1 },
-    { nome: "Gorgonzola", vegan: false, piccante: false, formaggi: 2 },
-    { nome: "Mixed by Genny", vegan: false, piccante: false, formaggi: 0 },
-    { nome: "Provola e Pepe", vegan: false, piccante: true, formaggi: 1 }
-  ];
-
-  function consigliaPizza(input) {
-    const q = input.toLowerCase();
-    let suggerite = menuPizze.filter(p => {
-      if (q.includes("vegetar") && p.vegan) return true;
-      if (q.includes("vegan") && p.vegan) return true;
-      if (q.includes("piccant") && p.piccante) return true;
-      if (q.includes("formaggio") && p.formaggi >= 2) return true;
-      if (q.includes(p.nome.toLowerCase())) return true;
-      if (q.includes("consiglia")) return true;
-      return false;
-    });
-    if (suggerite.length === 0) suggerite = menuPizze;
-    return suggerite.map(p => p.nome);
-  }
-
-  function parla() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      alert(currentLang === 'it' ? "Il tuo browser non supporta il riconoscimento vocale." : "Your browser does not support voice recognition.");
-      return;
+    function consigliaPizza(input) {
+      const q = input.toLowerCase();
+      let suggerite = menuPizze.filter(p => {
+        if (q.includes("vegetar") && p.vegan) return true;
+        if (q.includes("vegan") && p.vegan) return true;
+        if (q.includes("piccant") && p.piccante) return true;
+        if (q.includes("formaggio") && p.formaggi >= 2) return true;
+        if (q.includes(p.nome.toLowerCase())) return true;
+        if (q.includes("consiglia")) return true;
+        return false;
+      });
+      if (suggerite.length === 0) suggerite = menuPizze;
+      return suggerite.map(p => p.nome);
     }
-    const recognition = new SpeechRecognition();
-    recognition.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
-    recognition.start();
 
-    const rispostaDiv = document.getElementById("risposta-ai");
-    rispostaDiv.textContent = currentLang === 'it' ? "Sto ascoltando... 🎧" : "Listening... 🎧";
-
-    recognition.onresult = async (event) => {
-      const input = event.results[0][0].transcript;
-      const consigliate = consigliaPizza(input);
-
-      rispostaDiv.textContent = currentLang === 'it'
-        ? `Ti consiglio: ${consigliate.join(", ")}`
-        : `I recommend: ${consigliate.join(", ")}`;
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(rispostaDiv.textContent);
-        utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
-        window.speechSynthesis.speak(utter);
-      }
-    };
-
-    recognition.onerror = () => {
-      rispostaDiv.textContent = currentLang === 'it' ? "Errore nel riconoscimento vocale." : "Speech recognition error.";
-    };
+    function parla() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
         alert(currentLang === 'it' ? "Il tuo browser non supporta il riconoscimento vocale." : "Your browser does not support voice recognition.");
@@ -427,45 +321,26 @@
       const rispostaDiv = document.getElementById("risposta-ai");
       rispostaDiv.textContent = currentLang === 'it' ? "Sto ascoltando... 🎧" : "Listening... 🎧";
 
-      recognition.onresult = async (event) => {
+      recognition.onresult = (event) => {
         const input = event.results[0][0].transcript;
-        rispostaDiv.textContent = "";
+        const consigliate = consigliaPizza(input);
+        rispostaDiv.textContent = currentLang === 'it'
+          ? `Ti consiglio: ${consigliate.join(", ")}`
+          : `I recommend: ${consigliate.join(", ")}`;
 
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
-          const textToSpeak = currentLang === 'it' ? "Ti consiglio la pizza " + input : "I recommend the pizza " + input;
-          const utter = new SpeechSynthesisUtterance(textToSpeak);
+          const utter = new SpeechSynthesisUtterance(rispostaDiv.textContent);
           utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
           window.speechSynthesis.speak(utter);
         }
       };
 
       recognition.onerror = () => {
-        document.getElementById("risposta-ai").textContent = currentLang === 'it' ? "Errore nel riconoscimento vocale." : "Speech recognition error.";
+        rispostaDiv.textContent = currentLang === 'it' ? "Errore nel riconoscimento vocale." : "Speech recognition error.";
       };
     }
   </script>
 </body>
 
-
-
-
-
-
-
-
-
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-  
 </html>
