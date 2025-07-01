@@ -170,6 +170,7 @@
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       z-index: 10000;
+      user-select: none;
     }
     #ai-popup {
       position: fixed;
@@ -301,6 +302,16 @@
         <p class="bibita-ingredients"><em>Orange soda</em></p>
         <p class="bibita-price">€2,50</p>
       </div>
+      <div class="bibita">
+        <p class="bibita-name">Birra Chiara alla Spina</p>
+        <p class="bibita-ingredients"><em>Light draft beer</em></p>
+        <p class="bibita-price">€5,00</p>
+      </div>
+      <div class="bibita">
+        <p class="bibita-name">Birra Rossa alla Spina</p>
+        <p class="bibita-ingredients"><em>Red draft beer</em></p>
+        <p class="bibita-price">€5,00</p>
+      </div>
     </div>
 
     <!-- Dolci Button e Sottomenu -->
@@ -376,15 +387,15 @@
     <p id="coperto-text">Coperto 2€ con acqua inclusa</p>
   </main>
 
-  <div id="ai-fab" onclick="togglePopup()" title="Apri AI"></div>
-  <div id="ai-popup">
+  <div id="ai-fab" onclick="togglePopup()" title="Apri AI" aria-label="Apri AI"></div>
+  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
     <div class="lang-switch">
       <button onclick="setLang('it')" aria-label="Italiano">🇮🇹</button>
-      <button onclick="setLang('en')" aria-label="Inglese">🇬🇧</button>
+      <button onclick="setLang('en')" aria-label="English">🇬🇧</button>
     </div>
-    <h2 id="title-prompt">Pizza Advisor</h2>
-    <button class="action-btn" onclick="parla()" title="Consiglio pizza"></button>
-    <div id="risposta-ai"></div>
+    <h2 id="title-prompt">Consigliami una pizza</h2>
+    <button class="action-btn" onclick="parla()" aria-label="Consiglio pizza"></button>
+    <div id="risposta-ai" aria-live="polite"></div>
   </div>
 
   <script>
@@ -393,7 +404,7 @@
     function toggleSubmenu(id) {
       const submenu = document.getElementById("submenu-" + id);
       if (!submenu) return;
-      submenu.style.display = (submenu.style.display === "block") ? "none" : "block";
+      submenu.style.display = submenu.style.display === "block" ? "none" : "block";
     }
 
     function togglePopup() {
@@ -409,7 +420,6 @@
 
     function setLang(lang) {
       currentLang = lang;
-      // Cambia titolo prompt in base alla lingua
       const title = document.getElementById("title-prompt");
       if (lang === 'it') {
         title.textContent = "Consigliami una pizza";
@@ -419,27 +429,79 @@
       document.getElementById("risposta-ai").textContent = "";
     }
 
-    // Funzione parla e risposta AI simulata
     function parla() {
-      const rispostaAI = document.getElementById("risposta-ai");
-      let text;
-      if (currentLang === 'it') {
-        text = "Ti consiglio la pizza Margherita, classica e sempre deliziosa!";
-      } else if (currentLang === 'en') {
-        text = "I recommend the Margherita pizza, classic and always delicious!";
-      } else {
-        text = "Consiglio pizza non disponibile nella lingua selezionata.";
-      }
-      rispostaAI.textContent = text;
+      const pizze = [
+        {
+          nome_it: "Margherita",
+          nome_en: "Margherita",
+          dettagli_it: "Classica e sempre deliziosa!",
+          dettagli_en: "Classic and always delicious!"
+        },
+        {
+          nome_it: "Diavola",
+          nome_en: "Diavola",
+          dettagli_it: "Salame piccante del Sud Italia, sapori forti.",
+          dettagli_en: "Spicy salami from Southern Italy, bold flavors."
+        },
+        {
+          nome_it: "Gorgonzola",
+          nome_en: "Gorgonzola",
+          dettagli_it: "Gorgonzola DOP dalla Lombardia, noci croccanti.",
+          dettagli_en: "Gorgonzola PDO from Lombardy, crunchy walnuts."
+        },
+        {
+          nome_it: "Provola e Pepe",
+          nome_en: "Provola and Pepper",
+          dettagli_it: "Provola affumicata campana, pepe nero.",
+          dettagli_en: "Smoked provola cheese from Campania, black pepper."
+        },
+        {
+          nome_it: "Cipollina",
+          nome_en: "Cipollina",
+          dettagli_it: "Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia.",
+          dettagli_en: "Red onion, gorgonzola, pepper, mozzarella, pecorino cheese, sage."
+        },
+        {
+          nome_it: "Cosacca",
+          nome_en: "Cosacca",
+          dettagli_it: "Pomodoro, pecorino romano, olio, basilico.",
+          dettagli_en: "Tomato, Pecorino Romano cheese, olive oil, basil."
+        },
+        {
+          nome_it: "Marinara",
+          nome_en: "Marinara",
+          dettagli_it: "Pomodoro, origano, aglio, basilico.",
+          dettagli_en: "Tomato, oregano, garlic, basil."
+        },
+        {
+          nome_it: "Napoli",
+          nome_en: "Napoli",
+          dettagli_it: "Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico.",
+          dettagli_en: "Tomato, mozzarella, anchovies, capers, oregano, Pecorino cheese, basil."
+        }
+      ];
 
-      // Sintesi vocale
-      let utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = (currentLang === 'it') ? 'it-IT' : 'en-US';
-      speechSynthesis.cancel(); // interrompe eventuali sintesi in corso
-      speechSynthesis.speak(utterance);
+      const scelta = pizze[Math.floor(Math.random() * pizze.length)];
+
+      let frase;
+      if (currentLang === 'it') {
+        frase = `Ti consiglio la pizza ${scelta.nome_it}, ${scelta.dettagli_it}`;
+      } else {
+        frase = `I recommend the ${scelta.nome_en} pizza, ${scelta.dettagli_en}`;
+      }
+
+      const rispostaDiv = document.getElementById("risposta-ai");
+      rispostaDiv.textContent = frase;
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(frase);
+        utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
+        window.speechSynthesis.speak(utter);
+      }
     }
 
-    // Inizializza lingua italiana di default
+    // Impostazione lingua italiana di default
     setLang('it');
   </script>
 </body>
