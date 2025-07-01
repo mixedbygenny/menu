@@ -70,7 +70,7 @@
     .pizza-ingredients {
       font-size: 0.837em; /* ridotto del 7% da 0.9em */
       margin: 0 0 6px 0;
-      line-height: 1.3em; /* migliora leggibilità */
+      line-height: 1.3em;
     }
     .pizza-price {
       font-weight: 600;
@@ -443,7 +443,7 @@
       <button id="btn-it" aria-label="Lingua Italiano" title="Lingua Italiano">🇮🇹</button>
       <button id="btn-en" aria-label="Lingua Inglese" title="Lingua Inglese">🇬🇧</button>
     </div>
-    <button class="action-btn" id="consiglio-btn" title="Consiglio pizza AI">AI</button>
+    <button class="action-btn" id="consiglio-btn" title="Consiglio pizza AI"> </button>
     <div id="risposta-ai">Clicca il cerchio per ricevere un consiglio sulla pizza!</div>
   </div>
 
@@ -459,57 +459,94 @@
       submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
     }
 
-    // AI Popup toggle
+    // Riferimenti al popup AI e bottoni
     const aiFab = document.getElementById('ai-fab');
     const aiPopup = document.getElementById('ai-popup');
     const rispostaAi = document.getElementById('risposta-ai');
     const btnConsiglio = document.getElementById('consiglio-btn');
 
-    let lang = 'it'; // default lingua
-    let pizzeConsigliate = [
-      "Margherita",
-      "Diavola",
-      "Gorgonzola",
-      "Provola e Pepe",
-      "Quattro Formaggi",
-      "Tonnarella",
-      "Ortolana",
-      "Bufalina",
-      "Cipollina",
-      "Cosacca",
-      "Marinara",
-      "Napoli"
+    // Lista pizze con descrizioni complete in IT e EN
+    const pizze = [
+      {nome: "Margherita", 
+       it: "Pomodoro San Marzano, mozzarella di bufala", 
+       en: "San Marzano tomato, buffalo mozzarella" },
+      {nome: "Diavola", 
+       it: "Salame piccante, mozzarella, pomodoro", 
+       en: "Spicy salami, mozzarella, tomato" },
+      {nome: "Gorgonzola", 
+       it: "Mozzarella, gorgonzola DOP, noci", 
+       en: "Mozzarella, PDO gorgonzola, walnuts" },
+      {nome: "Provola e Pepe", 
+       it: "Provola affumicata, pepe nero, pomodoro", 
+       en: "Smoked provola, black pepper, tomato" },
+      {nome: "Quattro Formaggi", 
+       it: "Mozzarella, gorgonzola, fontina, Parmigiano Reggiano", 
+       en: "Mozzarella, gorgonzola, fontina, Parmigiano Reggiano" },
+      {nome: "Tonnarella", 
+       it: "Pomodoro, mozzarella, tonno, cipolla rossa, capperi", 
+       en: "Tomato, mozzarella, tuna, red onion, capers" },
+      {nome: "Ortolana", 
+       it: "Pomodoro, mozzarella, peperoni, melanzane, zucchine", 
+       en: "Tomato, mozzarella, peppers, eggplant, zucchini" },
+      {nome: "Bufalina", 
+       it: "Pomodoro San Marzano, mozzarella di bufala, basilico", 
+       en: "San Marzano tomato, buffalo mozzarella, basil" },
+      {nome: "Cipollina", 
+       it: "Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia", 
+       en: "Red onion, gorgonzola, pepper, mozzarella, pecorino, sage" },
+      {nome: "Cosacca", 
+       it: "Pomodoro, pecorino romano, olio, basilico", 
+       en: "Tomato, pecorino romano, oil, basil" },
+      {nome: "Marinara", 
+       it: "Pomodoro, origano, aglio, basilico", 
+       en: "Tomato, oregano, garlic, basil" },
+      {nome: "Napoli", 
+       it: "Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico", 
+       en: "Tomato, mozzarella, anchovies, capers, oregano, pecorino, basil" }
     ];
-    let indiceUltimo = -1;
 
+    let lang = 'it'; // lingua di default
+    let lastIndex = -1;
+
+    // Funzione per consigliare una pizza diversa ogni volta
     function consigliPizza() {
-      let indice;
+      let idx;
       do {
-        indice = Math.floor(Math.random() * pizzeConsigliate.length);
-      } while (indice === indiceUltimo);
-      indiceUltimo = indice;
+        idx = Math.floor(Math.random() * pizze.length);
+      } while (idx === lastIndex);
+      lastIndex = idx;
 
-      const pizza = pizzeConsigliate[indice];
+      const pizza = pizze[idx];
+      const testo = lang === 'it'
+        ? `Ti consiglio la pizza: ${pizza.nome}. Ingredienti: ${pizza.it}.`
+        : `I recommend the pizza: ${pizza.nome}. Ingredients: ${pizza.en}.`;
 
-      const testi = {
-        it: `Ti consiglio la pizza: ${pizza}`,
-        en: `I recommend the pizza: ${pizza}`
-      };
-      rispostaAi.textContent = testi[lang];
+      rispostaAi.textContent = testo;
+
+      // Sintesi vocale con lingua corretta
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(testo);
+        utter.lang = lang === 'it' ? 'it-IT' : 'en-US';
+        window.speechSynthesis.speak(utter);
+      }
     }
 
-    // Toggle visibilità AI popup
+    // Toggle visibilità popup AI cliccando il cerchio piccolo
     aiFab.addEventListener('click', () => {
       if (aiPopup.style.display === 'flex') {
         aiPopup.style.display = 'none';
         aiPopup.setAttribute('aria-hidden', 'true');
+        rispostaAi.textContent = lang === 'it' 
+          ? "Clicca il cerchio per ricevere un consiglio sulla pizza!"
+          : "Click the circle to get a pizza recommendation!";
       } else {
         aiPopup.style.display = 'flex';
         aiPopup.setAttribute('aria-hidden', 'false');
       }
     });
 
-    // Imposta lingua
+    // Cambia lingua
     document.getElementById('btn-it').addEventListener('click', () => {
       lang = 'it';
       rispostaAi.textContent = "Clicca il cerchio per ricevere un consiglio sulla pizza!";
@@ -519,9 +556,20 @@
       rispostaAi.textContent = "Click the circle to get a pizza recommendation!";
     });
 
+    // Pulsante per consigliare pizza
     btnConsiglio.addEventListener('click', consigliPizza);
 
-    // Accessibilità: abilita toggle AI anche con tastiera (Enter/Space)
+    // Toggle sottomenu (chiude gli altri eccetto AI)
+    function toggleSubmenu(id) {
+      const submenu = document.getElementById("submenu-" + id);
+      if (!submenu) return;
+      document.querySelectorAll('.submenu').forEach(el => {
+        if (el.id !== "submenu-" + id && el.id !== "submenu-ai") el.style.display = 'none';
+      });
+      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Accessibilità: toggle AI con tastiera (Enter/Space)
     aiFab.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
