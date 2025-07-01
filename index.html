@@ -238,42 +238,42 @@
     <div id="submenu-pizze" class="submenu">
       <div class="pizza">
         <p class="pizza-name">Margherita</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro San Marzano, mozzarella di bufala DOP. <em>San Marzano tomatoes, buffalo mozzarella PDO.</em></p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro San Marzano, mozzarella di bufala DOP.<br><em>San Marzano tomatoes, buffalo mozzarella PDO.</em></p>
         <p class="pizza-price">€6,00</p>
       </div>
       <div class="pizza">
         <p class="pizza-name">Diavola</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Salame piccante del Sud Italia, mozzarella. <em>Spicy salami from Southern Italy, mozzarella.</em></p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Salame piccante del Sud Italia, mozzarella.<br><em>Spicy salami from Southern Italy, mozzarella.</em></p>
         <p class="pizza-price">€7,50</p>
       </div>
       <div class="pizza">
         <p class="pizza-name">Gorgonzola</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Gorgonzola DOP dalla Lombardia, noci croccanti. <em>Gorgonzola PDO from Lombardy, crunchy walnuts.</em></p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Gorgonzola DOP dalla Lombardia, noci croccanti.<br><em>Gorgonzola PDO from Lombardy, crunchy walnuts.</em></p>
         <p class="pizza-price">€8,00</p>
       </div>
       <div class="pizza">
         <p class="pizza-name">Provola e Pepe</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Provola affumicata campana, pepe nero. <em>Smoked provola cheese from Campania, black pepper.</em></p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Provola affumicata campana, pepe nero.<br><em>Smoked provola cheese from Campania, black pepper.</em></p>
         <p class="pizza-price">€7,00</p>
       </div>
       <div class="pizza">
         <p class="pizza-name">Cipollina</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia. <em>Red onion, gorgonzola, pepper, mozzarella, pecorino cheese, sage.</em></p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia.<br><em>Red onion, gorgonzola, pepper, mozzarella, pecorino cheese, sage.</em></p>
         <p class="pizza-price">€8,50</p>
       </div>
       <div class="pizza">
         <p class="pizza-name">Cosacca</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, pecorino romano, olio, basilico. <em>Tomato, Pecorino Romano cheese, olive oil, basil.</em></p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, pecorino romano, olio, basilico.<br><em>Tomato, Pecorino Romano cheese, olive oil, basil.</em></p>
         <p class="pizza-price">€7,50</p>
       </div>
       <div class="pizza">
         <p class="pizza-name">Marinara</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, origano, aglio, basilico. <em>Tomato, oregano, garlic, basil.</em></p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, origano, aglio, basilico.<br><em>Tomato, oregano, garlic, basil.</em></p>
         <p class="pizza-price">€5,00</p>
       </div>
       <div class="pizza">
         <p class="pizza-name">Napoli</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico. <em>Tomato, mozzarella, anchovies, capers, oregano, Pecorino cheese, basil.</em></p>
+        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico.<br><em>Tomato, mozzarella, anchovies, capers, oregano, Pecorino cheese, basil.</em></p>
         <p class="pizza-price">€8,00</p>
       </div>
     </div>
@@ -376,14 +376,14 @@
     <p id="coperto-text">Coperto 2€ con acqua inclusa</p>
   </main>
 
-  <div id="ai-fab" onclick="togglePopup()">AI</div>
+  <div id="ai-fab" onclick="togglePopup()" title="Apri AI"></div>
   <div id="ai-popup">
     <div class="lang-switch">
-      <button onclick="setLang('it')">🇮🇹</button>
-      <button onclick="setLang('en')">🇬🇧</button>
+      <button onclick="setLang('it')" aria-label="Italiano">🇮🇹</button>
+      <button onclick="setLang('en')" aria-label="Inglese">🇬🇧</button>
     </div>
     <h2 id="title-prompt">Pizza Advisor</h2>
-    <button class="action-btn" onclick="parla()"></button>
+    <button class="action-btn" onclick="parla()" title="Consiglio pizza"></button>
     <div id="risposta-ai"></div>
   </div>
 
@@ -392,15 +392,56 @@
 
     function toggleSubmenu(id) {
       const submenu = document.getElementById("submenu-" + id);
-      submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+      if (!submenu) return;
+      submenu.style.display = (submenu.style.display === "block") ? "none" : "block";
     }
 
     function togglePopup() {
       const popup = document.getElementById("ai-popup");
-      popup.style.display = popup.style.display === "block" ? "none" : "block";
-      if (popup.style.display === "block") document.getElementById("risposta-ai").textContent = "";
+      if (popup.style.display === "block") {
+        popup.style.display = "none";
+        document.getElementById("risposta-ai").textContent = "";
+      } else {
+        popup.style.display = "block";
+        document.getElementById("risposta-ai").textContent = "";
+      }
     }
 
     function setLang(lang) {
       currentLang = lang;
-      document.document
+      // Cambia titolo prompt in base alla lingua
+      const title = document.getElementById("title-prompt");
+      if (lang === 'it') {
+        title.textContent = "Consigliami una pizza";
+      } else if (lang === 'en') {
+        title.textContent = "Recommend me a pizza";
+      }
+      document.getElementById("risposta-ai").textContent = "";
+    }
+
+    // Funzione parla e risposta AI simulata
+    function parla() {
+      const rispostaAI = document.getElementById("risposta-ai");
+      let text;
+      if (currentLang === 'it') {
+        text = "Ti consiglio la pizza Margherita, classica e sempre deliziosa!";
+      } else if (currentLang === 'en') {
+        text = "I recommend the Margherita pizza, classic and always delicious!";
+      } else {
+        text = "Consiglio pizza non disponibile nella lingua selezionata.";
+      }
+      rispostaAI.textContent = text;
+
+      // Sintesi vocale
+      let utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = (currentLang === 'it') ? 'it-IT' : 'en-US';
+      speechSynthesis.cancel(); // interrompe eventuali sintesi in corso
+      speechSynthesis.speak(utterance);
+    }
+
+    // Inizializza lingua italiana di default
+    setLang('it');
+  </script>
+</body>
+
+</html>
