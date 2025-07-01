@@ -26,6 +26,7 @@
     header img {
       max-width: 480px;
       width: 100%;
+      height: auto;
     }
     main {
       max-width: 800px;
@@ -46,6 +47,7 @@
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
+      user-select: none;
     }
     .menu-button:hover {
       background: #BFAFAF;
@@ -68,6 +70,7 @@
     .pizza-ingredients {
       font-size: 0.837em; /* ridotto del 7% da 0.9em */
       margin: 0 0 6px 0;
+      line-height: 1.3em; /* migliora leggibilità */
     }
     .pizza-price {
       font-weight: 600;
@@ -94,6 +97,7 @@
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
+      user-select: none;
     }
     #allergeni-btn:hover {
       background: #BFAFAF;
@@ -140,7 +144,7 @@
       user-select: none;
     }
 
-    /* AI Popup - ora circolare */
+    /* AI Popup - circolare */
     #ai-popup {
       position: fixed;
       top: 50%;
@@ -153,7 +157,7 @@
       border-radius: 50%;
       padding: 30px 20px 20px 20px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-      display: none;
+      display: none; /* nascosto di default */
       z-index: 9999;
       text-align: center;
       box-sizing: border-box;
@@ -209,11 +213,75 @@
       min-height: 60px;
       max-width: 280px;
       user-select: text;
+      line-height: 1.4em;
     }
 
     /* Menu Sottomenu Styles */
     .submenu {
       margin-top: 10px;
+    }
+
+    /* Allergeni lista - migliorata per evitare sovrapposizioni */
+    #submenu-allergeni p strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.05em;
+      line-height: 1.3em;
+    }
+    #submenu-allergeni hr {
+      margin: 10px 0 15px 0;
+      border: 0;
+      border-top: 1.5px solid #D1BDBD;
+    }
+    #submenu-allergeni ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 0;
+    }
+    #submenu-allergeni ul li {
+      margin-bottom: 10px;
+      font-size: 0.9em;
+      line-height: 1.4em;
+    }
+    #submenu-allergeni ul li em {
+      display: block;
+      margin-top: 2px;
+      color: #444;
+      font-style: italic;
+      font-size: 0.85em;
+      line-height: 1.2em;
+    }
+
+    /* Responsive per mobile */
+    @media (max-width: 480px) {
+      .menu-button {
+        width: 95%;
+        font-size: 1.1em;
+      }
+      #ai-popup {
+        width: 280px;
+        height: 280px;
+        padding: 20px 15px 15px 15px;
+      }
+      #ai-popup button.action-btn {
+        width: 70px;
+        height: 70px;
+        background-size: 40px 40px;
+        margin-top: 8px;
+      }
+      #risposta-ai {
+        font-size: 1em;
+        max-width: 240px;
+      }
+      .pizza-name {
+        font-size: 1.2em;
+      }
+      .pizza-ingredients {
+        font-size: 0.75em;
+      }
+      .pizza-price {
+        font-size: 0.9em;
+      }
     }
   </style>
 </head>
@@ -319,24 +387,6 @@
     <div id="submenu-bibite" class="submenu">
       <div class="pizza">
         <div class="pizza-info">
-          <p class="pizza-name">Birra Rossa</p>
-          <p class="pizza-price">3€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Birra Bionda</p>
-          <p class="pizza-price">3€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Coca-Cola Zero</p>
-          <p class="pizza-price">3€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
           <p class="pizza-name">Birra Chiara alla Spina</p>
           <p class="pizza-price">5€</p>
           <p><em>Draft Light Beer</em></p>
@@ -383,71 +433,101 @@
     <p id="coperto-text">Coperto 2€ con acqua inclusa</p>
   </main>
 
-  <!-- Pulsante AI e Popup -->
-  <div id="ai-fab" onclick="togglePopup()" title="Apri/Chiudi AI">AI</div>
+  <!-- Pulsante AI -->
+  <div id="ai-fab" title="AI" aria-label="Pulsante AI" role="button" tabindex="0">AI</div>
 
-  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="ai-title">
-    <h2 id="ai-title">AI</h2>
-    <div class="lang-switch" aria-label="Seleziona lingua">
-      <button onclick="setLang('it')" aria-label="Italiano">🇮🇹</button>
-      <button onclick="setLang('en')" aria-label="English">🇬🇧</button>
+  <!-- Popup AI -->
+  <div id="ai-popup" aria-live="polite" aria-modal="true" role="dialog" aria-labelledby="ai-popup-title" aria-hidden="true">
+    <h2 id="ai-popup-title">AI</h2>
+    <div class="lang-switch">
+      <button id="btn-it" aria-label="Lingua Italiano" title="Lingua Italiano">🇮🇹</button>
+      <button id="btn-en" aria-label="Lingua Inglese" title="Lingua Inglese">🇬🇧</button>
     </div>
-    <button class="action-btn" onclick="parla()" aria-label="Consiglio pizza"></button>
-    <div id="risposta-ai" aria-live="polite"></div>
+    <button class="action-btn" id="consiglio-btn" title="Consiglio pizza AI">AI</button>
+    <div id="risposta-ai">Clicca il cerchio per ricevere un consiglio sulla pizza!</div>
   </div>
 
   <script>
-    let currentLang = 'it';
-
+    // Funzione per aprire/chiudere sottomenu principali
     function toggleSubmenu(id) {
       const submenu = document.getElementById("submenu-" + id);
       if (!submenu) return;
-      submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+      // chiude tutti i sottomenu eccetto AI e il cliccato
+      document.querySelectorAll('.submenu').forEach(el => {
+        if (el.id !== "submenu-" + id && el.id !== "submenu-ai") el.style.display = 'none';
+      });
+      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
     }
 
-    function togglePopup() {
-      const popup = document.getElementById("ai-popup");
-      if (popup.style.display === "block") {
-        popup.style.display = "none";
+    // AI Popup toggle
+    const aiFab = document.getElementById('ai-fab');
+    const aiPopup = document.getElementById('ai-popup');
+    const rispostaAi = document.getElementById('risposta-ai');
+    const btnConsiglio = document.getElementById('consiglio-btn');
+
+    let lang = 'it'; // default lingua
+    let pizzeConsigliate = [
+      "Margherita",
+      "Diavola",
+      "Gorgonzola",
+      "Provola e Pepe",
+      "Quattro Formaggi",
+      "Tonnarella",
+      "Ortolana",
+      "Bufalina",
+      "Cipollina",
+      "Cosacca",
+      "Marinara",
+      "Napoli"
+    ];
+    let indiceUltimo = -1;
+
+    function consigliPizza() {
+      let indice;
+      do {
+        indice = Math.floor(Math.random() * pizzeConsigliate.length);
+      } while (indice === indiceUltimo);
+      indiceUltimo = indice;
+
+      const pizza = pizzeConsigliate[indice];
+
+      const testi = {
+        it: `Ti consiglio la pizza: ${pizza}`,
+        en: `I recommend the pizza: ${pizza}`
+      };
+      rispostaAi.textContent = testi[lang];
+    }
+
+    // Toggle visibilità AI popup
+    aiFab.addEventListener('click', () => {
+      if (aiPopup.style.display === 'flex') {
+        aiPopup.style.display = 'none';
+        aiPopup.setAttribute('aria-hidden', 'true');
       } else {
-        popup.style.display = "flex";
-        document.getElementById("risposta-ai").textContent = "";
+        aiPopup.style.display = 'flex';
+        aiPopup.setAttribute('aria-hidden', 'false');
       }
-    }
+    });
 
-    function setLang(lang) {
-      currentLang = lang;
-      document.documentElement.lang = lang;
-    }
+    // Imposta lingua
+    document.getElementById('btn-it').addEventListener('click', () => {
+      lang = 'it';
+      rispostaAi.textContent = "Clicca il cerchio per ricevere un consiglio sulla pizza!";
+    });
+    document.getElementById('btn-en').addEventListener('click', () => {
+      lang = 'en';
+      rispostaAi.textContent = "Click the circle to get a pizza recommendation!";
+    });
 
-    function parla() {
-      const pizze = [
-        { nome: "Margherita", dettagli: { it: "Pomodoro San Marzano, mozzarella di bufala DOP.", en: "San Marzano tomato, buffalo mozzarella PDO." } },
-        { nome: "Diavola", dettagli: { it: "Salame piccante del Sud Italia, mozzarella.", en: "Spicy salami from Southern Italy, mozzarella." } },
-        { nome: "Gorgonzola", dettagli: { it: "Gorgonzola DOP dalla Lombardia, noci croccanti.", en: "PDO Gorgonzola from Lombardy, crunchy walnuts." } },
-        { nome: "Provola e Pepe", dettagli: { it: "Provola affumicata campana, pepe nero.", en: "Smoked provola cheese from Campania, black pepper." } },
-        { nome: "Cipollina", dettagli: { it: "Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino e salvia.", en: "Red onion, gorgonzola, pepper, mozzarella, pecorino, sage." } },
-        { nome: "Cosacca", dettagli: { it: "Pomodoro, pecorino romano, olio e basilico.", en: "Tomato, pecorino romano, oil and basil." } },
-        { nome: "Marinara", dettagli: { it: "Pomodoro, origano, aglio e basilico.", en: "Tomato, oregano, garlic and basil." } },
-        { nome: "Napoli", dettagli: { it: "Pomodoro, mozzarella, acciughe, capperi, origano, pecorino e basilico.", en: "Tomato, mozzarella, anchovies, capers, oregano, pecorino and basil." } }
-      ];
+    btnConsiglio.addEventListener('click', consigliPizza);
 
-      const scelta = pizze[Math.floor(Math.random() * pizze.length)];
-
-      const frase = currentLang === 'it'
-        ? `Ti consiglio: ${scelta.nome}. ${scelta.dettagli.it}`
-        : `I recommend: ${scelta.nome}. ${scelta.dettagli.en}`;
-
-      const rispostaDiv = document.getElementById("risposta-ai");
-      rispostaDiv.textContent = frase;
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(frase);
-        utter.lang = currentLang === 'it' ? 'it-IT' : 'en-US';
-        window.speechSynthesis.speak(utter);
+    // Accessibilità: abilita toggle AI anche con tastiera (Enter/Space)
+    aiFab.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        aiFab.click();
       }
-    }
+    });
   </script>
 </body>
 
