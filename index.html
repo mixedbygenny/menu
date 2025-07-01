@@ -52,61 +52,26 @@
     }
     .submenu {
       display: none;
-      background: #E9E8E8;
-      padding: 15px 20px;
-      border-radius: 12px;
-      margin: 10px auto;
-      max-width: 800px;
-      color: #2B2B2B;
-      font-size: 0.95em;
-      line-height: 1.5;
-      text-align: left;
     }
-    .submenu p.intro {
-      font-weight: 600;
-      margin-bottom: 15px;
-      font-size: 1.1em;
-      text-align: center;
-    }
-    .allergeni-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .allergene-item {
-      flex: 1 1 45%;
-      background: #fff;
-      border-radius: 10px;
-      padding: 10px 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      font-size: 0.9em;
-    }
-    .allergene-item strong {
-      display: block;
-      margin-bottom: 6px;
-      color: #4B4B4B;
-    }
-    .pizza, .bibita, .dolce {
+    .pizza {
       margin: 20px 0;
       padding: 10px 5px;
-      font-size: 0.93em; /* ridotto del 7% */
     }
-    .pizza-info, .bibita-info, .dolce-info {
+    .pizza-info {
       padding: 5px 10px;
     }
-    .pizza-name, .bibita-name, .dolce-name {
-      font-size: 1.395em; /* ridotto del 7% da 1.5em */
+    .pizza-name {
+      font-size: 1.5em;
       margin: 0 0 6px 0;
       font-weight: 600;
     }
-    .pizza-ingredients, .bibita-ingredients, .dolce-ingredients {
-      font-size: 0.837em; /* ridotto del 7% da 0.9em */
+    .pizza-ingredients {
+      font-size: 0.837em; /* 7% smaller */
       margin: 0 0 6px 0;
     }
-    .pizza-price, .bibita-price, .dolce-price {
+    .pizza-price {
       font-weight: 600;
-      font-size: 1.023em; /* ridotto del 7% da 1.1em */
+      font-size: 1.023em; /* 7% smaller */
       margin: 0;
     }
     #footer-container {
@@ -170,61 +135,82 @@
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       z-index: 10000;
-      user-select: none;
     }
+
+    /* Popup AI arrotondato a cerchio */
     #ai-popup {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 340px;
-      height: 340px;
+      width: 320px;
+      height: 320px;
       background: #F8F8FF;
       border: 2px solid #D1BDBD;
-      border-radius: 20px;
-      padding: 25px;
+      border-radius: 50%; /* cerchio */
+      padding: 30px 25px 25px 25px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
       display: none;
       z-index: 9999;
       text-align: center;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
     }
+
     #ai-popup h2 {
-      font-size: 1.5em;
-      margin: 0 0 15px 0;
+      font-size: 2.2em;
+      margin: 0 0 20px 0;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #2B2B2B;
+      user-select: none;
     }
+
     #ai-popup .lang-switch {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
+
     #ai-popup .lang-switch button {
       background: transparent;
       border: none;
       font-size: 28px;
       cursor: pointer;
-      margin: 0 8px;
+      margin: 0 12px;
     }
+
     #ai-popup button.action-btn {
       background-image: url('https://img.icons8.com/ios-filled/50/fingerprint.png');
       background-repeat: no-repeat;
       background-position: center;
-      background-size: 40px 40px;
+      background-size: 50px 50px;
       background-color: #D1BDBD;
       border-radius: 50%;
       border: none;
-      width: 70px;
-      height: 70px;
-      margin-top: 15px;
+      width: 90px;
+      height: 90px;
+      margin-top: 10px;
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       text-indent: -9999px;
+      align-self: center;
     }
+
     #ai-popup button.action-btn:hover {
       background-color: #BFAFAF;
     }
+
     #risposta-ai {
-      margin-top: 12px;
+      margin-top: 25px;
       font-style: italic;
-      font-size: 1.1em;
-      min-height: 40px;
+      font-size: 1.15em;
+      min-height: 50px;
+      color: #333333;
+      user-select: text;
+      width: 100%;
+      max-width: 280px;
     }
   </style>
 </head>
@@ -234,151 +220,181 @@
     <img src="logocanva1-removebg-preview.png" alt="Logo Mixed by Genny" />
   </header>
   <main>
-    <!-- Pizze Button e Sottomenu -->
     <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
     <div id="submenu-pizze" class="submenu">
       <div class="pizza">
-        <p class="pizza-name">Margherita</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro San Marzano, mozzarella di bufala DOP.<br><em>San Marzano tomatoes, buffalo mozzarella PDO.</em></p>
-        <p class="pizza-price">€6,00</p>
+        <div class="pizza-info">
+          <p class="pizza-name">Margherita</p>
+          <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala<br><em>Tomato, buffalo mozzarella</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
       </div>
       <div class="pizza">
-        <p class="pizza-name">Diavola</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Salame piccante del Sud Italia, mozzarella.<br><em>Spicy salami from Southern Italy, mozzarella.</em></p>
-        <p class="pizza-price">€7,50</p>
+        <div class="pizza-info">
+          <p class="pizza-name">Diavola</p>
+          <p class="pizza-ingredients">Salame piccante, mozzarella, pomodoro<br><em>Spicy salami, mozzarella, tomato</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
       </div>
       <div class="pizza">
-        <p class="pizza-name">Gorgonzola</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Gorgonzola DOP dalla Lombardia, noci croccanti.<br><em>Gorgonzola PDO from Lombardy, crunchy walnuts.</em></p>
-        <p class="pizza-price">€8,00</p>
+        <div class="pizza-info">
+          <p class="pizza-name">Gorgonzola</p>
+          <p class="pizza-ingredients">Mozzarella, gorgonzola DOP, noci<br><em>Gorgonzola cheese, walnuts</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
       </div>
       <div class="pizza">
-        <p class="pizza-name">Provola e Pepe</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Provola affumicata campana, pepe nero.<br><em>Smoked provola cheese from Campania, black pepper.</em></p>
-        <p class="pizza-price">€7,00</p>
+        <div class="pizza-info">
+          <p class="pizza-name">Provola e Pepe</p>
+          <p class="pizza-ingredients">Provola affumicata, pepe nero, pomodoro<br><em>Smoked provola, black pepper, tomato</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+
+      <!-- Nuove pizze integrate -->
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Quattro Formaggi</p>
+          <p class="pizza-ingredients">Mozzarella, gorgonzola, fontina, Parmigiano Reggiano<br><em>Four cheeses</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
       </div>
       <div class="pizza">
-        <p class="pizza-name">Cipollina</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia.<br><em>Red onion, gorgonzola, pepper, mozzarella, pecorino cheese, sage.</em></p>
-        <p class="pizza-price">€8,50</p>
+        <div class="pizza-info">
+          <p class="pizza-name">Tonnarella</p>
+          <p class="pizza-ingredients">Pomodoro, mozzarella, tonno, cipolla rossa, capperi<br><em>Tuna, red onion, capers</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
       </div>
       <div class="pizza">
-        <p class="pizza-name">Cosacca</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, pecorino romano, olio, basilico.<br><em>Tomato, Pecorino Romano cheese, olive oil, basil.</em></p>
-        <p class="pizza-price">€7,50</p>
+        <div class="pizza-info">
+          <p class="pizza-name">Ortolana</p>
+          <p class="pizza-ingredients">Pomodoro, mozzarella, peperoni, melanzane, zucchine<br><em>Grilled vegetables</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
       </div>
       <div class="pizza">
-        <p class="pizza-name">Marinara</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, origano, aglio, basilico.<br><em>Tomato, oregano, garlic, basil.</em></p>
-        <p class="pizza-price">€5,00</p>
+        <div class="pizza-info">
+          <p class="pizza-name">Bufalina</p>
+          <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala, basilico<br><em>Buffalo mozzarella, tomato, basil</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+
+      <!-- Ultime pizze richieste -->
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Cipollina</p>
+          <p class="pizza-ingredients">Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia<br><em>Red onion, gorgonzola, pepper, mozzarella, pecorino, sage</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
       </div>
       <div class="pizza">
-        <p class="pizza-name">Napoli</p>
-        <p class="pizza-ingredients"><strong>Ingredienti:</strong> Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico.<br><em>Tomato, mozzarella, anchovies, capers, oregano, Pecorino cheese, basil.</em></p>
-        <p class="pizza-price">€8,00</p>
+        <div class="pizza-info">
+          <p class="pizza-name">Cosacca</p>
+          <p class="pizza-ingredients">Pomodoro, pecorino romano, olio, basilico<br><em>Tomato, pecorino romano, oil, basil</em></p>
+          <p class="pizza-price">10€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Marinara</p>
+          <p class="pizza-ingredients">Pomodoro, origano, aglio, basilico<br><em>Tomato, oregano, garlic, basil</em></p>
+          <p class="pizza-price">9€</p>
+        </div>
+      </div>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Napoli</p>
+          <p class="pizza-ingredients">Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico<br><em>Tomato, mozzarella, anchovies, capers, oregano, pecorino, basil</em></p>
+          <p class="pizza-price">11€</p>
+        </div>
       </div>
     </div>
 
-    <!-- Bibite Button e Sottomenu -->
     <button class="menu-button" onclick="toggleSubmenu('bibite')">🥤 Bibite</button>
     <div id="submenu-bibite" class="submenu">
-      <div class="bibita">
-        <p class="bibita-name">Acqua Naturale</p>
-        <p class="bibita-ingredients"><em>Natural water</em></p>
-        <p class="bibita-price">€1,50</p>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Birra Rossa</p>
+          <p class="pizza-price">3€</p>
+        </div>
       </div>
-      <div class="bibita">
-        <p class="bibita-name">Acqua Frizzante</p>
-        <p class="bibita-ingredients"><em>Sparkling water</em></p>
-        <p class="bibita-price">€1,80</p>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Birra Bionda</p>
+          <p class="pizza-price">3€</p>
+        </div>
       </div>
-      <div class="bibita">
-        <p class="bibita-name">Coca Cola</p>
-        <p class="bibita-ingredients"><em>Coca Cola</em></p>
-        <p class="bibita-price">€2,50</p>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Coca-Cola Zero</p>
+          <p class="pizza-price">3€</p>
+        </div>
       </div>
-      <div class="bibita">
-        <p class="bibita-name">Aranciata</p>
-        <p class="bibita-ingredients"><em>Orange soda</em></p>
-        <p class="bibita-price">€2,50</p>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Birra Chiara alla Spina</p>
+          <p class="pizza-price">5€</p>
+          <p><em>Draft pale beer</em></p>
+        </div>
       </div>
-      <div class="bibita">
-        <p class="bibita-name">Birra Chiara alla Spina</p>
-        <p class="bibita-ingredients"><em>Light draft beer</em></p>
-        <p class="bibita-price">€5,00</p>
-      </div>
-      <div class="bibita">
-        <p class="bibita-name">Birra Rossa alla Spina</p>
-        <p class="bibita-ingredients"><em>Red draft beer</em></p>
-        <p class="bibita-price">€5,00</p>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Birra Rossa alla Spina</p>
+          <p class="pizza-price">5€</p>
+          <p><em>Draft red beer</em></p>
+        </div>
       </div>
     </div>
 
-    <!-- Dolci Button e Sottomenu -->
     <button class="menu-button" onclick="toggleSubmenu('dolci')">🍰 Dolci</button>
     <div id="submenu-dolci" class="submenu">
-      <div class="dolce">
-        <p class="dolce-name">Tiramisù</p>
-        <p class="dolce-ingredients"><em>Classic Italian dessert with coffee and mascarpone</em></p>
-        <p class="dolce-price">€4,50</p>
-      </div>
-      <div class="dolce">
-        <p class="dolce-name">Cannoli Siciliani</p>
-        <p class="dolce-ingredients"><em>Sicilian cannoli filled with sweet ricotta</em></p>
-        <p class="dolce-price">€4,00</p>
-      </div>
-      <div class="dolce">
-        <p class="dolce-name">Gelato Artigianale</p>
-        <p class="dolce-ingredients"><em>Artisanal ice cream, various flavors</em></p>
-        <p class="dolce-price">€3,50</p>
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Tiramisù</p>
+          <p class="pizza-price">5€</p>
+        </div>
       </div>
     </div>
 
-    <!-- Allergeni Button e Sottomenu -->
-    <button class="menu-button" onclick="toggleSubmenu('allergeni')">⚠️ Allergeni</button>
-    <div id="submenu-allergeni" class="submenu">
-      <p class="intro">
+    <button id="allergeni-btn" onclick="toggleSubmenu('allergeni')">Allergeni</button>
+    <div id="submenu-allergeni" class="submenu" style="padding: 0 10px;">
+      <p style="font-weight: 600; margin-bottom: 10px; font-size: 1em; text-align: center;">
         Per la tua sicurezza, consulta la lista e per una migliore esperienza gastronomica, comunicaci le tue esigenze!<br />
-        <em>For your safety, please check the list and for a better gastronomic experience, inform us of your needs!</em>
+        <em>For your safety, consult the list and for a better gastronomic experience, inform us of your needs!</em>
       </p>
-      <div class="allergeni-list">
-        <div class="allergene-item">
-          <strong>Latte</strong>
-          Prodotti caseari, latticini e derivati<br />
-          <em>Dairy products, milk and derivatives</em>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; font-size: 0.9em; line-height: 1.3em;">
+        <div style="flex: 1 1 45%; margin-bottom: 8px;">
+          <strong>Latte</strong> (prodotti caseari, latticini e derivati)<br />
+          <em>Milk (dairy products, milk and derivatives)</em>
         </div>
-        <div class="allergene-item">
-          <strong>Frutta a guscio</strong>
-          Mandorle, nocciole, noci, pistacchi<br />
-          <em>Tree nuts: almonds, hazelnuts, walnuts, pistachios</em>
+        <div style="flex: 1 1 45%; margin-bottom: 8px;">
+          <strong>Frutta a guscio</strong> (mandorle, nocciole, noci, pistacchi)<br />
+          <em>Tree nuts (almonds, hazelnuts, walnuts, pistachios)</em>
         </div>
-        <div class="allergene-item">
-          <strong>Sedano</strong>
-          A pezzi o nei preparati vegetali<br />
-          <em>Celery (in pieces or vegetable preparations)</em>
+        <div style="flex: 1 1 45%; margin-bottom: 8px;">
+          <strong>Sedano</strong> (a pezzi o nei preparati vegetali)<br />
+          <em>Celery (pieces or in vegetable preparations)</em>
         </div>
-        <div class="allergene-item">
-          <strong>Semi</strong>
-          Nel pane o in alcuni tipi di farine<br />
+        <div style="flex: 1 1 45%; margin-bottom: 8px;">
+          <strong>Semi</strong> (nel pane o in alcuni tipi di farine)<br />
           <em>Seeds (in bread or some types of flour)</em>
         </div>
-        <div class="allergene-item">
-          <strong>Peperoncino</strong>
+        <div style="flex: 1 1 45%; margin-bottom: 8px;">
+          <strong>Peperoncino</strong><br />
           <em>Chili pepper</em>
         </div>
-        <div class="allergene-item">
-          <strong>Senape</strong>
-          Nelle salse e nei condimenti<br />
+        <div style="flex: 1 1 45%; margin-bottom: 8px;">
+          <strong>Senape</strong> (nelle salse e nei condimenti)<br />
           <em>Mustard (in sauces and dressings)</em>
         </div>
-        <div class="allergene-item">
-          <strong>Glutine</strong>
-          In tutti i cereali e i suoi derivati<br />
+        <div style="flex: 1 1 45%; margin-bottom: 8px;">
+          <strong>Glutine</strong> (in tutti i cereali e i suoi derivati)<br />
           <em>Gluten (in all cereals and derivatives)</em>
         </div>
-        <div class="allergene-item">
-          <strong>Arachidi</strong>
-          Creme e condimenti<br />
+        <div style="flex: 1 1 45%; margin-bottom: 8px;">
+          <strong>Arachidi</strong> (creme e condimenti)<br />
           <em>Peanuts (creams and dressings)</em>
         </div>
       </div>
@@ -387,15 +403,15 @@
     <p id="coperto-text">Coperto 2€ con acqua inclusa</p>
   </main>
 
-  <div id="ai-fab" onclick="togglePopup()" title="Apri AI" aria-label="Apri AI"></div>
-  <div id="ai-popup" role="dialog" aria-modal="true" aria-labelledby="title-prompt">
+  <div id="ai-fab" onclick="togglePopup()">AI</div>
+  <div id="ai-popup">
+    <h2>AI</h2>
     <div class="lang-switch">
       <button onclick="setLang('it')" aria-label="Italiano">🇮🇹</button>
       <button onclick="setLang('en')" aria-label="English">🇬🇧</button>
     </div>
-    <h2 id="title-prompt">Consigliami una pizza</h2>
-    <button class="action-btn" onclick="parla()" aria-label="Consiglio pizza"></button>
-    <div id="risposta-ai" aria-live="polite"></div>
+    <button class="action-btn" onclick="parla()" aria-label="Consiglio Pizza"></button>
+    <div id="risposta-ai"></div>
   </div>
 
   <script>
@@ -409,86 +425,33 @@
 
     function togglePopup() {
       const popup = document.getElementById("ai-popup");
-      if (popup.style.display === "block") {
-        popup.style.display = "none";
-        document.getElementById("risposta-ai").textContent = "";
-      } else {
-        popup.style.display = "block";
-        document.getElementById("risposta-ai").textContent = "";
-      }
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+      if (popup.style.display === "block") document.getElementById("risposta-ai").textContent = "";
     }
 
     function setLang(lang) {
       currentLang = lang;
-      const title = document.getElementById("title-prompt");
-      if (lang === 'it') {
-        title.textContent = "Consigliami una pizza";
-      } else if (lang === 'en') {
-        title.textContent = "Recommend me a pizza";
-      }
-      document.getElementById("risposta-ai").textContent = "";
+      document.documentElement.lang = lang;
+      // Non serve cambiare testo "AI" perché è solo la sigla
     }
 
     function parla() {
       const pizze = [
-        {
-          nome_it: "Margherita",
-          nome_en: "Margherita",
-          dettagli_it: "Classica e sempre deliziosa!",
-          dettagli_en: "Classic and always delicious!"
-        },
-        {
-          nome_it: "Diavola",
-          nome_en: "Diavola",
-          dettagli_it: "Salame piccante del Sud Italia, sapori forti.",
-          dettagli_en: "Spicy salami from Southern Italy, bold flavors."
-        },
-        {
-          nome_it: "Gorgonzola",
-          nome_en: "Gorgonzola",
-          dettagli_it: "Gorgonzola DOP dalla Lombardia, noci croccanti.",
-          dettagli_en: "Gorgonzola PDO from Lombardy, crunchy walnuts."
-        },
-        {
-          nome_it: "Provola e Pepe",
-          nome_en: "Provola and Pepper",
-          dettagli_it: "Provola affumicata campana, pepe nero.",
-          dettagli_en: "Smoked provola cheese from Campania, black pepper."
-        },
-        {
-          nome_it: "Cipollina",
-          nome_en: "Cipollina",
-          dettagli_it: "Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia.",
-          dettagli_en: "Red onion, gorgonzola, pepper, mozzarella, pecorino cheese, sage."
-        },
-        {
-          nome_it: "Cosacca",
-          nome_en: "Cosacca",
-          dettagli_it: "Pomodoro, pecorino romano, olio, basilico.",
-          dettagli_en: "Tomato, Pecorino Romano cheese, olive oil, basil."
-        },
-        {
-          nome_it: "Marinara",
-          nome_en: "Marinara",
-          dettagli_it: "Pomodoro, origano, aglio, basilico.",
-          dettagli_en: "Tomato, oregano, garlic, basil."
-        },
-        {
-          nome_it: "Napoli",
-          nome_en: "Napoli",
-          dettagli_it: "Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico.",
-          dettagli_en: "Tomato, mozzarella, anchovies, capers, oregano, Pecorino cheese, basil."
-        }
+        { nome: "Margherita", dettagli: { it: "Pomodoro San Marzano, mozzarella di bufala DOP.", en: "San Marzano tomato, buffalo mozzarella PDO." } },
+        { nome: "Diavola", dettagli: { it: "Salame piccante del Sud Italia, mozzarella.", en: "Spicy salami from Southern Italy, mozzarella." } },
+        { nome: "Gorgonzola", dettagli: { it: "Gorgonzola DOP dalla Lombardia, noci croccanti.", en: "PDO Gorgonzola from Lombardy, crunchy walnuts." } },
+        { nome: "Provola e Pepe", dettagli: { it: "Provola affumicata campana, pepe nero.", en: "Smoked provola cheese from Campania, black pepper." } },
+        { nome: "Cipollina", dettagli: { it: "Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino e salvia.", en: "Red onion, gorgonzola, pepper, mozzarella, pecorino, sage." } },
+        { nome: "Cosacca", dettagli: { it: "Pomodoro, pecorino romano, olio e basilico.", en: "Tomato, pecorino romano, oil and basil." } },
+        { nome: "Marinara", dettagli: { it: "Pomodoro, origano, aglio e basilico.", en: "Tomato, oregano, garlic and basil." } },
+        { nome: "Napoli", dettagli: { it: "Pomodoro, mozzarella, acciughe, capperi, origano, pecorino e basilico.", en: "Tomato, mozzarella, anchovies, capers, oregano, pecorino and basil." } }
       ];
 
       const scelta = pizze[Math.floor(Math.random() * pizze.length)];
 
-      let frase;
-      if (currentLang === 'it') {
-        frase = `Ti consiglio la pizza ${scelta.nome_it}, ${scelta.dettagli_it}`;
-      } else {
-        frase = `I recommend the ${scelta.nome_en} pizza, ${scelta.dettagli_en}`;
-      }
+      const frase = currentLang === 'it'
+        ? `Ti consiglio: ${scelta.nome}. ${scelta.dettagli.it}`
+        : `I recommend: ${scelta.nome}. ${scelta.dettagli.en}`;
 
       const rispostaDiv = document.getElementById("risposta-ai");
       rispostaDiv.textContent = frase;
@@ -500,9 +463,6 @@
         window.speechSynthesis.speak(utter);
       }
     }
-
-    // Impostazione lingua italiana di default
-    setLang('it');
   </script>
 </body>
 
