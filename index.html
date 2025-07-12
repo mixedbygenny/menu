@@ -448,110 +448,135 @@
   </div>
 
   <script>
-  const aiFab = document.getElementById('ai-fab');
-  const aiPopup = document.getElementById('ai-popup');
-  const rispostaAi = document.getElementById('risposta-ai');
-  const btnConsiglio = document.getElementById('consiglio-btn');
-
-  const pizze = [
-    {nome: "Margherita", it: "Pomodoro San Marzano, mozzarella di bufala", en: "San Marzano tomato, buffalo mozzarella"},
-    {nome: "Diavola", it: "Salame piccante, mozzarella, pomodoro", en: "Spicy salami, mozzarella, tomato"},
-    {nome: "Gorgonzola", it: "Mozzarella, gorgonzola DOP, noci", en: "Mozzarella, PDO gorgonzola, walnuts"},
-    {nome: "Provola e Pepe", it: "Provola affumicata, pepe nero, pomodoro", en: "Smoked provola, black pepper, tomato"},
-    {nome: "Quattro Formaggi", it: "Mozzarella, gorgonzola, fontina, Parmigiano Reggiano", en: "Four cheeses"},
-    {nome: "Tonnarella", it: "Pomodoro, mozzarella, tonno, cipolla rossa, capperi", en: "Tomato, mozzarella, tuna, red onion, capers"},
-    {nome: "Ortolana", it: "Pomodoro, mozzarella, peperoni, melanzane, zucchine", en: "Tomato, mozzarella, peppers, eggplant, zucchini"},
-    {nome: "Bufalina", it: "Pomodoro San Marzano, mozzarella di bufala, basilico", en: "San Marzano tomato, buffalo mozzarella, basil"},
-    {nome: "Cipollina", it: "Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia", en: "Red onion, gorgonzola, pepper, mozzarella, pecorino, sage"},
-    {nome: "Cosacca", it: "Pomodoro, pecorino romano, olio, basilico", en: "Tomato, pecorino romano, oil, basil"},
-    {nome: "Marinara", it: "Pomodoro, origano, aglio, basilico", en: "Tomato, oregano, garlic, basil"},
-    {nome: "Napoli", it: "Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico", en: "Tomato, mozzarella, anchovies, capers, oregano, pecorino, basil"}
-  ];
-
-  let lang = 'it';
-  let lastIndex = -1;
-
-  // Toggle popup visibilità
-  aiFab.addEventListener('click', () => {
-    const isVisible = aiPopup.style.display === 'flex';
-    aiPopup.style.display = isVisible ? 'none' : 'flex';
-    aiPopup.setAttribute('aria-hidden', isVisible ? 'true' : 'false');
-    rispostaAi.textContent = lang === 'it'
-      ? "Clicca il cerchio per ricevere un consiglio sulla pizza!"
-      : "Click the circle to get a pizza recommendation!";
-  });
-
-  // Cambia lingua
-  document.getElementById('btn-it').addEventListener('click', () => {
-    lang = 'it';
-    rispostaAi.textContent = "Clicca il cerchio per ricevere un consiglio sulla pizza!";
-  });
-
-  document.getElementById('btn-en').addEventListener('click', () => {
-    lang = 'en';
-    rispostaAi.textContent = "Click the circle to get a pizza recommendation!";
-  });
-
-  // Funzione consiglio pizza + effetto farina
-  btnConsiglio.addEventListener('click', () => {
-    let idx;
-    do {
-      idx = Math.floor(Math.random() * pizze.length);
-    } while (idx === lastIndex);
-    lastIndex = idx;
-
-    const pizza = pizze[idx];
-    const testo = lang === 'it'
-      ? `Ti consiglio la pizza: ${pizza.nome}. Ingredienti: ${pizza.it}.`
-      : `I recommend the pizza: ${pizza.nome}. Ingredients: ${pizza.en}.`;
-
-    rispostaAi.textContent = testo;
-
-    // Voce
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utter = new SpeechSynthesisUtterance(testo);
-      utter.lang = lang === 'it' ? 'it-IT' : 'en-US';
-      window.speechSynthesis.speak(utter);
+    // Funzione per aprire/chiudere sottomenu principali
+    function toggleSubmenu(id) {
+      const submenu = document.getElementById("submenu-" + id);
+      if (!submenu) return;
+      // chiude tutti i sottomenu eccetto AI e il cliccato
+      document.querySelectorAll('.submenu').forEach(el => {
+        if (el.id !== "submenu-" + id && el.id !== "submenu-ai") el.style.display = 'none';
+      });
+      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
     }
 
-    // 👇 Effetto farina (bagliore bianco temporaneo)
-    const flash = document.createElement("div");
-    flash.style.position = "fixed";
-    flash.style.top = "0";
-    flash.style.left = "0";
-    flash.style.width = "100%";
-    flash.style.height = "100%";
-    flash.style.background = "rgba(255,255,255,0.4)";
-    flash.style.zIndex = "99999";
-    flash.style.pointerEvents = "none";
-    flash.style.transition = "opacity 0.6s ease-out";
-    document.body.appendChild(flash);
-    setTimeout(() => {
-      flash.style.opacity = 0;
-      setTimeout(() => flash.remove(), 600);
-    }, 100);
-  });
+    // Riferimenti al popup AI e bottoni
+    const aiFab = document.getElementById('ai-fab');
+    const aiPopup = document.getElementById('ai-popup');
+    const rispostaAi = document.getElementById('risposta-ai');
+    const btnConsiglio = document.getElementById('consiglio-btn');
 
-  // Toggle sottomenù
-  function toggleSubmenu(id) {
-    const submenu = document.getElementById("submenu-" + id);
-    if (!submenu) return;
-    document.querySelectorAll('.submenu').forEach(el => {
-      if (el.id !== "submenu-" + id && el.id !== "submenu-ai") el.style.display = 'none';
+    // Lista pizze con descrizioni complete in IT e EN
+    const pizze = [
+      {nome: "Margherita", 
+       it: "Pomodoro San Marzano, mozzarella di bufala", 
+       en: "San Marzano tomato, buffalo mozzarella" },
+      {nome: "Diavola", 
+       it: "Salame piccante, mozzarella, pomodoro", 
+       en: "Spicy salami, mozzarella, tomato" },
+      {nome: "Gorgonzola", 
+       it: "Mozzarella, gorgonzola DOP, noci", 
+       en: "Mozzarella, PDO gorgonzola, walnuts" },
+      {nome: "Provola e Pepe", 
+       it: "Provola affumicata, pepe nero, pomodoro", 
+       en: "Smoked provola, black pepper, tomato" },
+      {nome: "Quattro Formaggi", 
+       it: "Mozzarella, gorgonzola, fontina, Parmigiano Reggiano", 
+       en: "Mozzarella, gorgonzola, fontina, Parmigiano Reggiano" },
+      {nome: "Tonnarella", 
+       it: "Pomodoro, mozzarella, tonno, cipolla rossa, capperi", 
+       en: "Tomato, mozzarella, tuna, red onion, capers" },
+      {nome: "Ortolana", 
+       it: "Pomodoro, mozzarella, peperoni, melanzane, zucchine", 
+       en: "Tomato, mozzarella, peppers, eggplant, zucchini" },
+      {nome: "Bufalina", 
+       it: "Pomodoro San Marzano, mozzarella di bufala, basilico", 
+       en: "San Marzano tomato, buffalo mozzarella, basil" },
+      {nome: "Cipollina", 
+       it: "Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia", 
+       en: "Red onion, gorgonzola, pepper, mozzarella, pecorino, sage" },
+      {nome: "Cosacca", 
+       it: "Pomodoro, pecorino romano, olio, basilico", 
+       en: "Tomato, pecorino romano, oil, basil" },
+      {nome: "Marinara", 
+       it: "Pomodoro, origano, aglio, basilico", 
+       en: "Tomato, oregano, garlic, basil" },
+      {nome: "Napoli", 
+       it: "Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico", 
+       en: "Tomato, mozzarella, anchovies, capers, oregano, pecorino, basil" }
+    ];
+
+    let lang = 'it'; // lingua di default
+    let lastIndex = -1;
+
+    // Funzione per consigliare una pizza diversa ogni volta
+    function consigliPizza() {
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * pizze.length);
+      } while (idx === lastIndex);
+      lastIndex = idx;
+
+      const pizza = pizze[idx];
+      const testo = lang === 'it'
+        ? `Ti consiglio la pizza: ${pizza.nome}. Ingredienti: ${pizza.it}.`
+        : `I recommend the pizza: ${pizza.nome}. Ingredients: ${pizza.en}.`;
+
+      rispostaAi.textContent = testo;
+
+      // Sintesi vocale con lingua corretta
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(testo);
+        utter.lang = lang === 'it' ? 'it-IT' : 'en-US';
+        window.speechSynthesis.speak(utter);
+      }
+    }
+
+    // Toggle visibilità popup AI cliccando il cerchio piccolo
+    aiFab.addEventListener('click', () => {
+      if (aiPopup.style.display === 'flex') {
+        aiPopup.style.display = 'none';
+        aiPopup.setAttribute('aria-hidden', 'true');
+        rispostaAi.textContent = lang === 'it' 
+          ? "Clicca il cerchio per ricevere un consiglio sulla pizza!"
+          : "Click the circle to get a pizza recommendation!";
+      } else {
+        aiPopup.style.display = 'flex';
+        aiPopup.setAttribute('aria-hidden', 'false');
+      }
     });
-    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-  }
 
-  // Accessibilità da tastiera
-  aiFab.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      aiFab.click();
+    // Cambia lingua
+    document.getElementById('btn-it').addEventListener('click', () => {
+      lang = 'it';
+      rispostaAi.textContent = "Clicca il cerchio per ricevere un consiglio sulla pizza!";
+    });
+    document.getElementById('btn-en').addEventListener('click', () => {
+      lang = 'en';
+      rispostaAi.textContent = "Click the circle to get a pizza recommendation!";
+    });
+
+    // Pulsante per consigliare pizza
+    btnConsiglio.addEventListener('click', consigliPizza);
+
+    // Toggle sottomenu (chiude gli altri eccetto AI)
+    function toggleSubmenu(id) {
+      const submenu = document.getElementById("submenu-" + id);
+      if (!submenu) return;
+      document.querySelectorAll('.submenu').forEach(el => {
+        if (el.id !== "submenu-" + id && el.id !== "submenu-ai") el.style.display = 'none';
+      });
+      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
     }
-  });
-</script>
 
+    // Accessibilità: toggle AI con tastiera (Enter/Space)
+    aiFab.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        aiFab.click();
+      }
+    });
+  </script>
 </body>
 
 </html><!DOCTYPE html>
@@ -986,7 +1011,7 @@
       </ul>
     </div>
 
-    <p id="coperto-text">Coperto 2€ con acqua inclusa</p>
+    <p id="coperto-text">Coperto 2€, acqua da 0.5l inclusa</p>
   </main>
 
   <!-- Pulsante AI -->
