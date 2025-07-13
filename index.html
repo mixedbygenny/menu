@@ -433,6 +433,7 @@
     <p id="coperto-text">Coperto 2€, acqua 0.5L inclusa</p>
   </main>
 
+
   <!-- Pulsante AI -->
   <div id="ai-fab" title="AI" aria-label="Pulsante AI" role="button" tabindex="0">AI</div>
 
@@ -448,37 +449,25 @@
   </div>
 
   <script>
-    // Funzione per aprire/chiudere sottomenu principali
     function toggleSubmenu(id) {
       const submenu = document.getElementById("submenu-" + id);
       if (!submenu) return;
-      // chiude tutti i sottomenu eccetto AI e il cliccato
       document.querySelectorAll('.submenu').forEach(el => {
         if (el.id !== "submenu-" + id && el.id !== "submenu-ai") el.style.display = 'none';
       });
       submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
     }
 
-    // AI Popup toggle
     const aiFab = document.getElementById('ai-fab');
     const aiPopup = document.getElementById('ai-popup');
     const rispostaAi = document.getElementById('risposta-ai');
     const btnConsiglio = document.getElementById('consiglio-btn');
 
-    let lang = 'it'; // default lingua
+    let lang = 'it';
     let pizzeConsigliate = [
-      "Margherita",
-      "Diavola",
-      "Gorgonzola",
-      "Provola e Pepe",
-      "Quattro Formaggi",
-      "Tonnarella",
-      "Ortolana",
-      "Bufalina",
-      "Cipollina",
-      "Cosacca",
-      "Marinara",
-      "Napoli"
+      "Margherita", "Diavola", "Gorgonzola", "Provola e Pepe",
+      "Quattro Formaggi", "Tonnarella", "Ortolana", "Bufalina",
+      "Cipollina", "Cosacca", "Marinara", "Napoli"
     ];
     let indiceUltimo = -1;
 
@@ -490,15 +479,27 @@
       indiceUltimo = indice;
 
       const pizza = pizzeConsigliate[indice];
-
       const testi = {
         it: `Ti consiglio la pizza: ${pizza}`,
         en: `I recommend the pizza: ${pizza}`
       };
       rispostaAi.textContent = testi[lang];
+
+      // EFFETTO FARINA (senza suoni)
+      let flour = document.createElement('div');
+      flour.style.position = 'fixed';
+      flour.style.top = 0;
+      flour.style.left = 0;
+      flour.style.width = '100%';
+      flour.style.height = '100%';
+      flour.style.background = 'url(https://www.transparenttextures.com/patterns/pw-maze-white.png) repeat';
+      flour.style.opacity = '0.6';
+      flour.style.zIndex = '9998';
+      flour.style.pointerEvents = 'none';
+      document.body.appendChild(flour);
+      setTimeout(() => flour.remove(), 800);
     }
 
-    // Toggle visibilità AI popup
     aiFab.addEventListener('click', () => {
       if (aiPopup.style.display === 'flex') {
         aiPopup.style.display = 'none';
@@ -509,7 +510,6 @@
       }
     });
 
-    // Imposta lingua
     document.getElementById('btn-it').addEventListener('click', () => {
       lang = 'it';
       rispostaAi.textContent = "Clicca il cerchio per ricevere un consiglio sulla pizza!";
@@ -521,7 +521,6 @@
 
     btnConsiglio.addEventListener('click', consigliPizza);
 
-    // Accessibilità: abilita toggle AI anche con tastiera (Enter/Space)
     aiFab.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -532,3 +531,4 @@
 </body>
 
 </html>
+
