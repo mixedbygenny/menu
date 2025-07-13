@@ -491,21 +491,22 @@ function consigliPizza() {
     window.speechSynthesis.speak(msg);
   }
 
- // EFFETTO FARINA (GIF realistica da Giphy)
-  let flour = document.createElement('img');
-  flour.src = 'https://media.giphy.com/media/aXtsC5ouajOQCoEivi/giphy.gif';
-  flour.style.position = 'fixed';
-  flour.style.top = '150%';
-  flour.style.left = '150%';
-  flour.style.transform = 'translate(-50%, -50%)';
-  flour.style.width = '280px';
-  flour.style.height = '280px';
-  flour.style.opacity = '0.9';
-  flour.style.pointerEvents = 'none';
-  flour.style.zIndex = '9998';
-  document.body.appendChild(flour);
+// EFFETTO FARINA (GIF realistica da Giphy - fullscreen per 3 secondi)
+let flour = document.createElement('img');
+flour.src = 'https://media.giphy.com/media/aXtsC5ouajOQCoEivi/giphy.gif';
+flour.style.position = 'fixed';
+flour.style.top = '0';
+flour.style.left = '0';
+flour.style.width = '100vw';
+flour.style.height = '100vh';
+flour.style.objectFit = 'cover';
+flour.style.opacity = '0.85';
+flour.style.pointerEvents = 'none';
+flour.style.zIndex = '9998';
+document.body.appendChild(flour);
+setTimeout(() => flour.remove(), 3000);  // Rimuove dopo 3 secondi
 
-  setTimeout(() => flour.remove(), 1000); // scompare dopo 1 secondo
+
 }
 
 
