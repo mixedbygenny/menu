@@ -300,6 +300,7 @@
           <p class="pizza-name">Margherita</p>
           <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala<br><em>San Marzano tomato, buffalo mozzarella</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('margherita')">🎙 Raccontami</button>
         </div>
       </div>
       <div class="pizza">
@@ -307,6 +308,7 @@
           <p class="pizza-name">Diavola</p>
           <p class="pizza-ingredients">Salame piccante, mozzarella, pomodoro<br><em>Spicy salami, mozzarella, tomato</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('diavola')">🎙 Raccontami</button>
         </div>
       </div>
       <div class="pizza">
@@ -314,6 +316,7 @@
           <p class="pizza-name">Gorgonzola</p>
           <p class="pizza-ingredients">Mozzarella, gorgonzola DOP, noci<br><em>Mozzarella, PDO gorgonzola, walnuts</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('gorgonzola')">🎙 Raccontami</button>
         </div>
       </div>
       <div class="pizza">
@@ -321,6 +324,7 @@
           <p class="pizza-name">Provola e Pepe</p>
           <p class="pizza-ingredients">Provola affumicata, pepe nero, pomodoro<br><em>Smoked provola, black pepper, tomato</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('provola')">🎙 Raccontami</button>
         </div>
       </div>
       <div class="pizza">
@@ -328,6 +332,7 @@
           <p class="pizza-name">Quattro Formaggi</p>
           <p class="pizza-ingredients">Mozzarella, gorgonzola, fontina, Parmigiano Reggiano<br><em>Four cheeses</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('formaggi')">🎙 Raccontami</button>
         </div>
       </div>
       <div class="pizza">
@@ -335,6 +340,7 @@
           <p class="pizza-name">Tonnarella</p>
           <p class="pizza-ingredients">Pomodoro, mozzarella, tonno, cipolla rossa, capperi<br><em>Tuna, red onion, capers</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('tonnarella')">🎙 Raccontami</button>
         </div>
       </div>
       <div class="pizza">
@@ -342,6 +348,7 @@
           <p class="pizza-name">Ortolana</p>
           <p class="pizza-ingredients">Pomodoro, mozzarella, peperoni, melanzane, zucchine<br><em>Tomato, mozzarella, peppers, eggplant, zucchini</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('ortolana')">🎙 Raccontami</button>
         </div>
       </div>
       <div class="pizza">
@@ -349,14 +356,15 @@
           <p class="pizza-name">Bufalina</p>
           <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala, basilico<br><em>San Marzano tomato, buffalo mozzarella, basil</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('bufalina')">🎙 Raccontami</button>
         </div>
       </div>
-      <!-- Nuove pizze -->
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Cipollina</p>
           <p class="pizza-ingredients">Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia<br><em>Red onion, gorgonzola, pepper, mozzarella, pecorino, sage</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('cipollina')">🎙 Raccontami</button>
         </div>
       </div>
       <div class="pizza">
@@ -364,6 +372,7 @@
           <p class="pizza-name">Cosacca</p>
           <p class="pizza-ingredients">Pomodoro, pecorino romano, olio, basilico<br><em>Tomato, pecorino romano, oil, basil</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('cosacca')">🎙 Raccontami</button>
         </div>
       </div>
       <div class="pizza">
@@ -371,6 +380,7 @@
           <p class="pizza-name">Marinara</p>
           <p class="pizza-ingredients">Pomodoro, origano, aglio, basilico<br><em>Tomato, oregano, garlic, basil</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('marinara')">🎙 Raccontami</button>
         </div>
       </div>
       <div class="pizza">
@@ -378,6 +388,7 @@
           <p class="pizza-name">Napoli</p>
           <p class="pizza-ingredients">Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico<br><em>Tomato, mozzarella, anchovies, capers, oregano, pecorino, basil</em></p>
           <p class="pizza-price">10€</p>
+          <button onclick="raccontaAneddoto('napoli')">🎙 Raccontami</button>
         </div>
       </div>
     </div>
@@ -537,6 +548,30 @@ setTimeout(() => flour.remove(), 3000);  // Rimuove dopo 3 secondi
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         aiFab.click();
+
+            function raccontaAneddoto(tipo) {
+      const aneddoti = {
+        margherita: "Legend says the Margherita pizza was created in 1889 to honor Queen Margherita of Savoy, with the ingredients representing the colors of the Italian flag.",
+        diavola: "The spicy Diavola was born to challenge the taste buds. Some say it was invented during a fiery summer in Calabria.",
+        gorgonzola: "Gorgonzola cheese dates back to the 9th century near Milan and brings a bold character to every bite.",
+        provola: "Smoked provola and black pepper make this a rustic favorite from southern Italy.",
+        formaggi: "The quattro formaggi blend symbolizes Italian cheese craftsmanship — from creamy to aged.",
+        tonnarella: "Tuna on pizza? A coastal tradition loved by fishermen families.",
+        ortolana: "Ortolana celebrates the harvest — every vegetable grilled to perfection.",
+        bufalina: "Using buffalo mozzarella from Campania, Bufalina is freshness incarnate.",
+        cipollina: "Red onion and sage were once used by monks in medieval kitchens — now reborn on pizza.",
+        cosacca: "Pizza Cosacca was said to be named after Russian Cossacks who once visited Naples.",
+        marinara: "The simplest and oldest pizza, once the meal of sailors returning to port.",
+        napoli: "A bold mix of anchovies and capers, Napoli pizza tells tales of the sea."
+      };
+
+      const testo = aneddoti[tipo];
+      if (!testo) return;
+
+      const msg = new SpeechSynthesisUtterance(testo);
+      msg.lang = 'en-GB';
+      window.speechSynthesis.speak(msg);
+    }
       }
     });
   </script>
