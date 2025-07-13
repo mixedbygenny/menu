@@ -458,123 +458,119 @@
     <button class="action-btn" id="consiglio-btn" title="Consiglio pizza AI">AI</button>
     <div id="risposta-ai">Clicca il cerchio per ricevere un consiglio sulla pizza!</div>
   </div>
+<script>
+  function toggleSubmenu(id) {
+    const submenu = document.getElementById("submenu-" + id);
+    if (!submenu) return;
+    document.querySelectorAll('.submenu').forEach(el => {
+      if (el.id !== "submenu-" + id && el.id !== "submenu-ai") el.style.display = 'none';
+    });
+    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+  }
 
-  <script>
-    function toggleSubmenu(id) {
-      const submenu = document.getElementById("submenu-" + id);
-      if (!submenu) return;
-      document.querySelectorAll('.submenu').forEach(el => {
-        if (el.id !== "submenu-" + id && el.id !== "submenu-ai") el.style.display = 'none';
-      });
-      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+  const aiFab = document.getElementById('ai-fab');
+  const aiPopup = document.getElementById('ai-popup');
+  const rispostaAi = document.getElementById('risposta-ai');
+  const btnConsiglio = document.getElementById('consiglio-btn');
+
+  let lang = 'it';
+  let pizzeConsigliate = [
+    "Margherita", "Diavola", "Gorgonzola", "Provola e Pepe",
+    "Quattro Formaggi", "Tonnarella", "Ortolana", "Bufalina",
+    "Cipollina", "Cosacca", "Marinara", "Napoli"
+  ];
+  let indiceUltimo = -1;
+
+  function consigliPizza() {
+    let indice;
+    do {
+      indice = Math.floor(Math.random() * pizzeConsigliate.length);
+    } while (indice === indiceUltimo);
+    indiceUltimo = indice;
+
+    const pizza = pizzeConsigliate[indice];
+    const testi = {
+      it: `Prova una ${pizza}`,
+      en: `Try a ${pizza}`
+    };
+    rispostaAi.textContent = testi[lang];
+
+    if ('speechSynthesis' in window) {
+      const msg = new SpeechSynthesisUtterance(testi[lang]);
+      msg.lang = lang === 'it' ? 'it-IT' : 'en-GB';
+      window.speechSynthesis.speak(msg);
     }
 
-    const aiFab = document.getElementById('ai-fab');
-    const aiPopup = document.getElementById('ai-popup');
-    const rispostaAi = document.getElementById('risposta-ai');
-    const btnConsiglio = document.getElementById('consiglio-btn');
+    let flour = document.createElement('img');
+    flour.src = 'https://media.giphy.com/media/aXtsC5ouajOQCoEivi/giphy.gif';
+    flour.style.position = 'fixed';
+    flour.style.top = '0';
+    flour.style.left = '0';
+    flour.style.width = '100vw';
+    flour.style.height = '100vh';
+    flour.style.objectFit = 'cover';
+    flour.style.opacity = '0.85';
+    flour.style.pointerEvents = 'none';
+    flour.style.zIndex = '9998';
+    document.body.appendChild(flour);
+    setTimeout(() => flour.remove(), 3000);
+  }
 
-    let lang = 'it';
-    let pizzeConsigliate = [
-      "Margherita", "Diavola", "Gorgonzola", "Provola e Pepe",
-      "Quattro Formaggi", "Tonnarella", "Ortolana", "Bufalina",
-      "Cipollina", "Cosacca", "Marinara", "Napoli"
-    ];
-    let indiceUltimo = -1;
-function consigliPizza() {
-  let indice;
-  do {
-    indice = Math.floor(Math.random() * pizzeConsigliate.length);
-  } while (indice === indiceUltimo);
-  indiceUltimo = indice;
+  // ✅ QUESTA FUNZIONE DEVE STARE FUORI DA TUTTO
+  function raccontaAneddoto(tipo) {
+    const aneddoti = {
+      margherita: "Legend says the Margherita pizza was created in 1889 to honor Queen Margherita of Savoy, with the ingredients representing the colors of the Italian flag.",
+      diavola: "The spicy Diavola was born to challenge the taste buds. Some say it was invented during a fiery summer in Calabria.",
+      gorgonzola: "Gorgonzola cheese dates back to the 9th century near Milan and brings a bold character to every bite.",
+      provola: "Smoked provola and black pepper make this a rustic favorite from southern Italy.",
+      formaggi: "The quattro formaggi blend symbolizes Italian cheese craftsmanship — from creamy to aged.",
+      tonnarella: "Tuna on pizza? A coastal tradition loved by fishermen families.",
+      ortolana: "Ortolana celebrates the harvest — every vegetable grilled to perfection.",
+      bufalina: "Using buffalo mozzarella from Campania, Bufalina is freshness incarnate.",
+      cipollina: "Red onion and sage were once used by monks in medieval kitchens — now reborn on pizza.",
+      cosacca: "Pizza Cosacca was said to be named after Russian Cossacks who once visited Naples.",
+      marinara: "The simplest and oldest pizza, once the meal of sailors returning to port.",
+      napoli: "A bold mix of anchovies and capers, Napoli pizza tells tales of the sea."
+    };
 
-  const pizza = pizzeConsigliate[indice];
-  const testi = {
-    it: `Prova una ${pizza}`,
-    en: `Try a ${pizza}`
-  };
-  rispostaAi.textContent = testi[lang];
+    const testo = aneddoti[tipo];
+    if (!testo) return;
 
-  // Sintesi vocale
-  if ('speechSynthesis' in window) {
-    const msg = new SpeechSynthesisUtterance(testi[lang]);
-    msg.lang = lang === 'it' ? 'it-IT' : 'en-GB';
+    const msg = new SpeechSynthesisUtterance(testo);
+    msg.lang = 'en-GB';
     window.speechSynthesis.speak(msg);
   }
 
-// EFFETTO FARINA (GIF realistica da Giphy - fullscreen per 3 secondi)
-let flour = document.createElement('img');
-flour.src = 'https://media.giphy.com/media/aXtsC5ouajOQCoEivi/giphy.gif';
-flour.style.position = 'fixed';
-flour.style.top = '0';
-flour.style.left = '0';
-flour.style.width = '100vw';
-flour.style.height = '100vh';
-flour.style.objectFit = 'cover';
-flour.style.opacity = '0.85';
-flour.style.pointerEvents = 'none';
-flour.style.zIndex = '9998';
-document.body.appendChild(flour);
-setTimeout(() => flour.remove(), 3000);  // Rimuove dopo 3 secondi
-
-
-}
-
-
-    
-
-    aiFab.addEventListener('click', () => {
-      if (aiPopup.style.display === 'flex') {
-        aiPopup.style.display = 'none';
-        aiPopup.setAttribute('aria-hidden', 'true');
-      } else {
-        aiPopup.style.display = 'flex';
-        aiPopup.setAttribute('aria-hidden', 'false');
-      }
-    });
-
-    document.getElementById('btn-it').addEventListener('click', () => {
-      lang = 'it';
-      rispostaAi.textContent = "Clicca il cerchio per ricevere un consiglio sulla pizza!";
-    });
-    document.getElementById('btn-en').addEventListener('click', () => {
-      lang = 'en';
-      rispostaAi.textContent = "Click the circle to get a pizza recommendation!";
-    });
-
-    btnConsiglio.addEventListener('click', consigliPizza);
-
-    aiFab.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        aiFab.click();
-
-            function raccontaAneddoto(tipo) {
-      const aneddoti = {
-        margherita: "Legend says the Margherita pizza was created in 1889 to honor Queen Margherita of Savoy, with the ingredients representing the colors of the Italian flag.",
-        diavola: "The spicy Diavola was born to challenge the taste buds. Some say it was invented during a fiery summer in Calabria.",
-        gorgonzola: "Gorgonzola cheese dates back to the 9th century near Milan and brings a bold character to every bite.",
-        provola: "Smoked provola and black pepper make this a rustic favorite from southern Italy.",
-        formaggi: "The quattro formaggi blend symbolizes Italian cheese craftsmanship — from creamy to aged.",
-        tonnarella: "Tuna on pizza? A coastal tradition loved by fishermen families.",
-        ortolana: "Ortolana celebrates the harvest — every vegetable grilled to perfection.",
-        bufalina: "Using buffalo mozzarella from Campania, Bufalina is freshness incarnate.",
-        cipollina: "Red onion and sage were once used by monks in medieval kitchens — now reborn on pizza.",
-        cosacca: "Pizza Cosacca was said to be named after Russian Cossacks who once visited Naples.",
-        marinara: "The simplest and oldest pizza, once the meal of sailors returning to port.",
-        napoli: "A bold mix of anchovies and capers, Napoli pizza tells tales of the sea."
-      };
-
-      const testo = aneddoti[tipo];
-      if (!testo) return;
-
-      const msg = new SpeechSynthesisUtterance(testo);
-      msg.lang = 'en-GB';
-      window.speechSynthesis.speak(msg);
+  aiFab.addEventListener('click', () => {
+    if (aiPopup.style.display === 'flex') {
+      aiPopup.style.display = 'none';
+      aiPopup.setAttribute('aria-hidden', 'true');
+    } else {
+      aiPopup.style.display = 'flex';
+      aiPopup.setAttribute('aria-hidden', 'false');
     }
-      }
-    });
-  </script>
+  });
+
+  document.getElementById('btn-it').addEventListener('click', () => {
+    lang = 'it';
+    rispostaAi.textContent = "Clicca il cerchio per ricevere un consiglio sulla pizza!";
+  });
+  document.getElementById('btn-en').addEventListener('click', () => {
+    lang = 'en';
+    rispostaAi.textContent = "Click the circle to get a pizza recommendation!";
+  });
+
+  btnConsiglio.addEventListener('click', consigliPizza);
+
+  aiFab.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      aiFab.click();
+    }
+  });
+</script>
+
+ 
 </body>
 
 </html>
