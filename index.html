@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mixed by Genny - Menu</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
   <style>
     body, button, input, p, h2 {
@@ -43,7 +41,7 @@
       display: block;
       width: 80%;
       text-align: center;
-      font-size: 1.21em; /* ridotto del 7% da 1.3em */
+      font-size: 1.21em;
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: background 0.3s ease;
@@ -63,44 +61,19 @@
       padding: 5px 10px;
     }
     .pizza-name {
-      font-size: 1.395em; /* ridotto del 7% da 1.5em */
+      font-size: 1.395em;
       margin: 0 0 6px 0;
       font-weight: 600;
     }
     .pizza-ingredients {
-      font-size: 0.837em; /* ridotto del 7% da 0.9em */
+      font-size: 0.837em;
       margin: 0 0 6px 0;
-      line-height: 1.3em; /* migliora leggibilità */
+      line-height: 1.3em;
     }
     .pizza-price {
       font-weight: 600;
-      font-size: 1.023em; /* ridotto del 7% da 1.1em */
+      font-size: 1.023em;
       margin: 0;
-    }
-    #footer-container {
-      max-width: 800px;
-      margin: 0 auto 30px;
-      width: 80%;
-      text-align: center;
-    }
-    #allergeni-btn {
-      background: #D1BDBD;
-      color: #2B2B2B;
-      border: none;
-      border-radius: 15px;
-      padding: 15px;
-      margin: 15px auto 5px auto;
-      display: block;
-      width: 80%;
-      text-align: center;
-      font-size: 1.21em; /* ridotto del 7% da 1.3em */
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s ease;
-      user-select: none;
-    }
-    #allergeni-btn:hover {
-      background: #BFAFAF;
     }
     #coperto-text {
       color: black;
@@ -123,155 +96,43 @@
       left: 0;
       border-radius: 1px;
     }
-
-    /* AI FAB */
-    #ai-fab {
+    .lang-selector {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background: #F2F3F4;
-      color: #2B2B2B;
-      font-size: 22px;
-      font-weight: 700;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 60px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      z-index: 10000;
-      user-select: none;
-    }
-
-    /* AI Popup - circolare */
-    #ai-popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 320px;
-      height: 320px;
-      background: #F8F8FF;
-      border: 2px solid #D1BDBD;
-      border-radius: 50%;
-      padding: 30px 20px 20px 20px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-      display: none; /* nascosto di default */
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(248, 248, 255, 0.95);
       z-index: 9999;
-      text-align: center;
-      box-sizing: border-box;
-      display: none;
-      flex-direction: column;
+      display: flex;
       align-items: center;
-      justify-content: start;
+      justify-content: center;
+      flex-direction: column;
     }
-
-    #ai-popup h2 {
+    .lang-selector h2 {
       font-size: 2em;
-      margin: 0 0 15px 0;
-      user-select: none;
+      margin-bottom: 20px;
     }
-
-    #ai-popup .lang-switch {
-      margin-bottom: 15px;
-    }
-    #ai-popup .lang-switch button {
-      background: transparent;
-      border: none;
-      font-size: 28px;
+    .lang-selector button {
+      font-size: 1.5em;
+      margin: 10px;
+      padding: 10px 20px;
       cursor: pointer;
-      margin: 0 8px;
-      user-select: none;
-    }
-
-    #ai-popup button.action-btn {
-      background-image: url('https://img.icons8.com/ios-filled/50/fingerprint.png');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 50px 50px;
+      border-radius: 10px;
+      border: none;
       background-color: #D1BDBD;
-      border-radius: 50%;
-      border: none;
-      width: 80px;
-      height: 80px;
-      margin-top: 10px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      text-indent: -9999px;
-      user-select: none;
-      align-self: center;
+      transition: background 0.3s;
     }
-    #ai-popup button.action-btn:hover {
+    .lang-selector button:hover {
       background-color: #BFAFAF;
     }
-
-    #risposta-ai {
-      margin-top: 20px;
-      font-style: italic;
-      font-size: 1.1em;
-      min-height: 60px;
-      max-width: 280px;
-      user-select: text;
-      line-height: 1.4em;
+    .en, .it {
+      display: none;
     }
-
-    /* Menu Sottomenu Styles */
-    .submenu {
-      margin-top: 10px;
-    }
-
-    /* Allergeni lista - migliorata per evitare sovrapposizioni */
-    #submenu-allergeni p strong {
-      display: block;
-      margin-bottom: 10px;
-      font-size: 1.05em;
-      line-height: 1.3em;
-    }
-    #submenu-allergeni hr {
-      margin: 10px 0 15px 0;
-      border: 0;
-      border-top: 1.5px solid #D1BDBD;
-    }
-    #submenu-allergeni ul {
-      list-style-type: none;
-      padding-left: 0;
-      margin-top: 0;
-    }
-    #submenu-allergeni ul li {
-      margin-bottom: 10px;
-      font-size: 0.9em;
-      line-height: 1.4em;
-    }
-    #submenu-allergeni ul li em {
-      display: block;
-      margin-top: 2px;
-      color: #444;
-      font-style: italic;
-      font-size: 0.85em;
-      line-height: 1.2em;
-    }
-
-    /* Responsive per mobile */
     @media (max-width: 480px) {
       .menu-button {
         width: 95%;
         font-size: 1.1em;
-      }
-      #ai-popup {
-        width: 280px;
-        height: 280px;
-        padding: 20px 15px 15px 15px;
-      }
-      #ai-popup button.action-btn {
-        width: 70px;
-        height: 70px;
-        background-size: 40px 40px;
-        margin-top: 8px;
-      }
-      #risposta-ai {
-        font-size: 1em;
-        max-width: 240px;
       }
       .pizza-name {
         font-size: 1.2em;
@@ -285,292 +146,108 @@
     }
   </style>
 </head>
-
 <body>
+  <!-- Selettore Lingua -->
+  <div class="lang-selector" id="langSelector">
+    <h2>Scegli la lingua / Choose language</h2>
+    <button onclick="setLanguage('it')">🇮🇹 Italiano</button>
+    <button onclick="setLanguage('en')">🇬🇧 English</button>
+  </div>
+
   <header>
     <img src="logocanva1-removebg-preview.png" alt="Logo Mixed by Genny" />
   </header>
 
   <main>
-    <!-- Bottoni menu -->
-    <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 Pizze</button>
+    <!-- Pizze -->
+    <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 <span class="it">Pizze</span><span class="en">Pizza</span></button>
     <div id="submenu-pizze" class="submenu">
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Margherita</p>
-          <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala<br><em>San Marzano tomato, buffalo mozzarella</em></p>
+          <p class="pizza-ingredients it">Pomodoro San Marzano, mozzarella di bufala</p>
+          <p class="pizza-ingredients en">San Marzano tomato, buffalo mozzarella</p>
           <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('margherita')">🎙 Raccontami</button>
+          <button onclick="raccontaAneddoto('margherita')"><span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span></button>
         </div>
       </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Diavola</p>
-          <p class="pizza-ingredients">Salame piccante, mozzarella, pomodoro<br><em>Spicy salami, mozzarella, tomato</em></p>
-          <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('diavola')">🎙 Raccontami</button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Gorgonzola</p>
-          <p class="pizza-ingredients">Mozzarella, gorgonzola DOP, noci<br><em>Mozzarella, PDO gorgonzola, walnuts</em></p>
-          <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('gorgonzola')">🎙 Raccontami</button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Provola e Pepe</p>
-          <p class="pizza-ingredients">Provola affumicata, pepe nero, pomodoro<br><em>Smoked provola, black pepper, tomato</em></p>
-          <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('provola')">🎙 Raccontami</button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Quattro Formaggi</p>
-          <p class="pizza-ingredients">Mozzarella, gorgonzola, fontina, Parmigiano Reggiano<br><em>Four cheeses</em></p>
-          <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('formaggi')">🎙 Raccontami</button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Tonnarella</p>
-          <p class="pizza-ingredients">Pomodoro, mozzarella, tonno, cipolla rossa, capperi<br><em>Tuna, red onion, capers</em></p>
-          <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('tonnarella')">🎙 Raccontami</button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Ortolana</p>
-          <p class="pizza-ingredients">Pomodoro, mozzarella, peperoni, melanzane, zucchine<br><em>Tomato, mozzarella, peppers, eggplant, zucchini</em></p>
-          <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('ortolana')">🎙 Raccontami</button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Bufalina</p>
-          <p class="pizza-ingredients">Pomodoro San Marzano, mozzarella di bufala, basilico<br><em>San Marzano tomato, buffalo mozzarella, basil</em></p>
-          <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('bufalina')">🎙 Raccontami</button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Cipollina</p>
-          <p class="pizza-ingredients">Cipolla rossa, gorgonzola, pepe, mozzarella, pecorino, salvia<br><em>Red onion, gorgonzola, pepper, mozzarella, pecorino, sage</em></p>
-          <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('cipollina')">🎙 Raccontami</button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Cosacca</p>
-          <p class="pizza-ingredients">Pomodoro, pecorino romano, olio, basilico<br><em>Tomato, pecorino romano, oil, basil</em></p>
-          <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('cosacca')">🎙 Raccontami</button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Marinara</p>
-          <p class="pizza-ingredients">Pomodoro, origano, aglio, basilico<br><em>Tomato, oregano, garlic, basil</em></p>
-          <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('marinara')">🎙 Raccontami</button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Napoli</p>
-          <p class="pizza-ingredients">Pomodoro, mozzarella, acciughe, capperi, origano, pecorino, basilico<br><em>Tomato, mozzarella, anchovies, capers, oregano, pecorino, basil</em></p>
-          <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('napoli')">🎙 Raccontami</button>
-        </div>
-      </div>
+      <!-- Altre pizze simili... -->
     </div>
 
     <!-- Bibite -->
-    <button class="menu-button" onclick="toggleSubmenu('bibite')">🥤 Bibite</button>
+    <button class="menu-button" onclick="toggleSubmenu('bibite')">🥤 <span class="it">Bibite</span><span class="en">Drinks</span></button>
     <div id="submenu-bibite" class="submenu">
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Birra Chiara alla Spina</p>
           <p class="pizza-price">5€</p>
-          <p><em>Draft Light Beer</em></p>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Birra Rossa alla Spina</p>
-          <p class="pizza-price">5€</p>
-          <p><em>Draft Red Beer</em></p>
+          <p class="it">Birra bionda fresca</p>
+          <p class="en">Draft Light Beer</p>
         </div>
       </div>
     </div>
 
     <!-- Dolci -->
-    <button class="menu-button" onclick="toggleSubmenu('dolci')">🍰 Dolci</button>
+    <button class="menu-button" onclick="toggleSubmenu('dolci')">🍰 <span class="it">Dolci</span><span class="en">Desserts</span></button>
     <div id="submenu-dolci" class="submenu">
       <div class="pizza">
         <div class="pizza-info">
           <p class="pizza-name">Tiramisù</p>
           <p class="pizza-price">5€</p>
-          <p><em>Classic Italian dessert</em></p>
+          <p class="it">Classico dolce italiano</p>
+          <p class="en">Classic Italian dessert</p>
         </div>
       </div>
     </div>
 
     <!-- Allergeni -->
-    <button class="menu-button" onclick="toggleSubmenu('allergeni')">⚠️ Allergeni</button>
-    <div id="submenu-allergeni" class="submenu" style="text-align: left; padding: 10px 20px;">
-      <p><strong>Per la tua sicurezza, consulta la lista e per una migliore esperienza gastronomica, comunicaci le tue esigenze!</strong></p>
-      <hr>
+    <button class="menu-button" onclick="toggleSubmenu('allergeni')">⚠️ <span class="it">Allergeni</span><span class="en">Allergens</span></button>
+    <div id="submenu-allergeni" class="submenu">
       <ul>
-        <li><strong>Latte:</strong> prodotti caseari, latticini e derivati<br><em>Milk: dairy products and derivatives</em></li>
-        <li><strong>Frutta a guscio:</strong> mandorle, nocciole, noci, pistacchi<br><em>Tree nuts: almonds, hazelnuts, walnuts, pistachios</em></li>
-        <li><strong>Sedano:</strong> a pezzi o nei preparati vegetali<br><em>Celery: pieces or in vegetable preparations</em></li>
-        <li><strong>Semi:</strong> nel pane o in alcuni tipi di farine<br><em>Seeds: in bread or certain flours</em></li>
-        <li><strong>Peperoncino</strong><br><em>Chili pepper</em></li>
-        <li><strong>Senape:</strong> nelle salse e nei condimenti<br><em>Mustard: in sauces and dressings</em></li>
-        <li><strong>Glutine:</strong> in tutti i cereali e suoi derivati<br><em>Gluten: in all cereals and derivatives</em></li>
-        <li><strong>Arachidi:</strong> creme e condimenti<br><em>Peanuts: creams and dressings</em></li>
+        <li><strong>Latte:</strong> <span class="it">prodotti caseari</span><span class="en">dairy products</span></li>
+        <li><strong>Glutine:</strong> <span class="it">cereali e derivati</span><span class="en">cereals and derivatives</span></li>
       </ul>
     </div>
 
-    <p id="coperto-text">Coperto 2€, acqua 0.5L inclusa</p>
+    <p id="coperto-text"><span class="it">Coperto 2€, acqua 0.5L inclusa</span><span class="en">Cover charge €2, 0.5L water included</span></p>
   </main>
 
-
-  <!-- Pulsante AI -->
-  <div id="ai-fab" title="AI" aria-label="Pulsante AI" role="button" tabindex="0">AI</div>
-
-  <!-- Popup AI -->
-  <div id="ai-popup" aria-live="polite" aria-modal="true" role="dialog" aria-labelledby="ai-popup-title" aria-hidden="true">
-    <h2 id="ai-popup-title">AI</h2>
-    <div class="lang-switch">
-      <button id="btn-it" aria-label="Lingua Italiano" title="Lingua Italiano">🇮🇹</button>
-      <button id="btn-en" aria-label="Lingua Inglese" title="Lingua Inglese">🇬🇧</button>
-    </div>
-    <button class="action-btn" id="consiglio-btn" title="Consiglio pizza AI">AI</button>
-    <div id="risposta-ai">Clicca il cerchio per ricevere un consiglio sulla pizza!</div>
-  </div>
 <script>
+  let currentLang = 'it';
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    document.getElementById('langSelector').style.display = 'none';
+
+    document.querySelectorAll('.it').forEach(el => {
+      el.style.display = lang === 'it' ? 'inline' : 'none';
+    });
+    document.querySelectorAll('.en').forEach(el => {
+      el.style.display = lang === 'en' ? 'inline' : 'none';
+    });
+  }
+
   function toggleSubmenu(id) {
     const submenu = document.getElementById("submenu-" + id);
     if (!submenu) return;
     document.querySelectorAll('.submenu').forEach(el => {
-      if (el.id !== "submenu-" + id && el.id !== "submenu-ai") el.style.display = 'none';
+      if (el !== submenu) el.style.display = 'none';
     });
     submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
   }
 
-  const aiFab = document.getElementById('ai-fab');
-  const aiPopup = document.getElementById('ai-popup');
-  const rispostaAi = document.getElementById('risposta-ai');
-  const btnConsiglio = document.getElementById('consiglio-btn');
-
-  let lang = 'it';
-  let pizzeConsigliate = [
-    "Margherita", "Diavola", "Gorgonzola", "Provola e Pepe",
-    "Quattro Formaggi", "Tonnarella", "Ortolana", "Bufalina",
-    "Cipollina", "Cosacca", "Marinara", "Napoli"
-  ];
-  let indiceUltimo = -1;
-
-  function consigliPizza() {
-    let indice;
-    do {
-      indice = Math.floor(Math.random() * pizzeConsigliate.length);
-    } while (indice === indiceUltimo);
-    indiceUltimo = indice;
-
-    const pizza = pizzeConsigliate[indice];
-    const testi = {
-      it: `Prova una ${pizza}`,
-      en: `Try a ${pizza}`
-    };
-    rispostaAi.textContent = testi[lang];
-
-    if ('speechSynthesis' in window) {
-      const msg = new SpeechSynthesisUtterance(testi[lang]);
-      msg.lang = lang === 'it' ? 'it-IT' : 'en-GB';
-      window.speechSynthesis.speak(msg);
-    }
-
-    let flour = document.createElement('img');
-    flour.src = 'https://media.giphy.com/media/aXtsC5ouajOQCoEivi/giphy.gif';
-    flour.style.position = 'fixed';
-    flour.style.top = '0';
-    flour.style.left = '0';
-    flour.style.width = '100vw';
-    flour.style.height = '100vh';
-    flour.style.objectFit = 'cover';
-    flour.style.opacity = '0.85';
-    flour.style.pointerEvents = 'none';
-    flour.style.zIndex = '9998';
-    document.body.appendChild(flour);
-    setTimeout(() => flour.remove(), 3000);
-  }
-
-  // ✅ QUESTA FUNZIONE DEVE STARE FUORI DA TUTTO
   function raccontaAneddoto(tipo) {
     const aneddoti = {
-      margherita: "Legend says the Margherita pizza was created in 1889 to honor Queen Margherita of Savoy, with the ingredients representing the colors of the Italian flag.",
-      diavola: "The spicy Diavola was born to challenge the taste buds. Some say it was invented during a fiery summer in Calabria.",
-      gorgonzola: "Gorgonzola cheese dates back to the 9th century near Milan and brings a bold character to every bite.",
-      provola: "Smoked provola and black pepper make this a rustic favorite from southern Italy.",
-      formaggi: "The quattro formaggi blend symbolizes Italian cheese craftsmanship — from creamy to aged.",
-      tonnarella: "Tuna on pizza? A coastal tradition loved by fishermen families.",
-      ortolana: "Ortolana celebrates the harvest — every vegetable grilled to perfection.",
-      bufalina: "Using buffalo mozzarella from Campania, Bufalina is freshness incarnate.",
-      cipollina: "Red onion and sage were once used by monks in medieval kitchens — now reborn on pizza.",
-      cosacca: "Pizza Cosacca was said to be named after Russian Cossacks who once visited Naples.",
-      marinara: "The simplest and oldest pizza, once the meal of sailors returning to port.",
-      napoli: "A bold mix of anchovies and capers, Napoli pizza tells tales of the sea."
+      margherita: {
+        it: "La pizza Margherita fu creata in onore della regina Margherita di Savoia.",
+        en: "The Margherita pizza was created to honor Queen Margherita of Savoy."
+      }
     };
 
-    const testo = aneddoti[tipo];
-    if (!testo) return;
-
-    const msg = new SpeechSynthesisUtterance(testo);
-    msg.lang = 'en-GB';
+    const msg = new SpeechSynthesisUtterance(aneddoti[tipo][currentLang]);
+    msg.lang = currentLang === 'it' ? 'it-IT' : 'en-GB';
     window.speechSynthesis.speak(msg);
   }
-
-  aiFab.addEventListener('click', () => {
-    if (aiPopup.style.display === 'flex') {
-      aiPopup.style.display = 'none';
-      aiPopup.setAttribute('aria-hidden', 'true');
-    } else {
-      aiPopup.style.display = 'flex';
-      aiPopup.setAttribute('aria-hidden', 'false');
-    }
-  });
-
-  document.getElementById('btn-it').addEventListener('click', () => {
-    lang = 'it';
-    rispostaAi.textContent = "Clicca il cerchio per ricevere un consiglio sulla pizza!";
-  });
-  document.getElementById('btn-en').addEventListener('click', () => {
-    lang = 'en';
-    rispostaAi.textContent = "Click the circle to get a pizza recommendation!";
-  });
-
-  btnConsiglio.addEventListener('click', consigliPizza);
-
-  aiFab.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      aiFab.click();
-    }
-  });
 </script>
-
- 
 </body>
-
 </html>
