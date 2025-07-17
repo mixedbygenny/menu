@@ -6,6 +6,27 @@
   <title>Mixed by Genny - Menu</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
   <style>
+
+.raccontami-button {
+  background-color: #F5D0A9; /* colore chiaro tipo crema */
+  color: #2B2B2B;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 0.95em;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.raccontami-button:hover {
+  background-color: #E6B97E; /* colore più intenso al passaggio */
+}
+
+
+
+
+    
     body, button, input, p, h2 {
       font-family: 'Playfair Display', serif;
       font-weight: 400;
@@ -159,7 +180,10 @@
           <p class="pizza-ingredients it">Pomodoro San Marzano, mozzarella di bufala</p>
           <p class="pizza-ingredients en">San Marzano tomato, buffalo mozzarella</p>
           <p class="pizza-price">10€</p>
-          <button onclick="raccontaAneddoto('margherita')"><span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span></button>
+         <button class="raccontami-button" onclick="raccontaAneddoto('margherita')">
+  <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
+</button>
+
         </div>
       </div>
       <div class="pizza">
@@ -168,7 +192,10 @@
           <p class="pizza-ingredients it">Pomodoro, mozzarella, salame piccante</p>
           <p class="pizza-ingredients en">Tomato, mozzarella, spicy salami</p>
           <p class="pizza-price">12€</p>
-          <button onclick="raccontaAneddoto('diavola')"><span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span></button>
+        <button class="raccontami-button" onclick="raccontaAneddoto('Diavola')">
+  <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
+</button>
+
         </div>
       </div>
       <div class="pizza">
@@ -177,7 +204,10 @@
           <p class="pizza-ingredients it">Mozzarella, gorgonzola, parmigiano, provola</p>
           <p class="pizza-ingredients en">Mozzarella, gorgonzola, parmesan, provola cheese</p>
           <p class="pizza-price">13€</p>
-          <button onclick="raccontaAneddoto('quattro_formaggi')"><span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span></button>
+        <button class="raccontami-button" onclick="raccontaAneddoto('Quattro Formaggi')">
+  <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
+</button>
+
         </div>
       </div>
       <div class="pizza">
@@ -186,7 +216,10 @@
           <p class="pizza-ingredients it">Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive</p>
           <p class="pizza-ingredients en">Tomato, mozzarella, cooked ham, mushrooms, artichokes, olives</p>
           <p class="pizza-price">14€</p>
-          <button onclick="raccontaAneddoto('capricciosa')"><span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span></button>
+          <button class="raccontami-button" onclick="raccontaAneddoto('Capricciosa')">
+  <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
+</button>
+
         </div>
       </div>
     </div>
