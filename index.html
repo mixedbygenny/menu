@@ -6,7 +6,6 @@
   <title>Mixed by Genny - Menu</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
   <style>
-
 body {
   margin: 0;
   padding: 0;
@@ -15,14 +14,16 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  background-color: transparent;
+  background-color: black;
+  color: #f0f0f0;
 }
-main, .menu, .sottomenu {
+
+main, .menu, .sottomenu, .submenu {
   background-color: transparent !important;
   box-shadow: none;
   border: none;
+  color: #f0f0f0;
 }
-
 
 .raccontami-button {
   background-color: #D1BDBD; 
@@ -49,85 +50,102 @@ header {
   text-align: center;
   padding: 20px 0;
 }
+
 header img {
-  max-width: 300px; /* dimensione logo */
+  max-width: 300px;
   width: 100%;
   height: auto;
 }
+
 main {
   max-width: 800px;
   margin: auto;
   padding: 0 10px 40px;
-  background-color:  rgba(255, 255, 255, 0.7); /* sfondo semitrasparente bianco per contenuto */
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .menu-button {
-      background: #D1BDBD;
-      color: #2B2B2B;
-      border: none;
-      border-radius: 15px;
-      padding: 15px;
-      margin: 15px auto;
-      display: block;
-      width: 80%;
-      text-align: center;
-      font-size: 1.21em;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s ease;
-      user-select: none;
-    }
-    .menu-button:hover {
-      background: #BFAFAF;
-    }
-    .submenu {
-      display: none;
-    }
-    .pizza {
-      margin: 20px 0;
-      padding: 10px 5px;
-    }
-    .pizza-info {
-      padding: 5px 10px;
-    }
-    .pizza-name {
-      font-size: 1.395em;
-      margin: 0 0 6px 0;
-      font-weight: 600;
-    }
-    .pizza-ingredients {
-      font-size: 0.837em;
-      margin: 0 0 6px 0;
-      line-height: 1.3em;
-    }
-    .pizza-price {
-      font-weight: 600;
-      font-size: 1.023em;
-      margin: 0;
-    }
-    #coperto-text {
-      color: black;
-      font-size: 1.1em;
-      text-align: center;
-      font-family: 'Arial', sans-serif;
-      margin-top: 35px;
-      font-weight: normal;
-      position: relative;
-      padding-bottom: 6px;
-    }
-    #coperto-text::after {
-      content: "";
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: black;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      border-radius: 1px;
-    }
-    /* Bandiere lingua in alto a sinistra */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.menu-button {
+  background: #D1BDBD;
+  color: #2B2B2B;
+  border: none;
+  border-radius: 15px;
+  padding: 15px;
+  margin: 15px auto;
+  display: block;
+  width: 80%;
+  text-align: center;
+  font-size: 1.21em;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+  user-select: none;
+}
+
+.menu-button:hover {
+  background: #BFAFAF;
+}
+
+.submenu {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.pizza {
+  margin: 20px 0;
+  padding: 10px 5px;
+}
+
+.pizza-info {
+  padding: 5px 10px;
+}
+
+.pizza-name {
+  font-size: 1.395em;
+  margin: 0 0 6px 0;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.pizza-ingredients {
+  font-size: 0.837em;
+  margin: 0 0 6px 0;
+  line-height: 1.3em;
+  color: #dddddd;
+}
+
+.pizza-price {
+  font-weight: 600;
+  font-size: 1.023em;
+  margin: 0;
+  color: #ffffff;
+}
+
+#coperto-text {
+  color: #f0f0f0;
+  font-size: 1.1em;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  margin-top: 35px;
+  font-weight: normal;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+#coperto-text::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #f0f0f0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 1px;
+}
 
 #langToggle {
   position: fixed;
@@ -136,40 +154,44 @@ main {
   z-index: 10000;
   display: flex;
   gap: 8px;
-    }
-    #langToggle img {
-      width: 32px;
-      height: 21px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      border-radius: 4px;
-      user-select: none;
-      transition: border-color 0.3s;
-    }
-    #langToggle img.selected {
-      border-color: #2B2B2B;
-    }
-    .it, .en {
-      display: none;
-    }
-    @media (max-width: 480px) {
-      .menu-button {
-        width: 95%;
-        font-size: 1.1em;
-      }
-      .pizza-name {
-        font-size: 1.2em;
-      }
-      .pizza-ingredients {
-        font-size: 0.75em;
-      }
-      .pizza-price {
-        font-size: 0.9em;
-      }
-    }
+}
+
+#langToggle img {
+  width: 32px;
+  height: 21px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  user-select: none;
+  transition: border-color 0.3s;
+}
+
+#langToggle img.selected {
+  border-color: #f0f0f0;
+}
+
+.it, .en {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .menu-button {
+    width: 95%;
+    font-size: 1.1em;
+  }
+  .pizza-name {
+    font-size: 1.2em;
+  }
+  .pizza-ingredients {
+    font-size: 0.75em;
+  }
+  .pizza-price {
+    font-size: 0.9em;
+  }
+}
   </style>
 </head>
-<body>
+
   <!-- il resto della pagina HTML rimane invariato -->
 </body>
 </html>
