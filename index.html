@@ -6,29 +6,25 @@
   <title>Mixed by Genny - Menu</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
   <style>
-<style>
+
 body {
   margin: 0;
-  padding: 0;
-  background-color: #ffffff;
-  background-image: url('https://www.transparenttextures.com/patterns/cartographer.png'); /* stile cartoon b/n */
-  background-repeat: repeat;
+  background-color: #e6e6e6; /* tonalità di grigio elegante sotto il logo  */
+  background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png'),
+                    url('https://cdn.pixabay.com/photo/2016/03/05/19/02/pizza-1239077_1280.jpg');
+  background-repeat: repeat, no-repeat;
+  background-position: center top;
+  background-size: auto, cover;
   background-attachment: fixed;
-  background-size: auto;
-  color: #000000;
-}
-
-main, .menu, .sottomenu, .submenu {
-  background-color: rgba(255, 255, 255, 0.85) !important;
-  box-shadow: none;
-  border: none;
-  color: #000000;
+  color: #2B2B2B;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .raccontami-button {
-  background-color: #ffffff;
-  color: #000000;
-  border: 2px solid #000;
+  background-color: #D1BDBD; 
+  color: #2B2B2B;
+  border: none;
   border-radius: 12px;
   padding: 8px 12px;
   font-size: 0.95em;
@@ -38,64 +34,139 @@ main, .menu, .sottomenu, .submenu {
 }
 
 .raccontami-button:hover {
-  background-color: #e6e6e6;
-}
-
-.menu-button {
-  background: #ffffff;
-  color: #000000;
-  border: 2px solid #000000;
-  border-radius: 15px;
-  padding: 15px;
-  margin: 15px auto;
-  display: block;
-  width: 40%;
-  text-align: center;
-  font-size: 1.21em;
-  cursor: pointer;
-  box-shadow: 3px 3px 0 #000;
-  transition: background 0.3s ease;
-  user-select: none;
-}
-
-.menu-button:hover {
-  background: #f2f2f2;
-}
-
-.submenu {
-  display: none;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 10px;
-  border-radius: 8px;
-  color: #000;
-}
-
-.pizza-name, .pizza-ingredients, .pizza-price, #coperto-text {
-  color: #000000;
-}
-
-#langToggle img.selected {
-  border-color: #000000;
-}
-
-#coperto-text::after {
-  background-color: #000000;
+  background-color: #BFAFAF;
 }
 
 body, button, input, p, h2 {
   font-family: 'Playfair Display', serif;
   font-weight: 400;
-  color: #000;
 }
-</style>
 
+header {
+  text-align: center;
+  padding: 20px 0;
 }
+header img {
+  max-width: 300px; /* dimensione logo */
+  width: 100%;
+  height: auto;
+}
+main {
+  max-width: 800px;
+  margin: auto;
+  padding: 0 10px 40px;
+  background-color:  #e6e6e6; /* tonalità di grigio elegante  sfgonbdo sotto bottoni menu*/
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .menu-button {
+      background: #D1BDBD;
+      color: #2B2B2B;
+      border: none;
+      border-radius: 15px;
+      padding: 15px;
+      margin: 15px auto;
+      display: block;
+      width: 80%;
+      text-align: center;
+      font-size: 1.21em;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    .menu-button:hover {
+      background: #BFAFAF;
+    }
+    .submenu {
+      display: none;
+    }
+    .pizza {
+      margin: 20px 0;
+      padding: 10px 5px;
+    }
+    .pizza-info {
+      padding: 5px 10px;
+    }
+    .pizza-name {
+      font-size: 1.395em;
+      margin: 0 0 6px 0;
+      font-weight: 600;
+    }
+    .pizza-ingredients {
+      font-size: 0.837em;
+      margin: 0 0 6px 0;
+      line-height: 1.3em;
+    }
+    .pizza-price {
+      font-weight: 600;
+      font-size: 1.023em;
+      margin: 0;
+    }
+    #coperto-text {
+      color: black;
+      font-size: 1.1em;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      margin-top: 35px;
+      font-weight: normal;
+      position: relative;
+      padding-bottom: 6px;
+    }
+    #coperto-text::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: black;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-radius: 1px;
+    }
+    /* Bandiere lingua in alto a sinistra */
+
+#langToggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 10000;
+  display: flex;
+  gap: 8px;
+    }
+    #langToggle img {
+      width: 32px;
+      height: 21px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      user-select: none;
+      transition: border-color 0.3s;
+    }
+    #langToggle img.selected {
+      border-color: #2B2B2B;
+    }
+    .it, .en {
+      display: none;
+    }
+    @media (max-width: 480px) {
+      .menu-button {
+        width: 95%;
+        font-size: 1.1em;
+      }
+      .pizza-name {
+        font-size: 1.2em;
+      }
+      .pizza-ingredients {
+        font-size: 0.75em;
+      }
+      .pizza-price {
+        font-size: 0.9em;
+      }
+    }
   </style>
 </head>
-
-</body>
-</html>
-
+<body>
 
   <!-- Bandiere lingua -->
   <div id="langToggle" role="navigation" aria-label="Selettore lingua">
