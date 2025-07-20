@@ -60,25 +60,25 @@ main {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    .menu-button {
-      background: #BC8F8F;   /* colore bottone menu*/
-      color: #2B2B2B;
-      border: none;
-      border-radius: 15px;
-      padding: 15px;
-      margin: 15px auto;
-      display: block;
-      width: 80%;
-      text-align: center;
-      font-size: 1.21em;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s ease;
-      user-select: none;
-    }
-    .menu-button:hover {
-      background: #BC8F8F; /* colore dopo aver schiacciato il bottone menu*/
-    }
+button {
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+  border: 3px solid black;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0px black;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+button:hover {
+  box-shadow: 2px 2px 0px black;
+  transform: translate(2px, 2px);
+}
+
     .submenu {
       display: none;
     }
