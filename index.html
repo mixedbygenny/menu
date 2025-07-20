@@ -26,9 +26,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; /* spazio tra i pulsanti */
-  margin-top: 30px; /* spazio dall’alto */
+  gap: 20px;
+  margin-top: 30px;
 }
+
 
 /* Stile dei pulsanti */
 button {
@@ -193,6 +194,21 @@ button:hover {
   </header>
 
   <main>
+
+    <div class="button-container">
+  <!-- Pizze -->
+  <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 <span class="it">Pizze</span><span class="en">Pizza</span></button>
+
+  <!-- Bibite -->
+  <button class="menu-button" onclick="toggleSubmenu('bibite')">🥤 <span class="it">Bibite</span><span class="en">Drinks</span></button>
+
+  <!-- Dolci -->
+  <button class="menu-button" onclick="toggleSubmenu('dolci')">🍰 <span class="it">Dolci</span><span class="en">Desserts</span></button>
+
+  <!-- Allergeni -->
+  <button class="menu-button" onclick="toggleSubmenu('allergeni')">⚠️ Allergeni</button>
+</div>
+
     <!-- Pizze -->
     <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 <span class="it">Pizze</span><span class="en">Pizza</span></button>
     <div id="submenu-pizze" class="submenu">
