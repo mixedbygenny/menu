@@ -21,22 +21,35 @@ body {
   box-sizing: border-box;
 
 }
+/* Container per i pulsanti */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* spazio tra i pulsanti */
+  margin-top: 30px; /* spazio dall’alto */
+}
 
-.raccontami-button {
-  background-color: #D1BDBD; 
-  color: #000000;   /* tonalità  scritta  */
-  border: none;
+/* Stile dei pulsanti */
+button {
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+  border: 3px solid black;
   border-radius: 12px;
-  padding: 8px 12px;
-  font-size: 0.95em;
+  box-shadow: 4px 4px 0px black;
   cursor: pointer;
-  margin-top: 10px;
-  transition: background 0.3s ease;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  width: fit-content;
+}
+button:hover {
+  box-shadow: 2px 2px 0px black;
+  transform: translate(2px, 2px);
 }
 
-.raccontami-button:hover {
-  background-color: #BFAFAF;
-}
 
 body, button, input, p, h2 {
   font-family: 'Playfair Display', serif;
@@ -48,7 +61,7 @@ header {
   padding: 20px 0;
 }
 header img {
-  max-width: 300px; /* dimensione logo */
+  max-width: 350px; /* dimensione logo */
   width: 100%;
   height: auto;
 }
