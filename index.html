@@ -81,10 +81,19 @@ main {
   margin-bottom: 0px;
   margin: auto;
   padding: 0 10px 10px;
-  background-color:  transparent; /* tonalità di grigio elegante  sfondo sotto bottoni menu*/
+  background-color: transparent;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+}
+main::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 2px;
+  background-color: #429DA6;
+  margin: 20px auto 0;
+  border-radius: 1px;
+}
 button {
   background-color: #429DA6; /* tonalità  sfondo  bottoni tutti menu*/
   color: black;
@@ -151,19 +160,6 @@ button:hover {
       border-radius: 1px;
     }
     /* Bandiere lingua in alto a sinistra */
-
-}
-main::after {
-  content: "";
-  display: block;
-  width: 80%;
-  height: 2px;
-  background-color: #429DA6;
-  margin: 20px auto 0;
-  border-radius: 1px;
-}
-
-
     
 #langToggle {
   position: fixed;
