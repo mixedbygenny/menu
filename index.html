@@ -8,16 +8,9 @@
   <style>
 
 body {
-  
-  #logo {
-  display: block;
-  margin: 0 auto 0px auto; /* ← questo aumenta lo spazio sotto il logo */
-  max-width: 200px; /* o qualsiasi dimensione tu stia usando */
-}
-
   margin: 0;
   background-color: #000000;
-  background-image: url('farina.jpg'); /* immagine sfondo  */
+  background-image: url('farina.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -25,21 +18,26 @@ body {
   color: #ffffff;
   padding: 10px;
   box-sizing: border-box;
-
 }
+
+#logo {
+  display: block;
+  margin: 0 auto 0px auto;
+  max-width: 200px;
+}
+
 /* Container per i pulsanti */
 .button-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin-top: 10px;  /* Container per i pulsanti posizione */
+  margin-top: 10px;
 }
-
 
 /* Stile dei pulsanti */
 button {
-  background-color: white; /* Stile dei pulsanti colore ex white */
+  background-color: #429DA6;
   color: black;
   padding: 12px 20px;
   font-size: 1rem;
@@ -58,9 +56,8 @@ button:hover {
 }
 .menu-button {
   display: block;
-  margin: 20px auto; /* spaziatura fra i 4 pulsanti */
+  margin: 20px auto;
 }
-
 
 body, button, input, p, h2 {
   font-family: 'Playfair Display', serif;
@@ -69,347 +66,215 @@ body, button, input, p, h2 {
 
 header {
   text-align: center;
-  padding: 10px 0;
+  padding: 10px 0 0;
 }
 header img {
-  max-width: 350px; /* dimensione logo */
+  max-width: 350px;
   width: 100%;
   height: auto;
 }
+#coperto-text {
+  color: white;
+  font-size: 1.1em;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  margin-top: 8px;
+  font-weight: normal;
+  position: relative;
+  padding-bottom: 6px;
+}
+#coperto-text::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 2px;
+  background-color: #429DA6;
+  position: relative;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
 main {
   max-width: 800px;
   margin-bottom: 0px;
   margin: auto;
   padding: 0 10px 10px;
-  background-color:  transparent; /* tonalità di grigio elegante  sfondo sotto bottoni menu*/
+  background-color: transparent;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-button {
-  background-color: #429DA6; /* tonalità  sfondo  bottoni tutti menu*/
-  color: black;
-  padding: 12px 20px;
-  font-size: 1rem;
-  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
-  border: 3px solid black;
-  border-radius: 12px;
-  box-shadow: 4px 4px 0px black;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  outline: none;
+}
+main::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 2px;
+  background-color: #429DA6;
+  margin: 20px auto 0;
+  border-radius: 1px;
 }
 
-button:hover {
-  box-shadow: 2px 2px 0px black;
-  transform: translate(2px, 2px);
+.submenu {
+  display: none;
+}
+.pizza {
+  margin: 20px 0;
+  padding: 10px 5px;
+}
+.pizza-info {
+  padding: 5px 10px;
+}
+.pizza-name {
+  font-size: 1.395em;
+  margin: 0 0 6px 0;
+  font-weight: 600;
+}
+.pizza-ingredients {
+  font-size: 0.837em;
+  margin: 0 0 6px 0;
+  line-height: 1.3em;
+}
+.pizza-price {
+  font-weight: 600;
+  font-size: 1.023em;
+  margin: 0;
 }
 
-    .submenu {
-      display: none;
-    }
-    .pizza {
-      margin: 20px 0;
-      padding: 10px 5px;
-    }
-    .pizza-info {
-      padding: 5px 10px;
-    }
-    .pizza-name {
-      font-size: 1.395em;
-      margin: 0 0 6px 0;
-      font-weight: 600;
-    }
-    .pizza-ingredients {
-      font-size: 0.837em;
-      margin: 0 0 6px 0;
-      line-height: 1.3em;
-    }
-    .pizza-price {
-      font-weight: 600;
-      font-size: 1.023em;
-      margin: 0;
-    }
-    #coperto-text {
-      color: white;
-      font-size: 1.1em;
-      text-align: center;
-      font-family: 'Arial', sans-serif;
-      margin-top: 0px;                /* margine scritta coperto */
-      font-weight: normal;
-      position: relative;
-      padding-bottom: 6px;
-    }
-    #coperto-text::after {
-      content: "";
-      display: block;
-      width: 100%;  /*linea  scritta coperto larghezza */
-      height: 2px;   /* scritta copero altezza */
-      background-color: #429DA6; /* scritta copero colore linea */
-      position: relative;
-      bottom: 0;
-      left: 0;
-      border-radius: 1px;
-    }
-    /* Bandiere lingua in alto a sinistra */
-
+/* Bandiere lingua */
 #langToggle {
   position: fixed;
   top: 10px;
   left: 10px;
   z-index: 10000;
   display: flex;
-  gap: 12px; /* Bandiere distanze fra di loro */
-    }
-    #langToggle img {
-      width: 42px;
-      height: 31px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      border-radius: 4px;
-      user-select: none;
-      transition: border-color 0.3s;
-    }
-    #langToggle img.selected {
-      border-color: #2B2B2B;
-    }
-    .it, .en {
-      display: none;
-    }
-    @media (max-width: 480px) {
-      .menu-button {
-        width: 65%;    /* grandezza bottone menu*/
-        font-size: 1.1em;
-        display: block;
-        margin: 12px auto; /* centra il pulsante e aggiunge spazio sopra e sotto */
-      }
-      .pizza-name {
-        font-size: 1.2em;
-      }
-      .pizza-ingredients {
-        font-size: 0.75em;
-      }
-      .pizza-price {
-        font-size: 0.9em;
-      }
-    }
+  gap: 12px;
+}
+#langToggle img {
+  width: 42px;
+  height: 31px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  user-select: none;
+  transition: border-color 0.3s;
+}
+#langToggle img.selected {
+  border-color: #2B2B2B;
+}
+
+.it, .en {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .menu-button {
+    width: 65%;
+    font-size: 1.1em;
+    display: block;
+    margin: 12px auto;
+  }
+  .pizza-name {
+    font-size: 1.2em;
+  }
+  .pizza-ingredients {
+    font-size: 0.75em;
+  }
+  .pizza-price {
+    font-size: 0.9em;
+  }
+}
   </style>
 </head>
 <body>
 
-  <!-- Bandiere lingua -->
-  <div id="langToggle" role="navigation" aria-label="Selettore lingua">
-    <img src="https://flagcdn.com/w20/it.png" alt="Italiano" id="flag-it" tabindex="0" />
-    <img src="https://flagcdn.com/w20/gb.png" alt="English" id="flag-en" tabindex="0" />
-  </div>
+<!-- Bandiere lingua -->
+<div id="langToggle" role="navigation" aria-label="Selettore lingua">
+  <img src="https://flagcdn.com/w20/it.png" alt="Italiano" id="flag-it" tabindex="0" />
+  <img src="https://flagcdn.com/w20/gb.png" alt="English" id="flag-en" tabindex="0" />
+</div>
 
-  
-    <header>
+<header>
   <img src="logo2424.png" alt="Logo Mixed by Genny" />
   <p id="coperto-text">
     <span class="it">Coperto 2€, acqua 0.5L inclusa</span>
     <span class="en">Cover charge €2, 0.5L water included</span>
   </p>
 </header>
-  
-  
 
-  <main>
-<div class="button-container">
-</div>
+<main>
+  <div class="button-container"></div>
 
-    <!-- Pizze -->
-     <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 <span class="it">Pizze</span><span class="en">Pizza</span></button>
-    <div id="submenu-pizze" class="submenu">
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Margherita</p>
-          <p class="pizza-ingredients it">Pomodoro San Marzano, mozzarella di bufala</p>
-          <p class="pizza-ingredients en">San Marzano tomato, buffalo mozzarella</p>
-          <p class="pizza-price">10€</p>
-         <button class="raccontami-button" onclick="raccontaAneddoto('margherita')">
-  <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
-</button>
+  <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 <span class="it">Pizze</span><span class="en">Pizza</span></button>
+  <div id="submenu-pizze" class="submenu"> ... </div>
 
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Diavola</p>
-          <p class="pizza-ingredients it">Pomodoro, mozzarella, salame piccante</p>
-          <p class="pizza-ingredients en">Tomato, mozzarella, spicy salami</p>
-          <p class="pizza-price">12€</p>
-        <button class="raccontami-button" onclick="raccontaAneddoto('diavola')">
-  <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
-</button>
+  <button class="menu-button" onclick="toggleSubmenu('bibite')">🥤 <span class="it">Bibite</span><span class="en">Drinks</span></button>
+  <div id="submenu-bibite" class="submenu"> ... </div>
 
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Quattro Formaggi</p>
-          <p class="pizza-ingredients it">Mozzarella, gorgonzola, parmigiano, provola</p>
-          <p class="pizza-ingredients en">Mozzarella, gorgonzola, parmesan, provola cheese</p>
-          <p class="pizza-price">13€</p>
-        <button class="raccontami-button" onclick="raccontaAneddoto('quattro_formaggi')">
-  <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
-</button>
+  <button class="menu-button" onclick="toggleSubmenu('dolci')">🍰 <span class="it">Dolci</span><span class="en">Desserts</span></button>
+  <div id="submenu-dolci" class="submenu"> ... </div>
 
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Capricciosa</p>
-          <p class="pizza-ingredients it">Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive</p>
-          <p class="pizza-ingredients en">Tomato, mozzarella, cooked ham, mushrooms, artichokes, olives</p>
-          <p class="pizza-price">14€</p>
-          <button class="raccontami-button" onclick="raccontaAneddoto('capricciosa')">
-  <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
-</button>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Bibite -->
-   <button class="menu-button" onclick="toggleSubmenu('bibite')">🥤 <span class="it">Bibite</span><span class="en">Drinks</span></button>
-    <div id="submenu-bibite" class="submenu">
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Birra Chiara alla Spina</p>
-          <p class="pizza-price">5€</p>
-          <p class="it">Birra bionda fresca alla spina</p>
-          <p class="en">Fresh draft light beer</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Coca-Cola</p>
-          <p class="pizza-price">3€</p>
-          <p class="it">Bibita gassata classica</p>
-          <p class="en">Classic soda drink</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Acqua Naturale 0.5L</p>
-          <p class="pizza-price">2€</p>
-          <p class="it">Acqua minerale naturale</p>
-          <p class="en">Still mineral water</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dolci -->
-    <button class="menu-button" onclick="toggleSubmenu('dolci')">🍰 <span class="it">Dolci</span><span class="en">Desserts</span></button>
-    <div id="submenu-dolci" class="submenu">
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Tiramisù</p>
-          <p class="pizza-price">5€</p>
-          <p class="it">Classico dolce italiano a base di mascarpone e caffè</p>
-          <p class="en">Classic Italian dessert with mascarpone and coffee</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Panna Cotta</p>
-          <p class="pizza-price">5€</p>
-          <p class="it">Dolce al cucchiaio con panna e vaniglia</p>
-          <p class="en">Creamy dessert with vanilla and cream</p>
-        </div>
-      </div>
-    </div>
-
-  <!-- Allergeni -->
-   <button class="menu-button" onclick="toggleSubmenu('allergeni')">⚠️ Allergeni</button>
-    <div id="submenu-allergeni" class="submenu" style="text-align: left; padding: 10px 20px;">
-      <p><strong>Per la tua sicurezza, consulta la lista e per una migliore esperienza gastronomica, comunicaci le tue esigenze!</strong></p>
-      <hr>
-      <ul>
-        <li><strong>Latte:</strong> prodotti caseari, latticini e derivati<br><em>Milk: dairy products and derivatives</em></li>
-        <li><strong>Frutta a guscio:</strong> mandorle, nocciole, noci, pistacchi<br><em>Tree nuts: almonds, hazelnuts, walnuts, pistachios</em></li>
-        <li><strong>Sedano:</strong> a pezzi o nei preparati vegetali<br><em>Celery: pieces or in vegetable preparations</em></li>
-        <li><strong>Semi:</strong> nel pane o in alcuni tipi di farine<br><em>Seeds: in bread or certain flours</em></li>
-        <li><strong>Peperoncino</strong><br><em>Chili pepper</em></li>
-        <li><strong>Senape:</strong> nelle salse e nei condimenti<br><em>Mustard: in sauces and dressings</em></li>
-        <li><strong>Glutine:</strong> in tutti i cereali e suoi derivati<br><em>Gluten: in all cereals and derivatives</em></li>
-        <li><strong>Arachidi:</strong> creme e condimenti<br><em>Peanuts: creams and dressings</em></li>
-      </ul>
-    </div>
-
-    
-  </main>
+  <button class="menu-button" onclick="toggleSubmenu('allergeni')">⚠️ Allergeni</button>
+  <div id="submenu-allergeni" class="submenu" style="text-align: left; padding: 10px 20px;"> ... </div>
+</main>
 
 <script>
-  let currentLang = 'it';
+let currentLang = 'it';
 
-  // Funzione cambio lingua
-  function setLanguage(lang) {
-    currentLang = lang;
-
-    // Mostra/nascondi testi
-    document.querySelectorAll('.it').forEach(el => {
-      el.style.display = (lang === 'it') ? 'inline' : 'none';
-    });
-    document.querySelectorAll('.en').forEach(el => {
-      el.style.display = (lang === 'en') ? 'inline' : 'none';
-    });
-
-    // Evidenzia bandiera selezionata
-    document.getElementById('flag-it').classList.toggle('selected', lang === 'it');
-    document.getElementById('flag-en').classList.toggle('selected', lang === 'en');
-  }
-
-  // Eventi click e tastiera su bandiere
-  document.getElementById('flag-it').addEventListener('click', () => setLanguage('it'));
-  document.getElementById('flag-en').addEventListener('click', () => setLanguage('en'));
-  document.getElementById('flag-it').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLanguage('it'); }
+function setLanguage(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.it').forEach(el => {
+    el.style.display = (lang === 'it') ? 'inline' : 'none';
   });
-  document.getElementById('flag-en').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLanguage('en'); }
+  document.querySelectorAll('.en').forEach(el => {
+    el.style.display = (lang === 'en') ? 'inline' : 'none';
   });
+  document.getElementById('flag-it').classList.toggle('selected', lang === 'it');
+  document.getElementById('flag-en').classList.toggle('selected', lang === 'en');
+}
+document.getElementById('flag-it').addEventListener('click', () => setLanguage('it'));
+document.getElementById('flag-en').addEventListener('click', () => setLanguage('en'));
+document.getElementById('flag-it').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLanguage('it'); }
+});
+document.getElementById('flag-en').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLanguage('en'); }
+});
+setLanguage('it');
 
-  // Impostazione iniziale lingua italiana
-  setLanguage('it');
+function toggleSubmenu(id) {
+  const submenu = document.getElementById("submenu-" + id);
+  if (!submenu) return;
+  document.querySelectorAll('.submenu').forEach(el => {
+    if (el !== submenu) el.style.display = 'none';
+  });
+  submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+}
 
-  // Toggle sottomenu
-  function toggleSubmenu(id) {
-    const submenu = document.getElementById("submenu-" + id);
-    if (!submenu) return;
-    document.querySelectorAll('.submenu').forEach(el => {
-      if (el !== submenu) el.style.display = 'none';
-    });
-    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-  }
-
-  // Funzione racconta aneddoto con sintesi vocale
-  function raccontaAneddoto(tipo) {
-    const aneddoti = {
-      margherita: {
-        it: "La pizza Margherita fu creata in onore della regina Margherita di Savoia.",
-        en: "The Margherita pizza was created to honor Queen Margherita of Savoy."
-      },
-      diavola: {
-        it: "La pizza Diavola è famosa per il suo sapore piccante e deciso.",
-        en: "The Diavola pizza is famous for its spicy and strong flavor."
-      },
-      quattro_formaggi: {
-        it: "La Quattro Formaggi è amata per la sua ricca combinazione di formaggi.",
-        en: "The Four Cheese pizza is loved for its rich cheese combination."
-      },
-      capricciosa: {
-        it: "La Capricciosa è una pizza ricca e varia, piena di gustosi ingredienti.",
-        en: "The Capricciosa is a rich and varied pizza, full of tasty ingredients."
-      }
-    };
-
-    if (!aneddoti[tipo]) return; // Sicurezza
-
-    const msg = new SpeechSynthesisUtterance(aneddoti[tipo][currentLang]);
-    msg.lang = currentLang === 'it' ? 'it-IT' : 'en-GB';
-    window.speechSynthesis.speak(msg);
-  }
+function raccontaAneddoto(tipo) {
+  const aneddoti = {
+    margherita: {
+      it: "La pizza Margherita fu creata in onore della regina Margherita di Savoia.",
+      en: "The Margherita pizza was created to honor Queen Margherita of Savoy."
+    },
+    diavola: {
+      it: "La pizza Diavola è famosa per il suo sapore piccante e deciso.",
+      en: "The Diavola pizza is famous for its spicy and strong flavor."
+    },
+    quattro_formaggi: {
+      it: "La Quattro Formaggi è amata per la sua ricca combinazione di formaggi.",
+      en: "The Four Cheese pizza is loved for its rich cheese combination."
+    },
+    capricciosa: {
+      it: "La Capricciosa è una pizza ricca e varia, piena di gustosi ingredienti.",
+      en: "The Capricciosa is a rich and varied pizza, full of tasty ingredients."
+    }
+  };
+  if (!aneddoti[tipo]) return;
+  const msg = new SpeechSynthesisUtterance(aneddoti[tipo][currentLang]);
+  msg.lang = currentLang === 'it' ? 'it-IT' : 'en-GB';
+  window.speechSynthesis.speak(msg);
+}
 </script>
 </body>
 </html>
