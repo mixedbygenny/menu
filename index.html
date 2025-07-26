@@ -88,7 +88,7 @@ main {
 main::after {
   content: "";
   display: block;
-  width: 60%;
+  width: 70%;
   height: 2px;
   background-color: #429DA6;
   margin: 20px auto 0;
@@ -138,26 +138,27 @@ button:hover {
       font-size: 1.023em;
       margin: 0;
     }
-    #coperto-text {
-      color: white;
-      font-size: 1.1em;
-      text-align: center;
-      font-family: 'Arial', sans-serif;
-      margin-top: 0px;                /* margine scritta coperto */
-      font-weight: normal;
-      position: relative;
-      padding-bottom: 6px;
-    }
-    #coperto-text::after {
-      content: "";
-      display: block;
-      width: 80%;  /*linea  scritta coperto larghezza */
-      height: 2px;   /* scritta copero altezza */
-      background-color: #429DA6; /* scritta copero colore linea */
-      position: relative;
-      bottom: 0;
-      left: 0;
-      border-radius: 1px;
+  #coperto-text {
+  color: white;
+  font-size: 1.1em;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  margin-top: 8px;
+  font-weight: normal;
+  position: relative;
+  padding-bottom: 6px;
+}
+#coperto-text::after {
+  content: "";
+  display: block;
+  width: 70%;
+  height: 2px;
+  background-color: #429DA6;
+  position: relative;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 1px;
     }
     /* Bandiere lingua in alto a sinistra */
     
