@@ -126,12 +126,15 @@ button:hover {
       padding: 10px 5px;
     }
     .pizza-info {
-      padding: 5px 10px;
+  display: flex;
+  justify-content: space-between; /* Spazio tra nome e prezzo */
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 5px 10px;
     }
-    .pizza-name {
-      font-size: 1.395em;
-      margin: 0 0 6px 0;
-      font-weight: 600;
+  .pizza-name,
+.pizza-ingredients {
+  flex: 1 1 70%;
     }
     .pizza-ingredients {
       font-size: 1.2em;
@@ -139,9 +142,11 @@ button:hover {
       line-height: 1.3em;
     }
     .pizza-price {
-      font-weight: 600;
-      font-size: 1.023em;
-      margin: 0;
+  flex: 1 1 30%;
+  text-align: right;
+  font-weight: 600;
+  font-size: 1.023em;
+  margin: 0;
     }
 #coperto-text {
   background-color: #429DA6;                                                 /* stesso colore dei pulsanti */
