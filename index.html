@@ -8,25 +8,20 @@
   <style>
 
 
-    
-html, body {
-  overflow: hidden;
-  height: 100%;
+body {
+  background-image: url('abstract-blue-.avif');                  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* ← questa riga fissa l'immagine */
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-body {
-  
-  margin: 0;
-  background-color: #000000;
-  background-image: url('abstract-blue-.avif');                  /* immagine sfondo */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-  color: #ffffff;
-  padding: 10px;
-  box-sizing: border-box;
-}
 
 /* Sposta fuori #logo dal body */
 #logo {
