@@ -9,15 +9,9 @@
 
 body {
   
-  #logo {
-  display: block;
-  margin: 0 auto 0px auto;                                             /* ← questo aumenta lo spazio sotto il logo */
-  max-width: 200px;                                                    /* o qualsiasi dimensione tu stia usando */
-}
-
   margin: 0;
   background-color: #000000;
-  background-image: url('abstract-blue-.avif');                                            /* immagine sfondo  */
+  background-image: url('abstract-blue-.avif');                  /* immagine sfondo */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -25,6 +19,15 @@ body {
   color: #ffffff;
   padding: 10px;
   box-sizing: border-box;
+}
+
+/* Sposta fuori #logo dal body */
+#logo {
+  display: block;
+  margin: 0 auto 0px auto;
+  max-width: 200px;
+}
+
 
 }
 /* Container per i pulsanti */
