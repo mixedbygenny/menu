@@ -7,27 +7,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
   <style>
 
-
 body {
-  background-image: url('abstract-blue-.avif');                  
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed; /* ← questa riga fissa l'immagine */
-  margin: 0;
-  font-family: 'Playfair Display', serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  
+  #logo {
+  display: block;
+  margin: 0 auto 0px auto;                                             /* ← questo aumenta lo spazio sotto il logo */
+  max-width: 200px;                                                    /* o qualsiasi dimensione tu stia usando */
 }
 
-
-/* Sposta fuori #logo dal body */
-#logo {
-  display: block;
-  margin: 0 auto 0px auto;
-  max-width: 200px;
+  margin: 0;
+  background-color: #000000;
+  background-image: url('abstract-blue-.avif');                                            /* immagine sfondo  */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #ffffff;
+  padding: 10px;
+  box-sizing: border-box;
 
 }
 /* Container per i pulsanti */
