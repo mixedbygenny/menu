@@ -159,16 +159,23 @@
       flex-wrap: wrap;
       padding: 5px 10px;
     }
-.pizza-name {
-  font-size: 2em; /* Nome più grande */
+.pizza-name,
+.pizza-ingredients {
+  flex: 1 1 70%;
 }
 
 .pizza-ingredients {
-  font-size: 1.5em; /* Ingredienti più grandi */
+  font-size: 1.2em;
+  margin: 0 0 6px 0;
+  line-height: 1.3em;
 }
 
 .pizza-price {
-  font-size: 1.4em; /* Prezzo più grande */
+  flex: 1 1 30%;
+  text-align: right;
+  font-weight: 600;
+  font-size: 1.023em;
+  margin: 0;
 }
 
     }
