@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -61,7 +62,7 @@
     }
 
     #coperto-text {
-      background-color: #708090;        /* Pulsanti coperto colore #FFF0D4 old */
+      background-color: #FFF0D4;
       color: black;
       font-size: 1.4em;
       text-align: center;
@@ -87,9 +88,6 @@
       transform: translateX(-50%);
       border-radius: 1px;
     }
-#coperto-text::after {           /* per cancellare lal linea sotto scritta coperto */
-  display: none;
-}
 
     main {
       max-width: 800px;
@@ -122,7 +120,7 @@
     .menu-button {
       display: block;
       margin: 20px auto;
-      background-color: #708090;    /* Pulsanti menu principali colore #FFF0D4 old */
+      background-color: #FFF0D4;
       color: black;
       padding: 12px 20px;
       font-size: 1.5rem;
@@ -159,34 +157,30 @@
       flex-wrap: wrap;
       padding: 5px 10px;
     }
-.pizza-name,
-.pizza-ingredients {
-  flex: 1 1 70%;
-}
-
-.pizza-ingredients {
-  font-size: 1.2em;
-  margin: 0 0 6px 0;
-  line-height: 1.3em;
-}
-
-.pizza-price {
-  flex: 1 1 30%;
-  text-align: right;
-  font-weight: 600;
-  font-size: 1.023em;
-  margin: 0;
-}
-
+    .pizza-name,
+    .pizza-ingredients {
+      flex: 1 1 70%;
+    }
+    .pizza-ingredients {
+      font-size: 1.2em;
+      margin: 0 0 6px 0;
+      line-height: 1.3em;
+    }
+    .pizza-price {
+      flex: 1 1 30%;
+      text-align: right;
+      font-weight: 600;
+      font-size: 1.023em;
+      margin: 0;
     }
 
     /* Pulsante raccontami */
     .raccontami-button {
       margin-top: 5px;
-      background-color: #708090;   /* Pulsante raccontami colore */
+      background-color: #FFF0D4;
       color: black;
       padding: 6px 12px;
-      font-size: 1.3rem;            /* Pulsante raccontami grandezza testo */
+      font-size: 1rem;
       font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
       border-radius: 8px;
       cursor: pointer;
