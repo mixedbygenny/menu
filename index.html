@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -7,7 +6,7 @@
   <title>Mixed by Genny - Menu</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
   <style>
-    /* ========== SFONDO RUSTICO SFOCATO ========== */
+    /* ========== SFONDO LEGNO SCURO RUSTICO ========== */
     body {
       margin: 0;
       padding: 10px;
@@ -17,8 +16,6 @@
       position: relative;
       overflow-x: hidden;
     }
-
-    /* Sfondo sfocato */
     body::before {
       content: "";
       position: fixed;
@@ -26,16 +23,14 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('sfondo_marrone.png'); /* Usa la tua immagine */
+      background-image: url('sfondo_legno.jpg'); /* Inserisci qui l'immagine di sfondo */
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      filter: blur(6px) brightness(0.8);
+      filter: blur(6px) brightness(0.7);
       z-index: -2;
-      pointer-events: none; /* Non blocca i click */
+      pointer-events: none;
     }
-
-    /* Overlay leggero per contrasto testo */
     body::after {
       content: "";
       position: fixed;
@@ -62,17 +57,16 @@
     }
 
     #coperto-text {
-      background-color: #FFF0D4;
-      color: black;
+      background-color: #9A8468; /* Beaver */
+      color: #FFFFFF;
       font-size: 1.4em;
       text-align: center;
       font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
       margin: 10px auto;
       padding: 10px 20px;
       font-weight: normal;
-      border: 3px transparent;
+      border: 3px solid #4B3929; /* Café Noir */
       border-radius: 12px;
-      box-shadow: 4px 4px 0px transparent;
       width: fit-content;
     }
 
@@ -81,11 +75,8 @@
       display: block;
       width: 80%;
       height: 2px;
-      background-color: #FFF0D4;
-      position: relative;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      background-color: #C65D3B; /* Rust Orange */
+      margin: 5px auto 0;
       border-radius: 1px;
     }
 
@@ -102,7 +93,7 @@
       display: block;
       width: 90%;
       height: 2px;
-      background-color: #FFF0D4;
+      background-color: #C65D3B;
       margin: 20px auto 0;
       border-radius: 1px;
     }
@@ -120,23 +111,21 @@
     .menu-button {
       display: block;
       margin: 20px auto;
-      background-color: #FFF0D4;
-      color: black;
+      background-color: #9A8468;
+      color: #FFFFFF;
       padding: 12px 20px;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
       font-weight: bold;
-      border: 3px transparent;
+      border: 3px solid #4B3929;
       border-radius: 12px;
-      box-shadow: 4px 4px 0px transparent;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
       outline: none;
       width: fit-content;
     }
-
     .menu-button:hover {
-      box-shadow: 2px 2px 0px black;
+      background-color: #C65D3B;
       transform: translate(2px, 2px);
     }
 
@@ -149,6 +138,7 @@
     .pizza {
       margin: 20px 0;
       padding: 10px 5px;
+      border-bottom: 1px solid #8A6955; /* Warm Taupe */
     }
     .pizza-info {
       display: flex;
@@ -157,33 +147,42 @@
       flex-wrap: wrap;
       padding: 5px 10px;
     }
-    .pizza-name,
-    .pizza-ingredients {
+    .pizza-name {
       flex: 1 1 70%;
+      font-size: 1.6em;
+      color: #FFFFFF;
+      margin: 0;
     }
     .pizza-ingredients {
-      font-size: 1.2em;
+      flex: 1 1 70%;
+      font-size: 1.3em;
       margin: 0 0 6px 0;
-      line-height: 1.3em;
+      line-height: 1.4em;
+      color: #F4EBDD;
     }
     .pizza-price {
       flex: 1 1 30%;
       text-align: right;
       font-weight: 600;
-      font-size: 1.023em;
+      font-size: 1.4em;
       margin: 0;
+      color: #FFFFFF;
     }
 
     /* Pulsante raccontami */
     .raccontami-button {
       margin-top: 5px;
-      background-color: #FFF0D4;
-      color: black;
+      background-color: #9A8468;
+      color: #FFFFFF;
       padding: 6px 12px;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
       border-radius: 8px;
       cursor: pointer;
+      border: 2px solid #4B3929;
+    }
+    .raccontami-button:hover {
+      background-color: #C65D3B;
     }
 
     /* Bandiere lingua */
@@ -205,7 +204,7 @@
       transition: border-color 0.3s;
     }
     #langToggle img.selected {
-      border-color: #2B2B2B;
+      border-color: #C65D3B;
     }
     .it, .en {
       display: none;
@@ -215,13 +214,12 @@
     @media (max-width: 480px) {
       .menu-button {
         width: 65%;
-        font-size: 1.1em;
-        display: block;
+        font-size: 1.3em;
         margin: 12px auto;
       }
-      .pizza-name { font-size: 1.2em; }
-      .pizza-ingredients { font-size: 0.9em; }
-      .pizza-price { font-size: 0.9em; }
+      .pizza-name { font-size: 1.3em; }
+      .pizza-ingredients { font-size: 1.1em; }
+      .pizza-price { font-size: 1.2em; }
     }
   </style>
 </head>
@@ -363,7 +361,6 @@
     let currentLang = 'it';
     let currentUtterance = null;
 
-    // Cambio lingua
     function setLanguage(lang) {
       currentLang = lang;
       document.querySelectorAll('.it').forEach(el => el.style.display = (lang === 'it') ? 'inline' : 'none');
@@ -374,16 +371,9 @@
 
     document.getElementById('flag-it').addEventListener('click', () => setLanguage('it'));
     document.getElementById('flag-en').addEventListener('click', () => setLanguage('en'));
-    document.getElementById('flag-it').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLanguage('it'); }
-    });
-    document.getElementById('flag-en').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLanguage('en'); }
-    });
 
     setLanguage('it');
 
-    // Toggle sottomenu
     function toggleSubmenu(id) {
       const submenu = document.getElementById("submenu-" + id);
       if (!submenu) return;
@@ -391,19 +381,16 @@
         if (el !== submenu) el.style.display = 'none';
       });
       submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-      stopSpeaking(); // interrompe eventuale racconto in corso
+      stopSpeaking();
     }
 
-    // Interrompe sintesi vocale
     function stopSpeaking() {
       window.speechSynthesis.cancel();
       currentUtterance = null;
     }
 
-    // Funzione racconta aneddoto
     function raccontaAneddoto(tipo) {
-      stopSpeaking(); // interrompi qualsiasi audio in corso
-
+      stopSpeaking();
       const aneddoti = {
         margherita: {
           it: "La pizza Margherita fu creata in onore della regina Margherita di Savoia.",
@@ -422,17 +409,11 @@
           en: "The Capricciosa is a rich and varied pizza, full of tasty ingredients."
         }
       };
-
       if (!aneddoti[tipo]) return;
       currentUtterance = new SpeechSynthesisUtterance(aneddoti[tipo][currentLang]);
       currentUtterance.lang = currentLang === 'it' ? 'it-IT' : 'en-GB';
       window.speechSynthesis.speak(currentUtterance);
     }
-
-    // Interrompe la lettura se clicchi qualunque punto dello schermo
-    document.addEventListener('click', function() {
-      if (currentUtterance) stopSpeaking();
-    }, true);
   </script>
 </body>
 </html>
