@@ -6,7 +6,7 @@
   <title>Mixed by Genny - Menu</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
   <style>
-    /* ======== SFONDO ======== */
+    /* ========== SFONDO ========== */
     body {
       margin: 0;
       padding: 10px;
@@ -27,6 +27,7 @@
       background-size: cover;
       filter: blur(2px) brightness(0.7);
       z-index: -2;
+      pointer-events: none;
     }
     body::after {
       content: "";
@@ -35,9 +36,10 @@
       width: 100%; height: 100%;
       background-color: rgba(0,0,0,0.25);
       z-index: -1;
+      pointer-events: none;
     }
 
-    /* ======== HEADER ======== */
+    /* ========== HEADER ========== */
     header {
       text-align: center;
       padding: 10px 0;
@@ -49,7 +51,6 @@
       display: block;
       margin: 0 auto;
     }
-
     #coperto-text {
       background-color: #9A8468;
       color: #FFFFFF;
@@ -78,7 +79,7 @@
       padding: 0 10px 10px;
     }
 
-    /* ======== BOTTONI MENU ======== */
+    /* ========== PULSANTI MENU ========== */
     .menu-button {
       display: flex;
       align-items: center;
@@ -99,7 +100,7 @@
       width: fit-content;
     }
     .menu-button img {
-      height: 1.5em; /* Altezza icona proporzionale al testo */
+      height: 1.5em;
       width: auto;
       display: block;
     }
@@ -108,7 +109,7 @@
       transform: translate(2px, 2px);
     }
 
-    /* ======== VOCI MENU ======== */
+    /* ========== SUBMENU ========== */
     .submenu { display: none; }
     .pizza {
       margin: 20px 0;
@@ -143,6 +144,7 @@
       margin: 0;
       color: #FFFFFF;
     }
+
     .raccontami-button {
       margin-top: 5px;
       background-color: #9A8468;
@@ -156,7 +158,19 @@
     }
     .raccontami-button:hover { background-color: #C65D3B; }
 
-    /* ======== BANDIERE ======== */
+    /* Pergamena per allergeni */
+    #submenu-allergeni {
+      background: url('https://i.imgur.com/MYtA6uU.png') repeat;
+      background-size: cover;
+      border: 3px solid #4B3929;
+      border-radius: 15px;
+      color: #3b2a1a;
+      padding: 15px;
+      font-weight: bold;
+    }
+    #submenu-allergeni ul li { margin-bottom: 8px; }
+
+    /* BANDIERE */
     #langToggle {
       position: fixed;
       top: 10px; left: 10px;
@@ -174,13 +188,9 @@
     #langToggle img.selected { border-color: #C65D3B; }
     .it, .en { display: none; }
 
-    /* ======== RESPONSIVE ======== */
+    /* Responsive */
     @media (max-width: 480px) {
-      .menu-button {
-        width: 65%;
-        font-size: 1.3em;
-        margin: 12px auto;
-      }
+      .menu-button { width: 65%; font-size: 1.3em; margin: 12px auto; }
       .menu-button img { height: 1.2em; }
       .pizza-name { font-size: 1.3em; }
       .pizza-ingredients { font-size: 1.1em; }
@@ -192,8 +202,8 @@
 
   <!-- Selettore lingua -->
   <div id="langToggle">
-    <img src="https://flagcdn.com/w20/it.png" alt="Italiano" id="flag-it" tabindex="0" />
-    <img src="https://flagcdn.com/w20/gb.png" alt="English" id="flag-en" tabindex="0" />
+    <img src="https://flagcdn.com/w20/it.png" alt="Italiano" id="flag-it" />
+    <img src="https://flagcdn.com/w20/gb.png" alt="English" id="flag-en" />
   </div>
 
   <header>
@@ -210,25 +220,58 @@
       <img src="pizza-icon.png" alt="Pizza Icon"> 
       <span class="it">Pizze</span><span class="en">Pizza</span>
     </button>
+    <div id="submenu-pizze" class="submenu">
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Margherita</p>
+          <p class="pizza-ingredients it">Pomodoro San Marzano, mozzarella di bufala</p>
+          <p class="pizza-ingredients en">San Marzano tomato, buffalo mozzarella</p>
+          <p class="pizza-price">10€</p>
+          <button class="raccontami-button" onclick="raccontaAneddoto('margherita')"><span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span></button>
+        </div>
+      </div>
+    </div>
 
     <!-- Bibite -->
     <button class="menu-button" onclick="toggleSubmenu('bibite')">
       <img src="drink-icon.png" alt="Drink Icon"> 
       <span class="it">Bibite</span><span class="en">Drinks</span>
     </button>
+    <div id="submenu-bibite" class="submenu">
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Coca-Cola</p>
+          <p class="pizza-price">3€</p>
+        </div>
+      </div>
+    </div>
 
     <!-- Dolci -->
     <button class="menu-button" onclick="toggleSubmenu('dolci')">
       <img src="dessert-icon.png" alt="Dessert Icon"> 
       <span class="it">Dolci</span><span class="en">Desserts</span>
     </button>
+    <div id="submenu-dolci" class="submenu">
+      <div class="pizza">
+        <div class="pizza-info">
+          <p class="pizza-name">Tiramisù</p>
+          <p class="pizza-price">5€</p>
+        </div>
+      </div>
+    </div>
 
     <!-- Allergeni -->
     <button class="menu-button" onclick="toggleSubmenu('allergeni')">
-      <img src="allergen-icon.png" alt="Allergens Icon"> 
-      ⚠️ Allergeni
+      <img src="allergen-icon.png" alt="Allergens Icon"> ⚠️ Allergeni
     </button>
-
+    <div id="submenu-allergeni" class="submenu">
+      <p>Consulta la lista per la tua sicurezza</p>
+      <ul>
+        <li>Latte - Milk</li>
+        <li>Frutta a guscio - Nuts</li>
+        <li>Glutine - Gluten</li>
+      </ul>
+    </div>
   <main>
     <!-- Pizze -->
     <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 <span class="it">Pizze</span><span class="en">Pizza</span></button>
@@ -347,7 +390,7 @@
     </div>
   </main>
 
-    <script>
+   <script>
     let currentLang = 'it';
     let currentUtterance = null;
 
@@ -371,10 +414,19 @@
       submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
       stopSpeaking();
     }
-
     function stopSpeaking() {
       window.speechSynthesis.cancel();
       currentUtterance = null;
+    }
+    function raccontaAneddoto(tipo) {
+      stopSpeaking();
+      const aneddoti = {
+        margherita: { it: "La pizza Margherita fu creata per la regina Margherita.", en: "The Margherita pizza was created for Queen Margherita." }
+      };
+      if (!aneddoti[tipo]) return;
+      currentUtterance = new SpeechSynthesisUtterance(aneddoti[tipo][currentLang]);
+      currentUtterance.lang = currentLang === 'it' ? 'it-IT' : 'en-GB';
+      window.speechSynthesis.speak(currentUtterance);
     }
   </script>
 </body>
