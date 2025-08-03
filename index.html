@@ -120,13 +120,17 @@
 }
 
     
-/* Pulsante Allergeni più grande e distanziato */
 #btn-allergeni {
-  width: 320px;         /* Più largo */
-  padding: 10px 30px;   /* Più alto e più spazioso */
-  margin: 30px auto;    /* Maggiore spazio sopra e sotto */
-  font-size: 1.8rem;    /* Testo leggermente più grande */
+  width: 320px;            /* Più largo */
+  padding: 12px 20px;      /* Spazio interno */
+  margin: 30px auto;       /* Maggiore spazio sopra e sotto */
+  font-size: 1.8rem;       /* Testo più grande */
+  display: flex;           /* Usa flex per centrare contenuto */
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center;     /* Centra verticalmente */
+  gap: 8px;                /* Piccolo spazio tra emoji e scritta */
 }
+
 
 .menu-button:hover {
   background-color: #C65D3B;
