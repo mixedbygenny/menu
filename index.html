@@ -98,35 +98,36 @@
 
 /* Pulsanti menu */
 .menu-button {
-  display: inline-flex;                  /* inline-flex per adattarsi meglio al contenuto */
-  align-items: center;                   /* centra verticalmente icona e testo */
-  justify-content: center;               /* centra orizzontalmente */
-  gap: 6px;                              /* leggermente ridotto per compattezza */
-  margin: 20px auto;                     /* distanza dagli altri elementi */
-  background-color: #9A8468;             /* colore bottone */
-  color: #FFFFFF;                        /* colore testo */
-  padding: 0 14px;                       /* 0px verticale per altezza minima */
-  font-size: 1.6rem;                     /* grandezza testo */
+  display: flex;
+  align-items: center;           /* Allinea icona e testo perfettamente al centro verticale */
+  justify-content: center;       /* Centra tutto orizzontalmente */
+  gap: 3px;                      /* Gap ridottissimo fra icona e testo */
+  margin: 20px auto;             /* Mantiene i pulsanti centrati nella pagina */
+  background-color: #9A8468;     
+  color: #FFFFFF;
+  padding: 0 12px;               /* Altezza minima: padding verticale 0 */
+  font-size: 1.6rem;
   font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
   font-weight: bold;
-  border: 3px solid #4B3929;             /* bordo marrone */
-  border-radius: 12px;                   /* angoli arrotondati */
+  border: 3px solid #4B3929;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   outline: none;
-  width: fit-content;                    /* si adatta al contenuto */
-  line-height: 1;                        /* elimina spazio verticale extra del font */
+  width: fit-content;
+  line-height: 1;                /* Rimuove spazio verticale extra del font */
 }
 
 .menu-button:hover {
-  background-color: #C65D3B;             /* colore al passaggio mouse */
-  transform: translate(2px, 2px);        /* piccolo effetto pressione */
+  background-color: #C65D3B;
+  transform: translate(2px, 2px);
 }
 
 .menu-button img {
-  height: 2.2em;                         /* più piccolo per abbassare il bottone */
+  height: 2em;                   /* Icona leggermente più piccola */
   width: auto;
-  display: block;                        /* elimina spazio fantasma sotto l’immagine */
+  display: block;                /* Elimina spazio fantasma sotto le icone */
+
 
 
     }
