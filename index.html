@@ -23,11 +23,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('sacco.jpg'); /* Inserisci qui l'immagine di sfondo */
+      background-image: url('sacco.jpg');
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      filter: blur(2px) brightness(0.7);   /* blur per sfocare immagine sfondo */
+      filter: blur(2px) brightness(0.7);
       z-index: -2;
       pointer-events: none;
     }
@@ -57,7 +57,7 @@
     }
 
     #coperto-text {
-      background-color: #9A8468; /* Beaver */
+      background-color: #9A8468;
       color: #FFFFFF;
       font-size: 1.4em;
       text-align: center;
@@ -65,17 +65,16 @@
       margin: 10px auto;
       padding: 10px 20px;
       font-weight: normal;
-      border: 3px solid #4B3929; /* Café Noir */
+      border: 3px solid #4B3929;
       border-radius: 12px;
       width: fit-content;
     }
-
     #coperto-text::after {
       content: "";
       display: block;
-      width: 100%;            /* linea coperto */
+      width: 100%;
       height: 2px;
-      background-color: #C65D3B; /* Rust Orange */
+      background-color: #C65D3B;
       margin: 5px auto 0;
       border-radius: 1px;
     }
@@ -87,7 +86,6 @@
       background-color: transparent;
       border-radius: 12px;
     }
-
     main::after {
       content: "";
       display: block;
@@ -109,7 +107,10 @@
 
     /* Pulsanti menu principali */
     .menu-button {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       margin: 20px auto;
       background-color: #9A8468;
       color: #FFFFFF;
@@ -128,17 +129,20 @@
       background-color: #C65D3B;
       transform: translate(2px, 2px);
     }
+    .icon-button {
+      width: 1.6em;
+      height: 1.6em;
+      object-fit: contain;
+    }
 
     /* Contenitori submenu */
-    .submenu {
-      display: none;
-    }
+    .submenu { display: none; }
 
     /* Elementi singola voce menu */
     .pizza {
       margin: 20px 0;
       padding: 10px 5px;
-      border-bottom: 1px solid #8A6955; /* Warm Taupe */
+      border-bottom: 1px solid #8A6955;
     }
     .pizza-info {
       display: flex;
@@ -181,9 +185,7 @@
       cursor: pointer;
       border: 2px solid #4B3929;
     }
-    .raccontami-button:hover {
-      background-color: #C65D3B;
-    }
+    .raccontami-button:hover { background-color: #C65D3B; }
 
     /* Bandiere lingua */
     #langToggle {
@@ -203,12 +205,8 @@
       user-select: none;
       transition: border-color 0.3s;
     }
-    #langToggle img.selected {
-      border-color: #C65D3B;
-    }
-    .it, .en {
-      display: none;
-    }
+    #langToggle img.selected { border-color: #C65D3B; }
+    .it, .en { display: none; }
 
     /* Responsive */
     @media (max-width: 480px) {
@@ -241,7 +239,10 @@
 
   <main>
     <!-- Pizze -->
-    <button class="menu-button" onclick="toggleSubmenu('pizze')">🍕 <span class="it">Pizze</span><span class="en">Pizza</span></button>
+    <button class="menu-button" onclick="toggleSubmenu('pizze')">
+      <img src="pizza-icon.png" alt="Pizza" class="icon-button">
+      <span class="it">Pizze</span><span class="en">Pizza</span>
+    </button>
     <div id="submenu-pizze" class="submenu">
       <div class="pizza">
         <div class="pizza-info">
@@ -290,7 +291,10 @@
     </div>
 
     <!-- Bibite -->
-    <button class="menu-button" onclick="toggleSubmenu('bibite')">🥤 <span class="it">Bibite</span><span class="en">Drinks</span></button>
+    <button class="menu-button" onclick="toggleSubmenu('bibite')">
+      <img src="bibite.png" alt="Bibite" class="icon-button">
+      <span class="it">Bibite</span><span class="en">Drinks</span>
+    </button>
     <div id="submenu-bibite" class="submenu">
       <div class="pizza">
         <div class="pizza-info">
@@ -319,7 +323,10 @@
     </div>
 
     <!-- Dolci -->
-    <button class="menu-button" onclick="toggleSubmenu('dolci')">🍰 <span class="it">Dolci</span><span class="en">Desserts</span></button>
+    <button class="menu-button" onclick="toggleSubmenu('dolci')">
+      <img src="dolci.png" alt="Dolci" class="icon-button">
+      <span class="it">Dolci</span><span class="en">Desserts</span>
+    </button>
     <div id="submenu-dolci" class="submenu">
       <div class="pizza">
         <div class="pizza-info">
@@ -393,8 +400,8 @@
       stopSpeaking();
       const aneddoti = {
         margherita: {
-          it: "La pizza Margherita fu creata in onore della regina Margherita di Savoia.",
-          en: "The Margherita pizza was created to honor Queen Margherita of Savoy."
+          it: "La pizza Margherita fu creata in onore della regina Margherita di Savoia chella granda bottana.",
+          en: "The Margherita pizza was created to honor Queen Margherita of Savoy a very big bitch."
         },
         diavola: {
           it: "La pizza Diavola è famosa per il suo sapore piccante e deciso.",
@@ -405,8 +412,8 @@
           en: "The Four Cheese pizza is loved for its rich cheese combination."
         },
         capricciosa: {
-          it: "La Capricciosa è una pizza ricca e varia, piena di gustosi ingredienti.",
-          en: "The Capricciosa is a rich and varied pizza, full of tasty ingredients."
+          it: "La Capricciosa è una pizza ricca e varia
+       en: "The Capricciosa is a rich and varied pizza, full of tasty ingredients."
         }
       };
       if (!aneddoti[tipo]) return;
