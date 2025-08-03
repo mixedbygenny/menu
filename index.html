@@ -96,16 +96,16 @@
       border-radius: 1px;
     }
 
-/* Pulsanti menu */
+/* Pulsanti menu - icona a sinistra allineata in colonna */
 .menu-button {
   display: flex;
-  align-items: center;           /* Allinea icona e testo perfettamente al centro verticale */
-  justify-content: center;       /* Centra tutto orizzontalmente */
-  gap: 3px;                      /* Gap ridottissimo fra icona e testo */
-  margin: 20px auto;             /* Mantiene i pulsanti centrati nella pagina */
-  background-color: #9A8468;     
+  align-items: center;             /* Centra verticalmente icona e testo */
+  justify-content: flex-start;     /* Contenuto allineato a sinistra */
+  gap: 6px;                        /* Piccolo spazio tra icona e testo */
+  margin: 20px auto;               /* Pulsanti centrati nella pagina */
+  background-color: #9A8468;
   color: #FFFFFF;
-  padding: 0 12px;               /* Altezza minima: padding verticale 0 */
+  padding: 0 16px;                 /* Minima altezza */
   font-size: 1.6rem;
   font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
   font-weight: bold;
@@ -114,8 +114,9 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   outline: none;
-  width: fit-content;
-  line-height: 1;                /* Rimuove spazio verticale extra del font */
+  width: 260px;                    /* Larghezza fissa per allineare le icone tra loro */
+  line-height: 1;                  /* Rimuove spazio extra verticale */
+  box-sizing: border-box;
 }
 
 .menu-button:hover {
@@ -124,13 +125,11 @@
 }
 
 .menu-button img {
-  height: 2em;                   /* Icona leggermente più piccola */
+  height: 2em;                     /* Icona compatta */
   width: auto;
-  display: block;                /* Elimina spazio fantasma sotto le icone */
+  display: block;                  /* Elimina spazio fantasma */
+}
 
-
-
-    }
 
     /* Submenu */
     .submenu { display: none; }
