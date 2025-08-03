@@ -119,6 +119,15 @@
   box-sizing: border-box;
 }
 
+    
+/* Pulsante Allergeni più grande e distanziato */
+#btn-allergeni {
+  width: 320px;         /* Più largo */
+  padding: 10px 30px;   /* Più alto e più spazioso */
+  margin: 30px auto;    /* Maggiore spazio sopra e sotto */
+  font-size: 1.8rem;    /* Testo leggermente più grande */
+}
+
 .menu-button:hover {
   background-color: #C65D3B;
   transform: translate(2px, 2px);
@@ -263,7 +272,9 @@
     </div>
 
     <!-- Allergeni -->
-    <button class="menu-button" onclick="toggleSubmenu('allergeni')">⚠️ Allergeni</button>
+   <button class="menu-button" id="btn-allergeni" onclick="toggleSubmenu('allergeni')">
+  ⚠️ Allergeni
+</button>
     <div id="submenu-allergeni" class="submenu" style="text-align: left; padding: 10px 20px;">
       <p><strong>Per la tua sicurezza, consulta la lista e per una migliore esperienza gastronomica, comunicaci le tue esigenze!</strong></p>
       <hr>
