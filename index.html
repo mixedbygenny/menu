@@ -23,7 +23,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('sacco.jpg');
+      background-image: url('sacco.jpg'); /* sfondo */
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
@@ -69,6 +69,7 @@
       border-radius: 12px;
       width: fit-content;
     }
+
     #coperto-text::after {
       content: "";
       display: block;
@@ -86,6 +87,7 @@
       background-color: transparent;
       border-radius: 12px;
     }
+
     main::after {
       content: "";
       display: block;
@@ -96,21 +98,12 @@
       border-radius: 1px;
     }
 
-    /* Container pulsanti menu */
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      margin-top: 10px;
-    }
-
-    /* Pulsanti menu principali */
+    /* ========== Pulsanti menu principali ========== */
     .menu-button {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       margin: 20px auto;
       background-color: #9A8468;
       color: #FFFFFF;
@@ -129,16 +122,15 @@
       background-color: #C65D3B;
       transform: translate(2px, 2px);
     }
-    .icon-button {
-      width: 1.6em;
-      height: 1.6em;
-      object-fit: contain;
+    .menu-button img.icon-img {
+      width: 36px;
+      height: 36px;
     }
 
     /* Contenitori submenu */
     .submenu { display: none; }
 
-    /* Elementi singola voce menu */
+    /* Voci del menu */
     .pizza {
       margin: 20px 0;
       padding: 10px 5px;
@@ -210,14 +202,11 @@
 
     /* Responsive */
     @media (max-width: 480px) {
-      .menu-button {
-        width: 65%;
-        font-size: 1.3em;
-        margin: 12px auto;
-      }
+      .menu-button { width: 65%; font-size: 1.3em; margin: 12px auto; }
       .pizza-name { font-size: 1.3em; }
       .pizza-ingredients { font-size: 1.1em; }
       .pizza-price { font-size: 1.2em; }
+      .menu-button img.icon-img { width: 28px; height: 28px; }
     }
   </style>
 </head>
@@ -240,110 +229,95 @@
   <main>
     <!-- Pizze -->
     <button class="menu-button" onclick="toggleSubmenu('pizze')">
-      <img src="pizza-icon.png" alt="Pizza" class="icon-button">
+      <img src="pizza-icon.png" class="icon-img" alt="Pizza">
       <span class="it">Pizze</span><span class="en">Pizza</span>
     </button>
     <div id="submenu-pizze" class="submenu">
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Margherita</p>
-          <p class="pizza-ingredients it">Pomodoro San Marzano, mozzarella di bufala</p>
-          <p class="pizza-ingredients en">San Marzano tomato, buffalo mozzarella</p>
-          <p class="pizza-price">10€</p>
-          <button class="raccontami-button" onclick="raccontaAneddoto('margherita')">
-            <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
-          </button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Diavola</p>
-          <p class="pizza-ingredients it">Pomodoro, mozzarella, salame piccante</p>
-          <p class="pizza-ingredients en">Tomato, mozzarella, spicy salami</p>
-          <p class="pizza-price">12€</p>
-          <button class="raccontami-button" onclick="raccontaAneddoto('diavola')">
-            <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
-          </button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Quattro Formaggi</p>
-          <p class="pizza-ingredients it">Mozzarella, gorgonzola, parmigiano, provola</p>
-          <p class="pizza-ingredients en">Mozzarella, gorgonzola, parmesan, provola cheese</p>
-          <p class="pizza-price">13€</p>
-          <button class="raccontami-button" onclick="raccontaAneddoto('quattro_formaggi')">
-            <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
-          </button>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Capricciosa</p>
-          <p class="pizza-ingredients it">Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive</p>
-          <p class="pizza-ingredients en">Tomato, mozzarella, cooked ham, mushrooms, artichokes, olives</p>
-          <p class="pizza-price">14€</p>
-          <button class="raccontami-button" onclick="raccontaAneddoto('capricciosa')">
-            <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
-          </button>
-        </div>
-      </div>
+      <div class="pizza"><div class="pizza-info">
+        <p class="pizza-name">Margherita</p>
+        <p class="pizza-ingredients it">Pomodoro San Marzano, mozzarella di bufala</p>
+        <p class="pizza-ingredients en">San Marzano tomato, buffalo mozzarella</p>
+        <p class="pizza-price">10€</p>
+        <button class="raccontami-button" onclick="raccontaAneddoto('margherita')">
+          <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
+        </button>
+      </div></div>
+
+      <div class="pizza"><div class="pizza-info">
+        <p class="pizza-name">Diavola</p>
+        <p class="pizza-ingredients it">Pomodoro, mozzarella, salame piccante</p>
+        <p class="pizza-ingredients en">Tomato, mozzarella, spicy salami</p>
+        <p class="pizza-price">12€</p>
+        <button class="raccontami-button" onclick="raccontaAneddoto('diavola')">
+          <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
+        </button>
+      </div></div>
+
+      <div class="pizza"><div class="pizza-info">
+        <p class="pizza-name">Quattro Formaggi</p>
+        <p class="pizza-ingredients it">Mozzarella, gorgonzola, parmigiano, provola</p>
+        <p class="pizza-ingredients en">Mozzarella, gorgonzola, parmesan, provola cheese</p>
+        <p class="pizza-price">13€</p>
+        <button class="raccontami-button" onclick="raccontaAneddoto('quattro_formaggi')">
+          <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
+        </button>
+      </div></div>
+
+      <div class="pizza"><div class="pizza-info">
+        <p class="pizza-name">Capricciosa</p>
+        <p class="pizza-ingredients it">Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive</p>
+        <p class="pizza-ingredients en">Tomato, mozzarella, cooked ham, mushrooms, artichokes, olives</p>
+        <p class="pizza-price">14€</p>
+        <button class="raccontami-button" onclick="raccontaAneddoto('capricciosa')">
+          <span class="it">🎙 Raccontami</span><span class="en">🎙 Tell me</span>
+        </button>
+      </div></div>
     </div>
 
     <!-- Bibite -->
     <button class="menu-button" onclick="toggleSubmenu('bibite')">
-      <img src="bibite.png" alt="Bibite" class="icon-button">
+      <img src="bibite.png" class="icon-img" alt="Bibite">
       <span class="it">Bibite</span><span class="en">Drinks</span>
     </button>
     <div id="submenu-bibite" class="submenu">
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Birra Chiara alla Spina</p>
-          <p class="pizza-ingredients it">Birra bionda fresca alla spina</p>
-          <p class="pizza-ingredients en">Fresh draft light beer</p>
-          <p class="pizza-price">5€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Coca-Cola</p>
-          <p class="pizza-ingredients it">Bibita gassata classica</p>
-          <p class="pizza-ingredients en">Classic soda drink</p>
-          <p class="pizza-price">3€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Acqua Naturale 0.5L</p>
-          <p class="pizza-ingredients it">Acqua minerale naturale</p>
-          <p class="pizza-ingredients en">Still mineral water</p>
-          <p class="pizza-price">2€</p>
-        </div>
-      </div>
+      <div class="pizza"><div class="pizza-info">
+        <p class="pizza-name">Birra Chiara alla Spina</p>
+        <p class="pizza-ingredients it">Birra bionda fresca alla spina</p>
+        <p class="pizza-ingredients en">Fresh draft light beer</p>
+        <p class="pizza-price">5€</p>
+      </div></div>
+      <div class="pizza"><div class="pizza-info">
+        <p class="pizza-name">Coca-Cola</p>
+        <p class="pizza-ingredients it">Bibita gassata classica</p>
+        <p class="pizza-ingredients en">Classic soda drink</p>
+        <p class="pizza-price">3€</p>
+      </div></div>
+      <div class="pizza"><div class="pizza-info">
+        <p class="pizza-name">Acqua Naturale 0.5L</p>
+        <p class="pizza-ingredients it">Acqua minerale naturale</p>
+        <p class="pizza-ingredients en">Still mineral water</p>
+        <p class="pizza-price">2€</p>
+      </div></div>
     </div>
 
     <!-- Dolci -->
     <button class="menu-button" onclick="toggleSubmenu('dolci')">
-      <img src="dolci.png" alt="Dolci" class="icon-button">
+      <img src="dolci.png" class="icon-img" alt="Dolci">
       <span class="it">Dolci</span><span class="en">Desserts</span>
     </button>
     <div id="submenu-dolci" class="submenu">
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Tiramisù</p>
-          <p class="pizza-ingredients it">Classico dolce italiano a base di mascarpone e caffè</p>
-          <p class="pizza-ingredients en">Classic Italian dessert with mascarpone and coffee</p>
-          <p class="pizza-price">5€</p>
-        </div>
-      </div>
-      <div class="pizza">
-        <div class="pizza-info">
-          <p class="pizza-name">Panna Cotta</p>
-          <p class="pizza-ingredients it">Dolce al cucchiaio con panna e vaniglia</p>
-          <p class="pizza-ingredients en">Creamy dessert with vanilla and cream</p>
-          <p class="pizza-price">5€</p>
-        </div>
-      </div>
+      <div class="pizza"><div class="pizza-info">
+        <p class="pizza-name">Tiramisù</p>
+        <p class="pizza-ingredients it">Classico dolce italiano a base di mascarpone e caffè</p>
+        <p class="pizza-ingredients en">Classic Italian dessert with mascarpone and coffee</p>
+        <p class="pizza-price">5€</p>
+      </div></div>
+      <div class="pizza"><div class="pizza-info">
+        <p class="pizza-name">Panna Cotta</p>
+        <p class="pizza-ingredients it">Dolce al cucchiaio con panna e vaniglia</p>
+        <p class="pizza-ingredients en">Creamy dessert with vanilla and cream</p>
+        <p class="pizza-price">5€</p>
+      </div></div>
     </div>
 
     <!-- Allergeni -->
@@ -400,8 +374,8 @@
       stopSpeaking();
       const aneddoti = {
         margherita: {
-          it: "La pizza Margherita fu creata in onore della regina Margherita di Savoia chella granda bottana.",
-          en: "The Margherita pizza was created to honor Queen Margherita of Savoy a very big bitch."
+          it: "La pizza Margherita fu creata in onore della regina Margherita di Savoia, chella granda latrin.",
+          en: "The Margherita pizza was created to honor Queen Margherita of Savoy, that big bathroom."
         },
         diavola: {
           it: "La pizza Diavola è famosa per il suo sapore piccante e deciso.",
@@ -412,11 +386,13 @@
           en: "The Four Cheese pizza is loved for its rich cheese combination."
         },
         capricciosa: {
-          it: "La Capricciosa è una pizza ricca e varia
-       en: "The Capricciosa is a rich and varied pizza, full of tasty ingredients."
-        }
+          it: "La Capricciosa è una pizza ricca e varia, piena di gustosi ingredienti.",
+          en: "The Capricciosa is a rich and varied pizza, full of tasty ingredients
+       }
       };
+
       if (!aneddoti[tipo]) return;
+
       currentUtterance = new SpeechSynthesisUtterance(aneddoti[tipo][currentLang]);
       currentUtterance.lang = currentLang === 'it' ? 'it-IT' : 'en-GB';
       window.speechSynthesis.speak(currentUtterance);
