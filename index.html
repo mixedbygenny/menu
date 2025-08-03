@@ -324,31 +324,33 @@
       currentUtterance = null;
     }
 
-    function raccontaAneddoto(tipo) {
-      stopSpeaking();
-      const aneddoti = {
-        margherita: {
-          it: "La pizza Margherita fu creata in onore della regina Margherita di Savoia, chella granda latrinòn.",
-          en: "The Margherita pizza was created to honor Queen Margherita of Savoy."
-        },
-        diavola: {
-          it: "La pizza Diavola è famosa per il suo sapore piccante e deciso.",
-          en: "The Diavola pizza is famous for its spicy and strong flavor."
-        },
-        quattro_formaggi: {
-          it: "La Quattro Formaggi è amata per la sua ricca combinazione di formaggi.",
-          en: "The Four Cheese pizza is loved for its rich cheese combination."
-        },
-        capricciosa: {
-          it: "La Capricciosa è una pizza ricca e varia, piena di gustosi ingredienti.",
-          en: "The Capricciosa is a rich and varied pizza, full of tasty ingredients."
-        }
-      };
-      if (!aneddoti[tipo]) return;
-      currentUtterance = new SpeechSynthesisUtterance(aneddoti[tipo][currentLang]);
-      currentUtterance.lang = currentLang === 'it' ? 'it-IT' : 'en-GB';
-      window.speechSynthesis.speak(currentUtterance);
+function raccontaAneddoto(tipo) {
+  stopSpeaking();
+  const aneddoti = {
+    margherita: {
+      it: "La pizza Margherita nacque a Napoli nel 1889 per omaggiare la regina Margherita di Savoia. Pomodoro, mozzarella e basilico richiamano i colori della bandiera italiana, anche se alcuni storici pensano che la combinazione fosse già comune prima.",
+      en: "The Margherita pizza was born in Naples in 1889 to honor Queen Margherita of Savoy. Tomato, mozzarella, and basil reflect the Italian flag colors, although some historians believe this combination was already common before."
+    },
+    quattro_formaggi: {
+      it: "La Quattro Formaggi celebra i formaggi italiani: mozzarella, gorgonzola, fontina e parmigiano. Secondo la tradizione, i pizzaioli la inventarono per valorizzare avanzi di formaggio, creando un mix cremoso e saporito.",
+      en: "The Four Cheese pizza celebrates Italian cheeses: mozzarella, gorgonzola, fontina, and parmesan. According to tradition, pizzaiolos created it to use leftover cheese, resulting in a creamy and flavorful mix."
+    },
+    diavola: {
+      it: "La Diavola è la regina del piccante, con il suo salame speziato tipico del sud Italia. Negli Stati Uniti è diventata famosa come 'pepperoni pizza', anche se lì il pepperoni è un salame piccante ispirato a quello italiano.",
+      en: "The Diavola is the queen of spiciness, topped with southern Italian spicy salami. In the United States, it became famous as 'pepperoni pizza', although American pepperoni is a spicy salami inspired by the Italian one."
+    },
+    capricciosa: {
+      it: "La Capricciosa nacque a Roma negli anni ’30 come pizza 'svuotafrigo': funghi, prosciutto, carciofi e olive variavano in base agli ingredienti disponibili. Il suo nome richiama il carattere fantasioso e mai identico di questa combinazione.",
+      en: "The Capricciosa was created in Rome in the 1930s as a 'clean-out-the-fridge' pizza: mushrooms, ham, artichokes, and olives changed depending on what was available. Its name recalls the whimsical and ever-changing nature of this mix."
     }
+  };
+
+  if (!aneddoti[tipo]) return;
+  currentUtterance = new SpeechSynthesisUtterance(aneddoti[tipo][currentLang]);
+  currentUtterance.lang = currentLang === 'it' ? 'it-IT' : 'en-GB';
+  window.speechSynthesis.speak(currentUtterance);
+}
+
   </script>
 </body>
 </html>
