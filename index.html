@@ -96,17 +96,29 @@
       border-radius: 1px;
     }
 
+/* Pulsanti menu - icona a sinistra allineata in colonna */
 .menu-button {
-  background: #f0f0f3;
-  border-radius: 35px; /* meno rotondo e più compatto */
-  box-shadow: 5px 5px 10px #bebebe,
-              -5px -5px 10px #ffffff;
-  padding: 8px 16px; /* meno spazio interno */
-  font-size: 14px;   /* testo più piccolo */
-  border: none;
+  display: flex;
+  align-items: center;             /* Centra verticalmente icona e testo */
+  justify-content: flex-start;     /* Contenuto allineato a sinistra */
+  gap: 18px;                        /* Piccolo spazio tra icona e testo */
+  margin: 20px auto;               /* Pulsanti centrati nella pagina */
+  background-color: #9A8468;
+  color: #FFFFFF;
+  padding: 0 16px;                 /* Minima altezza */
+  font-size: 1.6rem;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+  font-weight: bold;
+  border: none;             /*3px solid #4B3929; Larghezza fissa per allineare le icone tra loro */
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  width: 260px;                    /* Larghezza fissa per allineare le icone tra loro */
+  line-height: 1;                  /* Rimuove spazio extra verticale */
+  box-sizing: border-box;
 }
+
 
 
 .menu-button:active {
