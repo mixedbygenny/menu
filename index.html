@@ -96,27 +96,23 @@
       border-radius: 1px;
     }
 
-/* Pulsanti menu - icona a sinistra allineata in colonna */
 .menu-button {
-  display: flex;
-  align-items: center;             /* Centra verticalmente icona e testo */
-  justify-content: flex-start;     /* Contenuto allineato a sinistra */
-  gap: 18px;                        /* Piccolo spazio tra icona e testo */
-  margin: 20px auto;               /* Pulsanti centrati nella pagina */
-  background-color: #9A8468;
-  color: #FFFFFF;
-  padding: 0 16px;                 /* Minima altezza */
-  font-size: 1.6rem;
-  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
-  font-weight: bold;
-  border: none;             /*3px solid #4B3929; Larghezza fissa per allineare le icone tra loro */
-  border-radius: 12px;
+  background: #e0e0e0; /* Colore chiaro in linea con il resto del menu */
+  border-radius: 20px; /* Angoli morbidi */
+  box-shadow: 8px 8px 16px #bebebe,
+              -8px -8px 16px #ffffff;
+  padding: 12px 20px;
+  font-size: 1.1em;
+  font-family: 'Playfair Display', serif;
+  color: #333;
+  border: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  outline: none;
-  width: 260px;                    /* Larghezza fissa per allineare le icone tra loro */
-  line-height: 1;                  /* Rimuove spazio extra verticale */
-  box-sizing: border-box;
+}
+
+.menu-button:active {
+  box-shadow: inset 8px 8px 16px #bebebe,
+              inset -8px -8px 16px #ffffff;
 }
 
     
