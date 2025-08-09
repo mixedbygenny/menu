@@ -409,21 +409,30 @@
     // Submenu e effetto farina
     const flourOverlay = document.getElementById('flour-overlay');
 
-    function onMenuButtonClick(section) {
-      // Chiudo tutti
-      document.querySelectorAll('.submenu').forEach(s => s.style.display = 'none');
-      // Apro quello selezionato
-      const submenu = document.getElementById('submenu-' + section);
-      if(submenu){
-        submenu.style.display = 'block';
-      }
+ let openSection = null; // tiene traccia del sottomenu aperto
 
-      // Attivo effetto farina per 700ms
-      flourOverlay.style.opacity = 1;
-      setTimeout(() => {
-        flourOverlay.style.opacity = 0;
-      }, 700);
+function onMenuButtonClick(section) {
+  if(openSection === section){
+    // Se clicco sul pulsante già aperto: chiudo tutto e rimuovo farina
+    document.querySelectorAll('.submenu').forEach(s => s.style.display = 'none');
+    flourOverlay.style.opacity = 0;
+    openSection = null;
+  } else {
+    // Se apro un nuovo sottomenu:
+    document.querySelectorAll('.submenu').forEach(s => s.style.display = 'none');
+    const submenu = document.getElementById('submenu-' + section);
+    if(submenu){
+      submenu.style.display = 'block';
     }
+    // Effetto farina visibile per 700ms
+    flourOverlay.style.opacity = 1;
+    setTimeout(() => {
+      flourOverlay.style.opacity = 0;
+    }, 700);
+    openSection = section;
+  }
+}
+
 
     // Sintesi vocale per raccontami
     function onRaccontamiClick(pizzaKey) {
