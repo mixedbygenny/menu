@@ -206,6 +206,19 @@
       .pizza-ingredients { font-size: 1.1em; }
       .pizza-price { font-size: 1.5em; }
     }
+
+/* Effetto luce bianca dietro i pulsanti */
+.menu-button, #coperto-text, #btn-allergeni {
+  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.5); /* alone bianco */
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-button:hover, #coperto-text:hover, #btn-allergeni:hover {
+  box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.8); /* alone più intenso al passaggio del mouse */
+}
+
+
+    
   </style>
 </head>
 <body>
